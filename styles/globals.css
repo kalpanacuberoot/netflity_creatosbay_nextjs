@@ -18,9 +18,35 @@ p {
   height: 100vh;
 }
 
-.container {
+/* .container {
   padding-left: 30px;
   padding-right: 30px;
+} */
+
+.whalf {
+  width: 55%;
+}
+
+.whalf-r {
+  width: 45%;
+
+}
+@media (max-width: 991px) {
+  .whalf-r  {
+    width: 100%;
+  }
+  .whalf{
+    width: 100%;
+    position: absolute;
+    background-color: rgb(0 0 0 / 28%);
+    height: 100%;
+    z-index: 999;
+  }
+  logo-slider img {
+   
+    height: 30vh !important;
+  }
+  
 }
 
 /*  first page auto */
