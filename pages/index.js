@@ -56,7 +56,7 @@ export default function Home() {
                     </svg>
                   </button>
                   <h6 className="flex items-center w-full justify-center text-base font-bold leading-9 text-cyan-600">
-                    How it's Works
+                    How it&lsquo;s Works
                   </h6>
                 </div>
               </div>
