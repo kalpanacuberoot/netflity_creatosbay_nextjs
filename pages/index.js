@@ -56,7 +56,7 @@ export default function Home() {
                     </svg>
                   </button>
                   <h6 className="flex items-center w-full justify-center text-base font-bold leading-9 text-cyan-600">
-                    How it&#39;s Works
+                    How it's Works
                   </h6>
                 </div>
               </div>
@@ -248,49 +248,49 @@ export default function Home() {
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686317278186-be66e4db684e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={450}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1682686578842-00ba49b0a71a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
+                  height={100}
+                />
+                <Image
+                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                  alt=""
+                  width={400}
+                  height={100}
+                />
+                <Image
+                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                  alt=""
+                  width={400}
                   height={100}
                 />
               </div>
@@ -299,49 +299,49 @@ export default function Home() {
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
               </div>
@@ -353,49 +353,49 @@ export default function Home() {
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
               </div>
@@ -403,49 +403,49 @@ export default function Home() {
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
                 <Image
                   src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
-                  width={450}
+                  width={400}
                   height={100}
                 />
               </div>
