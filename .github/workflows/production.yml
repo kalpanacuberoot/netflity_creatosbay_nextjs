@@ -1,0 +1,55 @@
+name: Build and Deploy Production on Amazon AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy-production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache npm dependencies
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+          key: ${{ runner.os }}-npm-main-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-main-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Cache next dependencies
+        id: next-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-next-main-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-next-main-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: Install dependencies
+        run: npm ci --cache ~/.npm --prefer-offline --only=production --silent
+
+      - name: Build Next.js project
+        run: npm run build
+
+      - name: Deploying code using rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -azr --delete --exclude='.git'
+          path: ./
+          remote_path: /var/www/${{ secrets.MAIN_DOMAIN }}
+          remote_host: ${{ secrets.EC2_INSTANCE_HOST }}
+          remote_user: ${{ secrets.EC2_WEB_USER }}
+          remote_key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
