@@ -39,7 +39,7 @@ jobs:
           node-version: 18.16.0
 
       - name: Install dependencies
-        run: npm ci --cache ~/.npm --prefer-offline --only=production --silent
+        run: npm ci --cache ~/.npm --prefer-offline --silent
 
       - name: Build Next.js project
         run: npm run build
