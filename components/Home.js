@@ -2,6 +2,7 @@ import React from 'react'
 import Image from "next/image";
 import logo from "../images/logo.png";
 import { useState } from "react";
+import Link from 'next/link';
 
 const Home = () => {
     const [currentSection, setCurrentSection] = useState(1);
@@ -24,8 +25,15 @@ const Home = () => {
           <div className="flex justify-center px-4 lg:px-12">
             {currentSection === 1 && (
               <div className="p-4 lg:px-10 bg-white border-gray-300 border-solid w-full  rounded-2xl border-1">
+                
+                <Link href={'/home'}>
+                  <h6>Home Page</h6>
+                  </Link>
                 <h4 className="mt-0 mb-5 font-extrabold text-left text-gray-900 leading-20 text-base sm:text-lg md:text2xl lg:text-3xl xl:text-5xl ">
                   Make Your Brand a next social media star &#x2B50;
+                  <Link href={'/login'}>
+                  Login Page
+                  </Link>
                 </h4>
                 <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl ">
                   Sets the width of the element to a specific width of 64

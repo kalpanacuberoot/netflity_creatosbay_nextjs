@@ -1,23 +1,73 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-h1 {
-  font-family: Arial;
+
+body{
+  font-family: Arial, Poppins,Segoe Print;
 }
 
+
+h1 {
+  
+  font-size: 32px
+}
+h2 {
+  
+  font-size: 24px
+}
+h3 {
+  
+  font-size: 18.72px
+}
+h4 {
+  
+  font-size: 16px
+}
+h5 {
+  
+  font-size: 13.28px
+}
 h6 {
-  font-family: Arial;
+  
+  font-size: 12px
 }
 
 p {
-  font-family: Arial;
+  font-size: 10px;
+  
 }
 
 .h-full {
   height: 100vh;
 }
 
+.home_title{
+  font-family: Segoe Print;
+font-size: 36px;
+font-weight: 700;
+line-height: 64px;
+letter-spacing: 0px;
+text-align: left;
+}
+.golden_home_title{
+  color: #FFD557;
+}
+.start_campaign_btn{
+  font-family: Arial;
+  color:#FF56A2;
+  border: 1px solid #FF56A2;
+}
+.reel_creator_card{
+  position: absolute;
+  bottom:-15% !important;
+  left:3%;
+}
+.creator_top{
+  border: 1px solid #FF56A2;
+}
 /* .container {
   padding-left: 30px;
   padding-right: 30px;
@@ -80,6 +130,19 @@ logo-slider img {
   margin: 1vh 0;
   border-radius: 20px;
   height: 50vh;
+}
+
+.edit_button_clr{
+  background-color:#9357FF;
+  color: #fff;
+} 
+.button_clr{
+  background-color:#CBD2E0;
+  color: #9357FF;
+}
+.button_clr:hover{
+  background-color: #9357FF;
+  color: #fff;
 }
 
 
