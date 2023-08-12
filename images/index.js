@@ -13,6 +13,7 @@ import reel_creator_card from './reel_creator_card.png';
 import home_title_bg from './home_title_bg.png';
 import fill_star from './fill_star.png';
 import empty_star from './empty_star.png';
+import clock from './clock.png';
 
 export default {
     'company_logo':company_logo,
@@ -30,4 +31,5 @@ export default {
     'home_title_bg':home_title_bg,
     'fill_star':fill_star,
     'empty_star':empty_star,
+    'clock':clock
 };

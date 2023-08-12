@@ -163,3 +163,43 @@ logo-slider img {
     transform: translateY(-100%);
   }
 }
+
+.craetor_height{
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid green; */
+  overflow: hidden;
+  position: relative;
+  max-height: 60vh;
+}
+.child_creator {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: -15px;
+  /* border: 1px solid blue; */
+  overflow: auto;
+}
+/* .button_clr:hover{
+  color:red
+} */
+#cf {
+  position:relative;
+  height:281px;
+  width:450px;
+  margin:0 auto;
+}
+
+#cf img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+#cf img.top:hover {
+  opacity:0;
+}
