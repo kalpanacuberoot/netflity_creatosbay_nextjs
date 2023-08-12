@@ -20,6 +20,7 @@ const Homepage = () => {
             className="flex"
             style={{ backgroundColor: Colors.button_light_clr }}
         >
+           
             <div
                 className='auto-cols-max w-96 px-3 py-5 border'
                 style={{ backgroundColor: Colors.white_clr }}
@@ -81,10 +82,6 @@ const Homepage = () => {
                         <div className='items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
                         >
-                            <div id="cf">
-                                <img class="bottom" src="/images/Windows%20Logo.jpg" />
-                                <img class="top" src="/images/Turtle.jpg" />
-                            </div>
                             <Image
                                 src={Images.home_icon}
                                 width={22}
