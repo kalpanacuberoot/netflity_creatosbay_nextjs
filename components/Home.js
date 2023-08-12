@@ -28,7 +28,7 @@ const Home = () => {
                   Make Your Brand a next social media star &#x2B50;
                 </h4>
                 <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl ">
-                  Sets the width of the element to a specific width of 64
+                  Set the width of the element to a specific width of 64
                   pixels. Additionally, you can combine the w-1/2 className with
                   other utility classNamees or use responsive variants to apply
                   different widths at different screen
