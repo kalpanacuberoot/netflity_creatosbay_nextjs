@@ -10,7 +10,7 @@ const Loginpage = () => {
           <div className="flex justify-center height-70  items-center px-10 ">
             <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
               <h4>
-                Don't have an account ?
+                Don`&apos;t have an account ?
                 <span
                   className="  pl-3 font-bold"
                   style={{ color: Colors.logo_clr }}
