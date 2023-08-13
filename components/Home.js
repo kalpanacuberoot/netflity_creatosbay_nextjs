@@ -5,6 +5,8 @@ import { useState } from "react";
 import Link from "next/link";
 import images from "@/images";
 import Colors from "@/styles/Colors";
+import Layout from "./Layout";
+import Splash_screen_slider from "./splash_screen_slider";
 
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(1);
@@ -21,38 +23,32 @@ const Home = () => {
   };
   return (
     <>
-      <div className="container h-full flex bg-zinc-100">
-        <div className="whalf h-full  ">
-          <div
-            className="flex flex-col justify-center pl-10 height-15 "
-            style={{ backgroundColor: Colors.white_clr }}
-          >
-            <Image src={logo} alt="" width={60} />
-          </div>
-          <div className="flex justify-center height-70  items-center p-10 ">
+      <div className="flex items-center bg-zinc-100 height-70 ">
+        <div className="auto-cols-max w-full">
+          <div className="flex justify-center items-center p-10 w-full ">
             {currentSection === 1 && (
-              <div className=" p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+              <div className=" p-10 bg-white  border-gray-300 border-solid w-full min-h-800 rounded-lg border-1">
                 {/* <Link href={"/home"}>
                   <h6>Home Page</h6>
                 </Link> */}
                 <h1 className="mt-0 mb-5 text-left font-bold  ">
-                  Make Your Brand a next social media star &#x2B50;
+                  Make Your Brand a next <br/> social media star &#x2B50;
                   {/* <Link href={"/login"}>Login Page</Link> */}
                 </h1>
-                <h4 className="pt-5 ">
+                <h4 className="pt-5  ">
                   Sets the width of the element to a specific width of 64
                   pixels. Additionally, you can combine the w-1/2 className with
                   other utility classNamees or use responsive variants to apply
                   different widths at different screen
                 </h4>
-                <h4 className="pt-4">
+                <h4 className="pt-4 ">
                   different widths at different screen sizes. For example,
                   md:w-2/3 sets the width of the element
                 </h4>
-                <div className="flex justify-between pt-5 mt-10 align-middle ">
+                <div className="flex justify-between pt-5 mt-5 align-middle ">
                   <button
                     onClick={handleGetStarted}
-                    className="flex  tracking-wider align-middle justify-center items-center text-white w-full  rounded-full px-6 lg:px-8 lg:py-4 py-2 bg-cyan-600"
+                    className="flex  tracking-wider align-middle justify-center items-center text-white w-full text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl rounded-full px-6 lg:px-8 lg:py-4 py-2 bg-cyan-600"
                     style={{ backgroundColor: Colors.logo_clr }}
                   >
                     Get Started{" "}
@@ -65,7 +61,7 @@ const Home = () => {
                       fill="currentColor"
                       className="h-7 w-8 pl-3"
                     >
-                      <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                      <h4ath d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                     </svg>
                   </button>
                   <h6
@@ -79,88 +75,91 @@ const Home = () => {
             )}
             {currentSection === 2 && (
               <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
-                <h4 className=" text-base">
+              <h4 className=" text-base">
+                {" "}
+                Already a member ?{" "}
+                <span
+                  className="  pl-3 font-bold"
+                  style={{ color: Colors.logo_clr }}
+                >
                   {" "}
-                  Already a member ?{" "}
-                  <span
-                    className="  pl-3 font-bold"
-                    style={{ color: Colors.logo_clr }}
+                  <Link href={"/login"}>Login </Link>
+                </span>
+              </h4>
+              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+                Create New Account.
+              </h1>
+
+              <form>
+                <div className="flex">
+                  <input
+                    type="text"
+                    id="name"
+                    className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="First Name"
+                  />
+                  <input
+                    type="text"
+                    id="name"
+                    className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Last Name"
+                  />
+                </div>
+                <input
+                  type="email"
+                  id="name"
+                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="exampl@123.com"
+                />
+                <input
+                  type="password"
+                  id="name"
+                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Create Password"
+                />
+                <input
+                  type="password"
+                  id="name"
+                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Confirm Password"
+                />
+                <div className=" flex my-5 justify-between">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="myCheckbox"
+                      className="form-checkbox h-5 w-5 "
+                      style={{ backgroundColor: Colors.logo_clr }}
+                    />
+                    <label htmlFor="myCheckbox" className="ml-2 text-black">
+                      I accept co. Name{" "}
+                      <span style={{ color: Colors.pink_clr }}>
+                        {" "}
+                        Terms & Condition
+                      </span>
+                    </label>
+                  </div>
+                  <Link href={"/forgot"}>
+
+                  <button
+                    className="  float-right"
+                    style={{ color: Colors.pink_clr }}
                   >
                     {" "}
-                    <Link href={"/login"}>Login </Link>
-                  </span>
-                </h4>
-                <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
-                  Create New Account.
-                </h1>
-
-                <form>
-                  <div className="flex">
-                    <input
-                      type="text"
-                      id="name"
-                      className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="First Name"
-                    />
-                    <input
-                      type="text"
-                      id="name"
-                      className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Last Name"
-                    />
-                  </div>
-                  <input
-                    type="email"
-                    id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="exampl@123.com"
-                  />
-                  <input
-                    type="password"
-                    id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Create Password"
-                  />
-                  <input
-                    type="password"
-                    id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Confirm Password"
-                  />
-                  <div className=" flex my-5 justify-between">
-                    <div className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id="myCheckbox"
-                        className="form-checkbox h-5 w-5 "
-                        style={{ backgroundColor: Colors.logo_clr }}
-                      />
-                      <label htmlFor="myCheckbox" className="ml-2 text-black">
-                        I accept co. Name{" "}
-                        <span style={{ color: Colors.pink_clr }}>
-                          {" "}
-                          Terms & Condition
-                        </span>
-                      </label>
-                    </div>
-                    <button
-                      className="  float-right"
-                      style={{ color: Colors.pink_clr }}
-                    >
-                      {" "}
-                      Forgot Password ?
-                    </button>
-                  </div>
-                  <button
-                    onClick={handleGetStarted}
-                    type="submit"
-                    className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
-                    style={{ background: Colors.logo_clr }}
-                  >
-                    Create Account
+                    Forgot Password ?
                   </button>
-                </form>
-              </div>
+                  </Link>
+                </div>
+                <button
+                  onClick={handleGetStarted}
+                  type="submit"
+                  className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
+                  style={{ background: Colors.logo_clr }}
+                >
+                  Create Account
+                </button>
+              </form>
+            </div>
             )}
             {currentSection === 3 && (
               <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid w-full w-90 rounded-lg border-1">
@@ -208,7 +207,7 @@ const Home = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        <h4ath d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </div>
                   </div>
@@ -275,169 +274,11 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div className="flex height-15 align-center  p-10 gap-10">
+          {/* <div className="flex align-center  p-10 gap-10">
             <h4 style={{ color: Colors.pink_clr }}>Imprint</h4>
             <h4 style={{ color: Colors.pink_clr }}>Terms of use</h4>
             <h4 style={{ color: Colors.pink_clr }}>Dribble</h4>
-          </div>
-        </div>
-        <div className="flex h-full whalf-r">
-          <div className="w-1/2">
-            <logo-slider>
-              <div>
-                <Image
-                  src={images.a}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.b}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.c}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.d}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.e}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.f}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                 <Image
-                  src={images.a}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.b}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.c}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.d}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.e}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.f}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-            </logo-slider>
-          </div>
-          <div className="w-1/2">
-            <logo-slider className="lslider">
-            <div>
-                <Image
-                  src={images.a}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.b}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.c}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.d}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.e}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.f}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                 <Image
-                  src={images.a}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.b}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.c}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.d}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.e}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src={images.f}
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-            </logo-slider>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

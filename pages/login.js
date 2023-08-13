@@ -1,16 +1,21 @@
-import Home from "@/components/Home";
-import Footer from "@/components/Layout/Footer";
-import Navbar from "@/components/Layout/Navbar";
-import Loginpage from "@/components/userAuth/Loginpage";
 import React from "react";
+import Layout from "@/components/Layout";
+import Splash_screen_slider from "@/components/splash_screen_slider";
+import Loginpage from "@/components/userAuth/Loginpage";
 
 const Login = () => {
   return (
     <>
-      {/* <Navbar/>
-
-            <Footer/> */}
-      <Loginpage />
+      <div className="container flex flex-row h-screen bg-zinc-100 ">
+        <div className="auto-cols-max w-2/3 h-screen ">
+          <Layout>
+            <Loginpage />
+          </Layout>
+        </div>
+        <div className="auto-cols-max h-screen">
+          <Splash_screen_slider />
+        </div>
+      </div>
     </>
   );
 };
