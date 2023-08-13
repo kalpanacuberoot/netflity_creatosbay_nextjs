@@ -40,6 +40,11 @@ p {
   
 }
 
+button{
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
 .h-full {
   height: 100vh;
 }
@@ -125,7 +130,7 @@ logo-slider:hover div {
 logo-slider div {
   display: flex;
   position: relative;
-  animation: marquee 20s linear infinite;
+  animation: marquee 35s linear infinite;
   justify-content: space-around;
   flex-direction: column;
 }
@@ -134,6 +139,7 @@ logo-slider img {
   display: block;
   min-height: var(--image-size);
   margin: 1vh 0;
+  object-fit: cover;
   border-radius: 20px;
   height: 50vh;
 }
@@ -195,9 +201,33 @@ logo-slider img {
 .dropdown_text{
   font-size: 15px;
 }
-.divider_line{
-  border: 5px solid linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%);
+/* .divider_line{
+  
+max-width: 100%;
+border: 5px solid;
+border-image: linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%);
+} */
 
+.divider-line{
+  max-width: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-image: 
+  linear-gradient(to right, darkblue, darkorchid) 1;
+    /* linear-gradient(
+      to right, #13a338 0%, #1f3876 100%
+    ) 0 0 100% 0; */
+}
+.border-imaged-element {
+  max-width: 100%;
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+  linear-gradient(
+    to right, #13a338 0%, #1f3876 100%
+  ) 0 0 100% 0;
+  /* border-image:  linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%); */
+  ;
 }
 
 .campaign_info_title{

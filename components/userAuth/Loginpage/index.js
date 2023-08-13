@@ -17,7 +17,7 @@ const Loginpage = () => {
           </div>
           <div className="flex justify-center height-70  items-center px-10 ">
             <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
-              <p className=" text-base">
+              <h4>
                 Don't have an account ?
                 <span
                   className="  pl-3 font-bold"
@@ -25,7 +25,7 @@ const Loginpage = () => {
                 >
                   <Link href={"/login"}>Sign up </Link>
                 </span>
-              </p>
+              </h4>
               <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
                 Welcome back.
               </h1>
@@ -59,10 +59,7 @@ const Loginpage = () => {
                     />
                     <label htmlFor="myCheckbox" className="ml-2 text-black">
                       I accept co. Name
-                      <span
-                        className="text-md text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
-                        style={{ color: Colors.pink_clr }}
-                      >
+                      <span style={{ color: Colors.pink_clr }}>
                         Terms & Condition
                       </span>
                     </label>
@@ -70,7 +67,7 @@ const Loginpage = () => {
                   <Link href={"/forget"}>
                     {" "}
                     <button
-                      className=" text-md float-right text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
+                      className=" float-right "
                       style={{ color: Colors.pink_clr }}
                     >
                       Forgot Password ?
@@ -79,7 +76,7 @@ const Loginpage = () => {
                 </div>
                 <button
                   type="submit"
-                  className=" rounded-3xl  text-white w-full py-3 px-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
+                  className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
                   Create Account

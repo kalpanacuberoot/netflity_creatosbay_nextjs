@@ -18,7 +18,7 @@ const Verifypage = () => {
           </div>
           <div className="flex justify-center height-70  items-center px-10 ">
             <div className="p-10  bg-white border-gray-300 border-solid w-full rounded-lg border-1">
-              <p className=" text-base">
+              <h4>
                 Don't have an account ?
                 <span
                   className="  pl-3 font-bold"
@@ -26,7 +26,7 @@ const Verifypage = () => {
                 >
                   <Link href={"/login"}>Log in </Link>
                 </span>
-              </p>
+              </h4>
               <h1 className="mt-0 mb-4   font-bold text-left text-gray-900   ">
                 Enter Verify Code
               </h1>
@@ -83,7 +83,7 @@ const Verifypage = () => {
                 </div>
                 <button
                   type="submit"
-                  className=" rounded-3xl  text-white w-full py-3 px-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
+                  className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
                   Continue

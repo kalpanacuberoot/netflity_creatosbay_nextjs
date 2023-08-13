@@ -21,6 +21,14 @@ import plus_icon from './plus_icon.png';
 import campaign_info_imgs from './campaign_info_imgs.png';
 import arrowleft_icon from './arrowleft_icon.png';
 import arrowright_icon from './arrowright_icon.png';
+import a from './a.png';
+import b from './b.png';
+import c from './c.png';
+import d from './d.png';
+import e from './e.png';
+import f from './f.png';
+
+
 
 export default {
     'company_logo':company_logo,
@@ -46,4 +54,11 @@ export default {
     'campaign_info_imgs':campaign_info_imgs,
     'arrowleft_icon':arrowleft_icon,
     'arrowright_icon':arrowright_icon,
+    'a':a,
+    'b':b,
+    'c':c,
+    'd':d,
+    'e':e,
+    'f':f,
+
 };

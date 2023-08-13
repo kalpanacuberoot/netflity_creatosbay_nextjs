@@ -70,7 +70,7 @@ const Supportpage = () => {
 
                 <button
                   type="submit"
-                  className=" rounded-3xl  text-white w-full py-3 px-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
+                  className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
                   Submit

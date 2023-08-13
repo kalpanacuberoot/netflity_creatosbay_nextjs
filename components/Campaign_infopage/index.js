@@ -25,7 +25,7 @@ const Campaign_infopage = () => {
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
                 <div
-                    className='auto-cols-max w-80 px-3 py-5 border'
+                    className='auto-cols-max w-80 px-5 py-5 border'
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                    
@@ -33,10 +33,12 @@ const Campaign_infopage = () => {
                 </div>
                 <div className="m-2 w-full">
                     <div style={{ backgroundColor: Colors.white_clr }} className=" p-3 rounded-md flex flex-row">
-                        <div className="p-3 border rounded-md shadow-md m-2" >
+                        <div className="p-3 border rounded-md shadow-md m-2 divider_line" >
                             <h2 style={{ color: Colors.pending_clr }} className="font-bold campaign_info_title">Campaign Info</h2>
                             <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                            <div className=" my-5"><hr className="divider_line"/></div>
+                            {/* <p className="divider_line">fuyfudydyd</p> */}
+                            {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
+                            <hr className="divider_line my-5"/>
                             <div className="my-3">
                                 <h4 className="">Campaign Name</h4>
                                 <h6 className="mb-3">Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
@@ -158,13 +160,13 @@ const Campaign_infopage = () => {
                         </div>
 
                         {/* right */}
-                        <div className="p-3 border rounded-md shadow-md min-h-screen flex flex-col m-2 ">
+                        <div className="p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-96">
                             <h3>Today Highlights</h3>
                             <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             {/* <div className="h-full "> */}
                                 <Image
                                     src={Images.campaign_info_imgs}
-                                    className="image_capign_info"
+                                    className="image_capign_info w-full"
                                     // height={1000}
                                 />
                             {/* </div> */}

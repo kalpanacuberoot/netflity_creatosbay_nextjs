@@ -3,10 +3,11 @@ import Image from "next/image";
 import Images from "@/images";
 import Colors from "@/styles/Colors";
 import styled from "styled-components";
-import { useState } from "react";
-import Right_side_Dashboard from "./rightDashboard";
-import Left_Dashboard from "./leftDashboard";
-import Link from "next/link";
+import { useState } from 'react';
+import Right_side_Dashboard from './rightDashboard';
+import Left_Dashboard from './leftDashboard';
+import Link from 'next/link';
+
 
 const Homepage = () => {
   const [cardfirstshowmore, setCardfirstshowmore] = useState(false);
@@ -39,9 +40,11 @@ const Homepage = () => {
               </div>
               {/* <div className='home_title'>Welcome to Creators bay</div> */}
               <h3>Your content is just a click away !</h3>
-              <button className="start_campaign_btn px-5 py-1 rounded-full w-48">
-                Start Campaign
-              </button>
+              <Link href={'/campaign_info'}>
+                <button className="start_campaign_btn px-5 py-1 rounded-full w-48">
+                  Start Campaign
+                </button>
+              </Link>
             </div>
             <Image
               src={Images.home_title_bg}
@@ -353,7 +356,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -427,7 +430,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -501,7 +504,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -575,7 +578,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -664,7 +667,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -738,7 +741,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -812,7 +815,7 @@ const Homepage = () => {
                   <Image
                     src={Images.profile_user}
                     width={40}
-                    // height={30}
+                  // height={30}
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
