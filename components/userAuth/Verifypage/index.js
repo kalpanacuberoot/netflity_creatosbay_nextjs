@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import logo from "../../../images/logo.png";
+import { useState } from "react";
 import Link from "next/link";
 import Colors from "@/styles/Colors";
 
-const Loginpage = () => {
+const Verifypage = () => {
   return (
     <>
       <div className="container h-full flex bg-zinc-100">
@@ -16,73 +17,76 @@ const Loginpage = () => {
             <Image src={logo} alt="" width={60} />
           </div>
           <div className="flex justify-center height-70  items-center px-10 ">
-            <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+            <div className="p-10  bg-white border-gray-300 border-solid w-full rounded-lg border-1">
               <p className=" text-base">
                 Don't have an account ?
                 <span
                   className="  pl-3 font-bold"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/login"}>Sign up </Link>
+                  <Link href={"/login"}>Log in </Link>
                 </span>
               </p>
-              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
-                Welcome back.
+              <h1 className="mt-0 mb-4   font-bold text-left text-gray-900   ">
+                Enter Verify Code
               </h1>
 
               <form>
-                <input
-                  type="email"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Michal.mosiak12@gmail.com"
-                />
-                <input
-                  type="password"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Create Password"
-                />
-                <input
-                  type="password"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Confirm Password"
-                />
+                <div className="flex gap-4">
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                  <input
+                    type="num"
+                    id="name"
+                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="0"
+                  />
+                </div>
                 <div className=" flex my-5 justify-between">
                   <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="myCheckbox"
-                      className="form-checkbox h-5 w-5 "
-                      style={{ backgroundColor: Colors.logo_clr }}
-                    />
-                    <label htmlFor="myCheckbox" className="ml-2 text-black">
-                      I accept co. Name
-                      <span
-                        className="text-md text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
-                        style={{ color: Colors.pink_clr }}
-                      >
-                        Terms & Condition
-                      </span>
-                    </label>
-                  </div>
-                  <Link href={"/forget"}>
-                    {" "}
-                    <button
-                      className=" text-md float-right text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
+                    <label
+                      htmlFor="myCheckbox"
+                      className="ml-2"
                       style={{ color: Colors.pink_clr }}
                     >
-                      Forgot Password ?
-                    </button>
-                  </Link>
+                      Verify Code Valid for 05:00
+                    </label>
+                  </div>
                 </div>
                 <button
                   type="submit"
                   className=" rounded-3xl  text-white w-full py-3 px-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
-                  Create Account
+                  Continue
                 </button>
               </form>
             </div>
@@ -309,4 +313,4 @@ const Loginpage = () => {
   );
 };
 
-export default Loginpage;
+export default Verifypage;

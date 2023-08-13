@@ -1,5 +1,5 @@
 import notification from './notification.png';
-import company_logo from './logo_.png';
+import company_logo from './logo.png';
 import profile_user from './profile-user.png';
 import settings from './setting.png';
 import dropdown_icon from './dropdown_icon.png';

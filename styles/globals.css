@@ -68,10 +68,10 @@ text-align: left;
 .creator_top{
   border: 1px solid #FF56A2;
 }
-/* .container {
-  padding-left: 30px;
-  padding-right: 30px;
-} */
+.container {
+max-width: 1600px !important;
+margin: 0 auto;
+}
 
 .whalf {
   width: 55%;
@@ -79,8 +79,14 @@ text-align: left;
 
 .whalf-r {
   width: 45%;
-
 }
+.height-70{
+  height: 76vh;
+}
+.height-15{
+  height: 12vh;
+}
+
 @media (max-width: 991px) {
   .whalf-r  {
     width: 100%;

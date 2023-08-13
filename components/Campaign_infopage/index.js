@@ -25,7 +25,7 @@ const Campaign_infopage = () => {
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
                 <div
-                    className='auto-cols-max w-80 px-3 py-5 border'
+                    className='auto-cols-max w-80 px-5 py-5 border'
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                    
@@ -160,13 +160,13 @@ const Campaign_infopage = () => {
                         </div>
 
                         {/* right */}
-                        <div className="p-3 border rounded-md shadow-md min-h-screen flex flex-col m-2 ">
+                        <div className="p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-96">
                             <h3>Today Highlights</h3>
                             <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             {/* <div className="h-full "> */}
                                 <Image
                                     src={Images.campaign_info_imgs}
-                                    className="image_capign_info"
+                                    className="image_capign_info w-full"
                                     // height={1000}
                                 />
                             {/* </div> */}
