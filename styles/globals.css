@@ -189,9 +189,33 @@ logo-slider img {
 .dropdown_text{
   font-size: 15px;
 }
-.divider_line{
-  border: 5px solid linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%);
+/* .divider_line{
+  
+max-width: 100%;
+border: 5px solid;
+border-image: linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%);
+} */
 
+.divider-line{
+  max-width: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-image: 
+  linear-gradient(to right, darkblue, darkorchid) 1;
+    /* linear-gradient(
+      to right, #13a338 0%, #1f3876 100%
+    ) 0 0 100% 0; */
+}
+.border-imaged-element {
+  max-width: 100%;
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+  linear-gradient(
+    to right, #13a338 0%, #1f3876 100%
+  ) 0 0 100% 0;
+  /* border-image:  linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%); */
+  ;
 }
 
 .campaign_info_title{
