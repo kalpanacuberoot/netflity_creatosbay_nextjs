@@ -181,25 +181,25 @@ logo-slider img {
   /* border: 1px solid blue; */
   overflow: auto;
 }
-/* .button_clr:hover{
-  color:red
-} */
-#cf {
-  position:relative;
-  height:281px;
-  width:450px;
-  margin:0 auto;
+.home_dropdown_menu{
+  background-color: #fff;
+  top:30%;
+  left: 1%;
+}
+.dropdown_text{
+  font-size: 15px;
+}
+.divider_line{
+  border: 5px solid linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, rgba(19, 19, 19, 0) 101.42%);
+
 }
 
-#cf img {
-  position:absolute;
-  left:0;
-  -webkit-transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
-  transition: opacity 1s ease-in-out;
+.campaign_info_title{
+  font-family: Futura-Normal;
 }
-
-#cf img.top:hover {
-  opacity:0;
+.container_capmapign_info{
+  font-family: Futura;
+}
+.image_capign_info{
+  height: 100% !important;
 }
