@@ -27,13 +27,12 @@ const Home = () => {
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             {currentSection === 1 && (
-
-              <div className="p-4 lg:px-10 bg-white border-gray-300 border-solid w-full  rounded-2xl border-1">
-                <h4 className="mt-0 mb-5 font-extrabold text-left text-gray-900 leading-20 text-base sm:text-lg md:text2xl lg:text-3xl xl:text-5xl ">
-                  Make Your Brand a next social media star &#x2B50;
-                </h4>
-                <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl ">
-                  Set the width of the element to a specific width of 64
+              <div className=" p-10 bg-white  border-gray-300 border-solid w-full min-h-800 rounded-lg border-1">
+                <h1 className="mt-0 mb-5 text-left font-bold  ">
+                  Make Your Brand a next <br /> social media star &#x2B50;
+                </h1>
+                <h4 className="pt-5">
+                  Sets the width of the element to a specific width of 64
                   pixels. Additionally, you can combine the w-1/2 className with
                   other utility classNamees or use responsive variants to apply
                   different widths at different screen
@@ -72,91 +71,90 @@ const Home = () => {
             )}
             {currentSection === 2 && (
               <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
-              <h4 className=" text-base">
-                {" "}
-                Already a member ?{" "}
-                <span
-                  className="  pl-3 font-bold"
-                  style={{ color: Colors.logo_clr }}
-                >
+                <h4 className=" text-base">
                   {" "}
-                  <Link href={"/login"}>Login </Link>
-                </span>
-              </h4>
-              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
-                Create New Account.
-              </h1>
-
-              <form>
-                <div className="flex">
-                  <input
-                    type="text"
-                    id="name"
-                    className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="First Name"
-                  />
-                  <input
-                    type="text"
-                    id="name"
-                    className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Last Name"
-                  />
-                </div>
-                <input
-                  type="email"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="exampl@123.com"
-                />
-                <input
-                  type="password"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Create Password"
-                />
-                <input
-                  type="password"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Confirm Password"
-                />
-                <div className=" flex my-5 justify-between">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="myCheckbox"
-                      className="form-checkbox h-5 w-5 "
-                      style={{ backgroundColor: Colors.logo_clr }}
-                    />
-                    <label htmlFor="myCheckbox" className="ml-2 text-black">
-                      I accept co. Name{" "}
-                      <span style={{ color: Colors.pink_clr }}>
-                        {" "}
-                        Terms & Condition
-                      </span>
-                    </label>
-                  </div>
-                  <Link href={"/forgot"}>
-
-                  <button
-                    className="  float-right"
-                    style={{ color: Colors.pink_clr }}
+                  Already a member ?{" "}
+                  <span
+                    className="  pl-3 font-bold"
+                    style={{ color: Colors.logo_clr }}
                   >
                     {" "}
-                    Forgot Password ?
+                    <Link href={"/login"}>Login </Link>
+                  </span>
+                </h4>
+                <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+                  Create New Account.
+                </h1>
+
+                <form>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      id="name"
+                      className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="First Name"
+                    />
+                    <input
+                      type="text"
+                      id="name"
+                      className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                  <input
+                    type="email"
+                    id="name"
+                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="exampl@123.com"
+                  />
+                  <input
+                    type="password"
+                    id="name"
+                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Create Password"
+                  />
+                  <input
+                    type="password"
+                    id="name"
+                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Confirm Password"
+                  />
+                  <div className=" flex my-5 justify-between">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="myCheckbox"
+                        className="form-checkbox h-5 w-5 "
+                        style={{ backgroundColor: Colors.logo_clr }}
+                      />
+                      <label htmlFor="myCheckbox" className="ml-2 text-black">
+                        I accept co. Name{" "}
+                        <span style={{ color: Colors.pink_clr }}>
+                          {" "}
+                          Terms & Condition
+                        </span>
+                      </label>
+                    </div>
+                    <Link href={"/forgot"}>
+                      <button
+                        className="  float-right"
+                        style={{ color: Colors.pink_clr }}
+                      >
+                        {" "}
+                        Forgot Password ?
+                      </button>
+                    </Link>
+                  </div>
+                  <button
+                    onClick={handleGetStarted}
+                    type="submit"
+                    className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
+                    style={{ background: Colors.logo_clr }}
+                  >
+                    Create Account
                   </button>
-                  </Link>
-                </div>
-                <button
-                  onClick={handleGetStarted}
-                  type="submit"
-                  className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
-                  style={{ background: Colors.logo_clr }}
-                >
-                  Create Account
-                </button>
-              </form>
-            </div>
+                </form>
+              </div>
             )}
             {currentSection === 3 && (
               <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid w-full w-90 rounded-lg border-1">
