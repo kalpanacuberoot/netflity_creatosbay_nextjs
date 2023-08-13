@@ -27,16 +27,13 @@ const Home = () => {
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             {currentSection === 1 && (
-              <div className=" p-10 bg-white  border-gray-300 border-solid w-full min-h-800 rounded-lg border-1">
-                {/* <Link href={"/home"}>
-                  <h6>Home Page</h6>
-                </Link> */}
-                <h1 className="mt-0 mb-5 text-left font-bold  ">
-                  Make Your Brand a next <br/> social media star &#x2B50;
-                  {/* <Link href={"/login"}>Login Page</Link> */}
-                </h1>
-                <h4 className="pt-5  ">
-                  Sets the width of the element to a specific width of 64
+
+              <div className="p-4 lg:px-10 bg-white border-gray-300 border-solid w-full  rounded-2xl border-1">
+                <h4 className="mt-0 mb-5 font-extrabold text-left text-gray-900 leading-20 text-base sm:text-lg md:text2xl lg:text-3xl xl:text-5xl ">
+                  Make Your Brand a next social media star &#x2B50;
+                </h4>
+                <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl ">
+                  Set the width of the element to a specific width of 64
                   pixels. Additionally, you can combine the w-1/2 className with
                   other utility classNamees or use responsive variants to apply
                   different widths at different screen
