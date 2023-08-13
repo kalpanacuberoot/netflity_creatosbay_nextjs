@@ -31,8 +31,8 @@ const Campaign_infopage = () => {
                    
                     <Left_Dashboard />
                 </div>
-                <div className="m-2 w-full">
-                    <div style={{ backgroundColor: Colors.white_clr }} className=" p-3 rounded-md flex flex-row">
+                <div className="m-2 w-full auto-cols-max ">
+                    <div style={{ backgroundColor: Colors.white_clr }} className="auto-cols-max  p-3 rounded-md flex flex-row">
                         <div className="p-3 border rounded-md shadow-md m-2 divider_line" >
                             <h2 style={{ color: Colors.pending_clr }} className="font-bold campaign_info_title">Campaign Info</h2>
                             <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
@@ -160,7 +160,7 @@ const Campaign_infopage = () => {
                         </div>
 
                         {/* right */}
-                        <div className="p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-96">
+                        <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-96">
                             <h3>Today Highlights</h3>
                             <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                             {/* <div className="h-full "> */}

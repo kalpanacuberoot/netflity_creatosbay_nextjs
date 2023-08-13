@@ -4,6 +4,8 @@ import logo from "../images/logo.png";
 import { useState } from "react";
 import Link from "next/link";
 import Colors from "@/styles/Colors";
+import Layout from "./Layout";
+import Splash_screen_slider from "./splash_screen_slider";
 
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(1);
@@ -20,15 +22,10 @@ const Home = () => {
   };
   return (
     <>
-      <div className="container h-full flex bg-zinc-100">
-        <div className="whalf h-full  ">
-          <div
-            className="flex flex-col justify-center pl-10 height-15 "
-            style={{ backgroundColor: Colors.white_clr }}
-          >
-            <Image src={logo} alt="" width={60} />
-          </div>
-          <div className="flex justify-center height-70  items-center p-10 ">
+      <div className="flex bg-zinc-100 " >
+        <div className="auto-cols-max w-full">
+          
+          <div className="flex justify-center items-center p-10 w-full">
             {currentSection === 1 && (
               <div className=" p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
                 {/* <Link href={"/home"}>
@@ -38,20 +35,20 @@ const Home = () => {
                   Make Your Brand a next social media star &#x2B50;
                   {/* <Link href={"/login"}>Login Page</Link> */}
                 </h1>
-                <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl ">
+                <p className="pt-5  text-base sm:text-lg md:text-lg lg:text-xl xl:text-lg ">
                   Sets the width of the element to a specific width of 64
                   pixels. Additionally, you can combine the w-1/2 className with
                   other utility classNamees or use responsive variants to apply
                   different widths at different screen
                 </p>
-                <p className="pt-4  text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl">
+                <p className="pt-4  text-base sm:text-lg md:text-lg lg:text-xl xl:text-lg">
                   different widths at different screen sizes. For example,
                   md:w-2/3 sets the width of the element
                 </p>
-                <div className="flex justify-between pt-5 mt-10 align-middle ">
+                <div className="flex justify-between pt-5 mt-5 align-middle ">
                   <button
                     onClick={handleGetStarted}
-                    className="flex  tracking-wider align-middle justify-center items-center text-white w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl rounded-full px-6 lg:px-8 lg:py-4 py-2 bg-cyan-600"
+                    className="flex  tracking-wider align-middle justify-center items-center text-white w-full text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl rounded-full px-6 lg:px-8 lg:py-4 py-2 bg-cyan-600"
                     style={{ backgroundColor: Colors.logo_clr }}
                   >
                     Get Started{" "}
@@ -79,8 +76,8 @@ const Home = () => {
               </div>
             )}
             {currentSection === 2 && (
-              <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
-                <p className=" text-base">
+              <div className="p-4 lg:p-10 bg-white border-gray-300 border-solid rounded-lg border-1">
+                <p className=" text-sm">
                   {" "}
                   Already a member ?{" "}
                   <span
@@ -91,41 +88,40 @@ const Home = () => {
                     <Link href={"/login"}>Login </Link>
                   </span>
                 </p>
-                <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
-                  Create New Account.
+                <h1 className="mt-0 mb-3 font-bold text-left text-gray-900   ">
+                  Create New Account
                 </h1>
 
                 <form>
-                  <div className="flex">
+                  <div className="flex h-auto">
                     <input
                       type="text"
-                      id="name"
-                      className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className="text-sm py-2 h-auto border rounded-md w-full bg-gray-100 px-3 mr-2 text-gray-700  focus:outline-none focus:shadow-outline"
                       placeholder="First Name"
                     />
                     <input
                       type="text"
                       id="name"
-                      className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className="text-sm appearance-none border rounded-md w-full ml-2 py-2 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Last Name"
                     />
                   </div>
                   <input
                     type="email"
                     id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="text-sm appearance-none border rounded-md w-full mt-5 bg-gray-100  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="exampl@123.com"
                   />
                   <input
                     type="password"
                     id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="text-sm appearance-none border rounded-md w-full mt-5 bg-gray-100  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Create Password"
                   />
                   <input
                     type="password"
                     id="name"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="text-sm appearance-none border rounded-md w-full mt-5 bg-gray-100  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Confirm Password"
                   />
                   <div className=" flex my-5 justify-between">
@@ -136,19 +132,21 @@ const Home = () => {
                         className="form-checkbox h-5 w-5 "
                         style={{ backgroundColor: Colors.logo_clr }}
                       />
-                      <label htmlFor="myCheckbox" className="ml-2 text-black">
+                      <label htmlFor="myCheckbox" className="text-sm ml-2 text-black">
                         I accept co. Name{" "}
                         <span
-                          className="text-md text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
+                          // className="text-xs sm:text-sm md:text-sm lg:text-lg xl:text-xl"
+                          className="text-base"
                           style={{ color: Colors.pink_clr }}
                         >
-                          {" "}
+                        
                           Terms & Condition
                         </span>
                       </label>
                     </div>
                     <button
-                      className=" text-md float-right text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
+                      // className=" text-sm float-right text-sm sm:text-base md:text-sm lg:text-lg xl:text-xl"
+                      className=" text-base"
                       style={{ color: Colors.pink_clr }}
                     >
                       {" "}
@@ -158,7 +156,8 @@ const Home = () => {
                   <button
                     onClick={handleGetStarted}
                     type="submit"
-                    className=" rounded-3xl  text-white w-full py-3 px-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
+                    // className=" rounded-3xl  text-white w-full py-2 px-4 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl focus:outline-none focus:shadow-outline"
+                    className=" rounded-3xl  text-white w-full py-2 focus:outline-none focus:shadow-outline"
                     style={{ background: Colors.logo_clr }}
                   >
                     Create Account
@@ -285,224 +284,15 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div className="flex height-15 align-center  p-10 gap-10">
+          {/* <div className="flex align-center  p-10 gap-10">
             <h4 style={{ color: Colors.pink_clr }}>Imprint</h4>
             <h4 style={{ color: Colors.pink_clr }}>Terms of use</h4>
             <h4 style={{ color: Colors.pink_clr }}>Dribble</h4>
-          </div>
+          </div> */}
         </div>
-        <div className="flex h-full whalf-r">
-          <div className="w-1/2">
-            <logo-slider>
-              <div>
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-
-              <div>
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-            </logo-slider>
-          </div>
-          <div className="w-1/2">
-            <logo-slider className="lslider">
-              <div>
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-              <div>
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1686538653516-7e2c9ced00aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  width={400}
-                  height={100}
-                />
-              </div>
-            </logo-slider>
-          </div>
-        </div>
+       
       </div>
+      
     </>
   );
 };

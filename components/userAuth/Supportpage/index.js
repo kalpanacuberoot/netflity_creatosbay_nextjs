@@ -8,16 +8,11 @@ import Colors from "@/styles/Colors";
 const Supportpage = () => {
   return (
     <>
-      <div className="container h-full flex bg-zinc-100">
-        <div className="whalf h-full  ">
-          <div
-            className="flex flex-col justify-center pl-10 height-15"
-            style={{ backgroundColor: Colors.white_clr }}
-          >
-            <Image src={logo} alt="" width={60} />
-          </div>
-          <div className="flex justify-center height-70  items-center px-10 ">
-            <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+      <div className="container h-full flex bg-zinc-100 items-center">
+        <div className=" auto-col-max w-full">
+          
+          <div className="flex justify-center items-center w-full justify-center">
+            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5">
               <h1 className="font-bold text-left text-gray-900   ">
                 Need Help And Support
               </h1>
@@ -78,13 +73,13 @@ const Supportpage = () => {
               </form>
             </div>
           </div>
-          <div className="flex height-15 align-center  p-10 gap-10">
+          {/* <div className="flex height-15 align-center  p-10 gap-10">
             <h4 style={{ color: Colors.pink_clr }}>Imprint</h4>
             <h4 style={{ color: Colors.pink_clr }}>Terms of use</h4>
             <h4 style={{ color: Colors.pink_clr }}>Dribble</h4>
-          </div>
+          </div> */}
         </div>
-        <div className="flex h-full whalf-r">
+        {/* <div className=" auto-col-max flex h-full whalf-r">
           <div className="w-1/2">
             <logo-slider>
               <div>
@@ -294,7 +289,7 @@ const Supportpage = () => {
               </div>
             </logo-slider>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
