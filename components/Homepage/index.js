@@ -4,6 +4,9 @@ import Images from "@/images";
 import Colors from "@/styles/Colors";
 import styled from "styled-components";
 import { useState } from "react";
+import Right_side_Dashboard from "./rightDashboard";
+import Left_Dashboard from "./leftDashboard";
+import Link from "next/link";
 
 const Homepage = () => {
   const [cardfirstshowmore, setCardfirstshowmore] = useState(false);
@@ -17,88 +20,7 @@ const Homepage = () => {
         style={{ backgroundColor: Colors.white_clr }}
       >
         <div>
-          <div className="">
-            <Image
-              src={Images.company_logo}
-              width={100}
-              height={100}
-              alt=""
-              className=" mx-auto"
-            />
-          </div>
-
-          <div className="border flex flex-row my-5 justify-between rounded-full pe-2">
-            <Image src={Images.profile_user} width={35} height={30} />
-            <div className="flex flex-row">
-              <Image
-                src={Images.notification}
-                width={20}
-                height={20}
-                className="my-2 mx-1"
-              />
-              <Image
-                src={Images.settings}
-                width={20}
-                height={30}
-                className="my-2 mx-1"
-              />
-              <Image
-                src={Images.dropdown_icon}
-                width={20}
-                height={5}
-                className="my-2 mx-1"
-              />
-            </div>
-          </div>
-          <div className=" text-center">
-            <h4 className="font-bold">Creatorbay Inc.</h4>
-            <h5 className="px-2 mb-2">Neque orro quisquam est qui dolorem</h5>
-            <div className="w-100 rounded-full border edit_button_clr py-1">
-              <button>Edit</button>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly">
-              <Image
-                src={Images.home_icon}
-                width={22}
-                className="button_clr "
-              />
-              <button className="w-32 text-start">Home</button>
-            </div>
-            <div className=" my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly">
-              <Image
-                src={Images.campaign_icon}
-                width={22}
-                className="button_clr"
-              />
-              <button className="w-32 text-start">Campaign</button>
-            </div>
-            <div className=" my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly">
-              <Image
-                src={Images.market_place_icon}
-                width={22}
-                className="button_clr"
-              />
-              <button className="w-32 text-start">Marketplace</button>
-            </div>
-            <div className=" my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly">
-              <Image
-                src={Images.chats_icon}
-                width={22}
-                className="button_clr"
-              />
-              <button className="w-32 text-start">Chats</button>
-            </div>
-            <div className=" my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly">
-              <Image
-                src={Images.invoices_icon}
-                width={22}
-                className="button_clr"
-              />
-              <button className="w-32 text-start">Invoices</button>
-            </div>
-          </div>
+          <Left_Dashboard />
         </div>
       </div>
       <div
