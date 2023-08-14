@@ -27,8 +27,11 @@ import c from './c.png';
 import d from './d.png';
 import e from './e.png';
 import f from './f.png';
-
-
+import overdue_icon from './overdue_icon.png';
+import search_icon from './search_icon.png';
+import calendar_icon from './calendar_icon.png';
+import download_icon from './download_icon.png';
+import circle_icon from './circle_icon.png';
 
 export default {
     'company_logo':company_logo,
@@ -60,5 +63,9 @@ export default {
     'd':d,
     'e':e,
     'f':f,
-
+    'overdue_icon':overdue_icon,
+    'search_icon':search_icon,
+    'calendar_icon':calendar_icon,
+    'download_icon':download_icon,
+    'circle_icon':circle_icon
 };

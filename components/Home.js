@@ -27,7 +27,7 @@ const Home = () => {
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             {currentSection === 1 && (
-              <div className=" p-10 bg-white  border-gray-300 border-solid w-full min-h-800 rounded-lg border-1">
+              <div className=" p-10 bg-white screen1 border-gray-300 border-solid w-full min-h-800 rounded-lg border-1">
                 <h1 className="mt-0 mb-5 text-left font-bold  ">
                   Make Your Brand a next <br /> social media star &#x2B50;
                 </h1>

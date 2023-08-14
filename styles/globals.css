@@ -43,11 +43,38 @@ p {
 
 }
 
-button{
+.font_size_20 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.font_size_14 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.font_size_17 {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.font_size_12 {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.font_size_31 {
+  font-size: 31px;
+  font-weight: 500;
+}
+
+
+button {
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 1px;
 }
+
 .h-full {
   height: 100vh;
 }
@@ -102,7 +129,8 @@ button{
 .height-70 {
   height: 80vh;
 }
-.height-max{
+
+.height-max {
   min-height: 60vh;
   height: 100%;
   display: flex;
@@ -113,7 +141,8 @@ button{
 .height-12 {
   height: 12vh;
 }
-.height-13{
+
+.height-13 {
   height: 8vh;
 }
 
@@ -273,3 +302,104 @@ border-image: linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, r
 .image_capign_info {
   height: 100% !important;
 }
+
+.splash_screen {
+  display: flex;
+  flex-direction: row;
+}
+
+.home_half {
+  width: 60%;
+}
+
+.slider_half {
+  width: 40%;
+}
+
+.mobile_screen {
+  display: none;
+}
+
+@media(max-width:991px) {}
+
+@media(max-width:767px) {}
+
+@media (min-width: 576px) {}
+
+/*Responsive code start*/
+@media screen and (max-width: 1920px) and (min-width: 1401px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 991px) {}
+
+@media screen and (max-width: 950px) {}
+
+@media screen and (max-width: 850px) {}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 767px) {
+
+  .mobile_screen {
+    
+    width: 150%;
+  }
+
+  .slider_half {
+    display: none;
+  }
+
+  .splash_screen {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home_half {
+    width: 100%;
+  }
+
+  .slider_half {
+    width: 100%;
+  }
+
+  .slider_direction {
+    display: flex;
+    flex-direction: row-reverse;
+    /* flex-direction: column; */
+  }
+
+  logo-slider img {
+    /* display: block; */
+    /* min-height: var(--image-size); */
+    /* margin: 1vh 0; */
+    /* object-fit: cover; */
+    /* border-radius: 20px; */
+    /* height: 50vh; */
+  }
+
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+}
+
+@media screen and (max-width: 575px) {}
+
+@media screen and (max-width: 680px) {}
+
+@media screen and (max-width: 480px) {}
+
+@media screen and (max-width: 360px) {}
+
+@media screen and (max-width: 340px) {}
