@@ -7,7 +7,7 @@ const Home_Card2 = () => {
     const [cardsecondshowmore, setCardsecondshowmore] = useState(false);
     return (
         <>
-            <div className="w-96 my-2">
+            <div className=" my-2 mx-2">
             <div className="relative">
               <Image
                 src={Images.card_img}
@@ -24,7 +24,7 @@ const Home_Card2 = () => {
                 className="reel_creator_card mx-auto"
               />
             </div>
-            <div className="px-5 py-5 border rounded-b-lg">
+            <div className="px-5 py-5 border rounded-b-lg" style={{background:Colors.white_clr}}>
               <div className="flex flex-row justify-between items-end mt-4">
                 <div className="font_size_17 ">Reels creators</div>
                 <div

@@ -71,7 +71,7 @@ const Invoicepage = () => {
 
                     </div>
                     {/* invoices data */}
-                    <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5">
+                    <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 my-2">
                         <div className="font_size_31 ">
                             Recent invoices
                         </div>

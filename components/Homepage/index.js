@@ -14,10 +14,10 @@ import Home_Card4 from "./Card/Card4";
 
 
 const Homepage = () => {
-  
- 
-  
- 
+
+
+
+
   return (
     <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
       <div
@@ -60,13 +60,13 @@ const Homepage = () => {
           </div>
         </div>
         <div
-          className="flex flex-row justify-evenly py-4 rounded-md flex-wrap"
+          className="flex flex-row justify-evenly py-4 rounded-md flex-wrap  grid grid-cols-2"
           style={{ backgroundColor: Colors.white_clr }}
         >
-         <Home_Card1/>
-         <Home_Card2/>
-         <Home_Card3/>
-         <Home_Card4/>
+          <Home_Card1 />
+          <Home_Card2 />
+          <Home_Card3 />
+          <Home_Card4 />
         </div>
       </div>
       <div

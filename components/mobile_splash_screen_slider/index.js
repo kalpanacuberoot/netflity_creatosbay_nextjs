@@ -1,5 +1,5 @@
 import Image from "next/image";
-import images from "@/images";
+import Images from "@/images";
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -7,15 +7,25 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const Mobile_splash_screen_slider = ({ images }) => {
+const Mobile_splash_screen_slider = ({ items }) => {
     const settings = {
-        dots: true,
         infinite: true,
-        speed: 1000, // Transition speed in milliseconds
-        autoplay: true,
-        autoplaySpeed: 3000, // Time between slides in milliseconds
-        slidesToShow: 1,
+        slidesToShow: 3,
         slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
+        ],
     };
 
 
@@ -23,112 +33,323 @@ const Mobile_splash_screen_slider = ({ images }) => {
 
 
         <>
-            {/* <Carousel
-                autoPlay
-                infiniteLoop
-                showThumbs={false}
-                interval={3000}
-                className="border w-screen"
-            >
-
-                <div className=" max-h-25 flex flex-row">
-                    <Image
-                        src={images.a}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.b}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.c}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.d}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.e}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.f}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.a}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                    <Image
-                        src={images.b}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                </div>
-
-                
 
 
-            </Carousel> */}
 
-            {/* <Slider {...settings}>
-                <div>
-                    <Image
-                        src={images.a}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                </div>
-                <div>
-                    <Image
-                        src={images.b}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                </div>
-                <div>
-                    <Image
-                        src={images.c}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                </div>
-                <div>
-                    <Image
-                        src={images.d}
-                        alt=""
-                        width={400}
-                        height={100}
-                    />
-                </div>
-               
-            </Slider> */}
-            {/* <Slider {...settings}>
-                {images.map((image, index) => (
-                    <div key={index} className="w-full">
-                        <img src={image} alt={`Image ${index + 1}`} />
+
+
+
+
+            <div className="border">
+                <mobile-slider className=" ">
+                    <div className="flex flex-col ">
+                        <div className="">
+                        {/* <Image
+                                src={Images.a}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.b}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.c}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.d}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.e}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.f}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            /> */}
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.a}
+                                    alt=""
+                                    width={150}
+                                    // height={20}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.b}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.c}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.d}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.e}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.f}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.a}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.b}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.c}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.d}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                        </div>
+                        <div className="">
+                        {/* <Image
+                                src={Images.a}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.b}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.c}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.d}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.e}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            />
+                            <Image
+                                src={Images.f}
+                                alt=""
+                                width={150}
+                                // height={100}
+                                className=""
+                            /> */}
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.a}
+                                    alt=""
+                                    width={150}
+                                    // height={20}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.b}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.c}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.d}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.e}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.f}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.a}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.b}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.c}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                            <div className="bg-white p-4 rounded shadow-md ">
+                                <Image
+                                    src={Images.d}
+                                    alt=""
+                                    width={150}
+                                    // height={100}
+                                    className=""
+                                />
+                            </div>
+                        </div>
+
                     </div>
-                ))}
-            </Slider> */}
+
+                </mobile-slider>
+            </div>
+            {/* <div class="marquee-container">
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+                <Image
+                    src={Images.a}
+                    alt=""
+                />
+
+            </div> */}
+
 
         </>
     )

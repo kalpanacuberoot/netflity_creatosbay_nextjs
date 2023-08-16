@@ -24,6 +24,7 @@ const Left_Dashboard = () => {
                     src={Images.profile_user}
                     width={35}
                     height={30}
+                    alt=""
                 />
                 <div className='flex flex-row' onClick={() => setDropdown_menu(!dropdown_menu)}>
                     <Image
@@ -31,18 +32,21 @@ const Left_Dashboard = () => {
                         width={20}
                         height={20}
                         className='my-2 mx-1'
+                        alt=""
                     />
                     <Image
                         src={Images.settings}
                         width={20}
                         height={30}
                         className='my-2 mx-1'
+                        alt=""
                     />
                     <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
+                        alt=""
                     />
                 </div>
 
