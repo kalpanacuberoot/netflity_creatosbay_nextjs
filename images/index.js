@@ -1,7 +1,7 @@
-import notification from './notification.png';
+import notification from './notification_icon.png';
 import company_logo from './logo.png';
 import profile_user from './profile-user.png';
-import settings from './setting.png';
+import settings from './setting_icon.png';
 import dropdown_icon from './dropdown_icon.png';
 import home_icon from './home_icon.png';
 import campaign_icon from './campaign_icon.png';
@@ -16,7 +16,7 @@ import empty_star from './empty_star.png';
 import clock from './clock.png';
 import support_icon from './24_support.png'; 
 import terms_of_service from './terms_of_service.png';
-import logout from './logout.png';
+import logout from './logout_icon.png';
 import plus_icon from './plus_icon.png';
 import campaign_info_imgs from './campaign_info_imgs.png';
 import arrowleft_icon from './arrowleft_icon.png';
@@ -27,8 +27,14 @@ import c from './c.png';
 import d from './d.png';
 import e from './e.png';
 import f from './f.png';
-
-
+import overdue_icon from './overdue_icon.png';
+import search_icon from './search_icon.png';
+import calendar_icon from './calendar_icon.png';
+import download_icon from './download_icon.png';
+import circle_icon from './circle_icon.png';
+import leftdashboard_icon from './leftdashboard_icon.png';
+import pink_plus_icon from './pink_plus_icon.png';
+import notification_left_collapse_icon from './notification_left_collapse_icon.png';
 
 export default {
     'company_logo':company_logo,
@@ -60,5 +66,12 @@ export default {
     'd':d,
     'e':e,
     'f':f,
-
+    'overdue_icon':overdue_icon,
+    'search_icon':search_icon,
+    'calendar_icon':calendar_icon,
+    'download_icon':download_icon,
+    'circle_icon':circle_icon,
+    'leftdashboard_icon':leftdashboard_icon,
+    'pink_plus_icon':pink_plus_icon,
+    'notification_left_collapse_icon':notification_left_collapse_icon,
 };

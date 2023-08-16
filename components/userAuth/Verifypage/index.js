@@ -75,6 +75,7 @@ const Verifypage = () => {
                     </label>
                   </div>
                 </div>
+                <Link href={'/login'}>
                 <button
                   type="submit"
                   className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
@@ -82,6 +83,7 @@ const Verifypage = () => {
                 >
                   Continue
                 </button>
+                </Link>
               </form>
             </div>
           </div>

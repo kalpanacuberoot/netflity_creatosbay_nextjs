@@ -15,7 +15,7 @@ const Loginpage = () => {
                   className="  pl-3 font-bold"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/login"}>Sign up </Link>
+                  <Link href={"/signup"}>Sign up </Link>
                 </span>
               </h4>
               <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">

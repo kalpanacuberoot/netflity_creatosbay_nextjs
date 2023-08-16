@@ -1,5 +1,6 @@
 import Images from "@/images";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from 'react';
 
 const Left_Dashboard = () => {
@@ -23,6 +24,7 @@ const Left_Dashboard = () => {
                     src={Images.profile_user}
                     width={35}
                     height={30}
+                    alt=""
                 />
                 <div className='flex flex-row' onClick={() => setDropdown_menu(!dropdown_menu)}>
                     <Image
@@ -30,18 +32,21 @@ const Left_Dashboard = () => {
                         width={20}
                         height={20}
                         className='my-2 mx-1'
+                        alt=""
                     />
                     <Image
                         src={Images.settings}
                         width={20}
                         height={30}
                         className='my-2 mx-1'
+                        alt=""
                     />
                     <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
+                        alt=""
                     />
                 </div>
 
@@ -125,11 +130,12 @@ const Left_Dashboard = () => {
 
             </div>
             <div className='mt-5'>
+                <Link href={'/home'}>
 
-                <div className='items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className='items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
-                >
-                    {/* {home_icon && 
+                    >
+                        {/* {home_icon && 
                     <Image
                     src={Images.campaign_icon}
                     width={22}
@@ -153,39 +159,42 @@ const Left_Dashboard = () => {
 
 
 
-                    <Image
-                        src={Images.home_icon}
-                        width={22}
-                        className=' '
-                    />
-                    <button
-                        className='w-32 text-start'
+                        <Image
+                            src={Images.home_icon}
+                            width={22}
+                            className=' '
+                        />
+                        <button
+                            className='w-32 text-start'
+
+                        >
+                            Home
+                        </button>
+                    </div>
+                </Link>
+                <Link href={'/live_campaign'}>
+                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
                     >
-                        Home
-                    </button>
-                </div>
-                <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
-
-                >
-                    <Image
-                        src={Images.campaign_icon}
-                        width={22}
-                        className=''
-                    />
-                    <button
-                        className='w-32 text-start'
-                    >
-                        Campaign
-                    </button>
-                </div>
+                        <Image
+                            src={Images.campaign_icon}
+                            width={22}
+                            className=''
+                        />
+                        <button
+                            className='w-32 text-start'
+                        >
+                            Campaign
+                        </button>
+                    </div>
+                </Link>
                 <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
                 >
                     <Image
                         src={Images.market_place_icon}
                         width={22}
-                        className='button_clr'
+                        className=''
                     />
                     <button
                         className='w-32 text-start'
@@ -207,20 +216,22 @@ const Left_Dashboard = () => {
                         Chats
                     </button>
                 </div>
-                <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                <Link href={'/invoice'}>
+                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
-                >
-                    <Image
-                        src={Images.invoices_icon}
-                        width={22}
-                        className=''
-                    />
-                    <button
-                        className='w-32 text-start'
                     >
-                        Invoices
-                    </button>
-                </div>
+                        <Image
+                            src={Images.invoices_icon}
+                            width={22}
+                            className=''
+                        />
+                        <button
+                            className='w-32 text-start'
+                        >
+                            Invoices
+                        </button>
+                    </div>
+                </Link>
             </div>
         </div>
     )

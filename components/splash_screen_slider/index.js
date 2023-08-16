@@ -3,7 +3,7 @@ import images from "@/images"
 
 const Splash_screen_slider = () => {
     return (
-        <div className="flex h-full">
+        <div className="flex h-full  ">
             {/* <div className="flex h-screen whalf-r border"></div> */}
             <div className="">
                 <logo-slider>

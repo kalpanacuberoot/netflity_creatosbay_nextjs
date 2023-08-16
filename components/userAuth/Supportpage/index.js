@@ -8,7 +8,8 @@ import Colors from "@/styles/Colors";
 const Supportpage = () => {
   return (
     <>
-      <div className="container h-full flex bg-zinc-100 items-center height-70 px-10">
+      {/* <div className="container h-full flex bg-zinc-100 items-center height-70 px-10"> */}
+      <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
         <div className=" auto-col-max w-full">
           
           <div className="flex items-center w-full justify-center">
