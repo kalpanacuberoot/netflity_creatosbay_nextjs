@@ -209,21 +209,23 @@ const Left_Dashboard = () => {
                         Marketplace
                     </button>
                 </div>
-                <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                <Link href={'/communication'}>
+                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
-                >
-                    <Image
-                        src={Images.chats_icon}
-                        width={22}
-                        className=''
-                        alt=""
-                    />
-                    <button
-                        className='w-32 text-start'
                     >
-                        Chats
-                    </button>
-                </div>
+                        <Image
+                            src={Images.chats_icon}
+                            width={22}
+                            className=''
+                            alt=""
+                        />
+                        <button
+                            className='w-32 text-start'
+                        >
+                            Chats
+                        </button>
+                    </div>
+                </Link>
                 <Link href={'/invoice'}>
                     <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 

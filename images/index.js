@@ -35,6 +35,15 @@ import circle_icon from './circle_icon.png';
 import leftdashboard_icon from './leftdashboard_icon.png';
 import pink_plus_icon from './pink_plus_icon.png';
 import notification_left_collapse_icon from './notification_left_collapse_icon.png';
+import avatar1 from './avatar1.png';
+import avatar2 from './avatar2.png';
+import three_dots_icon from './3dots_icon.png';
+import chat_msg from './chat_msg.png';
+import communication_one from './communication1.png';
+import communication_two from './communication2.png';
+import communication_three from './communication3.png';
+import communication_four from './communication4.png';
+import communication_five from './communication5.png';
 
 export default {
     'company_logo':company_logo,
@@ -74,4 +83,13 @@ export default {
     'leftdashboard_icon':leftdashboard_icon,
     'pink_plus_icon':pink_plus_icon,
     'notification_left_collapse_icon':notification_left_collapse_icon,
+    'avatar1':avatar1,
+    'avatar2':avatar2,
+    'three_dots_icon':three_dots_icon,
+    'chat_msg':chat_msg,
+    'communication_one':communication_one,
+    'communication_two':communication_two,
+    'communication_three':communication_three,
+    'communication_four':communication_four,
+    'communication_five':communication_five,
 };
