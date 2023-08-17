@@ -61,6 +61,7 @@ const Left_Dashboard = () => {
                                     src={Images.market_place_icon}
                                     width={18}
                                     className=' '
+                                    alt=""
                                 />
                                 <button
                                     className=' w-48 dropdown_text text-center'
@@ -76,6 +77,7 @@ const Left_Dashboard = () => {
                                     src={Images.support_icon}
                                     width={18}
                                     className=''
+                                    alt=""
                                 />
                                 <button
                                     className=' w-48 dropdown_text text-center'
@@ -90,6 +92,7 @@ const Left_Dashboard = () => {
                                     src={Images.terms_of_service}
                                     width={18}
                                     className=''
+                                    alt=""
                                 />
                                 <button
                                     className=' w-48 dropdown_text text-center'
@@ -105,6 +108,7 @@ const Left_Dashboard = () => {
                                     width={18}
                                     height={10}
                                     className=''
+                                    alt=""
                                 />
                                 <button
                                     className='w-48  dropdown_text text-center'
@@ -163,6 +167,7 @@ const Left_Dashboard = () => {
                             src={Images.home_icon}
                             width={22}
                             className=' '
+                            alt=""
                         />
                         <button
                             className='w-32 text-start'
@@ -180,6 +185,7 @@ const Left_Dashboard = () => {
                             src={Images.campaign_icon}
                             width={22}
                             className=''
+                            alt=""
                         />
                         <button
                             className='w-32 text-start'
@@ -195,6 +201,7 @@ const Left_Dashboard = () => {
                         src={Images.market_place_icon}
                         width={22}
                         className=''
+                        alt=""
                     />
                     <button
                         className='w-32 text-start'
@@ -209,6 +216,7 @@ const Left_Dashboard = () => {
                         src={Images.chats_icon}
                         width={22}
                         className=''
+                        alt=""
                     />
                     <button
                         className='w-32 text-start'
@@ -224,6 +232,7 @@ const Left_Dashboard = () => {
                             src={Images.invoices_icon}
                             width={22}
                             className=''
+                            alt=""
                         />
                         <button
                             className='w-32 text-start'

@@ -129,6 +129,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -203,6 +204,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -277,6 +279,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -351,6 +354,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -440,6 +444,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -514,6 +519,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>
@@ -588,6 +594,7 @@ const Homepage = () => {
                     src={Images.profile_user}
                     width={40}
                   // height={30}
+                  alt=""
                   />
                   <div className="flex flex-row flex-wrap">
                     <div>

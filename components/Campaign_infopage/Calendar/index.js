@@ -15,6 +15,7 @@ const Calendar = () => {
                         <Image
                             src={Images.arrowleft_icon}
                             width={30}
+                            alt=""
                         />
                     </div>
                     <div className='flex group hover:bg-purple-500 hover:shadow-lg hover-dark-shadow rounded-lg mx-1 transition-all	duration-300	 cursor-pointer justify-center w-16'>
@@ -94,6 +95,7 @@ const Calendar = () => {
                         <Image
                             src={Images.arrowright_icon}
                             width={30}
+                            alt=""
                         />
                     </div>
 

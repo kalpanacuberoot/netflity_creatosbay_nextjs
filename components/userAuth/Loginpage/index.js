@@ -5,9 +5,9 @@ import Colors from "@/styles/Colors";
 const Loginpage = () => {
   return (
     <>
-      <div className="container h-full flex bg-zinc-100 items-center height-70 px-10">
-        <div className=" auto-col-max w-full">
-          <div className="flex justify-center height-70  items-center px-10 ">
+      <div className="container p-4 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
+        <div className=" auto-col-max w-full height-70">
+          <div className="flex justify-center  items-center px-10 ">
             <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
               <h4>
                 Don`&apos;t have an account ?
@@ -41,7 +41,7 @@ const Loginpage = () => {
                   className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Confirm Password"
                 />
-                <div className=" flex my-5 justify-between">
+                <div className=" flex my-5 justify-between font_size_16">
                   <div className="flex items-center">
                     <input
                       type="checkbox"
@@ -49,9 +49,9 @@ const Loginpage = () => {
                       className="form-checkbox h-5 w-5 "
                       style={{ backgroundColor: Colors.logo_clr }}
                     />
-                    <label htmlFor="myCheckbox" className="ml-2 text-black">
+                    <label htmlFor="myCheckbox" className=" ml-2 text-black">
                       I accept co. Name
-                      <span style={{ color: Colors.pink_clr }}>
+                      <span style={{ color: Colors.pink_clr }}  className="ml-2">
                         Terms & Condition
                       </span>
                     </label>

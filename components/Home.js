@@ -47,7 +47,7 @@ const Home = () => {
                 >
                   <button
                     // onClick={handleGetStarted}
-                   className="flex mobile_btn border items-center"
+                   className="flex mobile_btn items-center"
                    
                   >
                     Get Started{" "}
