@@ -93,6 +93,7 @@ const Campaign_infopage = () => {
                         src={Images.plus_icon}
                         width={20}
                         className="mx-auto "
+                        alt=""
                       />
                       <p className="mt-3" style={{ color: Colors.logo_clr }}>
                         Add Image
@@ -114,6 +115,7 @@ const Campaign_infopage = () => {
                         src={Images.plus_icon}
                         width={20}
                         className="mx-auto "
+                        alt=""
                       />
                       <p className="mt-3" style={{ color: Colors.logo_clr }}>
                         Add Image
@@ -156,6 +158,7 @@ const Campaign_infopage = () => {
                         src={Images.plus_icon}
                         width={20}
                         className="mx-auto "
+                        alt=""
                       />
                       <p className="mt-3" style={{ color: Colors.logo_clr }}>
                         Add Image
@@ -177,6 +180,7 @@ const Campaign_infopage = () => {
                         src={Images.plus_icon}
                         width={20}
                         className="mx-auto "
+                        alt=""
                       />
                       <p className="mt-3" style={{ color: Colors.logo_clr }}>
                         Add Image
@@ -202,6 +206,7 @@ const Campaign_infopage = () => {
                 src={Images.campaign_info_imgs}
                 className="image_capign_info w-full"
                 // height={1000}
+                alt=""
               />
               {/* </div> */}
             </div>

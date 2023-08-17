@@ -24,13 +24,14 @@ const CollapseLeftDashboard = () => {
                         alt=""
                         className="mx-auto"
                     />
-                    <div className="absolute  top-7 right-12">
+                    <div className="absolute  top-7 right-14">
 
                         <Image
                             src={Images.notification_left_collapse_icon}
                             width={24}
                             height={24}
                             className='my-2 mx-1'
+                            alt=""
                         />
                         {/* <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span> */}
                     </div>
@@ -47,6 +48,7 @@ const CollapseLeftDashboard = () => {
                                 src={Images.home_icon}
                                 width={56}
                                 className='mx-auto p-3  left_collapse rounded-md'
+                                alt=""
                             />
 
                         </div>
@@ -59,6 +61,7 @@ const CollapseLeftDashboard = () => {
                                 src={Images.campaign_icon}
                                 width={56}
                                 className='mx-auto p-3  left_collapse rounded-md'
+                                alt=""
                             />
 
                         </div>
@@ -70,6 +73,7 @@ const CollapseLeftDashboard = () => {
                             src={Images.market_place_icon}
                             width={56}
                             className='mx-auto p-3  left_collapse rounded-md'
+                            alt=""
                         />
 
                     </div>
@@ -80,6 +84,7 @@ const CollapseLeftDashboard = () => {
                             src={Images.chats_icon}
                             width={56}
                             className='mx-auto p-3  left_collapse rounded-md'
+                            alt=""
                         />
 
                     </div>
@@ -91,6 +96,7 @@ const CollapseLeftDashboard = () => {
                                 src={Images.invoices_icon}
                                 width={56}
                                 className='mx-auto p-3  left_collapse rounded-md'
+                                alt=""
                             />
 
                         </div>
@@ -109,6 +115,7 @@ const CollapseLeftDashboard = () => {
                             src={Images.settings}
                             width={56}
                             className='mx-auto p-3  left_collapse rounded-md '
+                            alt=""
                         />
 
                         </div>
@@ -119,6 +126,7 @@ const CollapseLeftDashboard = () => {
                             src={Images.logout}
                             width={56}
                             className='mx-auto p-3  left_collapse rounded-md'
+                            alt=""
                         />
 
                         </div>

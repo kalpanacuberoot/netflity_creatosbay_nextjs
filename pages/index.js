@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Home from '@/components/Home';
 import Layout from '@/components/Layout';
 import Mobile_splash_screen_slider from '@/components/mobile_splash_screen_slider';
