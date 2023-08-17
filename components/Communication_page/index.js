@@ -82,6 +82,7 @@ const Communication_page = () => {
                                         height={18}
                                         src={Images.three_dots_icon}
                                         className="rounded-md"
+                                        alt=""
                                     />
                                 </div>
                             </div>
@@ -93,6 +94,7 @@ const Communication_page = () => {
                                     src={Images.chat_msg}
                                     width={510}
                                     height={590}
+                                    alt=""
                                 />
                             </div>
                             <hr />
@@ -119,6 +121,7 @@ const Communication_page = () => {
                                     height={216}
                                     width={278}
                                     className="mx-auto"
+                                    alt=""
                                 />
                                 <div className="flex flex-row items-center justify-evenly py-2 flex-wrap ">
                                     <Image
@@ -154,7 +157,7 @@ const Communication_page = () => {
                                 <p className="font_size_16 communication_text py-2">
                                     Qorem ipsum Lorem Ipsum is simply dummy text of
                                     the printing and typesetting industry. Lorem Ipsum
-                                    has been the industry's standard dummy text ever
+                                    has been the industry&apos;s standard dummy text ever
                                     since the 1500s, when an unknown printer took a
                                     galley of type and scrambled it to make a type
                                     specimen book. It has survived not only five
@@ -166,7 +169,7 @@ const Communication_page = () => {
                                     like Aldus PageMaker including versions of Lorem
                                     Ipsum.Qorem ipsum Lorem Ipsum is simply dummy
                                     text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text
+                                    Ipsum has been the industry&apos;s standard dummy text
                                     ever since the 1500s.
                                 </p>
                             </div>

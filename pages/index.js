@@ -26,18 +26,18 @@ const index = () => {
   ];
   return (
     <>
-      {/* <div className=' container flex flex-row h-screen'>
-        <div className='auto-cols-max w-2/3 h-screen'>
+      <div className=' container flex flex-row h-screen justify-between items-center'>
+        <div className='auto-cols-max h-screen border children_layout'>
           <Layout>
             <Home />
           </Layout>
         </div>
-        <div className='auto-cols-max h-screen '>
+        <div className='auto-cols-max h-screen splash_slider border w-3/8'>
           <Splash_screen_slider />
         </div>
-      </div> */}
+      </div>
 
-      {isMobile ?
+      {/* {isMobile ?
         <div className=' container h-full'>
           <div className='auto-cols-max w-full h-screen'>
             <Layout>
@@ -65,7 +65,7 @@ const index = () => {
               <Splash_screen_slider />
             </div>
           </div>
-        </>}
+        </>} */}
       {/* <div className=' container h-screen splash_screen'>
         <div className='auto-cols-max h-screen'>
           <Layout>
