@@ -44,6 +44,14 @@ import communication_two from './communication2.png';
 import communication_three from './communication3.png';
 import communication_four from './communication4.png';
 import communication_five from './communication5.png';
+import pop_bg from './pop_bg.png';
+import popup_logo from './popup_logo.png';
+import share_like from './share_like.png';
+import twitter from './twitter.png';
+import twitter_inv_mem from './twitter_inv_mem.png';
+import whatsapp_inv_mem from './whatsapp_inv_mem.png';
+import instagram_inv_mem from './instagram_inv_mem.png';
+import facebook_inv_mem from './facebook_inv_mem.png';
 
 export default {
     'company_logo':company_logo,
@@ -92,4 +100,12 @@ export default {
     'communication_three':communication_three,
     'communication_four':communication_four,
     'communication_five':communication_five,
+    'pop_bg':pop_bg,
+    'popup_logo':popup_logo,
+    'share_like':share_like,
+    'twitter':twitter,
+    'twitter_inv_mem':twitter_inv_mem,
+    'whatsapp_inv_mem':whatsapp_inv_mem,
+    'instagram_inv_mem':instagram_inv_mem,
+    'facebook_inv_mem':facebook_inv_mem,
 };

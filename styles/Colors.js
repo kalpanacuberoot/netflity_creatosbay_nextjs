@@ -14,4 +14,7 @@ export default {
   gray2:'#F8FAFC',
   light_grey_clr:'#E7E7E7',
   orange_clr:'#FF4C00',
+  light_bg_clr:'#FAF5F8',
+  logo_light_clr:'#9357ff1c',
+  blue_clr:'#275E96',
 };

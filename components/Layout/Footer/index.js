@@ -9,9 +9,16 @@ const Footer = () => {
     >
       <div className="flex align-center justify-evenly items-center  height-13  w-80"
        >
-        <h6 style={{ color: Colors.pink_clr }}>Imprint</h6>
-        <h6 style={{ color: Colors.pink_clr }}>Terms of use</h6>
-        <h6 style={{ color: Colors.pink_clr }}>Dribble</h6>
+        <h6 
+        style={{ color: Colors.pink_clr }}
+        className='text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl'
+        >Imprint</h6>
+        <h6 style={{ color: Colors.pink_clr }}
+         className='text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl'
+        >Terms of use</h6>
+        <h6 style={{ color: Colors.pink_clr }}
+         className='text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl'
+        >Dribble</h6>
       </div>
     </div>
 
