@@ -344,7 +344,8 @@ logo-slider img {
   /* border: 1px solid green; */
   overflow: hidden;
   position: relative;
-  max-height: 60vh;
+  max-height: 55vh;
+  /* min-width: 55vh; */
 }
 
 .child_creator {

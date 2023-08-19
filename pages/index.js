@@ -12,7 +12,7 @@ import Images from '@/images';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-
+import 'flowbite';
 
 const index = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });

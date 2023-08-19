@@ -63,7 +63,26 @@ const Left_Dashboard = () => {
                     className=' mx-auto'
                 />
             </div>
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+            </svg></button>
 
+            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                    </li>
+                </ul>
+            </div>
             <div className='border flex flex-row my-5 justify-between rounded-full pe-2'>
 
                 <Image
@@ -72,7 +91,9 @@ const Left_Dashboard = () => {
                     height={30}
                     alt=""
                 />
-                <div className='flex flex-row' onClick={() => setDropdown_menu(!dropdown_menu)}>
+                <div className='flex flex-row'
+                onClick={() => setDropdown_menu(!dropdown_menu)}
+                >
                     <Image
                         src={Images.notification}
                         width={20}
@@ -80,6 +101,9 @@ const Left_Dashboard = () => {
                         className='my-2 mx-1'
                         alt=""
                     />
+
+
+
                     <Image
                         src={Images.settings}
                         width={20}
@@ -87,18 +111,18 @@ const Left_Dashboard = () => {
                         className='my-2 mx-1'
                         alt=""
                     />
-                    <Image
+                    {/* <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
                         alt=""
-                    />
+                    /> */}
                 </div>
 
-                <div className='absolute border home_dropdown_menu border rounded-md'>
+                <div className='z-10 bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700 border home_dropdown_menu rounded-md'>
                     {dropdown_menu &&
-                        <div className='mt-2  w-full px-3 py-2'>
+                        <div className='w-full px-3 py-2'>
 
                             <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
                             >
