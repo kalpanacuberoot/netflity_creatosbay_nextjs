@@ -16,7 +16,7 @@ const Tab3 = ({onClick}) => {
                     Step 3: Engage with Influencers
                 </div>
                 <div className="font_size_31 ine-height-[37.17px] py-3">
-                Discover top creators by browsing the "Top Creators" section or get personalized recommendations through the "Suggest Creators" feature. Engage in active conversations with influencers to discuss campaign details and collaboration opportunities.
+                Discover top creators by browsing the &quot;Top Creators&quot; section or get personalized recommendations through the &quot;Suggest Creators&quot; feature. Engage in active conversations with influencers to discuss campaign details and collaboration opportunities.
                 </div>
                 <div className="py-3">
                     <Buttons

@@ -14,7 +14,7 @@ const Tab2 = ({onClick}) => {
                     Step 2: Manage Your Campaign
                 </div>
                 <div className="font_size_31 ine-height-[37.17px]  py-3">
-                    Once your campaign is created, you can easily monitor its status and progress. Use the "Active" tab to view ongoing campaigns and the "Pending" tab to review campaigns awaiting approval.
+                    Once your campaign is created, you can easily monitor its status and progress. Use the &quot;Active&quot; tab to view ongoing campaigns and the &quot;Pending&quot; tab to review campaigns awaiting approval.
                 </div>
                 <div className="py-3">
                     <Buttons

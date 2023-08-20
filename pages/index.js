@@ -11,11 +11,11 @@ import Tab3 from '@/components/userAuth/Modal_onboarding_screens/Tab3';
 import Images from '@/images';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import 'flowbite';
+// import { useMediaQuery } from 'react-responsive';
+// import 'flowbite';
 
 const index = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  // const isMobile = useMediaQuery({ maxWidth: 767 });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -46,12 +46,7 @@ const closeModal = () => {
 
   return (
     <>
-     {/* <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-        onClick={() =>openModal()}
-      >
-        Open Modal
-      </button> */}
+     
       <Modal_onboarding_screens isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="relative w-full max-w-4xl max-h-full min-w-xl min-h-0">
 
@@ -69,53 +64,7 @@ const closeModal = () => {
         </div>
       </div>
 
-      {/* {isMobile ?
-        <div className=' container h-full'>
-          <div className='auto-cols-max w-full h-screen'>
-            <Layout>
-              <Home />
-            </Layout>
-          </div>
-
-          <div className=' slide_screen h-auto '>
-
-            <Mobile_splash_screen_slider />
-          </div>
-
-
-        </div>
-        :
-        <>
-          <div className=' container flex flex-row h-screen'>
-            <div className='auto-cols-max w-2/3 h-screen'>
-              <Layout>
-                <Home />
-              </Layout>
-            </div>
-
-            <div className='auto-cols-max h-screen'>
-              <Splash_screen_slider />
-            </div>
-          </div>
-        </>} */}
-      {/* <div className=' container h-screen splash_screen'>
-        <div className='auto-cols-max h-screen'>
-          <Layout>
-            <Home />
-          </Layout>
-        </div>
-        <div className='auto-cols-max h-screen w-1/3 '>
-          {isMobile ?
-
-            <Mobile_splash_screen_slider images={images} /> : <Splash_screen_slider />}
-          <div className='hidden md:block'>
-            <Splash_screen_slider />
-          </div>
-          <div className='hidden lg:block'>
-          <Mobile_splash_screen_slider />
-          </div>
-        </div>
-      </div> */}
+      
     </>
   )
 }

@@ -128,21 +128,25 @@ const Communication_page = () => {
                                         src={Images.communication_two}
                                         width={61}
                                         height={61}
+                                        alt=""
                                     />
                                     <Image
                                         src={Images.communication_three}
                                         width={61}
                                         height={61}
+                                        alt=""
                                     />
                                     <Image
                                         src={Images.communication_four}
                                         width={61}
                                         height={61}
+                                        alt=""
                                     />
                                     <Image
                                         src={Images.communication_five}
                                         width={61}
                                         height={61}
+                                        alt=""
                                     />
                                 </div>
                                 {/* <div className="flex flex-row items-center flex-wrap border rounded-full px-3 py-2"></div> */}

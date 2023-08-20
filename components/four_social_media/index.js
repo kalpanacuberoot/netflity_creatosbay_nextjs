@@ -12,6 +12,7 @@ const Social_media_icons = () => {
                             width={50}
                             height={50}
                             className="mx-auto p-1"
+                            alt=""
                         />
                         <div className="font_size_21 line-height-[26.52px]">Instagram</div>
                     </div>
@@ -23,6 +24,7 @@ const Social_media_icons = () => {
                             width={50}
                             height={50}
                             className="mx-auto p-1"
+                            alt=""
                         />
                         <div className="font_size_21 line-height-[26.52px]">Twitter</div>
                     </div>
@@ -35,6 +37,7 @@ const Social_media_icons = () => {
                             width={50}
                             height={50}
                             className="mx-auto p-1"
+                            alt=""
                         />
                         <div className="font_size_21 line-height-[26.52px]">Whatsapp</div>
                     </div>
@@ -46,6 +49,7 @@ const Social_media_icons = () => {
                             width={50}
                             height={50}
                             className="mx-auto p-1"
+                            alt=""
                         />
                         <div className="font_size_21 line-height-[26.52px]">Facebook</div>
                     </div>

@@ -57,6 +57,7 @@ const Terms_of_service_content = () => {
                                 width={64}
                                 height={64}
                                 className="mx-auto p-1"
+                                alt=""
                             />
                             <div className="font_size_20 leading-6">Share a Like</div>
                         </div>
@@ -66,6 +67,7 @@ const Terms_of_service_content = () => {
                                 width={64}
                                 height={64}
                                 className="mx-auto  p-1"
+                                alt=""
                             />
                             <div className="font_size_20  leading-6">Follow me on Twitter</div>
                         </div>

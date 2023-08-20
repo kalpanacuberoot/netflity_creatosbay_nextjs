@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import 'flowbite';
+// import 'flowbite';
 
 export default function Document() {
   return (
@@ -8,7 +8,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+        {/* <script src="../path/to/flowbite/dist/flowbite.min.js"></script> */}
       </body>
     </Html>
   )

@@ -21,7 +21,7 @@ const Invite_members_content = () => {
                             Invite a team member
                         </div>
                         <div className="font_size_21  line-height-[25.18px] my-3">
-                            "Suggest Creators" feature. Engage in active conversations with influencers to
+                        &quot;Suggest Creators&quot; feature. Engage in active conversations with influencers to
                             discuss campaign details and collaboration opportunities.
                         </div>
 
