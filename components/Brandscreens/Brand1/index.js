@@ -1,7 +1,7 @@
 import Colors from "@/styles/Colors";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import Brand2page from "../Brand2";
 
 

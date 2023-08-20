@@ -9,7 +9,12 @@ const Navbar = () => {
       className="flex flex-col justify-center pl-10 height-12 "
       style={{ backgroundColor: Colors.white_clr }}
     >
-      <Image src={Images.company_logo} alt="" width={60} />
+      <Image 
+      src={Images.company_logo} 
+      alt="" 
+      width={60} 
+      height={60} 
+      className="mobile_nav_logo"/>
     </div>
   );
 };

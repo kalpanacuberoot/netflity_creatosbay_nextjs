@@ -24,7 +24,16 @@ const CollapseLeftDashboard = () => {
                         alt=""
                         className="mx-auto"
                     />
-                    <div className="absolute  top-7 right-14">
+                    <div class="absolute inset-y-0 top-8 fixed left-10 flex items-center pl-3 pointer-events-none">
+                    <Image
+                            src={Images.notification_left_collapse_icon}
+                            width={24}
+                            height={24}
+                            className='my-2 mx-1'
+                            alt=""
+                        />
+                       </div>
+                    {/* <div className="absolute  top-7 right-14">
 
                         <Image
                             src={Images.notification_left_collapse_icon}
@@ -33,8 +42,8 @@ const CollapseLeftDashboard = () => {
                             className='my-2 mx-1'
                             alt=""
                         />
-                        {/* <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span> */}
-                    </div>
+                        <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    </div> */}
                 </div>
 
                 <div className='mt-5'>
@@ -77,17 +86,19 @@ const CollapseLeftDashboard = () => {
                         />
 
                     </div>
-                    <div className='my-2 py-1'
+                    <Link href={'/communication'}>
+                        <div className='my-2 py-1'
 
-                    >
-                        <Image
-                            src={Images.chats_icon}
-                            width={56}
-                            className='mx-auto p-3  left_collapse rounded-md'
-                            alt=""
-                        />
+                        >
+                            <Image
+                                src={Images.chats_icon}
+                                width={56}
+                                className='mx-auto p-3  left_collapse rounded-md'
+                                alt=""
+                            />
 
-                    </div>
+                        </div>
+                    </Link>
                     <Link href={'/invoice'}>
                         <div className='my-2 py-1'
 
@@ -111,27 +122,27 @@ const CollapseLeftDashboard = () => {
                         <div className='my-2 py-1'
 
                         >
-                           <Image
-                            src={Images.settings}
-                            width={56}
-                            className='mx-auto p-3  left_collapse rounded-md '
-                            alt=""
-                        />
+                            <Image
+                                src={Images.settings}
+                                width={56}
+                                className='mx-auto p-3  left_collapse rounded-md '
+                                alt=""
+                            />
 
                         </div>
                         <div className='my-2 py-1'
 
                         >
                             <Image
-                            src={Images.logout}
-                            width={56}
-                            className='mx-auto p-3  left_collapse rounded-md'
-                            alt=""
-                        />
+                                src={Images.logout}
+                                width={56}
+                                className='mx-auto p-3  left_collapse rounded-md'
+                                alt=""
+                            />
 
                         </div>
-                        
-                       
+
+
 
                     </div>
                     {/* </Link> */}
