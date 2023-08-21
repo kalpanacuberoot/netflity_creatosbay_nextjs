@@ -4,8 +4,10 @@ import Colors from "@/styles/Colors";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import Terms_of_service from '@/components/Homepage/Termsofservice';
+import Terms_of_service_content from '@/components/Homepage/Termsofservice/Terms_of_service_content';
 
 const Signuppage = () => {
 
@@ -17,6 +19,7 @@ const Signuppage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
+    const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
 
 
     // const handleSubmit = async (e) => {
@@ -33,6 +36,38 @@ const Signuppage = () => {
     //         console.error('POST response register catrch error-------------', error);
     //     }
     // };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //       // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
+    //       // console.log('GET response:', getResponse);
+
+    //       const postData = {
+    //         name: `${firstName} ${lastName}`, 
+    //         email: email, 
+    //         password: password, 
+    //         type: "brand"
+    //       };
+    //       const postResponse = await apiCall(`${url}/register`, 'post', postData);
+
+    //       console.log('POST response register-------------:', postResponse);
+    //       if (postResponse?.message) {
+    //         const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse));
+    //         toast.success('Login Successfully', {
+    //           position: 'top-center',
+    //           autoClose: 5000,
+    //         });
+
+    //         router.push('/brand')
+    //       } else {
+    //         console.error('Error:', postResponse?.statusText);
+    //         alert('logibn api response else', postResponse?.statusText)
+    //       }
+    //       // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
+    //     } catch (error) {
+    //       console.error('POST response register catrch error-------------', error);
+    //     }
+    //   };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,15 +92,15 @@ const Signuppage = () => {
             if (response.ok) {
                 const result = await response.json();
 
-                const usertoken = localStorage.setItem('user_data', JSON.stringify(result.token));
+                localStorage.setItem('user_data', JSON.stringify(result.token));
                 toast.success('Registration Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
-                  });
-                router.push('/home');
+                });
+                router.push('/brand');
                 console.log('register result------------', result);
                 // alert('', result.message); 
-                
+
 
             } else {
                 console.error('Error:', response.statusText);
@@ -95,6 +130,12 @@ const Signuppage = () => {
 
     return (
         <>
+            <Terms_of_service isOpen={isModalOpen_terms_service} onClose={() => setIsModalOpen_terms_service(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
+
+                    <Terms_of_service_content />
+                </div>
+            </Terms_of_service>
             <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
                 <div className="bg-white p-5 rounded-md">
                     <h4 className=" text-base">
@@ -175,7 +216,10 @@ const Signuppage = () => {
                                 />
                                 <label htmlFor="myCheckbox" className="ml-2 text-black">
                                     I accept co. Name{" "}
-                                    <span style={{ color: Colors.pink_clr }}>
+                                    <span style={{ color: Colors.pink_clr }}
+                                        onClick={() => setIsModalOpen_terms_service(true)}
+                                        className='cursor-pointer'
+                                    >
                                         {" "}
                                         Terms & Condition
                                     </span>

@@ -3,9 +3,10 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div 
+    <>
+    {/* <div 
     className=' bg-zinc-100  '
-    // style={{ backgroundColor: Colors.button_light_clr }}
+    style={{ backgroundColor: Colors.button_light_clr }}
     >
       <div className="flex align-center justify-evenly items-center  height-13  w-80"
        >
@@ -20,8 +21,8 @@ const Footer = () => {
          className='text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl'
         >Dribble</h6>
       </div>
-    </div>
-
+    </div> */}
+    </>
   )
 }
 
