@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Terms_of_service from '@/components/Homepage/Termsofservice';
 import Terms_of_service_content from '@/components/Homepage/Termsofservice/Terms_of_service_content';
+import Cookies from 'js-cookie';
 
 const Signuppage = () => {
 
@@ -92,7 +93,8 @@ const Signuppage = () => {
             if (response.ok) {
                 const result = await response.json();
 
-                localStorage.setItem('user_data', JSON.stringify(result.token));
+                // localStorage.setItem('user_data', JSON.stringify(result.token));
+                Cookies.set('user_data',JSON.stringify(result), { expires: 106500 });
                 toast.success('Registration Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds

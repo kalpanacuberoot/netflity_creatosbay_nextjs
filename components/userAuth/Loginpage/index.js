@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import Terms_of_service from "@/components/Homepage/Termsofservice";
 import Terms_of_service_content from "@/components/Homepage/Termsofservice/Terms_of_service_content";
 import { apiCall, url } from "@/generalfunation";
+import Cookies from 'js-cookie';
 
 const Loginpage = () => {
 
@@ -40,7 +41,8 @@ const Loginpage = () => {
 
       console.log('POST response register-------------:', postResponse);
       if (postResponse?.message) {
-        // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse));
+        //  localStorage.setItem('user_data', JSON.stringify(postResponse.token));
+        Cookies.set('user_data',JSON.stringify(postResponse), { expires: 106500 });
         toast.success('Login Successfully', {
           position: 'top-center',
           autoClose: 5000,
