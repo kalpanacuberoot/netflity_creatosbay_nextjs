@@ -75,6 +75,7 @@ const CollapseLeftDashboard = () => {
 
                         </div>
                     </Link>
+                    <Link href={'/marketplace'}>
                     <div className='my-2 py-1'
 
                     >
@@ -86,6 +87,7 @@ const CollapseLeftDashboard = () => {
                         />
 
                     </div>
+                    </Link>
                     <Link href={'/communication'}>
                         <div className='my-2 py-1'
 

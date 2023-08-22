@@ -125,9 +125,17 @@ const Brandscreens = () => {
                 setFile(data?.url)
             } else {
                 alert('Image upload failed.');
+                toast.error('Image upload failed', {
+                    position: 'top-center', // Set the toast position
+                    autoClose: 3000, // Close the toast after 3 seconds
+                });
             }
         } catch (error) {
             console.error('Error uploading image:', error);
+            toast.error('Please uplaod the image again', {
+                position: 'top-center', // Set the toast position
+                autoClose: 3000, // Close the toast after 3 seconds
+            });
         }
     };
 
@@ -323,9 +331,9 @@ const Brandscreens = () => {
                                 Next
                             </button>
 
-                          
+
                         </>
-                    
+
                     </div>
                 }
                 {open &&
@@ -341,7 +349,7 @@ const Brandscreens = () => {
                                     Brand Details.
                                 </h1>
 
-                               
+
                                 <div className=" w-full">
                                     <div
                                         className="border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
@@ -387,7 +395,7 @@ const Brandscreens = () => {
                                     onChange={(e) => setDesc(e.target.value)}
                                     required
                                 ></textarea>
-                               
+
                                 <button
                                     onClick={handleSubmit}
                                     type="submit"
@@ -396,7 +404,7 @@ const Brandscreens = () => {
                                 >
                                     Save
                                 </button>
-                             
+
                             </>
 
                         </div>
@@ -404,7 +412,7 @@ const Brandscreens = () => {
                     </div>
                 }
             </div>
-           
+
 
         </>
     )
