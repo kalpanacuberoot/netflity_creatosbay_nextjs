@@ -77,14 +77,7 @@ const Forgotpage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {/* <div className=" flex my-5 justify-between">
-                  <div className="flex items-center">
-                    <label className="ml-2" style={{ color: Colors.pink_clr }}>
-                      Code is sent to nickname@mail.com
-                    </label>
-                  </div>
-                </div> */}
-                {/* <Link href={"/verify"}> */}
+              
                 <button
                   type="submit"
                   className=" rounded-3xl my-5 text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
@@ -92,8 +85,6 @@ const Forgotpage = () => {
                 >
                   Continue
                 </button>
-                
-                {/* </Link> */}
               </form>
               <ToastContainer />
             </div>
