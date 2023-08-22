@@ -60,10 +60,18 @@ const Verifypage = () => {
 
       } else {
         console.error('Error:', response.statusText);
-        alert('resetpassword api response else', response.statusText)
+        // alert('resetpassword api response else', response.statusText)
+        toast.error('Please enter the correct User Details', {
+          position: 'top-center', // Set the toast position
+          autoClose: 3000, // Close the toast after 3 seconds
+        });
       }
     } catch (error) {
       console.error('Error:', error);
+      toast.error('Please try again after sometime', {
+        position: 'top-center', // Set the toast position
+        autoClose: 3000, // Close the toast after 3 seconds
+      });
     }
   };
 
@@ -153,42 +161,7 @@ const Verifypage = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="flex gap-4">
-                  {/* <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  />
-                  <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  />
-                  <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  />
-                  <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  />
-                  <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  />
-                  <input
-                    type="num"
-                    id="name"
-                    className="appearance-none border rounded-md w-1/3 text-center mb-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="0"
-                  /> */}
+                 
                   {digits?.map((digit, index) => (
                     <input
                       key={index}
@@ -230,18 +203,7 @@ const Verifypage = () => {
                 </div>
                 {/* <div>Verifying email for: {email}</div>; */}
 
-                {/* <div className=" flex my-5 justify-between">
-                  <div className="flex items-center">
-                    <label
-                      htmlFor="myCheckbox"
-                      className="ml-2"
-                      style={{ color: Colors.pink_clr }}
-                    >
-                      Verify Code Valid for 05:00
-                    </label>
-                  </div>
-                </div> */}
-                {/* <Link href={'/login'}> */}
+               
                 <button
                   type="submit"
                   className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
@@ -249,7 +211,7 @@ const Verifypage = () => {
                 >
                   Continue
                 </button>
-                {/* </Link> */}
+               
               </form>
               <ToastContainer />
             </div>

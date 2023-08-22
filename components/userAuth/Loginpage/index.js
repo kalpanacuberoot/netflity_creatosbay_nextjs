@@ -52,7 +52,7 @@ const Loginpage = () => {
       } else {
         // console.error('Error:', postResponse?.statusText);
         // alert('logibn api response else', postResponse?.statusText)
-        toast.error(postResponse?.message, {
+        toast.error("Have you register yourself with emailId", {
           position: 'top-center',
           autoClose: 5000,
         });

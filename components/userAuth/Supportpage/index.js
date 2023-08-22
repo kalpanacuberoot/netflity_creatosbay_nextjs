@@ -58,11 +58,19 @@ const Supportpage = () => {
         router.push('/')
       } else {
         console.error('Error:', postResponse?.statusText);
-        alert('logibn api response else', postResponse?.statusText)
+        toast.error('Please enter the correct User Details', {
+          position: 'top-center', // Set the toast position
+          autoClose: 3000, // Close the toast after 3 seconds
+        });
+        // alert('logibn api response else', postResponse?.statusText)
       }
       // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
     } catch (error) {
       console.error('support response catrch error-------------', error);
+      toast.error('Please try again after sometime', {
+        position: 'top-center', // Set the toast position
+        autoClose: 3000, // Close the toast after 3 seconds
+      });
     }
   };
 

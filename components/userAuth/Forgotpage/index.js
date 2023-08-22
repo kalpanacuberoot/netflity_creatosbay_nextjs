@@ -42,10 +42,18 @@ const Forgotpage = () => {
 
       } else {
         console.error('Error:', response);
+        toast.error('Please send the valid email Id', {
+          position: 'top-center', // Set the toast position
+          autoClose: 3000, // Close the toast after 3 seconds
+        });
         // alert('forgot api response else', response)
       }
     } catch (error) {
       console.error('forgot Error:', error);
+      toast.error('Please try again after sometime', {
+        position: 'top-center', // Set the toast position
+        autoClose: 3000, // Close the toast after 3 seconds
+      });
     }
   };
   return (
