@@ -32,27 +32,15 @@ const Brandscreens = () => {
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
-        handleUploadClick();
+
     };
 
     console.log("file", file);
-
-    const options1 = ["Option 1", "Option 2", "Option 3"];
-
-    const [selectedOption, setSelectedOption] = useState("");
-
-    const handleChange = (e) => {
-        setSelectedOption(e.target.value);
-    };
 
     const onNextpage = () => {
         // router.push('/Brand2')
         setOpen(!open)
     }
-    const handleSelectChange = (e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-        setSelectedValues(selectedOptions);
-    };
 
     const handleSubmit = async () => {
         const cookieValue = JSON.parse(Cookies.get('user_data'));
@@ -102,47 +90,8 @@ const Brandscreens = () => {
         }
     };
 
-    // const handleSubmit = async () => {
-    //     const cookieValue = JSON.parse(Cookies.get('user_data'))
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
-    //     try {
-    //         // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
-    //         // console.log('GET response:', getResponse);
-
-    //         const postData = {
-    //             "name": companyName,
-    //             "website": website,
-    //             "description": desc,
-    //             "categories": idArray,
-    //             "logo": file
-    //         };
-    //         const headers = {
-    //             'Authorization': `Bearer ${cookieValue?.token}`,
-    //         }
-
-    //         const postResponse = await apiCall(`${url}/brands`, 'post', postData, headers);
-
-    //         console.log('brands response-------------:', postResponse);
-    //         if (postResponse?.status) {
-    //            
-    //             console.log('brands response--------postResponse?.status-----:', postResponse);
-    //             toast.success('brands Successfully', {
-    //                 position: 'top-center',
-    //                 autoClose: 5000,
-    //             });
-
-    //             router.push('/home')
-    //         } else {
-    //             console.error('Error:', postResponse?.statusText);
-    //             alert('brands api response else', postResponse?.statusText)
-    //         }
-    //        
-    //     } catch (error) {
-    //         console.error('support response catrch error-------------', error);
-    //     }
-    // };
-
     const handleUploadClick = async () => {
+        // handleFileChange();
         if (!file) {
             alert('Please select an image to upload.');
             return;
@@ -186,8 +135,6 @@ const Brandscreens = () => {
 
 
     const getCompanyCategories = async () => {
-        
-
 
         const cookieValue = JSON.parse(Cookies.get('user_data'))
         console.log('categories cookieValue------------1', cookieValue?.token);
@@ -207,7 +154,7 @@ const Brandscreens = () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log("brand result------------", result?.data?.data);
-               
+
                 setDropdownvalues(result?.data?.data);
                 // setSelectedRoles(result?.data?.data);
 
@@ -227,18 +174,6 @@ const Brandscreens = () => {
         // handleSubmit();
     }, [])
 
-
-    // const handleSelect = (event) => {
-
-    //     const value = event.target.value;
-    //     console.log("handleSelect value",value);
-    //     if (!selectedValues.includes(value)) {
-    //         setSelectedValues([...selectedValues, value]);
-    //     } else {
-    //         setSelectedValues(selectedValues.filter((item) => item !== value));
-    //     }
-    // };
-
     const handleSelect = (event, selectedItem) => {
         const value = selectedItem; // Pass the entire item as the value
         if (!selectedValues.some((item) => item.id === value.id)) {
@@ -256,8 +191,6 @@ const Brandscreens = () => {
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit}> */}
-
             <div className="p-4 lg:p-10   bg-zinc-100 border-gray-300 border-solid w-full w-90 rounded-lg border-1">
 
                 {!open &&
@@ -281,9 +214,10 @@ const Brandscreens = () => {
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 required
+                                pattern="[a-zA-Z ]{3,190}" title="Only Alphabets and Spaces are allowed. Minimum characters 3"
                             />
                             <input
-                                type="text"
+                                type="url"
                                 id="name"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Add Website URL/Social Links"
@@ -291,35 +225,6 @@ const Brandscreens = () => {
                                 onChange={(e) => setWebsite(e.target.value)}
                                 required
                             />
-
-                            {/* <div className="relative">
-                                        <select
-                                            value={selectedOption}
-                                            onChange={handleChange}
-                                            className="block appearance-none  border rounded-md w-full mt-5 bg-gray-100 outline-none  py-5 px-3 text-gray-700  focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500 "
-                                            id="grid-state"
-                                            multiple
-                                        >
-                                            <option value="" disabled>
-                                                Company Type
-                                            </option>
-
-                                            {dropdownvalues.map((item, index) => (
-                                                <option key={index}>
-                                                    {item.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                            <svg
-                                                className="fill-current h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                            >
-                                                <h4ath d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                            </svg>
-                                        </div>
-                                    </div> */}
 
                             <div>
                                 <button
@@ -409,37 +314,18 @@ const Brandscreens = () => {
                                 )}
                             </div>
 
-
-                            {/* <div>
-                                        <select multiple onChange={handleSelect} value={selectedOption}>
-                                            {options.map((option) => (
-                                                <option key={option.id} value={option.id}>
-                                                    {option.label}
-                                                </option>
-                                            ))}
-                                        </select>
-
-                                        <input
-                                            type="text"
-                                            value={selectedValues.join(', ')} // Display selected values in the input field
-                                            readOnly
-                                        />
-                                    </div> */}
-
                             <button
                                 type="submit"
-                                // onClick={handleGetStarted}
                                 onClick={() => onNextpage()}
-                                // onClick={() => setOpen(false)}
                                 className=" rounded-3xl mt-5 text-white w-full  font-bold py-3 px-4  focus:outline-none focus:shadow-outline"
                                 style={{ backgroundColor: Colors.logo_clr }}
                             >
                                 Next
                             </button>
 
-                            {/* </form> */}
+                          
                         </>
-                        {/* } */}
+                    
                     </div>
                 }
                 {open &&
@@ -455,86 +341,41 @@ const Brandscreens = () => {
                                     Brand Details.
                                 </h1>
 
-                                {/* <form>  */}
-                                {/* <div className="relative w-full" onClick={onhandleFileSubmit}> */}
-                                {/* <label
-                                        htmlFor="fileInput"
-                                        className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
-                                        style={{ borderColor: Colors.logo_clr }}
-                                    >
-                                        <div className="mb-2">
-                                            <h4 className=" text-gray-300">+</h4>
-                                        </div>
-                                        <span className="text-base text-gray-300">
-                                            Company Logo
-                                        </span>
-                                    </label> */}
-                                {/* <input
-                                        id="fileInput"
-                                        className="absolute inset-0 opacity-0 w-full"
-                                        type="file"
-                                        accept="image/*" onChange={handleFileChange}
-                                    /> */}
-                                {/* <input
-                                        id="fileInput"
-                                        className="absolute inset-0 opacity-0 w-full"
-                                        type="file"
-                                        accept="image/*" onChange={handleFileChange}
-                                    /> */}
-                                {/* </div> */}
-
-                                {/* <div className="relative w-full">
-                                    <label
-                                        htmlFor="fileInput"
-                                        className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
-                                        style={{ borderColor: Colors.logo_clr }}
-
-                                    >
-                                        <div className="mb-2">
-                                            <input
-                                                id="fileInput"
-                                                className="absolute inset-0 opacity-0 w-full"
-                                                type="file"
-                                                accept="image/*"
-
-                                                required
-                                            />
-                                            <h4 className=" text-gray-300" onChange={handleFileChange}>+</h4>
-                                        </div>
-                                        <span className="text-base text-gray-300" onClick={handleUploadClick}>
-                                            Company Logo (Upload Image)
-                                        </span>
-                                    </label>
-
-                                </div> */}
-                                <div className="relative w-full">
+                               
+                                <div className=" w-full">
                                     <div
-                                        className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
+                                        className="border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                                     >
                                         <label
                                             htmlFor="fileInput"
-                                            // className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
                                             style={{ borderColor: Colors.logo_clr }}
-
                                         >
                                             <div>
                                                 <input
                                                     id="fileInput"
-                                                    type="file" accept="image/*" className="absolute inset-0 opacity-0 w-full" onChange={handleFileChange} />
+                                                    type="file"
+                                                    accept="image/*"
+                                                    className="absolute inset-0 opacity-0 w-full "
+                                                    onChange={handleFileChange} // Triggered when a file is selected
+                                                />
                                                 <Image
                                                     src={Images.plus_icon}
                                                     width={15}
                                                     height={15}
                                                     alt=""
-
+                                                    className=" cursor-default"
                                                 />
-
                                             </div>
 
                                         </label>
-                                        <div className="text-base text-gray-300" onClick={handleUploadClick}>Company Logo</div>
-
+                                        <div
+                                            className="text-base text-gray-300 p-5 cursor-pointer"
+                                            onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
+                                        >
+                                            Company Logo(Upload Image)
+                                        </div>
                                     </div>
+
                                 </div>
                                 <textarea
                                     id="descriptionInput"
@@ -546,7 +387,7 @@ const Brandscreens = () => {
                                     onChange={(e) => setDesc(e.target.value)}
                                     required
                                 ></textarea>
-                                {/* <Link href={"/home"}> */}
+                               
                                 <button
                                     onClick={handleSubmit}
                                     type="submit"
@@ -555,8 +396,7 @@ const Brandscreens = () => {
                                 >
                                     Save
                                 </button>
-                                {/* </Link> */}
-                                {/* </form> */}
+                             
                             </>
 
                         </div>
@@ -564,7 +404,7 @@ const Brandscreens = () => {
                     </div>
                 }
             </div>
-            {/* </form> */}
+           
 
         </>
     )

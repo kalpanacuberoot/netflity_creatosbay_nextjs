@@ -40,22 +40,30 @@ const Loginpage = () => {
       const postResponse = await apiCall(`${url}/login`, 'post', postData);
 
       console.log('POST response register-------------:', postResponse);
-      if (postResponse?.message) {
+      if (postResponse.ok) {
       
         Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
-        toast.success('Login Successfully', {
+        toast.success(postResponse?.message, {
           position: 'top-center',
           autoClose: 5000,
         });
 
         router.push('/brand')
       } else {
-        console.error('Error:', postResponse?.statusText);
-        alert('logibn api response else', postResponse?.statusText)
+        // console.error('Error:', postResponse?.statusText);
+        // alert('logibn api response else', postResponse?.statusText)
+        toast.error(postResponse?.message, {
+          position: 'top-center',
+          autoClose: 5000,
+        });
       }
     
     } catch (error) {
       console.error('POST response register catrch error-------------', error);
+      toast.error('please register yourself or login again after sometime', {
+        position: 'top-center',
+        autoClose: 5000,
+      });
     }
   };
 
@@ -94,6 +102,7 @@ const Loginpage = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  
                 />
                 <input
                   type="password"
@@ -104,6 +113,7 @@ const Loginpage = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  pattern="^.{8,}$" title="Minimum 8 characters allowed"
                 />
 
                 <div className=" flex my-5 justify-between font_size_16">

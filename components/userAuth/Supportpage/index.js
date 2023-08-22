@@ -97,6 +97,7 @@ const Supportpage = () => {
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  pattern="[0-9]{10}" title="10 digit number is required"
                 />
                 {/* <div class="relative inline-block w-full">
                   <select class="block appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline">
@@ -141,7 +142,8 @@ const Supportpage = () => {
                   rows={3}
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
-                  
+                  minLength={0}
+                  maxLength={250}
                 ></textarea>
                 <div className="flex items-center justify-end pt-4 pb-4">
                   <label style={{ color: Colors.pink_clr }}>

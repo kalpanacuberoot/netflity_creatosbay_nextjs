@@ -209,6 +209,7 @@ const Verifypage = () => {
                   required
                   value={password}
                   onChange={handlePasswordChange}
+                  pattern="^.{8,}$" title="Minimum 8 characters allowed"
                 />
                 <input
                   type="password"
@@ -223,7 +224,7 @@ const Verifypage = () => {
                 <div className=" flex my-5 justify-between">
                   <div className="flex items-center">
                     <label className="ml-2" style={{ color: Colors.pink_clr }}>
-                      Code is sent to n********@gmail.com
+                      Code is sent to {email}
                     </label>
                   </div>
                 </div>

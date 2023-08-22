@@ -165,7 +165,7 @@ const Signuppage = () => {
                                 required
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-
+                                pattern="[a-zA-Z ]{3,190}" title="Only Alphabets and Spaces are allowed. Minimum characters 3"
                             />
                             <input
                                 type="text"
@@ -175,6 +175,7 @@ const Signuppage = () => {
                                 required
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
+                                pattern="[a-zA-Z ]{3,190}" title="Only Alphabets and Spaces are allowed. Minimum characters 3"
                             />
                         </div>
                         <input
@@ -195,6 +196,7 @@ const Signuppage = () => {
                             value={password}
                             // onChange={(e) => setPassword(e.target.value)}
                             onChange={handlePasswordChange}
+                            pattern="^.{8,}$" title="Minimum 8 characters allowed"
                         />
                         <input
                             type="password"
