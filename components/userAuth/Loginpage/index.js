@@ -41,8 +41,8 @@ const Loginpage = () => {
 
       console.log('POST response register-------------:', postResponse);
       if (postResponse?.message) {
-        //  localStorage.setItem('user_data', JSON.stringify(postResponse.token));
-        Cookies.set('user_data',JSON.stringify(postResponse), { expires: 106500 });
+      
+        Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
         toast.success('Login Successfully', {
           position: 'top-center',
           autoClose: 5000,
@@ -53,7 +53,7 @@ const Loginpage = () => {
         console.error('Error:', postResponse?.statusText);
         alert('logibn api response else', postResponse?.statusText)
       }
-      // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
+    
     } catch (error) {
       console.error('POST response register catrch error-------------', error);
     }

@@ -29,7 +29,7 @@ const Brand1page = ({ onClick }) => {
     }
 
     // const getCompanyCategories = async() => {
-    //     const token = JSON.parse(localStorage.getItem('user_data'));
+    //    
     //     console.log("brand dcreens------------", token);
     //     try {
 
@@ -52,7 +52,7 @@ const Brand1page = ({ onClick }) => {
     //     }
     // };
     const getCompanyCategories = async () => {
-        // const token = JSON.parse(localStorage.getItem('user_data'));
+      
         const cookieValue = JSON.parse(Cookies.get('user_data'))
         console.log('categories cookieValue------------', cookieValue.token);
 
@@ -72,7 +72,7 @@ const Brand1page = ({ onClick }) => {
             if (response.ok) {
                 const result = await response.json();
                 console.log("brand result------------", result?.data?.data);
-                // localStorage.setItem('user_data', JSON.stringify(result.token));
+              
                 setDropdownvalues(result?.data?.data);
 
 
@@ -145,7 +145,7 @@ const Brand1page = ({ onClick }) => {
                                 ))} */}
                                 {dropdownvalues.map((item, index) => (
                                     <option key={index}>
-                                        {item.name}
+                                        {item?.name}
                                     </option>
                                 ))}
                             </select>

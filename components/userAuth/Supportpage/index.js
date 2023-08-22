@@ -26,7 +26,7 @@ const Supportpage = () => {
     "complain",
   ]
 
-  const token = JSON.parse(localStorage.getItem('user_data'));
+
   // console.log("token",token);
 
   const handleSubmit = async (e) => {

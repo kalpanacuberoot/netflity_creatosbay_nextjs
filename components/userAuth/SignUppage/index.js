@@ -32,7 +32,7 @@ const Signuppage = () => {
     //         const postData = { name: `${firstName} ${lastName}`, email: email, password: password, type: "brand" };
     //         const postResponse = await apiCall('https://backend.creatorsbay.app/api/register', 'post', postData);
     //         console.log('POST response register-------------:', postResponse);
-    //         const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
+    //     
     //     } catch (error) {
     //         console.error('POST response register catrch error-------------', error);
     //     }
@@ -53,7 +53,7 @@ const Signuppage = () => {
 
     //       console.log('POST response register-------------:', postResponse);
     //       if (postResponse?.message) {
-    //         const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse));
+    //        
     //         toast.success('Login Successfully', {
     //           position: 'top-center',
     //           autoClose: 5000,
@@ -64,7 +64,7 @@ const Signuppage = () => {
     //         console.error('Error:', postResponse?.statusText);
     //         alert('logibn api response else', postResponse?.statusText)
     //       }
-    //       // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
+    //      
     //     } catch (error) {
     //       console.error('POST response register catrch error-------------', error);
     //     }
@@ -93,7 +93,7 @@ const Signuppage = () => {
             if (response.ok) {
                 const result = await response.json();
 
-                // localStorage.setItem('user_data', JSON.stringify(result.token));
+                
                 Cookies.set('user_data',JSON.stringify(result), { expires: 106500 });
                 toast.success('Registration Successfully', {
                     position: 'top-center', // Set the toast position
