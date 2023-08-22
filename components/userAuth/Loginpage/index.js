@@ -4,70 +4,70 @@ import Colors from "@/styles/Colors";
 import { useRouter } from 'next/navigation';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify'; 
+import { toast } from 'react-toastify';
+import Terms_of_service from "@/components/Homepage/Termsofservice";
+import Terms_of_service_content from "@/components/Homepage/Termsofservice/Terms_of_service_content";
+import { apiCall, url } from "@/generalfunation";
+import Cookies from 'js-cookie';
 
 const Loginpage = () => {
 
   const router = useRouter();
 
   const [data, setData] = useState({ message: '' });
-  const [formData, setFormData] = useState({
-   email:'',
-   password:'',
-  });
+  const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
 
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleChange = (e) => {
     // const { name, value } = e.target;
     // setFormData({ ...formData, [name]: value });
-    
+
     setPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const options = {
-      "email":email,
-      "password":password,
-    }
     try {
-      const response = await fetch('https://backend.creatorsbay.app/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
+      // console.log('GET response:', getResponse);
 
-        body: JSON.stringify(options),
-      });
+      const postData = {
+        "email": email,
+        "password": password,
+      };
+      const postResponse = await apiCall(`${url}/login`, 'post', postData);
 
-      console.log('login response------', response)
-
-      if (response.ok) {
-        const result = await response.json();
-
-        const usertoken = localStorage.setItem('user_data', JSON.stringify(result));
-     
-        // console.log('result.message',result.token);
+      console.log('POST response register-------------:', postResponse);
+      if (postResponse?.message) {
+      
+        Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
         toast.success('Login Successfully', {
-          position: 'top-center', // Set the toast position
-          autoClose: 3000, // Close the toast after 3 seconds
+          position: 'top-center',
+          autoClose: 5000,
         });
-        // alert('', result.message); 
-        router.push('/home')
+
+        router.push('/brand')
       } else {
-        console.error('Error:', response.statusText);
-        alert('logibn api response else', response.statusText)
+        console.error('Error:', postResponse?.statusText);
+        alert('logibn api response else', postResponse?.statusText)
       }
+    
     } catch (error) {
-      console.error('Error:', error);
+      console.error('POST response register catrch error-------------', error);
     }
   };
 
 
   return (
     <>
+      <Terms_of_service isOpen={isModalOpen_terms_service} onClose={() => setIsModalOpen_terms_service(false)}>
+        <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
+
+          <Terms_of_service_content />
+        </div>
+      </Terms_of_service>
       <div className="container p-4 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
         <div className=" auto-col-max w-full height-70">
           <div className="flex justify-center  items-center px-10 ">
@@ -105,7 +105,7 @@ const Loginpage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                
+
                 <div className=" flex my-5 justify-between font_size_16">
                   <div className="flex items-center">
                     <input
@@ -117,7 +117,9 @@ const Loginpage = () => {
                     />
                     <label htmlFor="myCheckbox" className=" ml-2 text-black">
                       I accept co. Name
-                      <span style={{ color: Colors.pink_clr }} className="ml-2">
+                      <span style={{ color: Colors.pink_clr }} className="cursor-pointer ml-2"
+                        onClick={() => setIsModalOpen_terms_service(true)}
+                      >
                         Terms & Condition
                       </span>
                     </label>
@@ -137,7 +139,7 @@ const Loginpage = () => {
                   className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
-                  Create Account
+                  Login
                 </button>
               </form>
               <ToastContainer />

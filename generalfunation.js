@@ -10,7 +10,7 @@ export const isEmpty = (value) => {
 
 // Wrapper function for API calls
 
-
+export const url = 'https://backend.creatorsbay.app/api'
 export const apiCall =async (url, method, data = null, headers = {}) => {
   try {
     const options = {

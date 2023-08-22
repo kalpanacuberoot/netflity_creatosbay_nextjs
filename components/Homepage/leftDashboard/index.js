@@ -10,6 +10,8 @@ import Modal_Invite_members from "../Modal_Invite_members";
 import Invite_members_content from "../Modal_Invite_members/Invite_members_content";
 import Modal_Edit_Profile from "../Modal_Edit_Profile";
 import Edit_profile_content from "../Modal_Edit_Profile/Edit_profile_content";
+import Notification_popup from "../Notification_popup";
+import Notification_content from "../Notification_popup/Notification_content";
 
 
 const Left_Dashboard = () => {
@@ -19,6 +21,7 @@ const Left_Dashboard = () => {
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
     const [isModalOpen_invite_mem, setIsModalOpen_invite_mem] = useState(false);
     const [isModalOpen_edit_prof, setIsModalOpen_edit_prof] = useState(false);
+    const [isModalOpen_notification, setIsModalOpen_notification] = useState(false);
 
 
     const openModal = () => {
@@ -55,6 +58,11 @@ const Left_Dashboard = () => {
                     <Edit_profile_content />
                 </div>
             </Modal_Edit_Profile>
+            <Notification_popup isOpen={isModalOpen_notification} onClose={() => setIsModalOpen_notification(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-3xl ">
+                    <Notification_content />
+                </div>
+            </Notification_popup>
             <div className=''>
                 <Image
                     src={Images.company_logo}
@@ -83,6 +91,7 @@ const Left_Dashboard = () => {
                     </li>
                 </ul>
             </div> */}
+
             <div className='border flex flex-row my-5 justify-between rounded-full pe-2'>
 
                 <Image
@@ -94,15 +103,15 @@ const Left_Dashboard = () => {
                 <div className='flex flex-row'
                     onClick={() => setDropdown_menu(!dropdown_menu)}
                 >
-                    <Image
-                        src={Images.notification}
-                        width={20}
-                        height={20}
-                        className='my-2 mx-1'
-                        alt=""
-                    />
-
-
+                    <div onClick={() => setIsModalOpen_notification(true)}>
+                        <Image
+                            src={Images.notification}
+                            width={20}
+                            height={20}
+                            className='my-2 mx-1'
+                            alt=""
+                        />
+                    </div>
 
                     <Image
                         src={Images.settings}
@@ -211,6 +220,7 @@ const Left_Dashboard = () => {
                 </div>
 
             </div>
+
             <div className='mt-5'>
                 <Link href={'/home'}>
 

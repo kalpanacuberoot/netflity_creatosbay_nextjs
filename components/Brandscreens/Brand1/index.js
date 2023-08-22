@@ -1,15 +1,19 @@
 import Colors from "@/styles/Colors";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Brand2page from "../Brand2";
+import { apiCall, url } from "@/generalfunation";
+import Cookies from 'js-cookie';
 
-
-const Brand1page = ({onClick}) => {
+const Brand1page = ({ onClick }) => {
 
     const router = useRouter();
 
-    const [open,setOpen] = useState(false);
+    const [companyName, setCompanyName] = useState('');
+    const [password, setPassword] = useState('');
+    const [open, setOpen] = useState(false);
+    const [dropdownvalues, setDropdownvalues] = useState([]);
 
     const options = ["Option 1", "Option 2", "Option 3"];
 
@@ -23,6 +27,73 @@ const Brand1page = ({onClick}) => {
         // router.push('/Brand2')
         setOpen(!true)
     }
+
+    // const getCompanyCategories = async() => {
+    //    
+    //     console.log("brand dcreens------------", token);
+    //     try {
+
+    //         const headers = {
+    //             'Authorization': `Bearer ${token?.token}`,
+
+    //         }
+    //         const getResponse = await apiCall(`${url}/categories`, 'get', headers);
+    //         console.log('GET feedbacks response:', getResponse);
+    //         if (getResponse.ok) {
+
+    //             console.log('categories result------------', result);
+    //         } else {
+    //             console.error('Error:', response.statusText);
+    //             alert('categories api response else', response.statusText)
+    //         }
+
+    //     } catch (error) {
+    //         console.error('Get response register catrch error-------------', error);
+    //     }
+    // };
+    const getCompanyCategories = async () => {
+      
+        const cookieValue = JSON.parse(Cookies.get('user_data'))
+        console.log('categories cookieValue------------', cookieValue.token);
+
+
+        try {
+            const response = await fetch(`${url}/categories`, {
+                method: 'Get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${cookieValue.token}`,
+                },
+
+            });
+
+            console.log('categories response------', response)
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log("brand result------------", result?.data?.data);
+              
+                setDropdownvalues(result?.data?.data);
+
+
+
+
+            } else {
+                console.error('Error:', response.statusText);
+                alert('categories api response else', response.statusText)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    useEffect(() => {
+        getCompanyCategories();
+    }, [])
+
+    console.log("setDropdownvalues", dropdownvalues);
+
+
     return (
         <>
 
@@ -37,18 +108,24 @@ const Brand1page = ({onClick}) => {
                         Brand Details.
                     </h1>
 
-                    <form>
+                    <form >
                         <input
                             type="compant"
                             id="name"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Company Name"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            required
                         />
                         <input
                             type="password"
                             id="name"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Create Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
 
                         <div className="relative">
@@ -61,9 +138,14 @@ const Brand1page = ({onClick}) => {
                                 <option value="" disabled>
                                     Company Type
                                 </option>
-                                {options.map((option) => (
+                                {/* {options.map((option) => (
                                     <option key={option} value={option}>
                                         {option}
+                                    </option>
+                                ))} */}
+                                {dropdownvalues.map((item, index) => (
+                                    <option key={index}>
+                                        {item?.name}
                                     </option>
                                 ))}
                             </select>
@@ -88,11 +170,11 @@ const Brand1page = ({onClick}) => {
                         >
                             Next
                         </button>
-                       
+
                     </form>
                 </div>
             </div>
-            
+
         </>
     )
 }
