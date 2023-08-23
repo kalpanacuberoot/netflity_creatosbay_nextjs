@@ -83,8 +83,8 @@ const Brand1page = ({ onClick }) => {
 
             } else {
                 console.error('Error:', response.statusText);
-                alert('categories api response else', response?.statusText)
-                toast.error('Code is sent to your emailId', {
+                // alert('categories api response else', response?.statusText)
+                toast.error('Unauthorized', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
                   });

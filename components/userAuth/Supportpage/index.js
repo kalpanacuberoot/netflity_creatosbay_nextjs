@@ -34,7 +34,8 @@ const Supportpage = () => {
     try {
       // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
       // console.log('GET response:', getResponse);
-
+      const cookieValue = JSON.parse(Cookies.get('user_data'));
+      console.log('categories cookieValue------------1', cookieValue?.token);
       const postData = {
         "email": email,
         "phone": phone,
@@ -42,7 +43,7 @@ const Supportpage = () => {
         "text": desc,
       };
       const headers = {
-        'Authorization': `Bearer ${token?.token}`,
+        'Authorization': `Bearer ${cookieValue?.token}`,
       }
       
       const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData,headers);

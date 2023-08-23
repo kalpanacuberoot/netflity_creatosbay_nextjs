@@ -40,8 +40,8 @@ const Loginpage = () => {
       const postResponse = await apiCall(`${url}/login`, 'post', postData);
 
       console.log('POST response register-------------:', postResponse);
-      if (postResponse.ok) {
-      
+      if (postResponse?.message) {
+
         Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
         toast.success(postResponse?.message, {
           position: 'top-center',
@@ -57,7 +57,7 @@ const Loginpage = () => {
           autoClose: 5000,
         });
       }
-    
+
     } catch (error) {
       console.error('POST response register catrch error-------------', error);
       toast.error('please register yourself or login again after sometime', {
@@ -94,16 +94,18 @@ const Loginpage = () => {
               </h1>
 
               <form onSubmit={handleSubmit}>
-                <input
-                  type="email"
-                  id="email"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Michal.mosiak12@gmail.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  
-                />
+                
+                  <input
+                    type="email"
+                    id="email"
+                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Michal.mosiak12@gmail.com"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+
+                  />
+                
                 <input
                   type="password"
                   id="password"

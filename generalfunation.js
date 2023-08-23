@@ -15,7 +15,11 @@ export const apiCall =async (url, method, data = null, headers = {}) => {
   try {
     const options = {
       method,
-      headers,
+      // headers,
+      headers: {
+        ...headers, // Keep any additional headers you may have passed
+        'Accept': 'application/json', // Add the Accept header
+      },
     };
     
     if (method.toLowerCase() === 'post') {
