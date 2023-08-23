@@ -1,13 +1,17 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Creators_popup from "./Creators_popup";
+import Creators_popup_content from "./Creators_popup/Creators_popup_content";
+import Image from "next/image";
 
 const Creators_profilepage = () => {
 
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -22,7 +26,7 @@ const Creators_profilepage = () => {
     setIsDropdownOpen(false);
   };
 
-  
+  const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
   useEffect(() => {
     const { data } = router.query;
@@ -34,6 +38,16 @@ const Creators_profilepage = () => {
 
   return (
     <>
+
+      <Creators_popup isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      // onSubmit={handlePopupData}   
+      >
+        <div className="relative w-full max-w-2xl max-h-full">
+
+          <Creators_popup_content />
+        </div>
+      </Creators_popup>
       <div
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
@@ -58,9 +72,11 @@ const Creators_profilepage = () => {
               >
                 <div className="flex gap-2 justify-center align-middle">
                   <div>
-                    <img
+                    <Image
+                      width={500}
+                      height={100}
                       className="w-10 h-10 object-cover rounded-full"
-                      src="https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg"
+                      src={imageUrl}
                       alt=""
                     />
                   </div>
@@ -72,9 +88,11 @@ const Creators_profilepage = () => {
                 <div className="flex gap-2  align-middle items-center">
                   <div className="flex gap-2 align-middle items-center justify-center">
                     <h3>4.8</h3>
-                    <img
+                    <Image
+                      width={500}
+                      height={100}
                       className="w-4 h-4  "
-                      src="https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg"
+                      src={imageUrl}
                       alt=""
                     />
                   </div>
@@ -207,6 +225,7 @@ const Creators_profilepage = () => {
                     background: Colors.logo_clr,
                     color: Colors.white_clr,
                   }}
+                  onClick={() => setIsModalOpen(true)}
                 >
                   {" "}
                   Send Campaign
@@ -248,9 +267,9 @@ const Creators_profilepage = () => {
                         >
                           XXXXXXXXXXXXXXXX
                         </button>
-                      <div>
-                        jgjgjhg
-                      </div>
+                        <div>
+                          jgjgjhg
+                        </div>
                       </div>
                     )}
                   </div>
@@ -376,59 +395,81 @@ const Creators_profilepage = () => {
               {/* dropdown ************* */}
 
               <div className="grid h-full grid-cols-2 gap-5 overflow-y-scroll mt-10">
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
-                <img
+                <Image
+                  width={500}
+                  height={100}
                   className="h-60 rounded-lg"
-                  src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                  src={imageUrl}
                   alt=""
                 />
               </div>

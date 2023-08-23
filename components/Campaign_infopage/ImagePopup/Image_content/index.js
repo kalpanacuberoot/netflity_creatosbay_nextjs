@@ -11,13 +11,13 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { url } from "@/generalfunation";
 
-const Image_content = ({onPopupData}) => {
+const Image_content = ({ onPopupData }) => {
 
     const [link, setLink] = useState(null);
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-    
-    
+
+
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -26,7 +26,7 @@ const Image_content = ({onPopupData}) => {
     };
 
 
-    console.log("fileslected",link);
+    console.log("fileslected", link);
 
     const handleUploadClick = async () => {
         // handleFileChange();
@@ -46,7 +46,7 @@ const Image_content = ({onPopupData}) => {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
-                    'Accept':'/application/json',
+                    'Accept': '/application/json',
                 },
                 body: formData,
             });
@@ -84,10 +84,10 @@ const Image_content = ({onPopupData}) => {
                 link,
                 description,
                 name,
-          },
+            },
         ]
 
-          console.log("popupdata---",data);
+        console.log("popupdata---", data);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
         onPopupData(data);
@@ -95,8 +95,8 @@ const Image_content = ({onPopupData}) => {
             position: 'top-center', // Set the toast position
             autoClose: 3000, // Close the toast after 3 seconds0
         });
-      };
-     
+    };
+
 
     return (
         <>
@@ -172,7 +172,7 @@ const Image_content = ({onPopupData}) => {
                         />
                     </div>
                 </div>
-
+                <ToastContainer />
             </div>
         </>
     )
