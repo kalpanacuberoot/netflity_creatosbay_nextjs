@@ -111,7 +111,7 @@ const Image_content = ({ onPopupData }) => {
                                 type="text"
                                 id="text"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Michal.mosiak12@gmail.com"
+                                placeholder="Product Name"
                                 required
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -145,20 +145,25 @@ const Image_content = ({ onPopupData }) => {
                                     </div>
 
                                 </label>
-                                <button
+                                {/* <button
                                     className=" text-base text-gray-300 p-10 cursor-grabbing"
                                     onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
                                     style={{ cursor: 'grabbing' }}
                                 >
-                                    Upload Image
-                                </button>
+                                     Upload Product Image
+                                </button> */}
+                                <Buttons
+                                    label={"Upload Product Image"}
+                                    buttoncss="py-3 my-5 text-base text-gray-300 p-10 cursor-grabbing"
+                                    onClick={handleUploadClick}
+                                />
                             </div>
 
                         </div>
                         <textarea
                             id="descriptionInput"
                             type="text"
-                            placeholder="Company Description"
+                            placeholder="Product Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             rows={4}
                             value={description}
