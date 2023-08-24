@@ -11,13 +11,13 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { url } from "@/generalfunation";
 
-const Ref_Image_content = ({onPopupData}) => {
+const Ref_Image_content = ({ onPopupData }) => {
 
     const [link, setLink] = useState(null);
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-    
-    
+
+
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -26,7 +26,7 @@ const Ref_Image_content = ({onPopupData}) => {
     };
 
 
-    console.log("fileslected",link);
+    console.log("fileslected", link);
 
     const handleUploadClick = async () => {
         // handleFileChange();
@@ -46,7 +46,8 @@ const Ref_Image_content = ({onPopupData}) => {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
-                    'Accept':'/application/json',
+                    'Accept': '/application/json',
+                   
                 },
                 body: formData,
             });
@@ -84,10 +85,10 @@ const Ref_Image_content = ({onPopupData}) => {
                 link,
                 description,
                 name,
-          },
+            },
         ]
 
-          console.log("popupdata---",data);
+        console.log("popupdata---", data);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
         onPopupData(data);
@@ -95,8 +96,8 @@ const Ref_Image_content = ({onPopupData}) => {
             position: 'top-center', // Set the toast position
             autoClose: 3000, // Close the toast after 3 seconds0
         });
-      };
-     
+    };
+
 
     return (
         <>
@@ -132,6 +133,7 @@ const Ref_Image_content = ({onPopupData}) => {
                                             id="fileInput"
                                             type="file"
                                             accept="image/*"
+                                            // accept=".jpeg. .png, .gif, .jpg"
                                             className="hidden "
                                             onChange={handleFileChange} // Triggered when a file is selected
                                         />
@@ -145,23 +147,22 @@ const Ref_Image_content = ({onPopupData}) => {
                                     </div>
 
                                 </label>
-                                {/* <button
-                                    className=" text-base text-gray-300 p-10 cursor-grabbing"
-                                    onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
-                                    style={{ cursor: 'grabbing' }}
-                                >
-                                    Upload Image
-                                </button> */}
-                               <Buttons
-                                    label={"Upload Reference Image"}
-                                    buttoncss="py-3 my-5 text-base text-gray-300 p-10 cursor-grabbing"
-                                    onClick={handleUploadClick}
-                                />
+                                <h6>{link ? link?.name : "Choose the image"}</h6>
+                                <div className="p-10"  onClick={handleUploadClick}>
+                                    <button
+                                        className=" text-base  edit_button_clr p-5 rounded"
+                                        // Triggered when "Company Logo" text is clicked
+                                        style={{ cursor: 'grabbing' }}
+                                    >
+                                        Upload Reference Image
+                                    </button>
+                                </div>
+
                             </div>
 
                         </div>
                         <textarea
-                            id="descriptionInput"
+                            // id="descriptionInput"
                             type="text"
                             placeholder="Reference Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

@@ -144,26 +144,25 @@ const Image_content = ({ onPopupData }) => {
                                         />
                                     </div>
 
+                                    <h6>{link ? link?.name : " Image not found"}</h6>
+
                                 </label>
-                                {/* <button
-                                    className=" text-base text-gray-300 p-10 cursor-grabbing"
-                                    onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
-                                    style={{ cursor: 'grabbing' }}
-                                >
-                                     Upload Product Image
-                                </button> */}
-                                <Buttons
-                                    label={"Upload Product Image"}
-                                    buttoncss="py-3 my-5 text-base text-gray-300 p-10 cursor-grabbing"
-                                    onClick={handleUploadClick}
-                                />
+                                <div className=" p-10"  onClick={handleUploadClick}>
+                                    <button
+                                        className=" text-base  edit_button_clr  cursor-grabbing p-3 rounded"
+                                        // Triggered when "Company Logo" text is clicked
+                                        style={{ cursor: 'grabbing' }}
+                                    >
+                                        Product Upload Image
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
                         <textarea
                             id="descriptionInput"
                             type="text"
-                            placeholder="Product Description"
+                            placeholder="Company Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             rows={4}
                             value={description}

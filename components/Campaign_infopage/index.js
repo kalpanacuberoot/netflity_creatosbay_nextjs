@@ -107,6 +107,7 @@ const Campaign_infopage = () => {
         "status": "draft",
         "products": popupData,
         "references": refpopupData,
+
       };
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
@@ -114,10 +115,10 @@ const Campaign_infopage = () => {
       const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
 
       console.log('POST response campaigns-------------:', postResponse);
-      if (postResponse?.status === "success") {
+      if (postResponse?.status) {
 
 
-        Cookies.set('campaign_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
 
         toast.success(postResponse?.message, {
           position: 'top-center',
@@ -185,192 +186,194 @@ const Campaign_infopage = () => {
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
-              {/* <form onSubmit={handleSubmit}> */}
-              <div className="">
-                <h2
-                  style={{ color: Colors.pending_clr }}
-                  className="font-bold campaign_info_title"
-                >
-                  Campaign Info
-                </h2>
-                <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                {/* <p className="divider_line">fuyfudydyd</p> */}
-                {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
-                <hr className="divider_line my-5" />
-                <div className="my-3">
-                  <h4 className="">Campaign Name</h4>
-                  <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+              <form onSubmit={handleSubmit}>
+                <div className="">
+                  <h2
+                    style={{ color: Colors.pending_clr }}
+                    className="font-bold campaign_info_title"
+                  >
+                    Campaign Info
+                  </h2>
+                  <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                  {/* <p className="divider_line">fuyfudydyd</p> */}
+                  {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
+                  <hr className="divider_line my-5" />
+                  <div className="my-3">
+                    <h4 className="">Campaign Name</h4>
+                    <h6 className="mb-3">
+                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </h6>
 
-                  <input
-                    type="text"
-                    id="small-input"
-                    className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={campaign_name}
-                    onChange={(e) => setCampaign_name(e.target.value)}
-                  />
-                </div>
-                <div className="my-3">
-                  <h4>Campaign Description</h4>
-                  <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                    <input
+                      type="text"
+                      id="small-input"
+                      className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={campaign_name}
+                      onChange={(e) => setCampaign_name(e.target.value)}
+                    />
+                  </div>
+                  <div className="my-3">
+                    <h4>Campaign Description</h4>
+                    <h6 className="mb-3">
+                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </h6>
 
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Start Typing..."
-                    value={campaign_desc}
-                    onChange={(e) => setCampaign_desc(e.target.value)}
-                  ></textarea>
-                </div>
+                    <textarea
+                      id="message"
+                      rows="4"
+                      className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Start Typing..."
+                      value={campaign_desc}
+                      onChange={(e) => setCampaign_desc(e.target.value)}
+                    ></textarea>
+                  </div>
 
-                <div className="my-3">
-                  <h4>Product</h4>
-                  <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                  <div className="my-3">
+                    <h4>Product</h4>
+                    <h6 className="mb-3">
+                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </h6>
 
-                  <div className="flex flex-row justify-between">
-                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                      onClick={() => setIsModalOpen(true)}
-                    >
-                      {/* <input
+                    <div className="flex flex-row justify-between">
+                      <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        {/* <input
                       type="file"
                       ref={inputFileRef}
                       onChange={(e) => onFilechange(e)}
                       hidden
                       className=""
                     /> */}
-                      <button
-                        // onClick={() => onBtnClick()}
-                        className="h-48  w-full "
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
+                        <button
+                          // onClick={() => onBtnClick()}
+                          className="h-48  w-full "
+                        >
+                          <Image
+                            src={Images.plus_icon}
+                            width={20}
+                            className="mx-auto "
+                            alt=""
+                          />
+                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                            Add Image
+                          </p>
+                        </button>
+                      </div>
+                      <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
+                        <input
+                          type="file"
+                          ref={inputFileRef}
+                          // onChange={(e) => onFilechange(e)}
+                          hidden
                         />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
-                        </p>
-                      </button>
+                        <button
+                          // onClick={() => onBtnClick()}
+                          className="h-48  w-full"
+                        >
+                          <Image
+                            src={Images.plus_icon}
+                            width={20}
+                            className="mx-auto "
+                            alt=""
+                          />
+                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                            Add Image
+                          </p>
+                        </button>
+                      </div>
                     </div>
-                    <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
+                    <div>
+                      {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
                       <input
-                        type="file"
-                        ref={inputFileRef}
-                        // onChange={(e) => onFilechange(e)}
-                        hidden
+                        type="url"
+                        id="url"
+                        className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Paste link"
                       />
-                      <button
-                        // onClick={() => onBtnClick()}
-                        className="h-48  w-full"
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
-                        />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
-                        </p>
-                      </button>
                     </div>
                   </div>
-                  <div>
-                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
-                    <input
-                      type="url"
-                      id="url"
-                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Paste link"
-                    />
-                  </div>
-                </div>
 
-                {/* <h1>Received data from popup: {popupData?.file}</h1> */}
-                <div className="my-3">
-                  <h3>Timelines</h3>
-                  <h6>Set Creating Date</h6>
+                  {/* <h1>Received data from popup: {popupData?.file}</h1> */}
+                  <div className="my-3">
+                    <h3>Timelines</h3>
+                    <h6>Set Creating Date</h6>
 
-                  <Calendar_component />
-                  <div>
-                    {/* <h2>Campaign Info Page date range</h2> */}
-                    {startRangeDate !== null && endRangeDate !== null && (
-                      <p>
-                        Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="my-3">
-                  <h4>Content Reference</h4>
-                  <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
-
-                  <div className="flex flex-row justify-between">
-                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                      onClick={() => setIsModalOpenRef(true)}
-                    >
-
-                      <button
-                        // onClick={() => onBtnClick()}
-                        className="h-48  w-full "
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
-                        />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
+                    <Calendar_component />
+                    <div>
+                      {/* <h2>Campaign Info Page date range</h2> */}
+                      {startRangeDate !== null && endRangeDate !== null && (
+                        <p>
+                          Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
                         </p>
-                      </button>
+                      )}
                     </div>
+                  </div>
+                  <div className="my-3">
+                    <h4>Content Reference</h4>
+                    <h6 className="mb-3">
+                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </h6>
 
-                    <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
-                      {/* <input
+                    <div className="flex flex-row justify-between">
+                      <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                        onClick={() => setIsModalOpenRef(true)}
+                      >
+
+                        <button
+                          // onClick={() => onBtnClick()}
+                          className="h-48  w-full "
+                        >
+                          <Image
+                            src={Images.plus_icon}
+                            width={20}
+                            className="mx-auto "
+                            alt=""
+                          />
+                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                            Add Image
+                          </p>
+                        </button>
+                      </div>
+
+                      <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
+                       onClick={() => setIsModalOpenRef(true)}
+                      >
+                        {/* <input
                       type="file"
                       ref={inputFileRef}
                       onChange={(e) => onFilechange(e)}
                       hidden
                     /> */}
-                      <button
-                        // onClick={() => onBtnClick()}
-                        className="h-48  w-full"
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
-                        />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
-                        </p>
-                      </button>
+                        <button
+                          // onClick={() => onBtnClick()}
+                          className="h-48  w-full"
+                        >
+                          <Image
+                            src={Images.plus_icon}
+                            width={20}
+                            className="mx-auto "
+                            alt=""
+                          />
+                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                            Add Image
+                          </p>
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
+                      <input
+                        type="url"
+                        id="url"
+                        className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Paste link"
+                      />
                     </div>
                   </div>
-                  <div>
-                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
-                    <input
-                      type="url"
-                      id="url"
-                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Paste link"
-                    />
-                  </div>
+                  <Buttons label={"Proceed"} buttoncss={"py-3"} />
                 </div>
-                <Buttons label={"Proceed"} onClick={handleSubmit} buttoncss={"py-3"} />
-              </div>
-              {/* </form> */}
+              </form>
               <ToastContainer />
             </div>
             {/* right */}
