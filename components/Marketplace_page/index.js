@@ -34,6 +34,8 @@ const Marketplace_page = () => {
             ]
         }
     ]
+
+    const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
         <>
             <div
@@ -81,13 +83,34 @@ const Marketplace_page = () => {
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
                         {cardData.map((item, index) => {
                             return (
-                                <div className=" bg-white p-3 rounded-lg" key={index} T={console.log("market place card data", item)}>
+                                <div className=" bg-white p-3 rounded-lg" key={index} >
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={imageUrl}
+                                            alt=""
+                                        />
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={imageUrl}
+                                            alt=""
+                                        />
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={imageUrl}
+                                            alt=""
+                                        />
 
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
+                                        {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
 
                                         <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" />
+                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item.Creator_name}</h2></div>
@@ -105,7 +128,7 @@ const Marketplace_page = () => {
                                     <Link
                                         href={{
                                             pathname: "/creator_profile",
-                                            query: { data: JSON.stringify({key:item}) },
+                                            query: { data: JSON.stringify({ key: item }) },
                                         }}
                                     >
                                         <button className="w-full rounded-full p-2 mt-3" style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}>View profile</button>

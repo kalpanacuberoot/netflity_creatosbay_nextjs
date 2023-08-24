@@ -3,6 +3,9 @@ import Colors from "@/styles/Colors";
 import Image from "next/image";
 
 const Marketplace_card = () => {
+
+    const imageUrl = "https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA";
+
     return (
         <>
             <div className=" bg-white p-3 rounded-lg">
@@ -11,10 +14,32 @@ const Marketplace_card = () => {
                     src={Images.avatar1}
                     alt="" className="rounded-tl-lg rounded-bl-lg"
                     /> */}
-                    <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
+                    {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
 
                     <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                    <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" />
+                    <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
+                    <Image
+                        width={500}
+                        height={100}
+                        className="w-full h-64 object-cover"
+                        src={imageUrl}
+                        alt=""
+                    />
+                    <Image
+                        width={500}
+                        height={100}
+                        className="w-full h-64 object-cover"
+                        src={imageUrl}
+                        alt=""
+                    />
+                    <Image
+                        width={500}
+                        height={100}
+                        className="w-full h-64 object-cover"
+                        src={imageUrl}
+                        alt=""
+                    />
+
                 </div>
                 <div className="flex justify-between mb-2 mt-2">
                     <div> <h2 className="font-bold">Lily_youg</h2></div>
