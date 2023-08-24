@@ -74,16 +74,27 @@ const Brand1page = ({ onClick }) => {
                 console.log("brand result------------", result?.data?.data);
               
                 setDropdownvalues(result?.data?.data);
-
+                toast.success('Code is sent to your emailId', {
+                    position: 'top-center', // Set the toast position
+                    autoClose: 3000, // Close the toast after 3 seconds
+                  });
 
 
 
             } else {
                 console.error('Error:', response.statusText);
-                alert('categories api response else', response.statusText)
+                // alert('categories api response else', response?.statusText)
+                toast.error('Unauthorized', {
+                    position: 'top-center', // Set the toast position
+                    autoClose: 3000, // Close the toast after 3 seconds
+                  });
             }
         } catch (error) {
             console.error('Error:', error);
+            toast.error('Code is sent to your emailId', {
+                position: 'top-center', // Set the toast position
+                autoClose: 3000, // Close the toast after 3 seconds
+              });
         }
     };
 

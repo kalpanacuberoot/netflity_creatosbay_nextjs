@@ -53,6 +53,7 @@ const Brandscreens = () => {
                 description: desc,
                 categories: idArray,
                 logo: file,
+                user_id:cookieValue?.user?.id
             };
 
             const headers = {
@@ -70,6 +71,8 @@ const Brandscreens = () => {
                 const responseData = await response.json();
                 console.log('brands response:', responseData);
 
+                Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
                 if (responseData.status) {
                     toast.success('Brand Successfully Created', {
                         position: 'top-center',
@@ -79,11 +82,11 @@ const Brandscreens = () => {
                     router.push('/home');
                 } else {
                     console.error('Error:', responseData.message);
-                    alert('Brand creation failed');
+                    // alert('Brand creation failed');
                 }
             } else {
                 console.error('Error:', response.statusText);
-                alert('Brand creation failed');
+                // alert('Brand creation failed');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -125,9 +128,17 @@ const Brandscreens = () => {
                 setFile(data?.url)
             } else {
                 alert('Image upload failed.');
+                toast.error('Image upload failed', {
+                    position: 'top-center', // Set the toast position
+                    autoClose: 3000, // Close the toast after 3 seconds
+                });
             }
         } catch (error) {
             console.error('Error uploading image:', error);
+            toast.error('Please uplaod the image again', {
+                position: 'top-center', // Set the toast position
+                autoClose: 3000, // Close the toast after 3 seconds
+            });
         }
     };
 
@@ -323,9 +334,9 @@ const Brandscreens = () => {
                                 Next
                             </button>
 
-                          
+
                         </>
-                    
+
                     </div>
                 }
                 {open &&
@@ -341,21 +352,22 @@ const Brandscreens = () => {
                                     Brand Details.
                                 </h1>
 
-                               
-                                <div className=" w-full">
+
+                                <div className=" ">
                                     <div
-                                        className="border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                        className=" cursor-not-allowed border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                                     >
                                         <label
                                             htmlFor="fileInput"
                                             style={{ borderColor: Colors.logo_clr }}
+                                            className=" cursor-not-allowed   w-auto"
                                         >
-                                            <div>
+                                            <div className="cursor-not-allowed">
                                                 <input
                                                     id="fileInput"
                                                     type="file"
                                                     accept="image/*"
-                                                    className="absolute inset-0 opacity-0 w-full "
+                                                    className="hidden "
                                                     onChange={handleFileChange} // Triggered when a file is selected
                                                 />
                                                 <Image
@@ -363,17 +375,18 @@ const Brandscreens = () => {
                                                     width={15}
                                                     height={15}
                                                     alt=""
-                                                    className=" cursor-default"
+                                                    className=" cursor-default m-5 mb-0"
                                                 />
                                             </div>
 
                                         </label>
-                                        <div
-                                            className="text-base text-gray-300 p-5 cursor-pointer"
+                                        <button
+                                            className=" text-base text-gray-300 p-10 cursor-grabbing"
                                             onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
+                                            style={{ cursor: 'grabbing' }}
                                         >
                                             Company Logo(Upload Image)
-                                        </div>
+                                        </button>
                                     </div>
 
                                 </div>
@@ -387,7 +400,7 @@ const Brandscreens = () => {
                                     onChange={(e) => setDesc(e.target.value)}
                                     required
                                 ></textarea>
-                               
+
                                 <button
                                     onClick={handleSubmit}
                                     type="submit"
@@ -396,7 +409,7 @@ const Brandscreens = () => {
                                 >
                                     Save
                                 </button>
-                             
+
                             </>
 
                         </div>
@@ -404,7 +417,7 @@ const Brandscreens = () => {
                     </div>
                 }
             </div>
-           
+
 
         </>
     )

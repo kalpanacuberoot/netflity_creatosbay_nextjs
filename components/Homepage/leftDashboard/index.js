@@ -92,7 +92,7 @@ const Left_Dashboard = () => {
                 </ul>
             </div> */}
 
-            <div className='border flex flex-row my-5 justify-between rounded-full pe-2'>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
 
                 <Image
                     src={Images.profile_user}
@@ -100,7 +100,7 @@ const Left_Dashboard = () => {
                     height={30}
                     alt=""
                 />
-                <div className='flex flex-row'
+                <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
                     onClick={() => setDropdown_menu(!dropdown_menu)}
                 >
                     <div onClick={() => setIsModalOpen_notification(true)}>
@@ -127,84 +127,87 @@ const Left_Dashboard = () => {
                         className='my-2 mx-1'
                         alt=""
                     /> */}
+                    
                 </div>
+                {dropdown_menu &&
+                        <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
 
-                <div className='absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
-                    {dropdown_menu &&
-                        <div className='w-full px-3 py-2'>
+                            <div className='w-full px-3 py-2'>
 
-                            <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
-                            >
-                                <Image
-                                    src={Images.market_place_icon}
-                                    width={18}
-                                    className=' '
-                                    alt=""
-                                />
-                                <button
-                                    className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpen_invite_mem(true)}
+                                <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
                                 >
-                                    Invite Members
-                                </button>
-                            </div>
-                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    <Image
+                                        src={Images.market_place_icon}
+                                        width={18}
+                                        className=' '
+                                        alt=""
+                                    />
+                                    <button
+                                        className=' w-48 dropdown_text text-center'
+                                        onClick={() => setIsModalOpen_invite_mem(true)}
+                                    >
+                                        Invite Members
+                                    </button>
+                                </div>
+                                <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
-                            >
-                                <Image
-                                    src={Images.support_icon}
-                                    width={18}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpenlogout(true)}
                                 >
-                                    Support
-                                </button>
-                            </div>
-                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    <Image
+                                        src={Images.support_icon}
+                                        width={18}
+                                        className=''
+                                        alt=""
+                                    />
+                                    <button
+                                        className=' w-48 dropdown_text text-center'
+                                        onClick={() => setIsModalOpenlogout(true)}
+                                    >
+                                        Support
+                                    </button>
+                                </div>
+                                <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
-                            >
-                                <Image
-                                    src={Images.terms_of_service}
-                                    width={18}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className="w-48 dropdown_text rounded-lg"
-                                    onClick={openModal}
                                 >
-                                    Terms of services
-                                </button>
-                                {/* <button
+                                    <Image
+                                        src={Images.terms_of_service}
+                                        width={18}
+                                        className=''
+                                        alt=""
+                                    />
+                                    <button
+                                        className="w-48 dropdown_text rounded-lg"
+                                        onClick={openModal}
+                                    >
+                                        Terms of services
+                                    </button>
+                                    {/* <button
                                     className=' w-48 dropdown_text text-center'
                                 >
                                     
                                 </button> */}
-                            </div>
-                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                </div>
+                                <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
-                            >
-                                <Image
-                                    src={Images.logout}
-                                    width={18}
-                                    height={10}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className="w-48 dropdown_text rounded-lg"
-                                    onClick={() => setIsModalOpenlogout(true)}
                                 >
-                                    Sign Out
-                                </button>
-                            </div>
+                                    <Image
+                                        src={Images.logout}
+                                        width={18}
+                                        height={10}
+                                        className=''
+                                        alt=""
+                                    />
+                                    <button
+                                        className="w-48 dropdown_text rounded-lg"
+                                        onClick={() => setIsModalOpenlogout(true)}
+                                    >
+                                        Sign Out
+                                    </button>
+                                </div>
 
-                        </div>}
-                </div>
+                            </div>
+                        </div>
+                    }
+
             </div>
             <div className=' text-center'>
                 <h4 className='font-bold'>Creatorbay Inc.</h4>
@@ -282,21 +285,23 @@ const Left_Dashboard = () => {
                         </button>
                     </div>
                 </Link>
-                <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                <Link href={'/marketplace'}>
+                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
-                >
-                    <Image
-                        src={Images.market_place_icon}
-                        width={22}
-                        className=''
-                        alt=""
-                    />
-                    <button
-                        className='w-32 text-start'
                     >
-                        Marketplace
-                    </button>
-                </div>
+                        <Image
+                            src={Images.market_place_icon}
+                            width={22}
+                            className=''
+                            alt=""
+                        />
+                        <button
+                            className='w-32 text-start'
+                        >
+                            Marketplace
+                        </button>
+                    </div>
+                </Link>
                 <Link href={'/communication'}>
                     <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 

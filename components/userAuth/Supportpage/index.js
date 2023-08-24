@@ -34,7 +34,8 @@ const Supportpage = () => {
     try {
       // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
       // console.log('GET response:', getResponse);
-
+      const cookieValue = JSON.parse(Cookies.get('user_data'));
+      console.log('categories cookieValue------------1', cookieValue?.token);
       const postData = {
         "email": email,
         "phone": phone,
@@ -42,7 +43,7 @@ const Supportpage = () => {
         "text": desc,
       };
       const headers = {
-        'Authorization': `Bearer ${token?.token}`,
+        'Authorization': `Bearer ${cookieValue?.token}`,
       }
       
       const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData,headers);
@@ -58,11 +59,19 @@ const Supportpage = () => {
         router.push('/')
       } else {
         console.error('Error:', postResponse?.statusText);
-        alert('logibn api response else', postResponse?.statusText)
+        toast.error('Please enter the correct User Details', {
+          position: 'top-center', // Set the toast position
+          autoClose: 3000, // Close the toast after 3 seconds
+        });
+        // alert('logibn api response else', postResponse?.statusText)
       }
       // const usertoken = localStorage.setItem('user_data', JSON.stringify(postResponse.token));
     } catch (error) {
       console.error('support response catrch error-------------', error);
+      toast.error('Please try again after sometime', {
+        position: 'top-center', // Set the toast position
+        autoClose: 3000, // Close the toast after 3 seconds
+      });
     }
   };
 

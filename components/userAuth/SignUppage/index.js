@@ -105,11 +105,19 @@ const Signuppage = () => {
 
 
             } else {
-                console.error('Error:', response.statusText);
-                alert('register api response else', response.statusText)
+                console.error('Error:', response?.statusText);
+                toast.error('Please enter the UniqueID', {
+                    position: 'top-center', // Set the toast position
+                    autoClose: 3000, // Close the toast after 3 seconds
+                  });
+                // alert('register api response else', response.statusText)
             }
         } catch (error) {
             console.error('Error:', error);
+            toast.error('Please enter the UniqueID', {
+                position: 'top-center', // Set the toast position
+                autoClose: 3000, // Close the toast after 3 seconds
+              });
         }
     };
 
