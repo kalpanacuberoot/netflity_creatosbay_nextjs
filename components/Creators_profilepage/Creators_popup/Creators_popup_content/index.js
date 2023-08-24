@@ -10,8 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { url } from "@/generalfunation";
+import { Router, useRouter } from "next/router";
 
 const Creators_popup_content = () => {
+
+    const router = useRouter();
 
     const [imageCount, setImageCount] = useState(1);
     const [videoCount, setVideoCount] = useState(0);
@@ -79,11 +82,22 @@ const Creators_popup_content = () => {
 
                         {isOpen &&
                             <>
-                            <h3>Do you want to add another creator to this campaign?</h3>
-                                <label className="switch my-5" >
+                                <h3>Do you want to add another creator to this campaign?</h3>
+                                <div className="py-3">
+                                    <Buttons 
+                                    label={"Yes, Add Another"}
+                                     onClick={() => router.push('/marketplace')} 
+                                    buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5"}
+                                    />
+                                    <Buttons 
+                                    label={"No, complete process"} 
+                                    onClick={() => router.push('/creator_amount')}  
+                                    buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5 "}/>
+                                </div>
+                                {/* <label className="switch my-5" >
                                     <input type="checkbox" checked={isToggled} onChange={handleToggle} />
                                     <span className="slider round"></span>
-                                </label>
+                                </label> */}
                             </>
                         }
 

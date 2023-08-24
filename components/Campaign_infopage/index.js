@@ -114,7 +114,10 @@ const Campaign_infopage = () => {
       const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
 
       console.log('POST response campaigns-------------:', postResponse);
-      if (postResponse?.status) {
+      if (postResponse?.status === "success")  {
+
+        
+        Cookies.set('campaign_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
         toast.success(postResponse?.message, {
           position: 'top-center',
@@ -182,7 +185,7 @@ const Campaign_infopage = () => {
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
-              <form onSubmit={handleSubmit}>
+              {/* <form onSubmit={handleSubmit}> */}
                 <div className="">
                   <h2
                     style={{ color: Colors.pending_clr }}
@@ -208,20 +211,6 @@ const Campaign_infopage = () => {
                       onChange={(e) => setCampaign_name(e.target.value)}
                     />
                   </div>
-
-                  {/* {popupData && (
-                    <div>
-                      {Object.entries(popupData).map(([key, value]) => (
-                        <p key={key}>
-                          {key}: {value}
-                        </p>
-                      ))}
-                     
-                      {popupData.file && (
-                        <img src={popupData.file} alt="Uploaded" />
-                      )}
-                    </div>
-                  )} */}
                   <div className="my-3">
                     <h4>Campaign Description</h4>
                     <h6 className="mb-3">
@@ -371,9 +360,9 @@ const Campaign_infopage = () => {
                       </button>
                     </div>
                   </div>
-                  <Buttons label={"Proceed"} />
+                  <Buttons label={"Proceed"} onClick={handleSubmit}/>
                 </div>
-              </form>
+              {/* </form> */}
               <ToastContainer />
             </div>
             {/* right */}
