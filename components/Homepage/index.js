@@ -70,9 +70,11 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly py-4 rounded-md flex-wrap"
+            className="flex flex-row justify-evenly items-center py-4 rounded-md flex-wrap"
             style={{ backgroundColor: Colors.white_clr }}
           >
+
+            {/* No Campaigns Found */}
             <Home_Card1 />
             <Home_Card2 />
             <Home_Card3 />

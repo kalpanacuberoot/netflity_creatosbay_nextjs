@@ -17,6 +17,10 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import Ref_Imagepop from './Ref_Imagepop';
 import Ref_Image_content from './Ref_Imagepop/Ref_Image_content';
+import Date_range_picker from '../Invoicepage/daterangepicker';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'tailwindcss/tailwind.css';
 
 const Campaign_infopage = () => {
 
@@ -32,6 +36,8 @@ const Campaign_infopage = () => {
   const [campaign_desc, setCampaign_desc] = useState('');
   const [popupData, setPopupData] = useState([] ? [] : null); // State to hold popup data
   const [refpopupData, setRefpopupData] = useState([] ? [] : null); // State to hold popup data
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   // Function to update state with data from the popup
   const handleRefPopupData = (data) => {
@@ -42,11 +48,6 @@ const Campaign_infopage = () => {
     setRefpopupData(data);
   };
 
-  const namearray = popupData.filter((item) => item.name).join(", ");
-  const descriptionarray = popupData.filter((item) => item.description).join(", ");
-  const filearray = popupData.filter((item) => item.file).join(", ");
-
-  console.log("namearray", namearray, descriptionarray, filearray);
 
 
   useEffect(() => {
@@ -58,32 +59,6 @@ const Campaign_infopage = () => {
       setEndRangeDate(new Date(end_date));
     }
   }, [router.query]);
-
-  console.log("startRangeDate startRangeDate", startRangeDate?.toDateString(), endRangeDate?.toDateString());
-
-  const formatDateToYMD = (inputDate) => {
-    const date = new Date(inputDate); // Convert the input date string to a Date object
-
-    // Get the year, month, and day components
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-based
-    const day = String(date.getDate()).padStart(2, '0');
-
-    // Combine them in the "yyyy-MM-dd" format
-    const formattedDate = `${year}-${month}-${day}`;
-
-    return formattedDate;
-  }
-
-
-
-  // Example usage:
-  const endinputDateString = endRangeDate?.toDateString();
-  const startinputDateString = startRangeDate?.toDateString();
-  const endformattedDate = formatDateToYMD(endinputDateString);
-  const startformattedDate = formatDateToYMD(startinputDateString);
-  console.log('formattedDate', startformattedDate, endformattedDate); // Output: "2023-08-23"
-
 
   const handleSubmit = async (e) => {
 
@@ -118,8 +93,8 @@ const Campaign_infopage = () => {
       if (postResponse?.status) {
 
 
-        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id ), { expires: 106500 });
-        Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name ), { expires: 106500 });
+        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
+        Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
 
         toast.success(postResponse?.message, {
           position: 'top-center',
@@ -149,6 +124,31 @@ const Campaign_infopage = () => {
   };
 
   console.log("popupData", popupData);
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it is 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  }
+  
+  // Example usage:
+  const start_date = new Date(startDate);
+  const end_date = new Date(endDate);
+  const startformattedDate = formatDateToYYYYMMDD(start_date);
+  const endformattedDate = formatDateToYYYYMMDD(end_date);
+  // console.log(formattedDate); 
+
+  console.log("startingfate", startDate, endDate,startformattedDate,endformattedDate);
+
 
   return (
     <>
@@ -300,7 +300,54 @@ const Campaign_infopage = () => {
                     <h3>Timelines</h3>
                     <h6>Set Creating Date</h6>
 
-                    <Calendar_component />
+                    {/* <Calendar_component /> */}
+                    {/* dater pocker start */}
+
+                    <div className="flex flex-row my-5 border rounded-md justify-between items-center w-full px-5">
+                      <div className='relative w-full'>
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          selectsStart
+                          startDate={startDate}
+                          endDate={endDate}
+                          placeholderText="Start Date"
+                          className="w-full text-center p-2 rounded"
+                        />
+                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                          <Image
+                            src={Images.calendar_icon}
+                            alt=""
+                            width={20}
+                          />
+                        </div>
+                      </div>
+
+                      <span className="mx-4 mt-0 text-gray-500">-</span>
+
+                      <div className='relative w-full mt-0'>
+                        <DatePicker
+                          selected={endDate}
+                          onChange={(date) => setEndDate(date)}
+                          selectsEnd
+                          startDate={startDate}
+                          endDate={endDate}
+                          minDate={startDate}
+                          placeholderText="End Date"
+                          className="w-full text-center p-2 rounded"
+                        />
+                        <div className="absolute top-2.5 right-0 text-gray-400 ps-2 ">
+                          <Image
+                            src={Images.calendar_icon}
+                            alt=""
+                            width={20}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+
+                    {/* date picker end */}
                     <div>
                       {/* <h2>Campaign Info Page date range</h2> */}
                       {startRangeDate !== null && endRangeDate !== null && (
@@ -338,7 +385,7 @@ const Campaign_infopage = () => {
                       </div>
 
                       <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
-                       onClick={() => setIsModalOpenRef(true)}
+                        onClick={() => setIsModalOpenRef(true)}
                       >
                         {/* <input
                       type="file"

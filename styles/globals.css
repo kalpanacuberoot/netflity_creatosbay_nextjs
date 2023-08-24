@@ -429,6 +429,10 @@ logo-slider img {
   font-size: 15px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 /* .divider_line{
   
 max-width: 100%;
