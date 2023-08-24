@@ -5,6 +5,7 @@ import Images from '@/images';
 import Image from 'next/image';
 
 const Calendar_component = () => {
+    
     const currentDate = new Date(); // Get the current date
     const [startDate, setStartDate] = useState(currentDate);
     const [endDate, setEndDate] = useState(null);

@@ -82,11 +82,11 @@ const Brandscreens = () => {
                     router.push('/home');
                 } else {
                     console.error('Error:', responseData.message);
-                    alert('Brand creation failed');
+                    // alert('Brand creation failed');
                 }
             } else {
                 console.error('Error:', response.statusText);
-                alert('Brand creation failed');
+                // alert('Brand creation failed');
             }
         } catch (error) {
             console.error('Error:', error);

@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import Creators_popup from "./Creators_popup";
 import Creators_popup_content from "./Creators_popup/Creators_popup_content";
 import Image from "next/image";
+import { url } from "@/generalfunation";
+import Cookies from "js-cookie";
 
 const Creators_profilepage = () => {
 
@@ -12,6 +14,7 @@ const Creators_profilepage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [creator_details, setCreator_details] = useState(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -28,13 +31,71 @@ const Creators_profilepage = () => {
 
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
-  useEffect(() => {
+
+
+
+  const handleSubmit = async () => {
+
     const { data } = router.query;
     if (data) {
       const parsedData = JSON.parse(data);
       console.log("Received Data:", parsedData);
     }
-  }, [router.query]);
+
+
+    const parsedData = JSON?.parse(data);
+    const cookieValue = JSON.parse(Cookies.get('user_data'));
+    console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
+    Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
+    Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
+
+    try {
+
+      const headers = {
+        'Authorization': `Bearer ${cookieValue?.token}`,
+        'Content-Type': 'application/json',
+      };
+
+      const response = await fetch(`${url}/creators/${parsedData?.key}`, {
+        method: 'Get',
+        headers: headers,
+
+      });
+      console.log('creator_details response:1', response);
+      if (response?.ok) {
+        const responseData = await response.json();
+        console.log('creator_details response:', responseData?.data);
+        setCreator_details(responseData?.data)
+
+        // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
+        if (responseData.status) {
+          // toast.success('Brand Successfully Created', {
+          //     position: 'top-center',
+          //     autoClose: 5000,
+          // });
+
+        } else {
+          console.error('Error:', responseData.message);
+          // alert('Brand creation failed');
+        }
+      } else {
+        console.error('Error:', response.statusText);
+        // alert('Brand creation failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  console.log("creator_details", creator_details);
+
+
+  useEffect(() => {
+
+    handleSubmit();
+  }, [handleSubmit]);
+
 
   return (
     <>
@@ -81,7 +142,7 @@ const Creators_profilepage = () => {
                     />
                   </div>
                   <div className="flex flex-col  ">
-                    <h3>Vishal Kumar Singh</h3>
+                    <h3>{creator_details?.user?.name}</h3>
                     <p>I like Yor confidence</p>
                   </div>
                 </div>
@@ -105,43 +166,43 @@ const Creators_profilepage = () => {
 
               <div className="grid grid-cols-3 mt-8">
                 <div>
-                  <h4>Followers</h4>
+                  <h4 className="text-gray-400">Followers</h4>
                   <h3>00000k</h3>
                 </div>
                 <div>
-                  <h4>Reach</h4>
+                  <h4 className="text-gray-400">Reach</h4>
                   <h3>00000k</h3>
                 </div>
                 <div>
-                  <h4>Impression</h4>
-                  <h3>00000k</h3>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 mt-8">
-                <div>
-                  <h4>Followers</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4>Reach</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4>Impression</h4>
+                  <h4 className="text-gray-400">Impression</h4>
                   <h3>00000k</h3>
                 </div>
               </div>
               <div className="grid grid-cols-3 mt-8">
                 <div>
-                  <h4>Followers</h4>
+                  <h4 className="text-gray-400">Location</h4>
+                  <h3>{creator_details?.city}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Engagement Rate</h4>
                   <h3>00000k</h3>
                 </div>
                 <div>
-                  <h4>Reach</h4>
+                  <h4 className="text-gray-400">Avg. </h4>
+                  <h3>00000k</h3>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mt-8">
+                <div>
+                  <h4 className="text-gray-400">Website Click</h4>
                   <h3>00000k</h3>
                 </div>
                 <div>
-                  <h4>Impression</h4>
+                  <h4 className="text-gray-400">Avg Likes</h4>
+                  <h3>00000k</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">CPE</h4>
                   <h3>00000k</h3>
                 </div>
               </div>
@@ -150,62 +211,50 @@ const Creators_profilepage = () => {
                   className="pb-3 "
                   style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
                 >
-                  <h3>About</h3>
+                  <h3>About me</h3>
                 </div>
                 <div className="grid grid-cols-3 mt-8">
                   <div>
-                    <h4>Followers</h4>
+                    <h4 className="text-gray-400">Height</h4>
                     <h3>00000k</h3>
                   </div>
                   <div>
-                    <h4>Reach</h4>
+                    <h4 className="text-gray-400">Weight</h4>
                     <h3>00000k</h3>
                   </div>
                   <div>
-                    <h4>Impression</h4>
-                    <h3>00000k</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4>Followers</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4>Reach</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4>Impression</h4>
+                    <h4 className="text-gray-400">Hairs</h4>
                     <h3>00000k</h3>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 mt-8">
                   <div>
-                    <h4>Followers</h4>
-                    <h3>00000k</h3>
+                    <h4 className="text-gray-400">Skin Color</h4>
+                    <h3>{creator_details?.skintype?.name}</h3>
                   </div>
                   <div>
-                    <h4>Reach</h4>
-                    <h3>00000k</h3>
+                    <h4 className="text-gray-400">Eye Color</h4>
+                    <h3>{creator_details?.eyetype?.name}</h3>
                   </div>
                   <div>
-                    <h4>Impression</h4>
-                    <h3>00000k</h3>
+                    <h4 className="text-gray-400">Hairs Color</h4>
+                    <h3>{creator_details?.hairtype?.name}</h3>
                   </div>
+                </div>
+                <div className="grid grid-cols-3 mt-8">
+                  <div>
+                    <h4 className="text-gray-400">Kids</h4>
+                    <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-400">Pets</h4>
+                    <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
+                  </div>
+
                 </div>
               </div>
-              <h4 className=" pt-5">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry&apos;s standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
+              <h4 className=" pt-5 mb-5">
+                {creator_details?.bio}
               </h4>
 
               <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0">
