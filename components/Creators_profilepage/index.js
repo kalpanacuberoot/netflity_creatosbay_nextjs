@@ -42,11 +42,12 @@ const Creators_profilepage = () => {
       console.log("Received Data:", parsedData);
     }
 
-    
+
     const parsedData = JSON?.parse(data);
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
-    Cookies.set('creator_id', JSON.stringify(parsedData?.key,creator_details?.user?.name), { expires: 106500 });
+    Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
+    Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
 
     try {
 
@@ -60,7 +61,7 @@ const Creators_profilepage = () => {
         headers: headers,
 
       });
-      console.log('creator_details response:1',response);
+      console.log('creator_details response:1', response);
       if (response?.ok) {
         const responseData = await response.json();
         console.log('creator_details response:', responseData?.data);
@@ -87,13 +88,13 @@ const Creators_profilepage = () => {
     }
   };
 
-  console.log("creator_details",creator_details);
+  console.log("creator_details", creator_details);
 
 
   useEffect(() => {
 
     handleSubmit();
-  }, []);
+  }, [handleSubmit]);
 
 
   return (
@@ -243,17 +244,17 @@ const Creators_profilepage = () => {
                 <div className="grid grid-cols-3 mt-8">
                   <div>
                     <h4 className="text-gray-400">Kids</h4>
-                    <h3>{creator_details?.kids===0 ? "No" : "Yes"}</h3>
+                    <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
                   </div>
                   <div>
                     <h4 className="text-gray-400">Pets</h4>
-                    <h3>{creator_details?.pets===0 ? "No" : "Yes"}</h3>
+                    <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
                   </div>
-                  
+
                 </div>
               </div>
               <h4 className=" pt-5 mb-5">
-              {creator_details?.bio}
+                {creator_details?.bio}
               </h4>
 
               <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0">

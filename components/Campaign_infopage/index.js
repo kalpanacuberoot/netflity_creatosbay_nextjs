@@ -118,7 +118,8 @@ const Campaign_infopage = () => {
       if (postResponse?.status) {
 
 
-        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
+        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id ), { expires: 106500 });
+        Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name ), { expires: 106500 });
 
         toast.success(postResponse?.message, {
           position: 'top-center',

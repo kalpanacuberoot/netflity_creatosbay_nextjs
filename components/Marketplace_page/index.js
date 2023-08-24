@@ -131,7 +131,7 @@ const Marketplace_page = () => {
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
                         {creatordata?.length > 0 && creatordata.map((item, index) => {
                             return (
-                                <div className=" bg-white p-3 rounded-lg" key={index} >
+                                <div className=" bg-white p-3 rounded-lg" key={index}>
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
                                         <Image
                                             width={500}
@@ -171,7 +171,7 @@ const Marketplace_page = () => {
                                             {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
                                                 return (
 
-                                                    <h6 className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                    <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
                                                         {categories_item?.name}
                                                     </h6>      
                                             )

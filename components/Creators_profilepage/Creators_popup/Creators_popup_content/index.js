@@ -31,6 +31,8 @@ const Creators_popup_content = () => {
             console.log('categories cookieValue------------1', cookieValue?.token);
             const campaign_id = JSON.parse(Cookies.get('campaign_id'));
             const creator_id = JSON.parse(Cookies.get('creator_id'));
+            const creator_name = JSON.parse(Cookies.get('creator_name'));
+            const campaign_name = JSON.parse(Cookies.get('campaign_name'));
             console.log("creator_id campaign_id",creator_id,campaign_id);
 
             const postData = {
@@ -52,7 +54,7 @@ const Creators_popup_content = () => {
             if (postResponse?.status) {
 
             
-                toast.success("Creator X has been added to Campaign Y", {
+                toast.success(`${creator_name} has been added to ${campaign_name}`, {
                     position: 'top-center',
                     autoClose: 5000,
                 });

@@ -148,15 +148,18 @@ const Creator_Amountpage = () => {
                                             </tr>
 
                                         </thead>
-                                        {campaigndata?.creators?.length > 0 && campaigndata?.creators.map((creator_item, index) => {
+                                        {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
                                             return (
-                                                <tbody>
+                                                <tbody  key={index}>
 
-                                                    <Creator_table key={index} creatorData={creator_item} T={console.log("creator_item", creator_item)} />
+                                                    <Creator_table creatorData={creator_item} T={console.log("creator_item", creator_item)} />
                                                 </tbody>
 
                                             )
-                                        })}
+                                        })
+                                    :
+                                    "No Creator is found"
+                                    }
                                     </table>
                                 </div>
 

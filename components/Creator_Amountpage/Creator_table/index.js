@@ -38,7 +38,7 @@ const Creator_table = ({ creatorData }) => {
 
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData.status) {
+                if (responseData?.status) {
                     // toast.success('Brand Successfully Created', {
                     //     position: 'top-center',
                     //     autoClose: 5000,
