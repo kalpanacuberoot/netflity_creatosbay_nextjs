@@ -32,6 +32,8 @@ const Creators_profilepage = () => {
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
 
+
+
   const handleSubmit = async () => {
 
     const { data } = router.query;
@@ -39,9 +41,12 @@ const Creators_profilepage = () => {
       const parsedData = JSON.parse(data);
       console.log("Received Data:", parsedData);
     }
+
+    
     const parsedData = JSON?.parse(data);
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
+    Cookies.set('creator_id', JSON.stringify(parsedData?.key,creator_details?.user?.name), { expires: 106500 });
 
     try {
 

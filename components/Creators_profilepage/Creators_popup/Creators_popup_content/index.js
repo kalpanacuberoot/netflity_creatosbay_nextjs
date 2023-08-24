@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import { url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunation";
 import { Router, useRouter } from "next/router";
 
 const Creators_popup_content = () => {
@@ -24,14 +24,66 @@ const Creators_popup_content = () => {
     const handleToggle = () => {
         setIsToggled(!isToggled);
     };
+    const handleSubmit = async () => {
+       
+        try {
+            const cookieValue = JSON.parse(Cookies.get('user_data'));
+            console.log('categories cookieValue------------1', cookieValue?.token);
+            const campaign_id = JSON.parse(Cookies.get('campaign_id'));
+            const creator_id = JSON.parse(Cookies.get('creator_id'));
+            console.log("creator_id campaign_id",creator_id,campaign_id);
 
-    const onHandleSubmit = () => {
-        toast.success('Creator X has been added to Campaign Y', {
-            position: 'top-center',
-            autoClose: 5000,
-        });
-        setIsopen(true);
-    }
+            const postData = {
+                "campaign_id": campaign_id,
+                "creator_id": creator_id,
+                "image_count": imageCount,
+                "video_count": videoCount,
+                "approved": false
+            };
+
+            const headers = {
+                'Authorization': `Bearer ${cookieValue?.token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const postResponse = await apiCall(`${url}/campaigncreators`, 'post', postData,headers);
+
+            console.log('POST response campaigncreators-------------:', postResponse);
+            if (postResponse?.status) {
+
+            
+                toast.success("Creator X has been added to Campaign Y", {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+
+                setIsopen(true);
+            } else {
+                // console.error('Error:', postResponse?.statusText);
+                // alert('logibn api response else', postResponse?.statusText)
+                toast.error(message, {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+            }
+
+        } catch (error) {
+            console.error('POST response register catrch error-------------', error);
+            // toast.error('please register yourself or login again after sometime', {
+            //     position: 'top-center',
+            //     autoClose: 5000,
+            // });
+        }
+    };
+
+    
+    // const onHandleSubmit = () => {
+    //     toast.success('Creator X has been added to Campaign Y', {
+    //         position: 'top-center',
+    //         autoClose: 5000,
+    //     });
+    //     setIsopen(true);
+    // }
 
 
     return (
@@ -75,7 +127,7 @@ const Creators_popup_content = () => {
                                 <Buttons
                                     buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                                     label={"Confirm Button"}
-                                    onClick={() => onHandleSubmit()}
+                                    onClick={() => handleSubmit()}
                                 />
                             </>
                         }
@@ -84,15 +136,15 @@ const Creators_popup_content = () => {
                             <>
                                 <h3>Do you want to add another creator to this campaign?</h3>
                                 <div className="py-3">
-                                    <Buttons 
-                                    label={"Yes, Add Another"}
-                                     onClick={() => router.push('/marketplace')} 
-                                    buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5"}
+                                    <Buttons
+                                        label={"Yes, Add Another"}
+                                        onClick={() => router.push('/marketplace')}
+                                        buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5"}
                                     />
-                                    <Buttons 
-                                    label={"No, complete process"} 
-                                    onClick={() => router.push('/creator_amount')}  
-                                    buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5 "}/>
+                                    <Buttons
+                                        label={"No, complete process"}
+                                        onClick={() => router.push('/creator_amount')}
+                                        buttoncss={"my-2 font_size_24 leading-6 py-3 button_clr my-5 "} />
                                 </div>
                                 {/* <label className="switch my-5" >
                                     <input type="checkbox" checked={isToggled} onChange={handleToggle} />
