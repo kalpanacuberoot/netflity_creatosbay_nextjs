@@ -1,39 +1,87 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Images from "@/images";
 import Image from "next/image";
 import Marketplace_card from "./Marketplace_card";
 import Link from "next/link";
+import { apiCall, url } from "@/generalfunation";
+import Cookies from "js-cookie";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Marketplace_page = () => {
 
-    const cardData = [
-        {
-            id: 1,
-            Creator_name: "Myra",
-            hastag: [
-                {
-                    hashtag1: "music",
-                    hashtag2: "fashion",
-                    hashtag3: "lifestyle",
-                    hashtag: "mother",
+    const [creatordata, setCreatordata] = useState(null);
+
+
+    const handleSubmit = async () => {
+        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        console.log('categories cookieValue------------1', cookieValue?.token);
+
+        try {
+
+            const headers = {
+                'Authorization': `Bearer ${cookieValue?.token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const response = await fetch(`${url}/creators`, {
+                method: 'Get',
+                headers: headers,
+
+            });
+
+            if (response?.ok) {
+                const responseData = await response.json();
+                console.log('creators response:', responseData?.data?.data);
+                setCreatordata(responseData?.data?.data)
+
+                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
+                if (responseData.status) {
+                    toast.success('Brand Successfully Created', {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+
+                } else {
+                    console.error('Error:', responseData.message);
+                    // alert('Brand creation failed');
                 }
-            ]
-        },
-        {
-            id: 1,
-            Creator_name: "Mishi",
-            hastag: [
-                {
-                    hashtag1: "music",
-                    hashtag2: "fashion",
-                    hashtag3: "lifestyle",
-                    hashtag: "mother",
-                }
-            ]
+            } else {
+                console.error('Error:', response.statusText);
+                // alert('Brand creation failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
-    ]
+    };
+
+
+    // const handleSubmit = async () => {
+
+    //     const cookieValue = JSON.parse(Cookies.get('user_data'));
+    //     console.log('categories cookieValue------------1', cookieValue?.token);
+    //     try {
+
+    //         const headers = {
+    //             'Authorization': `Bearer ${cookieValue?.token}`,
+
+    //         };
+    //         const getResponse = await apiCall(`${url}/creators`, 'get', headers);
+    //         console.log('GET creator response: ', getResponse);
+
+
+    //     } catch (error) {
+    //         console.error('POST response creator catrch error-------------', error);
+    //     }
+    // };
+    console.log("creatordata", creatordata);
+    useEffect(() => {
+        handleSubmit();
+    }, [])
 
     const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
@@ -81,7 +129,7 @@ const Marketplace_page = () => {
                     </div>
 
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
-                        {cardData.map((item, index) => {
+                        {creatordata?.length > 0 && creatordata.map((item, index) => {
                             return (
                                 <div className=" bg-white p-3 rounded-lg" key={index} >
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
@@ -113,16 +161,22 @@ const Marketplace_page = () => {
                                         <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h2 className="font-bold">{item.Creator_name}</h2></div>
+                                        <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
                                         <div className="flex gap-4"><h3>x</h3>
                                             <h3>|</h3></div>
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h4>{item.Creator_name}</h4></div>
-                                        <div className="flex gap-1"><h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#lifestyle</h6>
-                                            {/* <h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#fashion</h6><h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#coffe</h6><h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#mother</h6> */}
-                                            <h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#fashion</h6><h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#coffe</h6>
-                                            <h6 className="px-2 py-1 m-0 p-0 rounded-full" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>#mother</h6>
+                                        <div> <h4>{item?.user?.name}</h4></div>
+                                        <div className="flex" key={index}>
+                                            {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                                                return (
+
+                                                    <h6 className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                        {categories_item?.name}
+                                                    </h6>      
+                                            )
+                                            })
+                                        }
                                         </div>
                                     </div>
                                     <Link
@@ -141,14 +195,14 @@ const Marketplace_page = () => {
                         )}
 
 
+                        {/* <Marketplace_card />
                         <Marketplace_card />
                         <Marketplace_card />
                         <Marketplace_card />
                         <Marketplace_card />
                         <Marketplace_card />
                         <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
+                        <Marketplace_card /> */}
                     </div>
                 </div>
             </div>
