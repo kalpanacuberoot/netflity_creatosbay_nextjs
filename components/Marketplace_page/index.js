@@ -182,7 +182,7 @@ const Marketplace_page = () => {
                                     <Link
                                         href={{
                                             pathname: "/creator_profile",
-                                            query: { data: JSON.stringify({ key: item }) },
+                                            query: { data: JSON.stringify({ key: item?.id }) },
                                         }}
                                     >
                                         <button className="w-full rounded-full p-2 mt-3" style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}>View profile</button>
