@@ -55,8 +55,8 @@ const Brandscreens = () => {
     console.log("file", file);
 
     const onNextpage = () => {
-        if(isEmpty(companyName) || isEmpty(website) || isEmpty(selectedValues)){
-            
+        if (isEmpty(companyName) || isEmpty(website) || isEmpty(selectedValues)) {
+
             toast.error('All fields are mandatory', {
                 position: 'top-center',
                 autoClose: 5000,
@@ -64,10 +64,10 @@ const Brandscreens = () => {
             setOpen(false)
 
         }
-        else{
-            setOpen(true) 
+        else {
+            setOpen(true)
         }
-       
+
 
         // router.push('/Brand2')
         // setOpen(true)
@@ -80,19 +80,19 @@ const Brandscreens = () => {
     //         await handlebrandSubmit();
     //        }
     //        else{
-            
+
     //         toast.error('All fields are mandatory', {
     //             position: 'top-center',
     //             autoClose: 5000,
     //         });
     //        }
-           
+
     //     }
     //     catch (error) {
     //         console.error('Error:', error);
     //         // Handle errors here
     //       }
-       
+
     // }
 
     const handleSubmit = async () => {
@@ -128,7 +128,7 @@ const Brandscreens = () => {
                     autoClose: 2000,
                 });
                 // alert('Image uploaded successfully.');
-                
+
                 await handlebrandSubmit(data?.url);
             } else {
                 alert('Image upload failed.');
@@ -194,11 +194,11 @@ const Brandscreens = () => {
             } else {
                 console.error('Error:', response.statusText);
                 // alert('Brand creation failed');
-                 
-            toast.error('All fields are mandatory', {
-                position: 'top-center',
-                autoClose: 5000,
-            });
+
+                toast.error('All fields are mandatory', {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
             }
         } catch (error) {
             console.error('Error:', error);
@@ -403,7 +403,7 @@ const Brandscreens = () => {
 
                     </div>
                 }
-                <ToastContainer/>
+                <ToastContainer />
                 {open &&
                     <div className="p-4 lg:p-10 bg-zinc-100 border-gray-300 border-solid w-full w-90 rounded-lg border-1">
 
@@ -445,7 +445,7 @@ const Brandscreens = () => {
                                                     type="file"
                                                     accept="image/*"
                                                     className="absolute w-screen hidden "
-                                                     // Triggered when a file is selected
+                                                // Triggered when a file is selected
                                                 />
                                                 <Image
                                                     src={Images.plus_icon}
@@ -468,7 +468,7 @@ const Brandscreens = () => {
                                             {file && (
                                                 <p className="text-base text-center">{file?.name}</p>
                                             )}
-                                            
+
                                             <div
                                                 className=" text-base text-gray-300 "
                                             // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
