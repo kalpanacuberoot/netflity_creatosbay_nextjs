@@ -70,7 +70,7 @@ const Creators_popup_content = () => {
             }
 
         } catch (error) {
-            console.error('POST response register catrch error-------------', error);
+            // console.error('POST response register catrch error-------------', error);
             // toast.error('please register yourself or login again after sometime', {
             //     position: 'top-center',
             //     autoClose: 5000,

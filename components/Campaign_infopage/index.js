@@ -117,7 +117,7 @@ const Campaign_infopage = () => {
       }
 
     } catch (error) {
-      console.error('POST response register catrch error-------------', error);
+      // console.error('POST response register catrch error-------------', error);
       // toast.error('please enter the valid token campaigns', {
       //   position: 'top-center',
       //   autoClose: 5000,

@@ -42,25 +42,18 @@ const Homepage = () => {
       const getResponse = await getApiCall(`${url}/campaigns?brand=${brandId}`, 'get', headers);
       console.log('GET campaigns?brand=1 response:', getResponse);
       if (getResponse?.status === 'success') {
-        // Code to execute when condition1 is false and condition2 is true
+
         console.log('GET campaigns?brand=1 response: good', getResponse);
         setCampaign_data(getResponse?.data)
-        // toast.success('Good job', {
-        //   position: 'top-center',
-        //   autoClose: 5000,
-        // });
+
       } else {
-        // Code to execute when both condition1 and condition2 are false
+
         console.log('GET campaigns?brand=1 response: good', getResponse);
-        // toast.error('NBeed to work', {
-        //   position: 'top-center',
-        //   autoClose: 5000,
-        // });
       }
 
 
     } catch (error) {
-      console.error('POST response register catrch error-------------', error);
+      // console.error('POST response register catrch error-------------', error);
     }
   };
 

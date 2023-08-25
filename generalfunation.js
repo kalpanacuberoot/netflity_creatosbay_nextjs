@@ -42,10 +42,10 @@ export const apiCall =async (url, method, data = null, headers = {}) => {
     return responseData;
   } catch (error) {
 
-    // if (error.message) {
-    //   alert('go to login page')
+    if (error.message) {
+      alert('go to login page')
 
-    // } 
+    } 
     throw new Error(`API call error: ${error.message}`);
     
   }
@@ -81,11 +81,11 @@ export const getApiCall = async (url, method,  headers = {}) => {
      
   } catch (error) {
     console.error('Error:', error);
-    //     if (error.message) {
-    //   alert('go to login page')
+        if (error.message) {
+      alert('go to login page')
 
 
-    // }
+    }
   }
 };
 
