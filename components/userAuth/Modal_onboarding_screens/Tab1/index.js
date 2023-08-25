@@ -2,7 +2,7 @@ import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import { useEffect } from "react";
 
-const Tab1 = ({onClick}) => {
+const Tab1 = ({onClick,onClose}) => {
 
     
 
@@ -28,7 +28,7 @@ const Tab1 = ({onClick}) => {
                     <Buttons
                         label={"Skip"}
                         buttoncss={"font_size_24 button_clr  my-3 leading-6  py-3"}
-                        onClick={onClick}
+                        onClick={onClose}
                     />
                 </div>
             </div>

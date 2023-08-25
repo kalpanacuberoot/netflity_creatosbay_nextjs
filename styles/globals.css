@@ -375,7 +375,15 @@ logo-slider img {
   color: #fff;
 }
 
-
+input:focus{
+  border-color: #9357FF;
+}
+textarea:focus{
+  border-color: #9357FF;
+}
+select:focus{
+  border-color: #9357FF;
+}
 
 @media (max-width: 900px) {
   logo-slider {

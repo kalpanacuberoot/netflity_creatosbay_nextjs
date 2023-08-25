@@ -68,7 +68,8 @@ const Home = () => {
                   className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl flex items-center w-full justify-center text-base font-bold leading-9"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/support"}> How it&lsquo;s Works</Link>
+                  {/* <Link href={"/support"}> How it&lsquo;s Works</Link> */}
+                  <Link href={"/support"}> Need Help and Support</Link>
                 </h6>
               </div>
             </div>

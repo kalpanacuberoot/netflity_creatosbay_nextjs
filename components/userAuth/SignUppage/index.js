@@ -93,8 +93,8 @@ const Signuppage = () => {
             if (response.ok) {
                 const result = await response.json();
 
-                
-                Cookies.set('user_data',JSON.stringify(result), { expires: 106500 });
+
+                Cookies.set('user_data', JSON.stringify(result), { expires: 106500 });
                 toast.success('Registration Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
@@ -109,7 +109,7 @@ const Signuppage = () => {
                 toast.error('Please enter the UniqueID', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
-                  });
+                });
                 // alert('register api response else', response.statusText)
             }
         } catch (error) {
@@ -117,7 +117,7 @@ const Signuppage = () => {
             toast.error('Please enter the UniqueID', {
                 position: 'top-center', // Set the toast position
                 autoClose: 3000, // Close the toast after 3 seconds
-              });
+            });
         }
     };
 
@@ -168,7 +168,7 @@ const Signuppage = () => {
                             <input
                                 type="text"
                                 id="name"
-                                className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="First Name"
                                 required
                                 value={firstName}
@@ -178,7 +178,7 @@ const Signuppage = () => {
                             <input
                                 type="text"
                                 id="name"
-                                className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Last Name"
                                 required
                                 value={lastName}
@@ -189,8 +189,8 @@ const Signuppage = () => {
                         <input
                             type="email"
                             id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="exampl@123.com"
+                            className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="Email"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -198,7 +198,7 @@ const Signuppage = () => {
                         <input
                             type="password"
                             id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Create Password"
                             required
                             value={password}
@@ -209,7 +209,7 @@ const Signuppage = () => {
                         <input
                             type="password"
                             id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Confirm Password"
                             value={confirmPassword}
                             required
@@ -228,14 +228,15 @@ const Signuppage = () => {
                                 />
                                 <label htmlFor="myCheckbox" className="ml-2 text-black">
                                     I accept co. Name{" "}
-                                    <span style={{ color: Colors.pink_clr }}
-                                        onClick={() => setIsModalOpen_terms_service(true)}
-                                        className='cursor-pointer'
-                                    >
-                                        {" "}
-                                        Terms & Condition
-                                    </span>
+
                                 </label>
+                                <span style={{ color: Colors.pink_clr }}
+                                    onClick={() => setIsModalOpen_terms_service(true)}
+                                    className='ms-2 cursor-pointer'
+                                >
+                                    {" "}
+                                    Terms & Condition
+                                </span>
                             </div>
                             <Link href={"/forgot"}>
                                 <button

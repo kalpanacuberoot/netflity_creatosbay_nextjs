@@ -81,7 +81,7 @@ const Loginpage = () => {
           <div className="flex justify-center  items-center px-10 ">
             <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
               <h4>
-                Don`&apos;t have an account ?
+                Don&apos;t have an account ?
                 <span
                   className="  pl-3 font-bold"
                   style={{ color: Colors.logo_clr }}
@@ -98,8 +98,8 @@ const Loginpage = () => {
                   <input
                     type="email"
                     id="email"
-                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Michal.mosiak12@gmail.com"
+                    className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -109,7 +109,7 @@ const Loginpage = () => {
                 <input
                   type="password"
                   id="password"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   // placeholder="Create Password"
                   placeholder="Password"
                   required
@@ -128,12 +128,13 @@ const Loginpage = () => {
                       style={{ backgroundColor: Colors.logo_clr }}
                     />
                     <label htmlFor="myCheckbox" className=" ml-2 text-black">
-                      I accept co. Name
-                      <span style={{ color: Colors.pink_clr }} className="cursor-pointer ml-2"
+                      Remember Me
+                      {/* I accept co. Name */}
+                      {/* <span style={{ color: Colors.pink_clr }} className="cursor-pointer ml-2"
                         onClick={() => setIsModalOpen_terms_service(true)}
                       >
                         Terms & Condition
-                      </span>
+                      </span> */}
                     </label>
                   </div>
                   <Link href={"/forgot"}>

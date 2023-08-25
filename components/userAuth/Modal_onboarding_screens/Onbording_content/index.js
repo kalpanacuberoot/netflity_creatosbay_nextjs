@@ -38,7 +38,7 @@ const Onbording_content = ({ tabs, onClose, isOpen }) => {
                                 {tabs.map((tab, index) => (
                                     <button
                                         key={index}
-                                        onClick={() => handleTabClick(index)}
+                                        onClick={() => handleTabClick(index) ||  onClose()}
                                         // className={`${activeTab === index ? 'bg-purple-500 text-white' : 'bg-gray-200 text-gray-700'
                                         //     } relative px-2 py-2  my-3 rounded-md`}
                                         // className={`line-height-[42px] font-bold text-lg py-3 ${activeTab === 0 ? 'text-pink-500' : 'text-gray-600'

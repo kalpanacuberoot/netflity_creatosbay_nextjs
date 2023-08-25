@@ -24,6 +24,7 @@ const Brandscreens = () => {
     const fileInputRef = useRef(null);
     const [desc, setDesc] = useState('');
     const [selectedRoles, setSelectedRoles] = useState([]);
+    const [previewImage, setPreviewImage] = useState(null);
 
     const [multivalues, setMultivalues] = useState(false)
 
@@ -31,7 +32,23 @@ const Brandscreens = () => {
     console.log("dropdownvalues", dropdownvalues);
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-        setFile(selectedFile);
+        if (selectedFile) {
+            // Create a FileReader instance
+            const reader = new FileReader();
+
+            // Set up a callback function for when the FileReader has loaded the image
+            reader.onloadend = () => {
+                setFile(selectedFile); // Save the selected image file
+                setPreviewImage(reader.result); // Set the image preview
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(selectedFile);
+        } else {
+            setFile(null); // Reset the selected image
+            setPreviewImage(null); // Reset the image preview
+        }
+        // setFile(selectedFile);
 
     };
 
@@ -43,6 +60,8 @@ const Brandscreens = () => {
     }
 
     const handleSubmit = async () => {
+
+        handleUploadClick();
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
@@ -53,7 +72,7 @@ const Brandscreens = () => {
                 description: desc,
                 categories: idArray,
                 logo: file,
-                user_id:cookieValue?.user?.id
+                user_id: cookieValue?.user?.id
             };
 
             const headers = {
@@ -200,9 +219,11 @@ const Brandscreens = () => {
 
     console.log("setSelectedValues", selectedValues, idArray);
 
+
+
     return (
         <>
-            <div className="p-4 lg:p-10   bg-zinc-100 border-gray-300 border-solid w-full w-90 rounded-lg border-1">
+            <div className="p-4 lg:p-10 bg-zinc-100 border-gray-300 border-solid w-full w-90 rounded-lg border-1">
 
                 {!open &&
                     <div className="bg-white p-5  rounded-md">
@@ -221,7 +242,7 @@ const Brandscreens = () => {
                                 type="compant"
                                 id="name"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Company Name"
+                                placeholder="Brand Name"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 required
@@ -231,7 +252,7 @@ const Brandscreens = () => {
                                 type="url"
                                 id="name"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Add Website URL/Social Links"
+                                placeholder="Add Website URL or Social Links"
                                 value={website}
                                 onChange={(e) => setWebsite(e.target.value)}
                                 required
@@ -241,11 +262,11 @@ const Brandscreens = () => {
                                 <button
                                     onClick={() => setMultivalues(!multivalues)}
                                     id="dropdownBgHoverButton"
-                                    className="hidden relative flex flex-row justify-between items-center text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                                    className="  focus:border-purple-500 focus:ring-purple-500 hidden relative flex flex-row justify-between items-center text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
                                     type="button"
                                 ><svg
                                     className=" w-2.5 h-2.5 ml-2.5"
-                                    aria-hidden="true"
+                                    aria-hidden="true"  
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 10 6"
@@ -262,11 +283,11 @@ const Brandscreens = () => {
                                 <div className="flex flex-row justify-between items-center">
                                     <input
                                         type="text"
-                                        className="  text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                                        className=" focus:border-purple-500 focus:ring-purple-500   text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
                                         // value={selectedValues.join(', ')}
                                         value={selectedValues.map((item) => item.name).join(', ')}
                                         readOnly
-                                        placeholder="Select the Company Type"
+                                        placeholder="Select the Brand Type"
                                         onClick={() => setMultivalues(!multivalues)}
                                         required
                                     />
@@ -290,7 +311,7 @@ const Brandscreens = () => {
                                 </div>
 
 
-                                {multivalues && (
+                                {multivalues && 
                                     <div id="dropdownBgHover" className="z-10 w-full bg-white rounded-lg shadow dark:bg-gray-700">
                                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
                                             {dropdownvalues.map((item, index) => (
@@ -301,13 +322,8 @@ const Brandscreens = () => {
                                                         <input
                                                             id={`checkbox-item-${index}`}
                                                             type="checkbox"
-                                                            // value={item.name} // Use the 'name' property as the value
-                                                            // onChange={handleSelect}
                                                             value={JSON.stringify(item)} // Pass the entire item as a JSON string
                                                             onChange={(event) => handleSelect(event, item)}
-                                                            // checked={selectedValues.includes(item.name)}
-                                                            // checked={selectedValues.map((item) => item.name).join(', ')}
-                                                            // checked={selectedValues.some((selectedItem) => selectedItem?.name === item?.name)}
                                                             checked={selectedValues.some(selectedItem => JSON.stringify(selectedItem) === JSON.stringify(item))}
                                                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                         />
@@ -322,7 +338,7 @@ const Brandscreens = () => {
                                             ))}
                                         </ul>
                                     </div>
-                                )}
+                                }
                             </div>
 
                             <button
@@ -355,19 +371,19 @@ const Brandscreens = () => {
 
                                 <div className=" ">
                                     <div
-                                        className=" cursor-not-allowed border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                        className=" border-dotted h-44 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                                     >
                                         <label
                                             htmlFor="fileInput"
                                             style={{ borderColor: Colors.logo_clr }}
-                                            className=" cursor-not-allowed   w-auto"
+                                            className="   w-auto"
                                         >
-                                            <div className="cursor-not-allowed">
+                                            <div className="">
                                                 <input
                                                     id="fileInput"
                                                     type="file"
                                                     accept="image/*"
-                                                    className="hidden "
+                                                    className="absolute w-full hidden "
                                                     onChange={handleFileChange} // Triggered when a file is selected
                                                 />
                                                 <Image
@@ -380,9 +396,21 @@ const Brandscreens = () => {
                                             </div>
 
                                         </label>
+                                        {previewImage && (
+                                            <Image
+                                                src={previewImage}
+                                                alt="Selected"
+                                                style={{ maxWidth: '100%', maxHeight: '300px' }}
+                                                width={50}
+                                                height={50}
+                                            />
+                                        )}
+                                        {file && (
+                                            <p className="text-base">{file?.name}</p>
+                                        )}
                                         <button
-                                            className=" text-base text-gray-300 p-10 cursor-grabbing"
-                                            onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
+                                            className=" text-base text-gray-300 "
+                                            // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
                                             style={{ cursor: 'grabbing' }}
                                         >
                                             Company Logo(Upload Image)
@@ -393,7 +421,7 @@ const Brandscreens = () => {
                                 <textarea
                                     id="descriptionInput"
                                     type="text"
-                                    placeholder="Company Description"
+                                    placeholder="Brand Description"
                                     className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rows={4}
                                     value={desc}
