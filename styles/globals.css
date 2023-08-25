@@ -1,6 +1,10 @@
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 
 body {
@@ -465,9 +469,9 @@ border-image: linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, r
   font-family: Futura-Normal;
 }
 
-.container_capmapign_info {
-  font-family: Futura-Book;
-}
+/* .container_capmapign_info {
+  font-family: Futura;
+} */
 
 .image_capign_info {
   height: 100% !important;

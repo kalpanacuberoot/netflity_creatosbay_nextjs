@@ -17,7 +17,20 @@ const Marketplace_page = () => {
 
 
     const handleSubmit = async () => {
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
+
+        // const cookieValue = Cookies.get('user_data'); // Get the cookie value
+
+        // let parsedUserData = null;
+
+        // if (cookieValue) {
+        //     try {
+        //         parsedUserData = JSON.parse(cookieValue); // Parse the JSON if the cookie value is defined
+        //     } catch (error) {
+        //         // Handle JSON parsing error, if necessary
+        //         console.error('Error parsing user_data cookie:', error);
+        //     }
+        // }
+        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -60,24 +73,6 @@ const Marketplace_page = () => {
     };
 
 
-    // const handleSubmit = async () => {
-
-    //     const cookieValue = JSON.parse(Cookies.get('user_data'));
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
-    //     try {
-
-    //         const headers = {
-    //             'Authorization': `Bearer ${cookieValue?.token}`,
-
-    //         };
-    //         const getResponse = await apiCall(`${url}/creators`, 'get', headers);
-    //         console.log('GET creator response: ', getResponse);
-
-
-    //     } catch (error) {
-    //         console.error('POST response creator catrch error-------------', error);
-    //     }
-    // };
     console.log("creatordata", creatordata);
     useEffect(() => {
         handleSubmit();
@@ -155,10 +150,7 @@ const Marketplace_page = () => {
                                             alt=""
                                         />
 
-                                        {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
-
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
+                                       
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
@@ -173,10 +165,10 @@ const Marketplace_page = () => {
 
                                                     <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
                                                         {categories_item?.name}
-                                                    </h6>      
-                                            )
+                                                    </h6>
+                                                )
                                             })
-                                        }
+                                            }
                                         </div>
                                     </div>
                                     <Link

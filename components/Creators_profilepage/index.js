@@ -164,7 +164,7 @@ const Creators_profilepage = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 mt-8">
+              {/* <div className="grid grid-cols-3 mt-8">
                 <div>
                   <h4 className="text-gray-400">Followers</h4>
                   <h3>00000k</h3>
@@ -178,7 +178,7 @@ const Creators_profilepage = () => {
                   <h3>00000k</h3>
                 </div>
               </div>
-              <div className="grid grid-cols-3 mt-8">
+              <div className="grid grid-cols-3 mt-8">0
                 <div>
                   <h4 className="text-gray-400">Location</h4>
                   <h3>{creator_details?.city}</h3>
@@ -205,58 +205,65 @@ const Creators_profilepage = () => {
                   <h4 className="text-gray-400">CPE</h4>
                   <h3>00000k</h3>
                 </div>
-              </div>
-              <div className="pt-5">
+              </div> */}
+              <div className="pt-5 pb-3"
+                style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
+              >
                 <div
                   className="pb-3 "
-                  style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
+
                 >
                   <h3>About me</h3>
                 </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Height</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Weight</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Hairs</h4>
-                    <h3>00000k</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Skin Color</h4>
-                    <h3>{creator_details?.skintype?.name}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Eye Color</h4>
-                    <h3>{creator_details?.eyetype?.name}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Hairs Color</h4>
-                    <h3>{creator_details?.hairtype?.name}</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Kids</h4>
-                    <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Pets</h4>
-                    <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
-                  </div>
+                <h4 className=" pt-5 mb-5">
+                  {creator_details?.bio}
+                </h4>
 
+              </div>
+
+              <div className="grid grid-cols-3 mt-8">
+                <div>
+                  <h4 className="text-gray-400">Height</h4>
+                  <h3>00000k</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Weight</h4>
+                  <h3>00000k</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Hairs</h4>
+                  <h3>00000k</h3>
                 </div>
               </div>
-              <h4 className=" pt-5 mb-5">
-                {creator_details?.bio}
-              </h4>
+              <div className="grid grid-cols-3 mt-8">
+                <div>
+                  <h4 className="text-gray-400">Skin Color</h4>
+                  <h3>{creator_details?.skintype?.name}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Eye Color</h4>
+                  <h3>{creator_details?.eyetype?.name}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Hairs Color</h4>
+                  <h3>{creator_details?.hairtype?.name}</h3>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mt-8">
+                <div>
+                  <h4 className="text-gray-400">Kids</h4>
+                  <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Pets</h4>
+                  <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Location</h4>
+                  <h3>{creator_details?.city}</h3>
+                </div>
 
+              </div>
               <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0">
                 <button
                   className=" w-full rounded-full h-10"
