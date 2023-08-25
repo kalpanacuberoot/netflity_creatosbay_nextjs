@@ -26,6 +26,8 @@ const Campaign_infopage = () => {
 
   const router = useRouter();
 
+  const currentDate = new Date();
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [startRangeDate, setStartRangeDate] = useState(null);
   const [endRangeDate, setEndRangeDate] = useState(null);
@@ -124,22 +126,15 @@ const Campaign_infopage = () => {
   };
 
   console.log("popupData", popupData);
-  const handleStartDateChange = (e) => {
-    setStartDate(e.target.value);
-  };
-
-  const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
-  };
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it is 0-based
     const day = String(date.getDate()).padStart(2, '0');
-  
+
     return `${year}-${month}-${day}`;
   }
-  
+
   // Example usage:
   const start_date = new Date(startDate);
   const end_date = new Date(endDate);
@@ -147,7 +142,26 @@ const Campaign_infopage = () => {
   const endformattedDate = formatDateToYYYYMMDD(end_date);
   // console.log(formattedDate); 
 
-  console.log("startingfate", startDate, endDate,startformattedDate,endformattedDate);
+  console.log("startingfate", startDate, endDate, startformattedDate, endformattedDate);
+
+  const handleStartDateChange = (date) => {
+
+    // const currentDate = new Date();
+    // currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+
+    // if (date > currentDate) {
+    //   // If the selected start date is in the future, don't update the start date
+    //   return;
+    // }
+    setStartDate(date);
+    // Calculate the minimum allowed end date (15 days from the start date)
+    const minEndDate = new Date(date);
+    minEndDate.setDate(minEndDate.getDate() + 14);
+    if (endDate < minEndDate) {
+      // If the current end date is less than the minimum allowed end date, update the end date
+      setEndDate(minEndDate);
+    }
+  };
 
 
   return (
@@ -307,12 +321,14 @@ const Campaign_infopage = () => {
                       <div className='relative w-full'>
                         <DatePicker
                           selected={startDate}
-                          onChange={(date) => setStartDate(date)}
+                          // onChange={(date) => setStartDate(date)}
+                          onChange={handleStartDateChange}
                           selectsStart
                           startDate={startDate}
                           endDate={endDate}
                           placeholderText="Start Date"
                           className="w-full text-center p-2 rounded"
+                          minDate={currentDate} // Set the minimum date to the current date
                         />
                         <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
                           <Image
@@ -332,9 +348,10 @@ const Campaign_infopage = () => {
                           selectsEnd
                           startDate={startDate}
                           endDate={endDate}
-                          minDate={startDate}
+                          // minDate={startDate}
                           placeholderText="End Date"
                           className="w-full text-center p-2 rounded"
+                          minDate={startDate || currentDate} // Set the minimum date to the current date
                         />
                         <div className="absolute top-2.5 right-0 text-gray-400 ps-2 ">
                           <Image
