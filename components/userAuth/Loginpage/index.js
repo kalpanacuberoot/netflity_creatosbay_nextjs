@@ -48,7 +48,7 @@ const Loginpage = () => {
           autoClose: 5000,
         });
 
-        router.push('/brand')
+        router.push('/user_brand_name');
       } else {
         // console.error('Error:', postResponse?.statusText);
         // alert('logibn api response else', postResponse?.statusText)
