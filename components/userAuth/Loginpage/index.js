@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Colors from "@/styles/Colors";
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,7 @@ const Loginpage = () => {
 
   const [data, setData] = useState({ message: '' });
   const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
+  const [brand_user, setBrand_user] = useState([]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,14 +33,14 @@ const Loginpage = () => {
 
       console.log('POST response register-------------:', postResponse);
       if (postResponse?.message) {
-
+        console.log('POST response register-------------:', postResponse);
         Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
         toast.success(postResponse?.message, {
           position: 'top-center',
           autoClose: 5000,
         });
-
-        router.push('/user_brand_name');
+        getUser_Brand();
+        // router.push('/user_brand_name');
       } else {
         // console.error('Error:', postResponse?.statusText);
         // alert('logibn api response else', postResponse?.statusText)
@@ -56,6 +57,63 @@ const Loginpage = () => {
         autoClose: 5000,
       });
     }
+  };
+
+
+
+
+  const getUser_Brand = async () => {
+
+
+      const cookieValue = JSON?.parse(Cookies?.get('user_data'));
+      console.log('categories cookieValue------------1', cookieValue?.token);
+
+      const userId = JSON?.parse(Cookies?.get('user_data'));
+      console.log('categories cookieValue------------1', userId?.user?.id);
+
+      try {
+
+          const headers = {
+              'Authorization': `Bearer ${cookieValue?.token}`,
+              'Content-Type': 'application/json',
+          };
+
+          const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
+              method: 'Get',
+              headers: headers,
+
+          });
+
+          if (response?.ok) {
+              const responseData = await response.json();
+              console.log('brandusers response:', responseData?.data?.data);
+
+
+              // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
+              if (responseData.status) {
+                  // toast.success('brandusers Name', {
+                  //     position: 'top-center',
+                  //     autoClose: 5000,
+                  // });
+                  if (brand_user.length === 0) {
+                    router.push('/brand'); // Redirect to the brand page
+                  } else {
+                    router.push('/user_brand_name'); // Redirect to the brand_user page
+                  }
+                  // setBrand_user(responseData?.data?.data)
+
+              } else {
+                  console.error('Error:', responseData.message);
+                  // alert('Brand creation failed');
+              }
+          } else {
+              console.error('Error:', response.statusText);
+              // alert('Brand creation failed');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
   };
 
 
