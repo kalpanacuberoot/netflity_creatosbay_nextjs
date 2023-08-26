@@ -13,6 +13,10 @@ import Edit_profile_content from "../Modal_Edit_Profile/Edit_profile_content";
 import Notification_popup from "../Notification_popup";
 import Notification_content from "../Notification_popup/Notification_content";
 import Cookies from "js-cookie";
+import Modal_change_password from "../Modal_change_password";
+import { isEmpty } from "@/generalfunation";
+import Change_password_content from "../Modal_change_password/Change_password_content";
+
 
 
 const Left_Dashboard = () => {
@@ -23,6 +27,7 @@ const Left_Dashboard = () => {
     const [isModalOpen_invite_mem, setIsModalOpen_invite_mem] = useState(false);
     const [isModalOpen_edit_prof, setIsModalOpen_edit_prof] = useState(false);
     const [isModalOpen_notification, setIsModalOpen_notification] = useState(false);
+    const [isModalOpen_change_password, setIsModalOpen_change_password] = useState(false);
 
 
     const openModal = () => {
@@ -33,9 +38,9 @@ const Left_Dashboard = () => {
         setIsModalOpen_terms_service(false);
     };
 
-    const brand_detail_name = JSON.parse(Cookies.get('brand_detail'))?.brand?.name;
+    // const brand_detail_name = JSON.parse(Cookies.get('brand_detail'))?.brand?.name;
 
-    console.log("brandId---",brand_detail_name);
+    // console.log("brandId---", brand_detail_name);
 
     return (
         <div>
@@ -68,6 +73,11 @@ const Left_Dashboard = () => {
                     <Notification_content />
                 </div>
             </Notification_popup>
+            <Modal_change_password isOpen={isModalOpen_change_password} onClose={() => setIsModalOpen_change_password(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-3xl ">
+                   <Change_password_content/>
+                </div>
+            </Modal_change_password>
             <div className=''>
                 <Image
                     src={Images.company_logo}
@@ -76,26 +86,6 @@ const Left_Dashboard = () => {
                     className=' mx-auto'
                 />
             </div>
-            {/* <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-            </svg></button>
-
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                    </li>
-                </ul>
-            </div> */}
 
             <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
 
@@ -132,91 +122,106 @@ const Left_Dashboard = () => {
                         className='my-2 mx-1'
                         alt=""
                     /> */}
-                    
+
                 </div>
                 {dropdown_menu &&
-                        <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
+                    <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
 
-                            <div className='w-full px-3 py-2'>
+                        <div className='w-full px-3 py-2'>
 
-                                <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            >
+                                <Image
+                                    src={Images.market_place_icon}
+                                    width={18}
+                                    className=' '
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpen_invite_mem(true)}
                                 >
-                                    <Image
-                                        src={Images.market_place_icon}
-                                        width={18}
-                                        className=' '
-                                        alt=""
-                                    />
-                                    <button
-                                        className=' w-48 dropdown_text text-center'
-                                        onClick={() => setIsModalOpen_invite_mem(true)}
-                                    >
-                                        Invite Members
-                                    </button>
-                                </div>
-                                <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    Invite Members
+                                </button>
+                            </div>
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
+                            >
+                                <Image
+                                    src={Images.support_icon}
+                                    width={18}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpenlogout(true)}
                                 >
-                                    <Image
-                                        src={Images.support_icon}
-                                        width={18}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className=' w-48 dropdown_text text-center'
-                                        onClick={() => setIsModalOpenlogout(true)}
-                                    >
-                                        Support
-                                    </button>
-                                </div>
-                                <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    Support
+                                </button>
+                            </div>
+                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
+                            >
+                                <Image
+                                    src={Images.terms_of_service}
+                                    width={18}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className="w-48 dropdown_text rounded-lg"
+                                    onClick={openModal}
                                 >
-                                    <Image
-                                        src={Images.terms_of_service}
-                                        width={18}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className="w-48 dropdown_text rounded-lg"
-                                        onClick={openModal}
-                                    >
-                                        Terms of services
-                                    </button>
-                                    {/* <button
+                                    Terms of services
+                                </button>
+                                {/* <button
                                     className=' w-48 dropdown_text text-center'
                                 >
                                     
                                 </button> */}
-                                </div>
-                                
-                                <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
-
-                                >
-                                    <Image
-                                        src={Images.logout}
-                                        width={18}
-                                        height={10}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className="w-48 dropdown_text rounded-lg"
-                                        onClick={() => setIsModalOpenlogout(true)}
-                                    >
-                                        Sign Out
-                                    </button>
-                                </div>
-
                             </div>
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.support_icon}
+                                    width={18}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpen_change_password(true)}
+                                >
+                                    Change Password
+                                </button>
+                            </div>
+                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.logout}
+                                    width={18}
+                                    height={10}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className="w-48 dropdown_text rounded-lg"
+                                    onClick={() => setIsModalOpenlogout(true)}
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+
                         </div>
-                    }
+                    </div>
+                }
 
             </div>
             <div className=' text-center'>
-                <h4 className='font-bold'>{brand_detail_name}</h4>
+                {/* <h4 className='font-bold'>{isEmpty(brand_detail_name)}</h4> */}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'
 
