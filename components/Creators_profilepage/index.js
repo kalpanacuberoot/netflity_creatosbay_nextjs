@@ -7,6 +7,7 @@ import Creators_popup_content from "./Creators_popup/Creators_popup_content";
 import Image from "next/image";
 import { url } from "@/generalfunation";
 import Cookies from "js-cookie";
+import Images from "@/images";
 
 const Creators_profilepage = () => {
 
@@ -30,9 +31,6 @@ const Creators_profilepage = () => {
   };
 
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
-
-
-
 
   const handleSubmit = async () => {
 
@@ -96,6 +94,19 @@ const Creators_profilepage = () => {
     handleSubmit();
   }, [handleSubmit]);
 
+  function convertHeight(heightCms) {
+    const inchesPerFoot = 12;
+    const feet = Math.floor(heightCms / (inchesPerFoot * 2.54));
+    const inches = Math.round((heightCms / 2.54) % inchesPerFoot);
+    
+    return `${feet}' ${inches}"`;
+}
+
+// Example usage
+const heightInCms = creator_details?.height;
+const heightInFeetAndInches = convertHeight(heightInCms);
+console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
+
 
   return (
     <>
@@ -137,7 +148,8 @@ const Creators_profilepage = () => {
                       width={500}
                       height={100}
                       className="w-10 h-10 object-cover rounded-full"
-                      src={imageUrl}
+                      // src={imageUrl}
+                      src={creator_details?.profile_pic}
                       alt=""
                     />
                   </div>
@@ -153,7 +165,7 @@ const Creators_profilepage = () => {
                       width={500}
                       height={100}
                       className="w-4 h-4  "
-                      src={imageUrl}
+                      src={Images.fill_star}
                       alt=""
                     />
                   </div>
@@ -224,11 +236,11 @@ const Creators_profilepage = () => {
               <div className="grid grid-cols-3 mt-8">
                 <div>
                   <h4 className="text-gray-400">Height</h4>
-                  <h3>00000k</h3>
+                  <h3>{heightInFeetAndInches}</h3>
                 </div>
                 <div>
                   <h4 className="text-gray-400">Weight</h4>
-                  <h3>00000k</h3>
+                  <h3>{creator_details?.weight}</h3>
                 </div>
                 <div>
                   <h4 className="text-gray-400">Hairs</h4>
