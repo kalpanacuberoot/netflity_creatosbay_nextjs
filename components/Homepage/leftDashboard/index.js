@@ -17,6 +17,9 @@ import Modal_change_password from "../Modal_change_password";
 import { isEmpty, url } from "@/generalfunation";
 import Change_password_content from "../Modal_change_password/Change_password_content";
 import { useRouter } from "next/router";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 
@@ -33,24 +36,41 @@ const Left_Dashboard = () => {
     const [isModalOpen_change_password, setIsModalOpen_change_password] = useState(false);
     const [alluser_accounts, setAlluser_accounts] = useState(false);
     const dropdownRef = useRef(null);
+    const [cookie_user_brand, setCookie_user_brand] = useState(null);
+
 
     useEffect(() => {
-        // Add an event listener to the document to detect clicks outside the dropdown
+
+        const brand_details = Cookies.get('brand_detail');
+        if (brand_details) {
+            try {
+                const brand_detail_name = JSON.parse(brand_details);
+                // Now, you can access properties of the object
+                console.log("brand_user--dwndbawb", brand_user, brand_detail_name);
+                setCookie_user_brand(brand_detail_name)
+            } catch (error) {
+                console.error('Error parsing JSON from cookie:', error);
+            }
+        } else {
+            console.error('Cookie "brand_detail" is empty or not defined');
+        }
+
+        getUser_Brand();
+
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setAlluser_accounts(false);
             }
         }
 
-        // Attach the event listener
         document.addEventListener('mousedown', handleClickOutside);
 
-        // Clean up the event listener when the component unmounts
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
 
-        getUser_Brand();
+
+
     }, []);
 
     const toggleDropdown = () => {
@@ -79,6 +99,8 @@ const Left_Dashboard = () => {
 
             });
 
+            console.log("response get userbarnd", response);
+
             if (response?.ok) {
                 const responseData = await response.json();
                 console.log('brandusers response:', responseData?.data?.data);
@@ -86,11 +108,11 @@ const Left_Dashboard = () => {
 
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData.status) {
-                    toast.success('brandusers Name', {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
+                if (responseData?.status) {
+                    // toast.success('brandusers Name', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
                     setBrand_user(responseData?.data?.data)
 
                 } else {
@@ -114,7 +136,9 @@ const Left_Dashboard = () => {
         setIsModalOpen_terms_service(false);
     };
 
-    console.log("brand_user--dwndbawb",brand_user);
+    console.log("brand_user--dwndbawb1", brand_user, cookie_user_brand);
+
+
     return (
         <div className="" ref={dropdownRef}>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
@@ -175,39 +199,30 @@ const Left_Dashboard = () => {
 
                         <div className='w-full px-3 py-2'>
 
-                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            {brand_user.length > 0 && brand_user.map((item,index) => {
+                                return (
 
-                            >
-                                <Image
-                                    src={Images.support_icon}
-                                    width={18}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpen_change_password(true)}
-                                >
-                                    Change Password
-                                </button>
-                            </div>
-                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                        key={index}
+                                    >
+                                        <Image
+                                            src={item?.brand?.logo}
+                                            width={30}
+                                            height={30}
+                                            className='rounded-full bg-white'
+                                            alt=""
+                                        />
+                                        <button
+                                            className='text-base w-48 dropdown_text text-center'
+                                        // onClick={() => setIsModalOpen_change_password(true)}
+                                        >
+                                            {item?.brand?.name}
+                                        </button>
+                                    </div>
 
-                            >
-                                <Image
-                                    src={Images.logout}
-                                    width={18}
-                                    height={10}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className="w-48 dropdown_text rounded-lg"
-                                    onClick={() => setIsModalOpenlogout(true)}
-                                >
-                                    Sign Out
-                                </button>
-                            </div>
+                                )
+                            })
+                            }
 
                         </div>
                     </div>
@@ -340,7 +355,10 @@ const Left_Dashboard = () => {
 
             </div>
             <div className=' text-center'>
-                {/* <h4 className='font-bold'>{isEmpty(brand_detail_name)}</h4> */}
+
+                {cookie_user_brand && (
+                    <h4 className='font-bold'>{cookie_user_brand.brand.name}</h4>
+                )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'
 
