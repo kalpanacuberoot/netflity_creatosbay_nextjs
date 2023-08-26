@@ -20,19 +20,10 @@ const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    // const { name, value } = e.target;
-    // setFormData({ ...formData, [name]: value });
-
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
-      // console.log('GET response:', getResponse);
-
+    
       const postData = {
         "email": email,
         "password": password,
@@ -129,23 +120,18 @@ const Loginpage = () => {
                     />
                     <label htmlFor="myCheckbox" className=" ml-2 text-black">
                       Remember Me
-                      {/* I accept co. Name */}
-                      {/* <span style={{ color: Colors.pink_clr }} className="cursor-pointer ml-2"
-                        onClick={() => setIsModalOpen_terms_service(true)}
-                      >
-                        Terms & Condition
-                      </span> */}
                     </label>
                   </div>
-                  <Link href={"/forgot"}>
+                  {/* <Link href={"/forgot"}> */}
                     {" "}
                     <button
                       className=" float-right "
                       style={{ color: Colors.pink_clr }}
+                      onClick={() => router.push('/forgot')}
                     >
                       Forgot Password ?
                     </button>
-                  </Link>
+                  {/* </Link> */}
                 </div>
                 <button
                   type="submit"
