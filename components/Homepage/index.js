@@ -12,7 +12,7 @@ import Home_Card2 from "./Card/Card2";
 import Home_Card3 from "./Card/Card3";
 import Home_Card4 from "./Card/Card4";
 import Terms_of_service from "./Termsofservice";
-import { apiCall, getApiCall, url } from "@/generalfunation";
+import { apiCall, getApiCall, isEmpty, url } from "@/generalfunation";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';
@@ -31,31 +31,74 @@ const Homepage = () => {
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     console.log('categories cookieValue------------1', cookieValue?.token);
 
-    const brandId = JSON.parse(Cookies.get('brand_id'));
-    console.log('categories cookieValue------------1', brandId);
+    // const brand_detail = JSON.parse(Cookies.get('brand_detail'));
+    // const brandIds = JSON.parse(Cookies.get('brand_id'));
+
+    // const brandId = isEmpty(brandIds || brand_detail?.id);
+
+    // console.log('brandId brandId------------1', brandId);
+    const brand_detail = Cookies.get('brand_detail');
+    const brandIds = Cookies.get('brand_id');
+
+    let brandId = null;
+
+    if (brand_detail) {
+      try {
+        brandId = JSON.parse(brand_detail)?.id;
+      } catch (error) {
+        console.error('Error parsing brand_detail:', error);
+      }
+    }
+
+    if (!brandId && brandIds) {
+      try {
+        brandId = JSON.parse(brandIds);
+      } catch (error) {
+        console.error('Error parsing brand_ids:', error);
+      }
+    }
+
+    console.log('brandId:', brandId);
 
     try {
 
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
       };
-      const getResponse = await getApiCall(`${url}/campaigns?brand=${brandId}`, 'get', headers);
-      console.log('GET campaigns?brand=1 response:', getResponse);
-      if (getResponse?.status === 'success') {
+      // const getResponse = await getApiCall(`${url}/campaigns?brand=${brandId}`, 'get', headers);
+      const response = await fetch(`${url}/campaigns?brand=${brandId}`, {
+        method: 'Get',
+        headers: headers,
 
-        console.log('GET campaigns?brand=1 response: good', getResponse);
-        setCampaign_data(getResponse?.data)
+      });
+      console.log('GET campaigns?brand=1 response:', response);
+      if (response?.ok) {
+        const responseData = await response.json();
+        console.log('campaigns response:', responseData?.data?.data);
 
+        if (responseData.status) {
+          // toast.success('All campaigns', {
+          //   position: 'top-center',
+          //   autoClose: 5000,
+          // });
+
+          setCampaign_data(responseData?.data?.data);
+          // setBrand_user(responseData?.data?.data)
+
+        } else {
+          console.error('Error:', responseData.message);
+          // alert('Brand creation failed');
+        }
       } else {
-
-        console.log('GET campaigns?brand=1 response: good', getResponse);
+        console.error('Error:', response.statusText);
+        // alert('Brand creation failed');
       }
-
-
     } catch (error) {
-      // console.error('POST response register catrch error-------------', error);
+      console.error('Error:', error);
     }
-  };
+  }
+
+
 
   useEffect(() => {
     allCampaignData();
@@ -114,17 +157,16 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly items-center py-5 rounded-md flex-wrap  h-full"
+            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap  h-full"
             style={{ backgroundColor: Colors.white_clr }}
           >
-            {campaign_data.length > 0 ?
-              <>
+            {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
+                <>
+                <Home_Card1 key={index} items={item}/>
+                </>
+              ))
+            
 
-                <Home_Card1 />
-                <Home_Card2 />
-                <Home_Card3 />
-                <Home_Card4 />
-              </>
               :
               <div className="flex flex-col">
                 <h1>

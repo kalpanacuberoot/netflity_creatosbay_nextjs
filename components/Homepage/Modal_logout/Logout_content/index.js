@@ -32,7 +32,7 @@ const Logout_content = () => {
 
             console.log("response onLogout", response);
 
-            if (response?.ok) {
+            if (response) {
                 const data = await response.json();
                 
                 console.log("onLogout", data);

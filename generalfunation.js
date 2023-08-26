@@ -15,7 +15,7 @@ export const isEmpty = (value) => {
 // Wrapper function for API calls
 
 export const url = 'https://backend.creatorsbay.app/api'
-export const apiCall =async (url, method, data = null, headers = {}) => {
+export const apiCall = async (url, method, data = null, headers = {}) => {
   try {
     const options = {
       method,
@@ -25,7 +25,7 @@ export const apiCall =async (url, method, data = null, headers = {}) => {
         'Accept': 'application/json', // Add the Accept header
       },
     };
-    
+
     if (method.toLowerCase() === 'post') {
       options.headers['Content-Type'] = 'application/json';
       options.body = JSON.stringify(data);
@@ -38,20 +38,20 @@ export const apiCall =async (url, method, data = null, headers = {}) => {
     }
 
     const responseData = await response.json();
-   
+
     return responseData;
   } catch (error) {
 
     if (error.message) {
       alert('go to login page')
 
-    } 
+    }
     throw new Error(`API call error: ${error.message}`);
-    
+
   }
 }
 
-export const getApiCall = async (url, method,  headers = {}) => {
+export const getApiCall = async (url, method, headers = {}) => {
 
   const router = useRouter();
 
@@ -70,22 +70,27 @@ export const getApiCall = async (url, method,  headers = {}) => {
       options.headers['Content-Type'] = 'application/json';
     }
 
-    const response = await fetch(url,options);
-    if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
-    }
-
+    const response = await fetch(url, options);
     const responseData = await response.json();
-   
-    return responseData;
-     
-  } catch (error) {
-    console.error('Error:', error);
-        if (error.message) {
-      alert('go to login page')
-
-
+    if (response.ok) {
+      const responseData = await response.json();
+      return responseData;
     }
-  }
-};
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+
+
+
+      
+
+    } catch (error) {
+      console.error('Error:', error);
+      if (error.message) {
+        alert('go to login page')
+
+
+      }
+    }
+  };
 

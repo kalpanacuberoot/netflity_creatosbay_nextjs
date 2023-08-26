@@ -186,6 +186,7 @@ const Left_Dashboard = () => {
                                     
                                 </button> */}
                                 </div>
+                                
                                 <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
                                 >
@@ -210,8 +211,8 @@ const Left_Dashboard = () => {
 
             </div>
             <div className=' text-center'>
-                <h4 className='font-bold'>Creatorbay Inc.</h4>
-                <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5>
+                <h4 className='font-bold'>Brand Nmae...</h4>
+                {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'
 
                 >

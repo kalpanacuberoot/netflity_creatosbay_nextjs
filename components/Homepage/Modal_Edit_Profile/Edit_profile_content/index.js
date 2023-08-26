@@ -52,13 +52,13 @@ const Edit_profile_content = () => {
                             type="compant"
                             id="name"
                             className="appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Company Name"
+                            placeholder="Brand Name"
                         />
                         <input
                             type="password"
                             id="name"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Company Website"
+                            placeholder="Brand Website"
                         />
 
                         <div className="relative">
@@ -69,7 +69,7 @@ const Edit_profile_content = () => {
                                 id="grid-state"
                             >
                                 <option value="" disabled>
-                                    Company Type
+                                Brand Type
                                 </option>
                                 {options.map((option) => (
                                     <option key={option} value={option}>
@@ -105,7 +105,7 @@ const Edit_profile_content = () => {
                                     />
                                 </div>
                                 <span className="text-base  text-gray-700">
-                                    Company Logo
+                                Brand Logo
                                 </span>
                             </label>
                             <input
@@ -117,7 +117,7 @@ const Edit_profile_content = () => {
                         <textarea
                             id="descriptionInput"
                             type="text"
-                            placeholder="Company Description"
+                            placeholder="Brand Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             rows={4}
                         ></textarea>
