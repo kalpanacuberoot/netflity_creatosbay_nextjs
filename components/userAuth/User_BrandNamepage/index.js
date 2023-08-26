@@ -44,10 +44,10 @@ const User_BrandNamepage = () => {
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {
-                    toast.success('brandusers Name', {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
+                    // toast.success('brandusers Name', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
                     setBrand_user(responseData?.data?.data)
 
                 } else {
@@ -63,14 +63,14 @@ const User_BrandNamepage = () => {
         }
     };
 
-    useEffect(() => {
-        // Check if brandUsers is empty and redirect accordingly
-        if (brand_user.length === 0) {
-          router.push('/brand'); // Redirect to the brand page
-        } else {
-          router.push('/user_brand_name'); // Redirect to the brand_user page
-        }
-      }, [brand_user, router]);
+    // useEffect(() => {
+    //     // Check if brandUsers is empty and redirect accordingly
+    //     if (brand_user.length === 0) {
+    //       router.push('/brand'); // Redirect to the brand page
+    //     } else {
+    //       router.push('/user_brand_name'); // Redirect to the brand_user page
+    //     }
+    //   }, [brand_user, router]);
 
 
     useEffect(() => {

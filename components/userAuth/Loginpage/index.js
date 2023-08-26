@@ -96,7 +96,7 @@ const Loginpage = () => {
                   //     position: 'top-center',
                   //     autoClose: 5000,
                   // });
-                  if (brand_user.length === 0) {
+                  if (responseData?.data?.data.length === 0) {
                     router.push('/brand'); // Redirect to the brand page
                   } else {
                     router.push('/user_brand_name'); // Redirect to the brand_user page
