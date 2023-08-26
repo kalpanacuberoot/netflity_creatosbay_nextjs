@@ -1,7 +1,7 @@
 import Images from "@/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Terms_of_service from "../Termsofservice";
 import Terms_of_service_content from "../Termsofservice/Terms_of_service_content";
 import Modal_logout from "../Modal_logout";
@@ -14,13 +14,16 @@ import Notification_popup from "../Notification_popup";
 import Notification_content from "../Notification_popup/Notification_content";
 import Cookies from "js-cookie";
 import Modal_change_password from "../Modal_change_password";
-import { isEmpty } from "@/generalfunation";
+import { isEmpty, url } from "@/generalfunation";
 import Change_password_content from "../Modal_change_password/Change_password_content";
+import { useRouter } from "next/router";
 
 
 
 const Left_Dashboard = () => {
+    const router = useRouter();
 
+    const [brand_user, setBrand_user] = useState([]);
     const [dropdown_menu, setDropdown_menu] = useState(false);
     const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
@@ -28,7 +31,80 @@ const Left_Dashboard = () => {
     const [isModalOpen_edit_prof, setIsModalOpen_edit_prof] = useState(false);
     const [isModalOpen_notification, setIsModalOpen_notification] = useState(false);
     const [isModalOpen_change_password, setIsModalOpen_change_password] = useState(false);
+    const [alluser_accounts, setAlluser_accounts] = useState(false);
+    const dropdownRef = useRef(null);
 
+    useEffect(() => {
+        // Add an event listener to the document to detect clicks outside the dropdown
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setAlluser_accounts(false);
+            }
+        }
+
+        // Attach the event listener
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+
+        getUser_Brand();
+    }, []);
+
+    const toggleDropdown = () => {
+        setAlluser_accounts(!alluser_accounts);
+    };
+
+    const getUser_Brand = async () => {
+
+
+        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
+        console.log('categories cookieValue------------1', cookieValue?.token);
+
+        const userId = JSON?.parse(Cookies?.get('user_data'));
+        console.log('categories cookieValue------------1', userId?.user?.id);
+
+        try {
+
+            const headers = {
+                'Authorization': `Bearer ${cookieValue?.token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
+                method: 'Get',
+                headers: headers,
+
+            });
+
+            if (response?.ok) {
+                const responseData = await response.json();
+                console.log('brandusers response:', responseData?.data?.data);
+
+
+                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
+                if (responseData.status) {
+                    toast.success('brandusers Name', {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    setBrand_user(responseData?.data?.data)
+
+                } else {
+                    console.error('Error:', responseData.message);
+                    // alert('Brand creation failed');
+                }
+            } else {
+                console.error('Error:', response.statusText);
+                // alert('Brand creation failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const openModal = () => {
         setIsModalOpen_terms_service(true);
@@ -38,12 +114,9 @@ const Left_Dashboard = () => {
         setIsModalOpen_terms_service(false);
     };
 
-    // const brand_detail_name = JSON.parse(Cookies.get('brand_detail'))?.brand?.name;
-
-    // console.log("brandId---", brand_detail_name);
-
+    console.log("brand_user--dwndbawb",brand_user);
     return (
-        <div>
+        <div className="" ref={dropdownRef}>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -75,7 +148,7 @@ const Left_Dashboard = () => {
             </Notification_popup>
             <Modal_change_password isOpen={isModalOpen_change_password} onClose={() => setIsModalOpen_change_password(false)}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl ">
-                   <Change_password_content/>
+                    <Change_password_content />
                 </div>
             </Modal_change_password>
             <div className=''>
@@ -87,6 +160,7 @@ const Left_Dashboard = () => {
                 />
             </div>
 
+
             <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
 
                 <Image
@@ -94,7 +168,52 @@ const Left_Dashboard = () => {
                     width={35}
                     height={30}
                     alt=""
+                    onClick={toggleDropdown}
                 />
+                {alluser_accounts &&
+                    <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
+
+                        <div className='w-full px-3 py-2'>
+
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.support_icon}
+                                    width={18}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpen_change_password(true)}
+                                >
+                                    Change Password
+                                </button>
+                            </div>
+                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.logout}
+                                    width={18}
+                                    height={10}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className="w-48 dropdown_text rounded-lg"
+                                    onClick={() => setIsModalOpenlogout(true)}
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
                     onClick={() => setDropdown_menu(!dropdown_menu)}
                 >
