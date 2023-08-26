@@ -19,7 +19,7 @@ const Edit_profile_content = () => {
     return (
         <>
 
-            <div className="overflow-x-hidden overflow-y-auto h-full relative bg-white rounded-lg shadow dark:bg-gray-700 edit_profile_ht">
+            <div className="overflow-x-hidden w-full overflow-y-auto h-full relative bg-white rounded-lg shadow dark:bg-gray-700 edit_profile_ht">
 
                 <div className="flex items-start justify-between border-b rounded-t dark:border-gray-600">
 
@@ -124,7 +124,7 @@ const Edit_profile_content = () => {
 
 
                     </form>
-                    <div className="font_size_21  line-height-[26.52px]">
+                    {/* <div className="font_size_21  line-height-[26.52px]">
                         Account Details.
                     </div>
                     <form>
@@ -178,7 +178,7 @@ const Edit_profile_content = () => {
 
                         </div>
 
-                    </form>
+                    </form> */}
                     <Buttons
                         buttoncss="font_size_24 leading-6 py-3 my-5"
                         label={"Apply Changes"}
