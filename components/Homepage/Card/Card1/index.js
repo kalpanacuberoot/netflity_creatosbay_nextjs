@@ -27,10 +27,10 @@ const Home_Card1 = ({items}) => {
                     /> */}
                 </div>
                 <div className="px-5 py-5 border rounded-b-lg" style={{background:Colors.white_clr}}>
-                    <div className="flex flex-row justify-between items-end mt-4">
+                    <div className="flex flex-row justify-between items-end mt-4  mx-0">
                         <div className="font_size_17 ">Reels creators {items?.creators?.length}</div>
                         <div
-                            className="flex flex-row items-center px-3 rounded-md"
+                            className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
                             style={{ backgroundColor: Colors.delay_clr }}
                         >
                             <Image
@@ -40,10 +40,10 @@ const Home_Card1 = ({items}) => {
                                 alt=""
                                 className="me-2"
                             />
-                            <h6>{items?.status}</h6>
+                            <h5 className="">{items?.status}</h5>
                         </div>
                     </div>
-                    <h2 className="font-bold">{items?.name}</h2>
+                    <h2 className="font-bold ">{items?.name}</h2>
                     <div className="font_size_12">
                        {items?.description}
                         {cardfirstshowmore && (

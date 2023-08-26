@@ -26,17 +26,13 @@ const Homepage = () => {
 
   const [campaign_data, setCampaign_data] = useState([]);
 
+ 
+
   const allCampaignData = async () => {
 
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     console.log('categories cookieValue------------1', cookieValue?.token);
 
-    // const brand_detail = JSON.parse(Cookies.get('brand_detail'));
-    // const brandIds = JSON.parse(Cookies.get('brand_id'));
-
-    // const brandId = isEmpty(brandIds || brand_detail?.id);
-
-    // console.log('brandId brandId------------1', brandId);
     const brand_detail = Cookies.get('brand_detail');
     const brandIds = Cookies.get('brand_id');
 
@@ -44,7 +40,7 @@ const Homepage = () => {
 
     if (brand_detail) {
       try {
-        brandId = JSON.parse(brand_detail)?.id;
+        brandId = JSON.parse(brand_detail)?.brand?.id;
       } catch (error) {
         console.error('Error parsing brand_detail:', error);
       }
@@ -57,9 +53,7 @@ const Homepage = () => {
         console.error('Error parsing brand_ids:', error);
       }
     }
-
     console.log('brandId:', brandId);
-
     try {
 
       const headers = {
@@ -97,7 +91,6 @@ const Homepage = () => {
       console.error('Error:', error);
     }
   }
-
 
 
   useEffect(() => {
@@ -161,11 +154,11 @@ const Homepage = () => {
             style={{ backgroundColor: Colors.white_clr }}
           >
             {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
-                <>
-                <Home_Card1 key={index} items={item}/>
-                </>
-              ))
-            
+              <>
+                <Home_Card1 key={index} items={item} />
+              </>
+            ))
+
 
               :
               <div className="flex flex-col">

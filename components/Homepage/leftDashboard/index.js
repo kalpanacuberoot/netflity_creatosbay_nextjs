@@ -12,6 +12,7 @@ import Modal_Edit_Profile from "../Modal_Edit_Profile";
 import Edit_profile_content from "../Modal_Edit_Profile/Edit_profile_content";
 import Notification_popup from "../Notification_popup";
 import Notification_content from "../Notification_popup/Notification_content";
+import Cookies from "js-cookie";
 
 
 const Left_Dashboard = () => {
@@ -31,6 +32,10 @@ const Left_Dashboard = () => {
     const closeModal = () => {
         setIsModalOpen_terms_service(false);
     };
+
+    const brand_detail_name = JSON.parse(Cookies.get('brand_detail'))?.brand?.name;
+
+    console.log("brandId---",brand_detail_name);
 
     return (
         <div>
@@ -211,7 +216,7 @@ const Left_Dashboard = () => {
 
             </div>
             <div className=' text-center'>
-                <h4 className='font-bold'>Brand Nmae...</h4>
+                <h4 className='font-bold'>{brand_detail_name}</h4>
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'
 
