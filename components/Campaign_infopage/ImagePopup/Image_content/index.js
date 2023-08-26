@@ -162,7 +162,7 @@ const Image_content = ({ onPopupData }) => {
                         <textarea
                             id="descriptionInput"
                             type="text"
-                            placeholder="Company Description"
+                            placeholder="Product Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             rows={4}
                             value={description}

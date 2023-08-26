@@ -275,15 +275,15 @@ const Campaign_infopage = () => {
                           </p>
                         </button>
                       </div>
-                      <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
+                      {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
                         <input
                           type="file"
                           ref={inputFileRef}
-                          // onChange={(e) => onFilechange(e)}
+                          
                           hidden
                         />
                         <button
-                          // onClick={() => onBtnClick()}
+                         
                           className="h-48  w-full"
                         >
                           <Image
@@ -296,7 +296,7 @@ const Campaign_infopage = () => {
                             Add Image
                           </p>
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                     <div>
                       {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
@@ -317,7 +317,7 @@ const Campaign_infopage = () => {
                     {/* <Calendar_component /> */}
                     {/* dater pocker start */}
 
-                    <div className="flex flex-row my-5 border rounded-md justify-between items-center w-full px-5">
+                    <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
                       <div className='relative w-full'>
                         <DatePicker
                           selected={startDate}
@@ -327,10 +327,10 @@ const Campaign_infopage = () => {
                           startDate={startDate}
                           endDate={endDate}
                           placeholderText="Start Date"
-                          className="w-full text-center p-2 rounded"
+                          className="w-full text-center p-2 rounded "
                           minDate={currentDate} // Set the minimum date to the current date
                         />
-                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
                           <Image
                             src={Images.calendar_icon}
                             alt=""
@@ -341,7 +341,8 @@ const Campaign_infopage = () => {
 
                       <span className="mx-4 mt-0 text-gray-500">-</span>
 
-                      <div className='relative w-full mt-0'>
+                      <div className='relative mt-0 w-full'>
+                     
                         <DatePicker
                           selected={endDate}
                           onChange={(date) => setEndDate(date)}
@@ -350,10 +351,10 @@ const Campaign_infopage = () => {
                           endDate={endDate}
                           // minDate={startDate}
                           placeholderText="End Date"
-                          className="w-full text-center p-2 rounded"
+                          className="w-full text-center p-2 rounded "
                           minDate={startDate || currentDate} // Set the minimum date to the current date
                         />
-                        <div className="absolute top-2.5 right-0 text-gray-400 ps-2 ">
+                         <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
                           <Image
                             src={Images.calendar_icon}
                             alt=""
@@ -401,17 +402,11 @@ const Campaign_infopage = () => {
                         </button>
                       </div>
 
-                      <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
+                      {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
                         onClick={() => setIsModalOpenRef(true)}
                       >
-                        {/* <input
-                      type="file"
-                      ref={inputFileRef}
-                      onChange={(e) => onFilechange(e)}
-                      hidden
-                    /> */}
                         <button
-                          // onClick={() => onBtnClick()}
+                         
                           className="h-48  w-full"
                         >
                           <Image
@@ -424,7 +419,7 @@ const Campaign_infopage = () => {
                             Add Image
                           </p>
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                     <div>
                       {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
