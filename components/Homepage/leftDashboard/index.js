@@ -279,7 +279,7 @@ const Left_Dashboard = () => {
                             >
                                 <Image
                                     src={Images.market_place_icon}
-                                    width={18}
+                                    width={20}
                                     className=' '
                                     alt=""
                                 />
@@ -295,7 +295,7 @@ const Left_Dashboard = () => {
                             >
                                 <Image
                                     src={Images.support_icon}
-                                    width={18}
+                                    width={20}
                                     className=''
                                     alt=""
                                 />
@@ -311,7 +311,7 @@ const Left_Dashboard = () => {
                             >
                                 <Image
                                     src={Images.terms_of_service}
-                                    width={18}
+                                    width={20}
                                     className=''
                                     alt=""
                                 />
@@ -332,7 +332,7 @@ const Left_Dashboard = () => {
                             >
                                 <Image
                                     src={Images.profile_user}
-                                    width={18}
+                                    width={20}
                                     className=''
                                     alt=""
                                 />
@@ -348,8 +348,8 @@ const Left_Dashboard = () => {
                             >
                                 <Image
                                     src={Images.logout}
-                                    width={18}
-                                    height={10}
+                                    width={20}
+                                    height={18}
                                     className=''
                                     alt=""
                                 />

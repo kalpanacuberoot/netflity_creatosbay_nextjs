@@ -116,7 +116,7 @@ const Homepage = () => {
         </div>
         <div
           // className="grid grid-flow-col border w-100 px-3"
-          className="w-full auto-cols-max me-3 ps-5 rounded-md pb-3"
+          className="w-full auto-cols-max me-3 ps-5 rounded-md pb-3 "
         >
           <div
             className="my-4 ps-3 rounded-md"
@@ -150,9 +150,10 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap  h-full"
+            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap"
             style={{ backgroundColor: Colors.white_clr }}
           >
+           
             {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
               <>
                 <Home_Card1 key={index} items={item} />
