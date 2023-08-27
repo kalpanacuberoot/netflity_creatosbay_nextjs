@@ -143,7 +143,7 @@ const Campaign_infopage = () => {
     }
   };
 
-  console.log("popupData", popupData,refpopupData);
+  console.log("popupData", popupData, refpopupData);
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
@@ -220,8 +220,8 @@ const Campaign_infopage = () => {
           >
             <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
               <form
-               onSubmit={handleSubmit}
-               >
+                onSubmit={handleSubmit}
+              >
                 <div className="">
                   <h2
                     style={{ color: Colors.pending_clr }}
@@ -318,6 +318,11 @@ const Campaign_infopage = () => {
                         </button>
                       </div> */}
                     </div>
+                    <div className="flex items-center mt-5">
+                      <div className="flex-grow border-t border-gray-300"></div>
+                      <div className="px-4 text-gray-600">OR</div>
+                      <div className="flex-grow border-t border-gray-300"></div>
+                    </div>
                     <div>
                       {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
                       <input
@@ -362,7 +367,7 @@ const Campaign_infopage = () => {
                       <span className="mx-4 mt-0 text-gray-500">-</span>
 
                       <div className='relative mt-0 w-full'>
-                     
+
                         <DatePicker
                           selected={endDate}
                           onChange={(date) => setEndDate(date)}
@@ -374,7 +379,7 @@ const Campaign_infopage = () => {
                           className="w-full text-center p-2 rounded "
                           minDate={startDate || currentDate} // Set the minimum date to the current date
                         />
-                         <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
                           <Image
                             src={Images.calendar_icon}
                             alt=""
@@ -441,6 +446,11 @@ const Campaign_infopage = () => {
                         </button>
                       </div> */}
                     </div>
+                    <div className="flex items-center mt-5">
+                      <div className="flex-grow border-t border-gray-300"></div>
+                      <div className="px-4 text-gray-600">OR</div>
+                      <div className="flex-grow border-t border-gray-300"></div>
+                    </div>
                     <div>
                       {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
                       <input
@@ -453,7 +463,7 @@ const Campaign_infopage = () => {
                   </div>
                   <Buttons label={"Proceed"} buttoncss={"py-3"}
                   //  onClick={handleSubmit}
-                   />
+                  />
                 </div>
               </form>
               <ToastContainer />
