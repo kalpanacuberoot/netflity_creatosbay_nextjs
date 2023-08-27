@@ -1,6 +1,10 @@
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 
 body {
@@ -371,7 +375,22 @@ logo-slider img {
   color: #fff;
 }
 
+input:focus{
+  border-color: #9357FF;
+}
+textarea:focus{
+  border-color: #9357FF;
+}
+select:focus{
+  border-color: #9357FF;
+}
 
+.react-datepicker-wrapper {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  width: -webkit-fill-available;
+}
 
 @media (max-width: 900px) {
   logo-slider {
@@ -429,6 +448,10 @@ logo-slider img {
   font-size: 15px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 /* .divider_line{
   
 max-width: 100%;
@@ -461,9 +484,9 @@ border-image: linear-gradient(90deg, #131313 0%, rgba(19, 19, 19, 0.24) 53.4%, r
   font-family: Futura-Normal;
 }
 
-.container_capmapign_info {
-  font-family: Futura-Book;
-}
+/* .container_capmapign_info {
+  font-family: Futura;
+} */
 
 .image_capign_info {
   height: 100% !important;
