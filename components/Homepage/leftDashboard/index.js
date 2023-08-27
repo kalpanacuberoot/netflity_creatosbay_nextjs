@@ -39,7 +39,17 @@ const Left_Dashboard = () => {
     const [cookie_user_brand, setCookie_user_brand] = useState(null);
 
 
+    const onSwitchBrand = (item, index) => {
+        console.log("onSwitchBrand", item, index);
+        // JSON.stringify(Cookies.set('brand_detail',item))
+       const new_user_name =  Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
+       setCookie_user_brand(new_user_name);
+       router.reload();
+    }
+
     useEffect(() => {
+
+
 
         const brand_details = Cookies.get('brand_detail');
         if (brand_details) {
@@ -139,6 +149,8 @@ const Left_Dashboard = () => {
     console.log("brand_user--dwndbawb1", brand_user, cookie_user_brand);
 
 
+
+
     return (
         <div className="" ref={dropdownRef}>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
@@ -199,7 +211,7 @@ const Left_Dashboard = () => {
 
                         <div className='w-full px-3 py-2'>
 
-                            {brand_user.length > 0 && brand_user.map((item,index) => {
+                            {brand_user.length > 0 && brand_user.map((item, index) => {
                                 return (
 
                                     <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
@@ -214,7 +226,7 @@ const Left_Dashboard = () => {
                                         />
                                         <button
                                             className='text-base w-48 dropdown_text text-center'
-                                        // onClick={() => setIsModalOpen_change_password(true)}
+                                            onClick={() => onSwitchBrand(item, index)}
                                         >
                                             {item?.brand?.name}
                                         </button>
@@ -357,7 +369,7 @@ const Left_Dashboard = () => {
             <div className=' text-center'>
 
                 {cookie_user_brand && (
-                    <h4 className='font-bold'>{cookie_user_brand.brand.name}</h4>
+                    <h4 className='font-bold'>{cookie_user_brand?.brand?.name}</h4>
                 )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'
