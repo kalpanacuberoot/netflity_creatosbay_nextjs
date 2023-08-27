@@ -14,11 +14,11 @@ const Contact_Us = () => {
   return (
     <>
       {/* <div className="container h-full flex bg-zinc-100 items-center height-70 px-10"> */}
-      <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
-        <div className=" auto-col-max w-full">
+      <div className=" p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100   ">
+        <div className=" auto-col-max w-full ">
 
-          <div className="flex items-center w-full justify-center">
-            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5">
+          <div className="sm:flex items-center w-full gap-2 ">
+            <div className=" bg-white border-gray-300 border-solid sm:w-6/12 rounded-lg border-1 p-5">
               <h1 className="font-bold text-left text-gray-900   ">
                 Need Help And Support
               </h1>
@@ -43,7 +43,7 @@ const Contact_Us = () => {
                 //   onChange={(e) => setPhone(e.target.value)}
                 //   pattern="[0-9]{10}" title="10 digit number is required"
                 />
-                
+
 
                 <select id="countries"
                   className="block appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
@@ -66,9 +66,9 @@ const Contact_Us = () => {
                 //   value={desc}
                 //   onChange={handleTextChange}
                 //   placeholder={`Max Characters: ${maxCharacters}`}
-               
+
                 ></textarea>
-                
+
 
                 <button
                   type="submit"
@@ -79,9 +79,19 @@ const Contact_Us = () => {
                 </button>
               </form>
             </div>
+            <div className="sm:w-6/12"><iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224611.86194800303!2d77.15426027976997!3d28.402344350134463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc15f5a424b1%3A0xe4f50576c850e0f2!2sFaridabad%2C%20Haryana!5e0!3m2!1sen!2sin!4v1693129689532!5m2!1sen!2sin"
+              width="100%"
+              height="540"
+              style={{ border: "0" }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            </div>
           </div>
         </div>
-      
+
       </div>
     </>
   );

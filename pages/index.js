@@ -1,5 +1,6 @@
 import About_Us from "@/components/About_Us"
 import Contact_Us from "@/components/Contact_Us"
+import Faq from "@/components/Faq"
 import Navbar from "@/components/Navbar"
 import Team from "@/components/Team"
 
@@ -12,7 +13,8 @@ const index = () => {
       <Navbar />
       <About_Us />
       <Team />
-      <Contact_Us/>
+      <Faq />
+      <Contact_Us />
     </>
   )
 }
