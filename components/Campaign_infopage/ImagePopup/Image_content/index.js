@@ -23,6 +23,8 @@ const Image_content = ({ onPopupData }) => {
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
 
+    
+
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {

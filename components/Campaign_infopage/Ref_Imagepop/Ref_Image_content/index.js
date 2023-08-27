@@ -4,7 +4,7 @@ import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import Social_media_icons from "@/components/four_social_media";
 import ModalHeader from "@/components/Homepage/ModalHeader";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
@@ -16,13 +16,19 @@ const Ref_Image_content = ({ refpopupData }) => {
     const IMAGE_URL = "https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com";
 
     const [file2, setFile2] = useState(null);
-    const [description_ref, setDescription_ref] = useState('');
-    const [ref_name, setRef_name] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
     const [previewRefImage, setPreviewRefImage] = useState(null);
+    const refImage2 = useRef(null);
 
+    // Function to trigger click event on the file input
+    const handleImageClick = (ref) => () => {
+        ref.current.click();
+    };
 
     const handleRefFileChange = (event) => {
         const selectedRefFile = event.target.files[0];
+        console.log("fileslected and ref", file2, selectedRefFile);
         if (selectedRefFile) {
             // Create a FileReader instance
             const reader = new FileReader();
@@ -35,6 +41,7 @@ const Ref_Image_content = ({ refpopupData }) => {
 
             // Read the image file as a data URL
             reader.readAsDataURL(selectedRefFile);
+
         } else {
             setFile2(null); // Reset the selected image
             setPreviewRefImage(null); // Reset the image preview
@@ -44,10 +51,11 @@ const Ref_Image_content = ({ refpopupData }) => {
     };
 
 
-    console.log("fileslected", file2);
+    console.log("fileslected and ref", file2);
 
     const handleRefUploadClick = async () => {
         // handleFileChange();
+        {handleImageClick(refImage2)}
         if (!file2) {
             alert('Please select an image to upload.');
             return;
@@ -108,8 +116,8 @@ const Ref_Image_content = ({ refpopupData }) => {
         const data = [
             {
                 link,
-                ref_description,
-                ref_name,
+                description,
+                name,
             },
         ]
 
@@ -139,8 +147,8 @@ const Ref_Image_content = ({ refpopupData }) => {
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Reference Name"
                                 required
-                                value={ref_name}
-                                onChange={(e) => setRef_name(e.target.value)}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
 
                             />
                         </div>
@@ -149,15 +157,16 @@ const Ref_Image_content = ({ refpopupData }) => {
                                 className=" border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                             >
                                 <label
-                                    htmlFor="fileInput"
+                                    htmlFor="reffileInput"
                                     style={{ borderColor: Colors.logo_clr }}
                                     className="w-auto"
                                 >
                                     <div className="">
                                         <input
-                                            id="fileInput"
+                                            id="reffileInput"
                                             type="file"
                                             accept="image/*"
+                                            ref={refImage2}
                                             // accept=".jpeg. .png, .gif, .jpg"
                                             className="hidden absolute w-full"
                                             onChange={handleRefFileChange} // Triggered when a file is selected
@@ -208,8 +217,8 @@ const Ref_Image_content = ({ refpopupData }) => {
                             placeholder="Reference Description"
                             className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             rows={4}
-                            value={description_ref}
-                            onChange={(e) => setDescription_ref(e.target.value)}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                             required
                         ></textarea>
                         <Buttons
