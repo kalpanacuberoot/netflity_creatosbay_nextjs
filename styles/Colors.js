@@ -1,6 +1,7 @@
 export default {
   logo_clr: "#9357FF",
-  button_light_clr: "#CBD2E0",
+  // button_light_clr: "#CBD2E0",
+  button_light_clr: "#F0F0F0",
   white_clr: "#fff",
   golden_clr: "#FFD557",
   delay_clr: "#FFF4C1",
