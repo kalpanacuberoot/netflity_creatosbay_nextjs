@@ -331,7 +331,7 @@ const Left_Dashboard = () => {
 
                             >
                                 <Image
-                                    src={Images.support_icon}
+                                    src={Images.profile_user}
                                     width={18}
                                     className=''
                                     alt=""
