@@ -40,6 +40,8 @@ const Campaign_infopage = () => {
   const [refpopupData, setRefpopupData] = useState([] ? [] : null); // State to hold popup data
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [product_link,setProduct_link] = useState('');
+  const [ref_link,setRef_link] = useState('');
 
   // Function to update state with data from the popup
   const handleRefPopupData = (data) => {
@@ -101,8 +103,8 @@ const Campaign_infopage = () => {
         "ending_date": endformattedDate,
         "brand_id": brandId,
         "status": "draft",
-        "products": popupData,
-        "references": refpopupData,
+        "products": popupData || product_link,
+        "references": refpopupData || ref_link,
       };
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
@@ -164,13 +166,6 @@ const Campaign_infopage = () => {
 
   const handleStartDateChange = (date) => {
 
-    // const currentDate = new Date();
-    // currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-
-    // if (date > currentDate) {
-    //   // If the selected start date is in the future, don't update the start date
-    //   return;
-    // }
     setStartDate(date);
     // Calculate the minimum allowed end date (15 days from the start date)
     const minEndDate = new Date(date);
@@ -330,6 +325,8 @@ const Campaign_infopage = () => {
                         id="url"
                         className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Paste link"
+                        value={product_link}
+                        onChange={(e) => setProduct_link(e.target.value)}
                       />
                     </div>
                   </div>
@@ -458,6 +455,8 @@ const Campaign_infopage = () => {
                         id="url"
                         className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Paste link"
+                        value={ref_link}
+                        onChange={(e) => setRef_link(e.target.value)}
                       />
                     </div>
                   </div>
