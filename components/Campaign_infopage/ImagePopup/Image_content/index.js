@@ -10,27 +10,47 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { url } from "@/generalfunation";
+import { useRouter } from "next/router";
 
 const Image_content = ({ onPopupData }) => {
 
-    const [link, setLink] = useState(null);
+    const router = useRouter();
+
+    const IMAGE_URL = "https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com";
+
+    const [file, setFile] = useState(null);
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-
-
+    const [previewImage, setPreviewImage] = useState(null);
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-        setLink(selectedFile);
+        if (selectedFile) {
+            // Create a FileReader instance
+            const reader = new FileReader();
+
+            // Set up a callback function for when the FileReader has loaded the image
+            reader.onloadend = () => {
+                setFile(selectedFile); // Save the selected image file
+                setPreviewImage(reader.result); // Set the image preview
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(selectedFile);
+        } else {
+            setFile(null); // Reset the selected image
+            setPreviewImage(null); // Reset the image preview
+        }
+        // setFile(selectedFile);
 
     };
 
 
-    console.log("fileslected", link);
+    console.log("fileslected product image", file);
 
     const handleUploadClick = async () => {
         // handleFileChange();
-        if (!link) {
+        if (!file) {
             alert('Please select an image to upload.');
             return;
         }
@@ -39,7 +59,7 @@ const Image_content = ({ onPopupData }) => {
         console.log('categories cookieValue------------2', cookieValue?.token);
 
         const formData = new FormData();
-        formData.append('file', link);
+        formData.append('file', file);
 
         try {
             const response = await fetch(`${url}/saveimage`, {
@@ -55,17 +75,17 @@ const Image_content = ({ onPopupData }) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("image response ok", data?.url);
+                console.log("image response ok produvt image", data?.url);
                 toast.success('Image Uploaded Successfully', {
                     position: 'top-center',
                     autoClose: 5000,
                 });
                 // alert('Image uploaded successfully.');
-                setLink(data?.url)
+                setFile(data?.url)
             } else {
                 // alert('Image upload failed.');
                 toast.error('Image upload failed', {
-                    position: 'top-center', // Set the toast position
+                    position: 'top-center', // Set the toast posi0tion
                     autoClose: 3000, // Close the toast after 3 seconds
                 });
             }
@@ -79,6 +99,12 @@ const Image_content = ({ onPopupData }) => {
     };
 
     const sendDataToParent = () => {
+        const link = `${IMAGE_URL}/uploads/${file?.name}`;
+        console.log('imgrddsa product popup----1', file, link)
+
+        handleUploadClick();
+        console.log('imgrddsa product popup-----2', file)
+
         const data = [
             {
                 link,
@@ -87,7 +113,9 @@ const Image_content = ({ onPopupData }) => {
             },
         ]
 
-        console.log("popupdata---", data);
+        console.log("popupdata---", file,
+            description,
+            name,);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
         onPopupData(data);
@@ -95,7 +123,11 @@ const Image_content = ({ onPopupData }) => {
             position: 'top-center', // Set the toast position
             autoClose: 3000, // Close the toast after 3 seconds0
         });
+        // router.push('/campaign_info')
+
+
     };
+
 
 
     return (
@@ -132,7 +164,7 @@ const Image_content = ({ onPopupData }) => {
                                             id="fileInput"
                                             type="file"
                                             accept="image/*"
-                                            className="hidden "
+                                            className="hidden absolute w-full"
                                             onChange={handleFileChange} // Triggered when a file is selected
                                         />
                                         <Image
@@ -143,11 +175,24 @@ const Image_content = ({ onPopupData }) => {
                                             className=" cursor-default m-5 mb-0"
                                         />
                                     </div>
+                                    {previewImage && (
+                                        <Image
+                                            src={previewImage}
+                                            alt="Selected"
+                                            style={{ maxWidth: '100%', maxHeight: '300px' }}
+                                            width={50}
+                                            height={50}
+                                            className="mx-auto"
+                                        />
+                                    )}
+                                    {file && (
+                                        <h6 className="text-base text-center">{file?.name}</h6>
+                                    )}
 
-                                    <h6>{link ? link?.name : " Image not found"}</h6>
+                                    {/* <h6>{file ? file?.name : " Image not found"}</h6> */}
 
                                 </label>
-                                <div className=" p-10"  onClick={handleUploadClick}>
+                                <div className=" p-10">
                                     <button
                                         className=" text-base  edit_button_clr  cursor-grabbing p-3 rounded"
                                         // Triggered when "Company Logo" text is clicked

@@ -73,28 +73,6 @@ const Brandscreens = () => {
         // setOpen(true)
     }
 
-    // const handleSubmit = async () => {
-    //     try{
-    //        const imageres = await handleUploadClick();
-    //        if(imageres.status === 200){
-    //         await handlebrandSubmit();
-    //        }
-    //        else{
-
-    //         toast.error('All fields are mandatory', {
-    //             position: 'top-center',
-    //             autoClose: 5000,
-    //         });
-    //        }
-
-    //     }
-    //     catch (error) {
-    //         console.error('Error:', error);
-    //         // Handle errors here
-    //       }
-
-    // }
-
     const handleSubmit = async () => {
         // handleFileChange();
         if (!file) {

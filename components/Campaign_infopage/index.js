@@ -70,8 +70,27 @@ const Campaign_infopage = () => {
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     console.log('campaigns cookieValue------------1', cookieValue?.token);
 
-    const brandId = JSON.parse(Cookies.get('brand_id'));
-    console.log('categories cookieValue------------1', brandId);
+    const brand_detail = Cookies.get('brand_detail');
+    const brandIds = Cookies.get('brand_id');
+
+    let brandId = null;
+
+    if (brand_detail) {
+      try {
+        brandId = JSON.parse(brand_detail)?.brand?.id;
+      } catch (error) {
+        console.error('Error parsing brand_detail:', error);
+      }
+    }
+
+    if (!brandId && brandIds) {
+      try {
+        brandId = JSON.parse(brandIds);
+      } catch (error) {
+        console.error('Error parsing brand_ids:', error);
+      }
+    }
+    console.log('brandId:', brandId);
 
     try {
 
@@ -84,7 +103,6 @@ const Campaign_infopage = () => {
         "status": "draft",
         "products": popupData,
         "references": refpopupData,
-
       };
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
@@ -125,7 +143,7 @@ const Campaign_infopage = () => {
     }
   };
 
-  console.log("popupData", popupData);
+  console.log("popupData", popupData,refpopupData);
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
@@ -180,7 +198,7 @@ const Campaign_infopage = () => {
         onClose={() => setIsModalOpenRef(false)}
       >
         <div className="relative w-full max-w-2xl max-h-full">
-          <Ref_Image_content onPopupData={handleRefPopupData} />
+          <Ref_Image_content refpopupData={handleRefPopupData} />
         </div>
       </Ref_Imagepop>
       <div
@@ -201,7 +219,9 @@ const Campaign_infopage = () => {
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
-              <form onSubmit={handleSubmit}>
+              <form
+               onSubmit={handleSubmit}
+               >
                 <div className="">
                   <h2
                     style={{ color: Colors.pending_clr }}
@@ -431,7 +451,9 @@ const Campaign_infopage = () => {
                       />
                     </div>
                   </div>
-                  <Buttons label={"Proceed"} buttoncss={"py-3"} />
+                  <Buttons label={"Proceed"} buttoncss={"py-3"}
+                  //  onClick={handleSubmit}
+                   />
                 </div>
               </form>
               <ToastContainer />
