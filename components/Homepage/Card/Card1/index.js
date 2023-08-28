@@ -33,7 +33,7 @@ const Home_Card1 = ({ items }) => {
         }
     
         console.log("items", items);
-    },[])
+    },[items])
 
 
     return (
