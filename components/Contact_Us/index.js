@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const Contact_Us = () => {
 
-
+  const dropdown_options = ['query', 'suggestion']
 
   return (
     <>
@@ -18,7 +18,7 @@ const Contact_Us = () => {
         <div className=" auto-col-max w-full ">
 
           <div className="sm:flex items-center w-full gap-2 ">
-            <div className=" bg-white border-gray-300 border-solid sm:w-6/12 rounded-lg border-1 p-5">
+            <div className=" bg-white border-gray-300 border-solid sm:w-6/12 rounded-lg border-1 py-5 px-10 me-5">
               <h1 className="font-bold text-left text-gray-900   ">
                 Need Help And Support
               </h1>
@@ -50,11 +50,11 @@ const Contact_Us = () => {
                 //   value={options}
                 //   onChange={(e) => setOptions(e.target.value)}
                 >
-                  {/* {dropdown_options.map((item, index) => (
+                  {dropdown_options.map((item, index) => (
                     <option key={index}
 
                     >{item}</option>
-                  ))} */}
+                  ))}
                 </select>
 
                 <textarea
@@ -79,15 +79,16 @@ const Contact_Us = () => {
                 </button>
               </form>
             </div>
-            <div className="sm:w-6/12"><iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224611.86194800303!2d77.15426027976997!3d28.402344350134463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc15f5a424b1%3A0xe4f50576c850e0f2!2sFaridabad%2C%20Haryana!5e0!3m2!1sen!2sin!4v1693129689532!5m2!1sen!2sin"
-              width="100%"
-              height="540"
-              style={{ border: "0" }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div className="sm:w-6/12">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224611.86194800303!2d77.15426027976997!3d28.402344350134463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc15f5a424b1%3A0xe4f50576c850e0f2!2sFaridabad%2C%20Haryana!5e0!3m2!1sen!2sin!4v1693129689532!5m2!1sen!2sin"
+                width="100%"
+                height="540"
+                style={{ border: "0" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>

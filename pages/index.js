@@ -15,6 +15,7 @@ const index = () => {
       <Team />
       <Faq />
       <Contact_Us />
+
     </>
   )
 }

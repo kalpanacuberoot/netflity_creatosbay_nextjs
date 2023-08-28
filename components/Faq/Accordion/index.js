@@ -60,34 +60,42 @@ const Accordion = () => {
     };
 
     return (
-        <div className=" px-8 w-full my-10">
-            <h1 className="font-bold mb-8">Frequently asked questions</h1>
+        <div className="mx-auto grid max-w-7xl px-8 w-full my-10">
+            <h1 className="font-bold mb-8 underline">Frequently asked questions</h1>
             {items.map((item, index) => (
-                <div key={index}>
+                <div key={index} className="my-3">
                     <button
-                        className="flex justify-between items-center w-full p-2 text-left edit_button_clr  border-b-2   hover:bg-opacity-40 focus:outline-none"
+                        className="flex justify-between items-center w-full p-2 text-left  border-b-2   hover:bg-opacity-40 focus:outline-none"
                         onClick={() => toggleAccordion(index)}
                     >
-                        <span>{item.title}</span>
+                        <span>{item?.title}</span>
                         {activeIndex === index ? (
-                            <Image
+                            <>
+                            {/* <Image
                                 src={Images.pink_plus_icon}
-                                classNameName="h-8 w-auto"
+                                className="h-8 w-auto"
                                 alt=""
                                 width={35}
-                            />
+                            /> */}
+                            <h1 className="text-white rounded bg-purple-500 px-3"> -</h1>
+                            </>
 
-                        ) : (<Image
-                            src={Images.pink_plus_icon}
-                            classNameName="h-8 w-auto"
+                        ) : (
+                        <>
+                          <h1 className="text-white rounded bg-purple-500 px-3"> +</h1>
+                          {/* <Image
+                            src={Images.plus_icon}
+                            className="h-8 w-auto"
                             alt=""
-                            width={35}
-                        />
+                            width={15}
+                        /> */}
+                        </>
+                       
                         )}
                     </button>
                     {activeIndex === index && (
-                        <div className="p-2 bg-white">
-                            {item.content}
+                        <div className="p-2 border p-5 rounded shadow-lg bg-gray-100">
+                            {item?.content}
 
                         </div>
                     )}
