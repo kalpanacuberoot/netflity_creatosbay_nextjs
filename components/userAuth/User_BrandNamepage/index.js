@@ -13,6 +13,7 @@ const User_BrandNamepage = () => {
     const router = useRouter();
 
     const [brand_user, setBrand_user] = useState([]);
+    const [user_active_account, setUser_active_account] = useState(null);
 
 
     const getUser_Brand = async () => {
@@ -76,6 +77,17 @@ const User_BrandNamepage = () => {
 
     useEffect(() => {
         getUser_Brand();
+        const active_account = Cookies.get('brand_detail');
+        if (active_account !== undefined || null) {
+            const current_account = JSON?.parse(active_account)
+            console.log("active_account in user_brand_page", active_account,current_account);
+            // const current_account = JSON?.parse(active_account)
+          setUser_active_account(current_account?.brand?.id);
+
+
+        }
+
+        
     }, [])
 
     console.log("brand_user", brand_user);
@@ -85,7 +97,10 @@ const User_BrandNamepage = () => {
         console.log("onBrand_details", item, index);
         Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
         router.push('/home');
+
     }
+
+    console.log("active_account in user_brand_page", user_active_account);
 
     return (
         <>
@@ -95,9 +110,12 @@ const User_BrandNamepage = () => {
                         <div className="p-10 bg-white w-full  h-screen ">
                             <h1 className="my-3">Choose Brand Account</h1>
                             <div className="flex flex-col items-center justify-center ">
-                                {brand_user.length > 0 && brand_user?.map((item, index) => (
-                                    <>
-                                        {/* <div className={`w-full rounded edit_button_clr py-3 px-5 text-center my-2`}
+                                {brand_user.length > 0 && brand_user?.map((item, index) => {
+                                    const isCurrent = item?.brand?.id === user_active_account
+                                    console.log("isCurrent user brand name", isCurrent);
+                                    return (
+                                        <>
+                                            {/* <div className={`w-full rounded edit_button_clr py-3 px-5 text-center my-2`}
                                         key={index}
                                         onClick={() => onBrand_details(item, index)}
                                     >
@@ -106,21 +124,23 @@ const User_BrandNamepage = () => {
                                         >
                                             {item.brand.name}
                                         </button>
+                                         className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : 'button_clr'}`}
                                     </div> */}
-                                        <div
-                                            className=" border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer"
-                                            onClick={() => onBrand_details(item, index)}
-                                        >
-                                            <Image className="mr-2 rounded-full"
-                                                src={item?.brand?.logo}
-                                                alt="Jese image"
-                                                width={60}
-                                                height={60}
-                                            />
-                                            {item?.brand?.name}
-                                        </div>
-                                    </>
-                                ))}
+                                            <div
+                                                className={`border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? 'bg-amber-400 text-white hover:bg-white hover:text-amber-800 ' : ''}`}
+                                                onClick={() => onBrand_details(item, index)}
+                                            >
+                                                <Image className="mr-2 rounded-full"
+                                                    src={item?.brand?.logo}
+                                                    alt="Jese image"
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                                {item?.brand?.name}
+                                            </div>
+                                        </>
+                                    )
+                                })}
 
 
                             </div>

@@ -218,7 +218,7 @@ const Left_Dashboard = () => {
                                 return (
 
                                     <div
-                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : ''}`}
+                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : 'button_clr'}`}
                                         // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
                                         key={index}
                                     >
