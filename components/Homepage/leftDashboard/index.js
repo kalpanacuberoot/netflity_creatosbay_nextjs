@@ -42,9 +42,9 @@ const Left_Dashboard = () => {
     const onSwitchBrand = (item, index) => {
         console.log("onSwitchBrand", item, index);
         // JSON.stringify(Cookies.set('brand_detail',item))
-       const new_user_name =  Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
-       setCookie_user_brand(new_user_name);
-       router.reload();
+        const new_user_name = Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
+        setCookie_user_brand(new_user_name);
+        router.reload();
     }
 
     useEffect(() => {
@@ -211,10 +211,15 @@ const Left_Dashboard = () => {
 
                         <div className='w-full px-3 py-2'>
 
-                            {brand_user.length > 0 && brand_user.map((item, index) => {
+                            {brand_user?.length > 0 && brand_user.map((item, index) => {
+                                // const isCurrent = item.isCurrent;
+                                const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
+                                console.log("isCurrent left dashboard",isCurrent);
                                 return (
 
-                                    <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    <div
+                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : ''}`}
+                                        // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
                                         key={index}
                                     >
                                         <Image
