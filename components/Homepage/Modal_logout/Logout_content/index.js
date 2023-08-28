@@ -40,7 +40,7 @@ const Logout_content = () => {
                     position: 'top-center',
                     autoClose: 2000,
                 });
-                // router.push('/login');
+                router.push('/login');
                 // Cookies.remove('brand_id');
                 // Cookies.remove('user_data');
 

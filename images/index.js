@@ -52,6 +52,8 @@ import twitter_inv_mem from './twitter_inv_mem.png';
 import whatsapp_inv_mem from './whatsapp_inv_mem.png';
 import instagram_inv_mem from './instagram_inv_mem.png';
 import facebook_inv_mem from './facebook_inv_mem.png';
+import show_eye from './show_eye.png';
+import hide_eye from './hide_eye.png';
 
 export default {
     'company_logo':company_logo,
@@ -108,4 +110,6 @@ export default {
     'whatsapp_inv_mem':whatsapp_inv_mem,
     'instagram_inv_mem':instagram_inv_mem,
     'facebook_inv_mem':facebook_inv_mem,
+    'show_eye':show_eye,
+    'hide_eye':hide_eye,
 };
