@@ -107,15 +107,17 @@ const User_BrandNamepage = () => {
                                             {item.brand.name}
                                         </button>
                                     </div> */}
-                                        <div 
-                                        className=" border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded">
-                                            <Image className="mr-2 rounded-full" 
-                                            src={item?.brand?.logo} 
-                                            alt="Jese image" 
-                                            width={60}
-                                            height={60}
+                                        <div
+                                            className=" border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer"
+                                            onClick={() => onBrand_details(item, index)}
+                                        >
+                                            <Image className="mr-2 rounded-full"
+                                                src={item?.brand?.logo}
+                                                alt="Jese image"
+                                                width={60}
+                                                height={60}
                                             />
-                                             {item?.brand?.name}
+                                            {item?.brand?.name}
                                         </div>
                                     </>
                                 ))}
