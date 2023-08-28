@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const User_BrandNamepage = () => {
 
@@ -79,9 +80,9 @@ const User_BrandNamepage = () => {
 
     console.log("brand_user", brand_user);
 
-    const onBrand_details = (item, index) =>{
+    const onBrand_details = (item, index) => {
 
-        console.log("onBrand_details",item, index);
+        console.log("onBrand_details", item, index);
         Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
         router.push('/home');
     }
@@ -95,7 +96,8 @@ const User_BrandNamepage = () => {
                             <h1 className="my-3">Choose Brand Account</h1>
                             <div className="flex flex-col items-center justify-center ">
                                 {brand_user.length > 0 && brand_user?.map((item, index) => (
-                                    <div className={`w-full rounded edit_button_clr py-3 px-5 text-center my-2`}
+                                    <>
+                                        {/* <div className={`w-full rounded edit_button_clr py-3 px-5 text-center my-2`}
                                         key={index}
                                         onClick={() => onBrand_details(item, index)}
                                     >
@@ -104,11 +106,23 @@ const User_BrandNamepage = () => {
                                         >
                                             {item.brand.name}
                                         </button>
-                                    </div>
+                                    </div> */}
+                                        <div 
+                                        className=" border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded">
+                                            <Image className="mr-2 rounded-full" 
+                                            src={item?.brand?.logo} 
+                                            alt="Jese image" 
+                                            width={60}
+                                            height={60}
+                                            />
+                                             {item?.brand?.name}
+                                        </div>
+                                    </>
                                 ))}
 
 
                             </div>
+
                             <Buttons
                                 label={"Add New Brand"}
                                 buttoncss={"py-3 button_clr px-5 my-5"}
