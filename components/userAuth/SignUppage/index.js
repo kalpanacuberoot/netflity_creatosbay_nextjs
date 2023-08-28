@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import Terms_of_service from '@/components/Homepage/Termsofservice';
 import Terms_of_service_content from '@/components/Homepage/Termsofservice/Terms_of_service_content';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
+import Images from '@/images';
 
 const Signuppage = () => {
 
@@ -21,54 +23,8 @@ const Signuppage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
-
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
-    //         // console.log('GET response:', getResponse);
-
-    //         const postData = { name: `${firstName} ${lastName}`, email: email, password: password, type: "brand" };
-    //         const postResponse = await apiCall('https://backend.creatorsbay.app/api/register', 'post', postData);
-    //         console.log('POST response register-------------:', postResponse);
-    //     
-    //     } catch (error) {
-    //         console.error('POST response register catrch error-------------', error);
-    //     }
-    // };
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //       // const getResponse = await apiCall('https://jsonplaceholder.typicode.com/posts/1', 'get');
-    //       // console.log('GET response:', getResponse);
-
-    //       const postData = {
-    //         name: `${firstName} ${lastName}`, 
-    //         email: email, 
-    //         password: password, 
-    //         type: "brand"
-    //       };
-    //       const postResponse = await apiCall(`${url}/register`, 'post', postData);
-
-    //       console.log('POST response register-------------:', postResponse);
-    //       if (postResponse?.message) {
-    //        
-    //         toast.success('Login Successfully', {
-    //           position: 'top-center',
-    //           autoClose: 5000,
-    //         });
-
-    //         router.push('/brand')
-    //       } else {
-    //         console.error('Error:', postResponse?.statusText);
-    //         alert('logibn api response else', postResponse?.statusText)
-    //       }
-    //      
-    //     } catch (error) {
-    //       console.error('POST response register catrch error-------------', error);
-    //     }
-    //   };
+    const [showPassword, setShowPassword] = useState(false);
+    const [showconfirmPassword, setShowconfirmPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -138,6 +94,18 @@ const Signuppage = () => {
         setPasswordsMatch(password === newConfirmPassword);
     };
 
+    // showw password
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    // end show password
+
+    // show confirm password
+    const toggleConfirmPasswordVisibility = () => {
+        setShowconfirmPassword(!showconfirmPassword)
+    }
+    // end show confirm password
+
     return (
         <>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={() => setIsModalOpen_terms_service(false)}>
@@ -195,27 +163,74 @@ const Signuppage = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <input
-                            type="password"
-                            id="name"
-                            className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Create Password"
-                            required
-                            value={password}
-                            // onChange={(e) => setPassword(e.target.value)}
-                            onChange={handlePasswordChange}
-                            pattern="^.{8,}$" title="Minimum 8 characters allowed"
-                        />
-                        <input
-                            type="password"
-                            id="name"
-                            className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            required
-                            // onChange={(e) => setPasswordsMatch(e.target.value)}
-                            onChange={handleConfirmPasswordChange}
-                        />
+                        <div className='flex items-center relative'>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                id="name"
+                                className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Create Password"
+                                required
+                                value={password}
+                                // onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
+                                pattern="^.{8,}$" title="Minimum 8 characters allowed"
+                            />
+                            <button
+                                className="absolute text-black rounded-r-md p-5 pb-0 right-0"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {/* {showPassword ? 'Hide' : 'Show'} */}
+                                {showPassword ?
+                                    <Image
+                                        src={Images.show_eye}
+                                        width={20}
+                                        height={20}
+                                        alt=""
+                                    />
+                                    :
+                                    <Image
+                                        src={Images.hide_eye}
+                                        width={20}
+                                        height={20}
+                                        alt=""
+                                    />
+                                }
+                            </button>
+                        </div>
+
+                        <div className='flex items-center relative'>
+                            <input
+                               type={showconfirmPassword ? 'text' : 'password'}
+                                id="name"
+                                className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Confirm Password"
+                                value={confirmPassword}
+                                required
+                                // onChange={(e) => setPasswordsMatch(e.target.value)}
+                                onChange={handleConfirmPasswordChange}
+                            />
+                            <button
+                                className="absolute text-black rounded-r-md p-5 pb-0 right-0"
+                                onClick={toggleConfirmPasswordVisibility}
+                            >
+                                {/* {showPassword ? 'Hide' : 'Show'} */}
+                                {showconfirmPassword ?
+                                    <Image
+                                        src={Images.show_eye}
+                                        width={20}
+                                        height={20}
+                                        alt=""
+                                    />
+                                    :
+                                    <Image
+                                        src={Images.hide_eye}
+                                        width={20}
+                                        height={20}
+                                        alt=""
+                                    />
+                                }
+                            </button>
+                        </div>
                         {!passwordsMatch && <p>Passwords do not match</p>}
                         <div className=" flex my-5 justify-between">
                             <div className="flex items-center">
