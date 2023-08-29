@@ -1,29 +1,12 @@
-import React from "react";
-import Image from "next/image";
-import logo from "../images/logo.png";
-import { useState } from "react";
+
 import Link from "next/link";
-import images from "@/images";
 import Colors from "@/styles/Colors";
-import Layout from "./Layout";
-import Splash_screen_slider from "./splash_screen_slider";
 
 const Home = () => {
-  const [currentSection, setCurrentSection] = useState(1);
 
-  const handleGetStarted = () => {
-    setCurrentSection(currentSection + 1);
-  };
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const options = ["Option 1", "Option 2", "Option 3"];
-
-  const handleChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
   return (
     <>
-      <div className="flex items-center bg-zinc-100 ">
+      <div className="flex items-center bg-zinc-100 h-screen">
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             <div className=" p-10 bg-white screen1 border-gray-300 border-solid w-full max-h-screen min-h-800 rounded-lg border-1">
@@ -46,7 +29,6 @@ const Home = () => {
                   style={{ backgroundColor: Colors.logo_clr }}
                 >
                   <button
-                    // onClick={handleGetStarted}
                     className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl flex mobile_btn items-center"
 
                   >
@@ -68,7 +50,7 @@ const Home = () => {
                   className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl flex items-center w-full justify-center text-base font-bold leading-9"
                   style={{ color: Colors.logo_clr }}
                 >
-                  {/* <Link href={"/support"}> How it&lsquo;s Works</Link> */}
+
                   <Link href={"/support"}> Need Help and Support</Link>
                 </h6>
               </div>

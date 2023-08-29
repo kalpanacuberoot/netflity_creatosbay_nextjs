@@ -88,7 +88,7 @@ const User_BrandNamepage = () => {
         }
 
         
-    }, [])
+    }, [brand_user])
 
     console.log("brand_user", brand_user);
 

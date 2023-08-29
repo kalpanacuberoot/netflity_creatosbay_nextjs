@@ -132,7 +132,7 @@ const Left_Dashboard = () => {
 
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData?.status) {
+                if (responseData?.status==="success") {
                     // toast.success('brandusers Name', {
                     //     position: 'top-center',
                     //     autoClose: 5000,
@@ -166,7 +166,7 @@ const Left_Dashboard = () => {
 
 
     return (
-        <div className="" ref={dropdownRef}>
+        <div className="h-screen" ref={dropdownRef}>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -211,7 +211,7 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 '>
 
                 <Image
                     src={Images.profile_user}
@@ -388,7 +388,7 @@ const Left_Dashboard = () => {
             <div className=' text-center'>
 
                 {cookie_user_brand && (
-                    <h4 className='font-bold'>{cookie_user_brand?.brand?.name}</h4>
+                    <h4 className='font-bold'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
                 )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
                 <div className='w-100 rounded-full border edit_button_clr py-1'

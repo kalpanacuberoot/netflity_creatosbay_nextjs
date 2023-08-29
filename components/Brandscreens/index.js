@@ -156,6 +156,7 @@ const Brandscreens = () => {
                 const responseData = await response.json();
                 console.log('brands response:', responseData);
 
+                Cookies.set('brand_detail', JSON.stringify(responseData?.data), { expires: 106500 });
                 Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {

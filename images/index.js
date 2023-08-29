@@ -54,6 +54,7 @@ import instagram_inv_mem from './instagram_inv_mem.png';
 import facebook_inv_mem from './facebook_inv_mem.png';
 import show_eye from './show_eye.png';
 import hide_eye from './hide_eye.png';
+import loader_gif from './loader.gif';
 
 export default {
     'company_logo':company_logo,
@@ -112,4 +113,5 @@ export default {
     'facebook_inv_mem':facebook_inv_mem,
     'show_eye':show_eye,
     'hide_eye':hide_eye,
+    'loader_gif':loader_gif,
 };
