@@ -17,7 +17,7 @@ const Communication_page = () => {
             <div className="flex container_invoice container w-full"
                 style={{ background: Colors.logo_background_clr }}
             >
-                <div className="auto-cols-max  px-3 py-5 border w-1/8"
+                <div className="auto-cols-max  px-3 py-5 border w-1/7"
                     style={{ background: Colors.white_clr }}
                 >
                     <CollapseLeftDashboard />

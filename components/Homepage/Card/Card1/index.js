@@ -38,7 +38,7 @@ const Home_Card1 = ({ items }) => {
 
     return (
         <>
-            <div className="my-2 mx-2 h-auto">
+            <div className="my-2 mx-2 h-auto ">
                 <div className="relative">
                     <Image
                         src={Images.card_img}
