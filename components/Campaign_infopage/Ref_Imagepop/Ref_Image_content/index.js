@@ -4,33 +4,59 @@ import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import Social_media_icons from "@/components/four_social_media";
 import ModalHeader from "@/components/Homepage/ModalHeader";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { url } from "@/generalfunation";
 
-const Ref_Image_content = ({ onPopupData }) => {
+const Ref_Image_content = ({ refpopupData }) => {
 
-    const [link, setLink] = useState(null);
+    const IMAGE_URL = "https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com";
+
+    const [file2, setFile2] = useState(null);
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
+    const [previewRefImage, setPreviewRefImage] = useState(null);
+    const refImage2 = useRef(null);
 
+    // Function to trigger click event on the file input
+    const handleImageClick = (ref) => () => {
+        ref.current.click();
+    };
 
+    const handleRefFileChange = (event) => {
+        const selectedRefFile = event.target.files[0];
+        console.log("fileslected and ref", file2, selectedRefFile);
+        if (selectedRefFile) {
+            // Create a FileReader instance
+            const reader = new FileReader();
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setLink(selectedFile);
+            // Set up a callback function for when the FileReader has loaded the image
+            reader.onloadend = () => {
+                setFile2(selectedRefFile); // Save the selected image file
+                setPreviewRefImage(reader.result); // Set the image preview
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(selectedRefFile);
+
+        } else {
+            setFile2(null); // Reset the selected image
+            setPreviewRefImage(null); // Reset the image preview
+        }
+        // setFile(selectedFile);
 
     };
 
 
-    console.log("fileslected", link);
+    console.log("fileslected and ref", file2);
 
-    const handleUploadClick = async () => {
+    const handleRefUploadClick = async () => {
         // handleFileChange();
-        if (!link) {
+        {handleImageClick(refImage2)}
+        if (!file2) {
             alert('Please select an image to upload.');
             return;
         }
@@ -39,7 +65,7 @@ const Ref_Image_content = ({ onPopupData }) => {
         console.log('categories cookieValue------------2', cookieValue?.token);
 
         const formData = new FormData();
-        formData.append('file', link);
+        formData.append('file', file2);
 
         try {
             const response = await fetch(`${url}/saveimage`, {
@@ -47,7 +73,7 @@ const Ref_Image_content = ({ onPopupData }) => {
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
                     'Accept': '/application/json',
-                   
+
                 },
                 body: formData,
             });
@@ -57,12 +83,12 @@ const Ref_Image_content = ({ onPopupData }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("image response ok", data?.url);
-                toast.success('Image Uploaded Successfully', {
+                toast.success('reference Image Uploaded Successfully', {
                     position: 'top-center',
                     autoClose: 5000,
                 });
                 // alert('Image uploaded successfully.');
-                setLink(data?.url)
+                setFile2(data?.url)
             } else {
                 // alert('Image upload failed.');
                 toast.error('Image upload failed', {
@@ -79,7 +105,14 @@ const Ref_Image_content = ({ onPopupData }) => {
         }
     };
 
-    const sendDataToParent = () => {
+    const sendRefDataToParent = () => {
+
+        const link = `${IMAGE_URL}/uploads/${file2?.name}`;
+        console.log('imgrddsa product popup----1', file2, link)
+
+        handleRefUploadClick();
+        console.log('imgrddsa product popup-----2', file2)
+
         const data = [
             {
                 link,
@@ -91,7 +124,7 @@ const Ref_Image_content = ({ onPopupData }) => {
         console.log("popupdata---", data);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
-        onPopupData(data);
+        refpopupData(data);
         toast.success('Data is saved', {
             position: 'top-center', // Set the toast position
             autoClose: 3000, // Close the toast after 3 seconds0
@@ -121,21 +154,22 @@ const Ref_Image_content = ({ onPopupData }) => {
                         </div>
                         <div className=" ">
                             <div
-                                className=" cursor-not-allowed border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                className=" border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                             >
                                 <label
-                                    htmlFor="fileInput"
+                                    htmlFor="reffileInput"
                                     style={{ borderColor: Colors.logo_clr }}
-                                    className=" cursor-not-allowed   w-auto"
+                                    className="w-auto"
                                 >
-                                    <div className="cursor-not-allowed">
+                                    <div className="">
                                         <input
-                                            id="fileInput"
+                                            id="reffileInput"
                                             type="file"
                                             accept="image/*"
+                                            ref={refImage2}
                                             // accept=".jpeg. .png, .gif, .jpg"
-                                            className="hidden "
-                                            onChange={handleFileChange} // Triggered when a file is selected
+                                            className="hidden absolute w-full"
+                                            onChange={handleRefFileChange} // Triggered when a file is selected
                                         />
                                         <Image
                                             src={Images.plus_icon}
@@ -145,10 +179,26 @@ const Ref_Image_content = ({ onPopupData }) => {
                                             className=" cursor-default m-5 mb-0"
                                         />
                                     </div>
+                                    {previewRefImage && (
+                                        <Image
+                                            src={previewRefImage}
+                                            alt="Selected"
+                                            style={{ maxWidth: '100%', maxHeight: '300px' }}
+                                            width={50}
+                                            height={50}
+                                            className="mx-auto"
+                                        />
+                                    )}
+                                    {file2 && (
+                                        <h6 className="text-base text-center">{file2?.name}</h6>
+                                    )}
 
                                 </label>
-                                <h6>{link ? link?.name : "Choose the image"}</h6>
-                                <div className="p-10"  onClick={handleUploadClick}>
+
+                                {/* <h6>{link ? link?.name : "Choose the image"}</h6> */}
+                                <div className="p-10"
+                                // onClick={handleUploadClick}
+                                >
                                     <button
                                         className=" text-base  edit_button_clr p-5 rounded"
                                         // Triggered when "Company Logo" text is clicked
@@ -174,7 +224,7 @@ const Ref_Image_content = ({ onPopupData }) => {
                         <Buttons
                             buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                             label={"Submit"}
-                            onClick={sendDataToParent}
+                            onClick={sendRefDataToParent}
                         />
                     </div>
                 </div>

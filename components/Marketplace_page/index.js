@@ -1,6 +1,6 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Images from "@/images";
 import Image from "next/image";
 import Marketplace_card from "./Marketplace_card";
@@ -10,14 +10,50 @@ import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import Filters_popup_page from "../Filters_popup_page";
 
 const Marketplace_page = () => {
 
     const [creatordata, setCreatordata] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    useEffect(() => {
+
+        handleSubmit();
+        const handleOutsideClick = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleOutsideClick);
+
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, []);
 
 
     const handleSubmit = async () => {
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
+
+        // const cookieValue = Cookies.get('user_data'); // Get the cookie value
+
+        // let parsedUserData = null;
+
+        // if (cookieValue) {
+        //     try {
+        //         parsedUserData = JSON.parse(cookieValue); // Parse the JSON if the cookie value is defined
+        //     } catch (error) {
+        //         // Handle JSON parsing error, if necessary
+        //         console.error('Error parsing user_data cookie:', error);
+        //     }
+        // }
+        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -60,28 +96,10 @@ const Marketplace_page = () => {
     };
 
 
-    // const handleSubmit = async () => {
-
-    //     const cookieValue = JSON.parse(Cookies.get('user_data'));
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
-    //     try {
-
-    //         const headers = {
-    //             'Authorization': `Bearer ${cookieValue?.token}`,
-
-    //         };
-    //         const getResponse = await apiCall(`${url}/creators`, 'get', headers);
-    //         console.log('GET creator response: ', getResponse);
-
-
-    //     } catch (error) {
-    //         console.error('POST response creator catrch error-------------', error);
-    //     }
-    // };
     console.log("creatordata", creatordata);
-    useEffect(() => {
-        handleSubmit();
-    }, [])
+    // useEffect(() => {
+    //     handleSubmit();
+    // }, [])
 
     const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
@@ -89,6 +107,7 @@ const Marketplace_page = () => {
             <div
                 className="flex container_capmapign_info w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
+                ref={dropdownRef}
             >
                 <div
                     className="auto-cols-max  px-5 py-5 border w-1/5"
@@ -112,9 +131,14 @@ const Marketplace_page = () => {
                                 </div>
                                 <div className="font_size_21">Showing 12 of 100 Influencers</div>
                             </div>
+
                             <div
                                 style={{ background: Colors.white_clr }}
-                                className="rounded-md flex flex-row justify-between items-center px-3 py-2">
+                                className="rounded-md flex flex-row justify-between items-center px-3 py-2"
+                                onClick={toggleDropdown}
+
+                            >
+
                                 <button className="font_size_21 mx-4">
                                     Filters
                                 </button>
@@ -125,6 +149,13 @@ const Marketplace_page = () => {
                                     alt=""
                                 />
                             </div>
+                            {isOpen &&
+                                <div className='z-10 w-96 mt-10 top-14 right-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 divide-gray-100 shadow dark:bg-gray-700 border rounded-md'>
+                                    <Filters_popup_page />
+                                </div>
+                            }
+
+
                         </div>
                     </div>
 
@@ -155,10 +186,7 @@ const Marketplace_page = () => {
                                             alt=""
                                         />
 
-                                        {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
 
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
@@ -173,10 +201,10 @@ const Marketplace_page = () => {
 
                                                     <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
                                                         {categories_item?.name}
-                                                    </h6>      
-                                            )
+                                                    </h6>
+                                                )
                                             })
-                                        }
+                                            }
                                         </div>
                                     </div>
                                     <Link

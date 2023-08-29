@@ -14,17 +14,26 @@ const Supportpage = () => {
 
   const router = useRouter();
 
+  const maxCharacters = 250;
+
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [options, setOptions] = useState('');
-  const [desc,setDesc] = useState('');
+  const [desc, setDesc] = useState('');
   const dropdown_options = [
-    "Select your option",
+    "Support Type",
     "suggestion",
     "query",
     "support",
     "complain",
   ]
+
+  const handleTextChange = (event) => {
+    const newText = event.target.value;
+    if (newText.length <= maxCharacters) {
+      setDesc(newText);
+    }
+  };
 
 
   // console.log("token",token);
@@ -45,8 +54,8 @@ const Supportpage = () => {
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
       }
-      
-      const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData,headers);
+
+      const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData, headers);
 
       console.log('support response-------------:', postResponse);
       if (postResponse?.status) {
@@ -93,7 +102,7 @@ const Supportpage = () => {
                   type="email"
                   id="name"
                   className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Michal.mosiak12@gmail.com"
+                  placeholder="Email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -146,18 +155,23 @@ const Supportpage = () => {
                 <textarea
                   id="descriptionInput"
                   type="text"
-                  placeholder="Explain your query in short."
+                  // placeholder="Explain your query in short."
                   className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   rows={3}
                   value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                  minLength={0}
-                  maxLength={250}
+                  onChange={handleTextChange}
+                  placeholder={`Max Characters: ${maxCharacters}`}
+                // onChange={(e) => setDesc(e.target.value)}
+                // minLength={0}
+                // maxLength={250}
                 ></textarea>
                 <div className="flex items-center justify-end pt-4 pb-4">
-                  <label style={{ color: Colors.pink_clr }}>
+                  {/* <label style={{ color: Colors.pink_clr }}>
                     Max Characters : 0 / 250
-                  </label>
+                  </label> */}
+                  <div  style={{ color: Colors.pink_clr }}>
+                    {desc?.length} / {maxCharacters} characters used
+                  </div>
                 </div>
 
                 <button
