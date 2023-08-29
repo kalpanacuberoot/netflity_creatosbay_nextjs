@@ -154,14 +154,14 @@ const Image_content = ({ onPopupData }) => {
                         </div>
                         <div className=" ">
                             <div
-                                className=" cursor-not-allowed border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                className="  border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                             >
                                 <label
                                     htmlFor="fileInput"
                                     style={{ borderColor: Colors.logo_clr }}
-                                    className=" cursor-not-allowed   w-auto"
+                                    className="    w-auto"
                                 >
-                                    <div className="cursor-not-allowed">
+                                    <div className="">
                                         <input
                                             id="fileInput"
                                             type="file"

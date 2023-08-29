@@ -134,7 +134,7 @@ const Live_Campaignpage = () => {
 
 
                     </div>
-                    <div className="flex flex-row flex-wrap items-start  justify-evenly grid grid-cols-3">
+                    <div className="flex flex-row flex-wrap items-start  justify-evenly">
                         {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
                             <>
                                 <Home_Card1 key={index} items={item} />
@@ -143,13 +143,13 @@ const Live_Campaignpage = () => {
 
 
                             :
-                            <div className="flex flex-col">
-                                <h1>
+                            <div className="flex flex-col bg-white h-full w-full mt-5 rounded items-center">
+                                <h1 className="text-center p-10">
                                     {"No Campaigns Found"}
                                 </h1>
 
                             </div>
-                        }
+                         } 
                     </div>
 
                 </div>

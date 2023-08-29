@@ -114,7 +114,7 @@ const Homepage = () => {
 
       <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
         <div
-          className="auto-cols-max w-96 px-3 py-5 border"
+          className="auto-cols-max  px-5 py-5  w-1/5 h-screen"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <div>

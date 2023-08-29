@@ -110,13 +110,13 @@ const Marketplace_page = () => {
                 ref={dropdownRef}
             >
                 <div
-                    className="auto-cols-max  px-5 py-5 border w-1/5"
+                    className="auto-cols-max  px-5 py-5 border w-1/5 h-screen"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
                 </div>
 
-                <div className="m-2 w-full auto-cols-max text-start p-2"
+                <div className="m-2 w-full auto-cols-max text-start p-2  h-screen"
 
                 >
                     <div
@@ -135,7 +135,7 @@ const Marketplace_page = () => {
                             <div
                                 style={{ background: Colors.white_clr }}
                                 className="rounded-md flex flex-row justify-between items-center px-3 py-2"
-                                onClick={toggleDropdown}
+                                // onClick={toggleDropdown}
 
                             >
 

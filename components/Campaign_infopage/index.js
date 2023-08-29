@@ -40,8 +40,8 @@ const Campaign_infopage = () => {
   const [refpopupData, setRefpopupData] = useState([] ? [] : null); // State to hold popup data
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [product_link,setProduct_link] = useState('');
-  const [ref_link,setRef_link] = useState('');
+  const [product_link, setProduct_link] = useState('');
+  const [ref_link, setRef_link] = useState('');
 
   // Function to update state with data from the popup
   const handleRefPopupData = (data) => {
@@ -112,7 +112,7 @@ const Campaign_infopage = () => {
       const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
 
       console.log('POST response campaigns-------------:', postResponse);
-      if (postResponse?.status) {
+      if (postResponse?.status === "success") {
 
 
         Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
@@ -145,7 +145,23 @@ const Campaign_infopage = () => {
     }
   };
 
-  console.log("popupData", popupData, refpopupData);
+  const refpopupData_link = refpopupData.map((item) => item?.link);
+  const imagerefArray = refpopupData_link;
+
+  // Use the join method to convert the array to a string
+  const imagerefString = imagerefArray.join('');
+
+  console.log('imagerefString', imagerefString);
+
+  const propopupData_link = popupData.map((item) => item?.link);
+  const imageproArray = propopupData_link;
+
+  // Use the join method to convert the array to a string
+  const imageproString = imageproArray.join('');
+
+  console.log('imagerefString', imagerefString);
+
+  console.log("popupData", popupData, refpopupData, imagerefString,imageproString);
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
@@ -201,7 +217,7 @@ const Campaign_infopage = () => {
         style={{ backgroundColor: Colors.button_light_clr }}
       >
         <div
-          className="auto-cols-max  px-5 py-5 border w-1/5"
+          className="auto-cols-max  px-5 py-5 w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
@@ -214,83 +230,99 @@ const Campaign_infopage = () => {
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
-              <form
+              {/* <form
                 onSubmit={handleSubmit}
-              >
-                <div className="">
-                  <h2
-                    style={{ color: Colors.pending_clr }}
-                    className="font-bold campaign_info_title"
-                  >
-                    Campaign Info
-                  </h2>
-                  <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-                  {/* <p className="divider_line">fuyfudydyd</p> */}
-                  {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
-                  <hr className="divider_line my-5" />
-                  <div className="my-3">
-                    <h4 className="">Campaign Name</h4>
-                    <h6 className="mb-3">
-                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </h6>
+              > */}
+              <div className="">
+                <h2
+                  style={{ color: Colors.pending_clr }}
+                  className="font-bold campaign_info_title"
+                >
+                  Campaign Info
+                </h2>
+                <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                {/* <p className="divider_line">fuyfudydyd</p> */}
+                {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
+                <hr className="divider_line my-5" />
+                <div className="my-3">
+                  <h4 className="">Campaign Name</h4>
+                  <h6 className="mb-3">
+                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </h6>
 
-                    <input
-                      type="text"
-                      id="small-input"
-                      className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      value={campaign_name}
-                      onChange={(e) => setCampaign_name(e.target.value)}
-                    />
-                  </div>
-                  <div className="my-3">
-                    <h4>Campaign Description</h4>
-                    <h6 className="mb-3">
-                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </h6>
+                  <input
+                    type="text"
+                    id="small-input"
+                    className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={campaign_name}
+                    onChange={(e) => setCampaign_name(e.target.value)}
 
-                    <textarea
-                      id="message"
-                      rows="4"
-                      className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Start Typing..."
-                      value={campaign_desc}
-                      onChange={(e) => setCampaign_desc(e.target.value)}
-                    ></textarea>
-                  </div>
+                  />
+                </div>
+                <div className="my-3">
+                  <h4>Campaign Description</h4>
+                  <h6 className="mb-3">
+                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </h6>
 
-                  <div className="my-3">
-                    <h4>Product</h4>
-                    <h6 className="mb-3">
-                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </h6>
+                  <textarea
+                    id="message"
+                    rows="4"
+                    className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Start Typing..."
+                    value={campaign_desc}
+                    onChange={(e) => setCampaign_desc(e.target.value)}
+                  ></textarea>
+                </div>
 
-                    <div className="flex flex-row justify-between">
-                      <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        {/* <input
+                <div className="my-3">
+                  <h4>Product</h4>
+                  <h6 className="mb-3">
+                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </h6>
+
+                  <div className="flex flex-row justify-between">
+                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      {/* <input
                       type="file"
                       ref={inputFileRef}
                       onChange={(e) => onFilechange(e)}
                       hidden
                       className=""
                     /> */}
-                        <button
-                          // onClick={() => onBtnClick()}
-                          className="h-48  w-full "
-                        >
-                          <Image
-                            src={Images.plus_icon}
-                            width={20}
-                            className="mx-auto "
-                            alt=""
-                          />
-                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                            Add Image
-                          </p>
-                        </button>
-                      </div>
-                      {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
+                      <button
+                        // onClick={() => onBtnClick()}
+                        className="h-48  w-full "
+                      >
+                        <Image
+                          src={Images.plus_icon}
+                          width={20}
+                          className="mx-auto "
+                          alt=""
+                        />
+                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                          Add Image
+
+                        </p>
+                        {imagerefString &&
+                          <>
+                            {/* <h3>{imagerefString}</h3> */}
+                            <input
+                            type="url"
+                            value={imagerefString}
+                            className='w-full p-3'
+                            onChange={() => setIsModalOpen(false)}
+                            readOnly
+                            />
+                          </>
+                        }
+                      </button>
+
+                    </div>
+
+                    {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
                         <input
                           type="file"
                           ref={inputFileRef}
@@ -312,119 +344,133 @@ const Campaign_infopage = () => {
                           </p>
                         </button>
                       </div> */}
-                    </div>
-                    <div className="flex items-center mt-5">
-                      <div className="flex-grow border-t border-gray-300"></div>
-                      <div className="px-4 text-gray-600">OR</div>
-                      <div className="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    <div>
-                      {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
-                      <input
-                        type="url"
-                        id="url"
-                        className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Paste link"
-                        value={product_link}
-                        onChange={(e) => setProduct_link(e.target.value)}
+                  </div>
+                  <div className="flex items-center mt-5">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <div className="px-4 text-gray-600">OR</div>
+                    <div className="flex-grow border-t border-gray-300"></div>
+                  </div>
+                  <div>
+                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
+                    <input
+                      type="url"
+                      id="url"
+                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="Paste link"
+                      value={product_link}
+                      onChange={(e) => setProduct_link(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {/* <h1>Received data from popup: {popupData?.file}</h1> */}
+                <div className="my-3">
+                  <h3>Timelines</h3>
+                  <h6>Set Creating Date</h6>
+
+                  {/* <Calendar_component /> */}
+                  {/* dater pocker start */}
+
+                  <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
+                    <div className='relative w-full'>
+                      <DatePicker
+                        selected={startDate}
+                        // onChange={(date) => setStartDate(date)}
+                        onChange={handleStartDateChange}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        placeholderText="Start Date"
+                        className="w-full text-center p-2 rounded "
+                        minDate={currentDate} // Set the minimum date to the current date
                       />
-                    </div>
-                  </div>
-
-                  {/* <h1>Received data from popup: {popupData?.file}</h1> */}
-                  <div className="my-3">
-                    <h3>Timelines</h3>
-                    <h6>Set Creating Date</h6>
-
-                    {/* <Calendar_component /> */}
-                    {/* dater pocker start */}
-
-                    <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
-                      <div className='relative w-full'>
-                        <DatePicker
-                          selected={startDate}
-                          // onChange={(date) => setStartDate(date)}
-                          onChange={handleStartDateChange}
-                          selectsStart
-                          startDate={startDate}
-                          endDate={endDate}
-                          placeholderText="Start Date"
-                          className="w-full text-center p-2 rounded "
-                          minDate={currentDate} // Set the minimum date to the current date
+                      <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
+                        <Image
+                          src={Images.calendar_icon}
+                          alt=""
+                          width={20}
                         />
-                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
-                          <Image
-                            src={Images.calendar_icon}
-                            alt=""
-                            width={20}
-                          />
-                        </div>
-                      </div>
-
-                      <span className="mx-4 mt-0 text-gray-500">-</span>
-
-                      <div className='relative mt-0 w-full'>
-
-                        <DatePicker
-                          selected={endDate}
-                          onChange={(date) => setEndDate(date)}
-                          selectsEnd
-                          startDate={startDate}
-                          endDate={endDate}
-                          // minDate={startDate}
-                          placeholderText="End Date"
-                          className="w-full text-center p-2 rounded "
-                          minDate={startDate || currentDate} // Set the minimum date to the current date
-                        />
-                        <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
-                          <Image
-                            src={Images.calendar_icon}
-                            alt=""
-                            width={20}
-                          />
-                        </div>
                       </div>
                     </div>
 
+                    <span className="mx-4 mt-0 text-gray-500">-</span>
 
-                    {/* date picker end */}
-                    <div>
-                      {/* <h2>Campaign Info Page date range</h2> */}
-                      {startRangeDate !== null && endRangeDate !== null && (
-                        <p>
-                          Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
-                        </p>
-                      )}
+                    <div className='relative mt-0 w-full'>
+
+                      <DatePicker
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        // minDate={startDate}
+                        placeholderText="End Date"
+                        className="w-full text-center p-2 rounded "
+                        minDate={startDate || currentDate} // Set the minimum date to the current date
+                      />
+                      <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                        <Image
+                          src={Images.calendar_icon}
+                          alt=""
+                          width={20}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="my-3">
-                    <h4>Content Reference</h4>
-                    <h6 className="mb-3">
-                      Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </h6>
 
-                    <div className="flex flex-row justify-between">
-                      <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                        onClick={() => setIsModalOpenRef(true)}
+
+                  {/* date picker end */}
+                  <div>
+                    {/* <h2>Campaign Info Page date range</h2> */}
+                    {startRangeDate !== null && endRangeDate !== null && (
+                      <p>
+                        Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="my-3">
+                  <h4>Content Reference</h4>
+                  <h6 className="mb-3">
+                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </h6>
+
+                  <div className="flex flex-row justify-between">
+                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                      onClick={() => setIsModalOpenRef(true)}
+                    >
+
+                      <button
+                        // onClick={() => onBtnClick()}
+                        className="h-48  w-full "
                       >
+                        <Image
+                          src={Images.plus_icon}
+                          width={20}
+                          className="mx-auto "
+                          alt=""
+                        />
+                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                          Add Image
+                        </p>
+                        {imageproString &&
+                          <>
+                            {/* <h3>{imagerefString}</h3> */}
+                            <input
+                            type="url"
+                            value={imageproString}
+                            className='w-full p-3'
+                            onChange={() => setIsModalOpenRef(false)}
+                            readOnly
+                            />
+                          </>
+                        }
 
-                        <button
-                          // onClick={() => onBtnClick()}
-                          className="h-48  w-full "
-                        >
-                          <Image
-                            src={Images.plus_icon}
-                            width={20}
-                            className="mx-auto "
-                            alt=""
-                          />
-                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                            Add Image
-                          </p>
-                        </button>
-                      </div>
+                      </button>
+                    </div>
+                   
 
-                      {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
+                    {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
                         onClick={() => setIsModalOpenRef(true)}
                       >
                         <button
@@ -442,29 +488,29 @@ const Campaign_infopage = () => {
                           </p>
                         </button>
                       </div> */}
-                    </div>
-                    <div className="flex items-center mt-5">
-                      <div className="flex-grow border-t border-gray-300"></div>
-                      <div className="px-4 text-gray-600">OR</div>
-                      <div className="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    <div>
-                      {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
-                      <input
-                        type="url"
-                        id="url"
-                        className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Paste link"
-                        value={ref_link}
-                        onChange={(e) => setRef_link(e.target.value)}
-                      />
-                    </div>
                   </div>
-                  <Buttons label={"Proceed"} buttoncss={"py-3"}
-                  //  onClick={handleSubmit}
-                  />
+                  <div className="flex items-center mt-5">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <div className="px-4 text-gray-600">OR</div>
+                    <div className="flex-grow border-t border-gray-300"></div>
+                  </div>
+                  <div>
+                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
+                    <input
+                      type="url"
+                      id="url"
+                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="Paste link"
+                      value={ref_link}
+                      onChange={(e) => setRef_link(e.target.value)}
+                    />
+                  </div>
                 </div>
-              </form>
+                <Buttons label={"Proceed"} buttoncss={"py-3"}
+                  onClick={handleSubmit}
+                />
+              </div>
+              {/* </form> */}
               <ToastContainer />
             </div>
             {/* right */}
