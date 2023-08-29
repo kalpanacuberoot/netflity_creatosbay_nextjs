@@ -81,13 +81,27 @@ const Left_Dashboard = () => {
 
 
 
-    }, [cookie_user_brand,brand_user]);
+    }, []);
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
     };
 
     const getUser_Brand = async () => {
+
+        // const brand_details = Cookies.get('brand_detail');
+        // if (brand_details) {
+        //     try {
+        //         const brand_detail_name = JSON.parse(brand_details);
+        //         // Now, you can access properties of the object
+        //         console.log("brand_user--dwndbawb", brand_user, brand_detail_name);
+        //         setCookie_user_brand(brand_detail_name)
+        //     } catch (error) {
+        //         console.error('Error parsing JSON from cookie:', error);
+        //     }
+        // } else {
+        //     console.error('Cookie "brand_detail" is empty or not defined');
+        // }
 
 
         const cookieValue = JSON?.parse(Cookies?.get('user_data'));

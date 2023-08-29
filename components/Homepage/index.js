@@ -26,7 +26,7 @@ const Homepage = () => {
 
   const [campaign_data, setCampaign_data] = useState([]);
 
- 
+
 
   const allCampaignData = async () => {
 
@@ -65,6 +65,13 @@ const Homepage = () => {
         headers: headers,
 
       });
+      if (response.status === 429) {
+        const retryAfter = parseInt(response.headers.get('Retry-After')) || 60; // Default to 60 seconds
+        console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000)); // Convert seconds to milliseconds
+        return makeRequest(); // Retry the request
+      }
+
       console.log('GET campaigns?brand=1 response:', response);
       if (response?.ok) {
         const responseData = await response.json();
@@ -153,7 +160,7 @@ const Homepage = () => {
             className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap h-full"
             style={{ backgroundColor: Colors.white_clr }}
           >
-           
+
             {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
               <>
                 <Home_Card1 key={index} items={item} />
