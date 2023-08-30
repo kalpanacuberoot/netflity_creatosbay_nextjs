@@ -1,6 +1,6 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import Creators_popup from "./Creators_popup";
 import Creators_popup_content from "./Creators_popup/Creators_popup_content";
@@ -32,7 +32,7 @@ const Creators_profilepage = () => {
 
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
 
     const { data } = router.query;
     if (data) {
@@ -84,7 +84,7 @@ const Creators_profilepage = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+ }, []);
 
   console.log("creator_details", creator_details);
 
