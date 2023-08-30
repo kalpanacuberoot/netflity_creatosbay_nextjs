@@ -1,5 +1,5 @@
 import Buttons from "@/components/Button"
-import { getApiCall, url } from "@/generalfunation";
+import { getApiCall, url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { ToastContainer } from 'react-toastify';

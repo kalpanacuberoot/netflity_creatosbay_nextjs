@@ -5,7 +5,7 @@ import Images from "@/images";
 import Image from "next/image";
 import Marketplace_card from "./Marketplace_card";
 import Link from "next/link";
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

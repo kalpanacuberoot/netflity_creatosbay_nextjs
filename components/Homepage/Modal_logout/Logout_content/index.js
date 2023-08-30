@@ -4,7 +4,7 @@ import ModalHeader from "../../ModalHeader";
 import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import Cookies from "js-cookie";
-import { apiCall, getApiCall, url } from "@/generalfunation";
+import { apiCall, getApiCall, url } from "@/generalfunctions";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';

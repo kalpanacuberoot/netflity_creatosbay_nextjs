@@ -12,7 +12,7 @@ import Home_Card2 from "./Card/Card2";
 import Home_Card3 from "./Card/Card3";
 import Home_Card4 from "./Card/Card4";
 import Terms_of_service from "./Termsofservice";
-import { apiCall, getApiCall, isEmpty, url } from "@/generalfunation";
+import { apiCall, getApiCall, isEmpty, url } from "@/generalfunctions";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';

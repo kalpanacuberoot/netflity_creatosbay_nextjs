@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Terms_of_service from "@/components/Homepage/Termsofservice";
 import Terms_of_service_content from "@/components/Homepage/Termsofservice/Terms_of_service_content";
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import Cookies from 'js-cookie';
 import Image from "next/image";
 import Images from "@/images";

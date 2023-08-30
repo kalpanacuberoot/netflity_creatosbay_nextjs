@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Creators_popup from "./Creators_popup";
 import Creators_popup_content from "./Creators_popup/Creators_popup_content";
 import Image from "next/image";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import Images from "@/images";
 

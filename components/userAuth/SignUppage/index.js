@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { apiCall } from "@/generalfunation";
+import { apiCall } from "@/generalfunctions";
 import Colors from "@/styles/Colors";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
