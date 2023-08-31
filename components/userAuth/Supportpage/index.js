@@ -155,12 +155,12 @@ const Supportpage = () => {
                 <textarea
                   id="descriptionInput"
                   type="text"
-                  // placeholder="Explain your query in short."
+                  placeholder="Explain your query in short."
                   className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   rows={3}
                   value={desc}
                   onChange={handleTextChange}
-                  placeholder={`Max Characters: ${maxCharacters}`}
+                  // placeholder={`Max Characters: ${maxCharacters}`}
                 // onChange={(e) => setDesc(e.target.value)}
                 // minLength={0}
                 // maxLength={250}
@@ -170,7 +170,7 @@ const Supportpage = () => {
                     Max Characters : 0 / 250
                   </label> */}
                   <div  style={{ color: Colors.pink_clr }}>
-                    {desc?.length} / {maxCharacters} characters used
+                    {desc?.length} / {maxCharacters} characters
                   </div>
                 </div>
 

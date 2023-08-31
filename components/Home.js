@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex items-center bg-zinc-100 h-screen">
+      <div className=" bg-zinc-100 h-screen">
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             <div className=" p-10 bg-white screen1 border-gray-300 border-solid w-full max-h-screen min-h-800 rounded-lg border-1">
