@@ -24,7 +24,7 @@ const Home = () => {
                 md:w-2/3 sets the width of the element
               </h4>
               <div className="flex justify-between pt-5 mt-5 align-middle items-center home_buttons">
-                <Link href={'/signup'}
+                <Link href={'/login'}
                   className="flex  tracking-wider align-middle justify-center items-center text-white w-full text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl rounded-full px-6 lg:px-8 xl:py-4 py-2 bg-cyan-600 get_started_btn"
                   style={{ backgroundColor: Colors.logo_clr }}
                 >
