@@ -57,7 +57,7 @@ const Marketplace_page = () => {
 
             });
 
-            if (response?.ok) {
+            if (response?.ok === true) {
                 const responseData = await response.json();
                 console.log('creators response:', responseData?.data?.data);
                 setCreatordata(responseData?.data?.data)

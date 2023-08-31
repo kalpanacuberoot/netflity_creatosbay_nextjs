@@ -88,7 +88,7 @@ const User_BrandNamepage = () => {
         }
 
         
-    }, [brand_user])
+    }, [])
 
     console.log("brand_user", brand_user);
 
@@ -115,20 +115,11 @@ const User_BrandNamepage = () => {
                                     console.log("isCurrent user brand name", isCurrent);
                                     return (
                                         <>
-                                            {/* <div className={`w-full rounded edit_button_clr py-3 px-5 text-center my-2`}
-                                        key={index}
-                                        onClick={() => onBrand_details(item, index)}
-                                    >
-                                        <button
-
-                                        >
-                                            {item.brand.name}
-                                        </button>
-                                         className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : 'button_clr'}`}
-                                    </div> */}
+                                           
                                             <div
                                                 className={`border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-4 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
                                                 onClick={() => onBrand_details(item, index)}
+                                                key={index}
                                             >
                                                 <Image className="mr-2 rounded-full"
                                                     src={item?.brand?.logo}

@@ -37,7 +37,7 @@ const Left_Dashboard = () => {
     const [alluser_accounts, setAlluser_accounts] = useState(false);
     const dropdownRef = useRef(null);
     const [cookie_user_brand, setCookie_user_brand] = useState(null);
-
+    const settingdropdownRef = useRef(null);
 
     const onSwitchBrand = (item, index) => {
         console.log("onSwitchBrand", item, index);
@@ -71,6 +71,9 @@ const Left_Dashboard = () => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setAlluser_accounts(false);
             }
+            if (settingdropdownRef.current && !settingdropdownRef.current.contains(event.target)) {
+                setDropdown_menu(false);
+            }
         }
 
         document.addEventListener('mousedown', handleClickOutside);
@@ -88,21 +91,6 @@ const Left_Dashboard = () => {
     };
 
     const getUser_Brand = async () => {
-
-        // const brand_details = Cookies.get('brand_detail');
-        // if (brand_details) {
-        //     try {
-        //         const brand_detail_name = JSON.parse(brand_details);
-        //         // Now, you can access properties of the object
-        //         console.log("brand_user--dwndbawb", brand_user, brand_detail_name);
-        //         setCookie_user_brand(brand_detail_name)
-        //     } catch (error) {
-        //         console.error('Error parsing JSON from cookie:', error);
-        //     }
-        // } else {
-        //     console.error('Cookie "brand_detail" is empty or not defined');
-        // }
-
 
         const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
@@ -166,7 +154,7 @@ const Left_Dashboard = () => {
 
 
     return (
-        <div className="h-screen" ref={dropdownRef}>
+        <div className="h-screen">
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -211,7 +199,7 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 '>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 '  ref={dropdownRef}>
 
                 <Image
                     src={Images.profile_user}
@@ -261,7 +249,7 @@ const Left_Dashboard = () => {
 
 
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
-                    onClick={() => setDropdown_menu(!dropdown_menu)}
+                  ref={ settingdropdownRef} 
                 >
                     <div onClick={() => setIsModalOpen_notification(true)}>
                         <Image
@@ -279,6 +267,7 @@ const Left_Dashboard = () => {
                         height={30}
                         className='my-2 mx-1'
                         alt=""
+                        onClick={() => setDropdown_menu(!dropdown_menu)}
                     />
                     {/* <Image
                         src={Images.dropdown_icon}
