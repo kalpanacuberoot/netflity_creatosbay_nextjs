@@ -84,7 +84,7 @@ const Creators_profilepage = () => {
     } catch (error) {
       console.error('Error:', error);
     }
- }, []);
+ }, [creator_details?.user?.name, router.query]);
 
   console.log("creator_details", creator_details);
 
