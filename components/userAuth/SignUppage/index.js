@@ -114,13 +114,13 @@ const Signuppage = () => {
                     <Terms_of_service_content />
                 </div>
             </Terms_of_service>
-            <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
-                <div className="bg-white p-5 rounded-md">
+            <div className="container p-4 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+                <div className="bg-white p-5 rounded-md  xl:p-10 lg:p-10">
                     <h4 className=" text-base">
                         {" "}
                         Already a member ?{" "}
                         <span
-                            className="  pl-3 font-bold"
+                            className="bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400"
                             style={{ color: Colors.logo_clr }}
                         >
                             {" "}

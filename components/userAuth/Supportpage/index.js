@@ -88,11 +88,11 @@ const Supportpage = () => {
   return (
     <>
       {/* <div className="container h-full flex bg-zinc-100 items-center height-70 px-10"> */}
-      <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+      <div className="container p-4 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
         <div className=" auto-col-max w-full">
 
-          <div className="flex items-center w-full justify-center">
-            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5">
+          <div className="flex items-center justify-start w-full">
+            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5 xl:p-10 lg:p-10">
               <h1 className="font-bold text-left text-gray-900   ">
                 Need Help And Support
               </h1>
