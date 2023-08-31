@@ -135,7 +135,7 @@ const Signuppage = () => {
                         <div className="flex">
                             <input
                                 type="text"
-                                id="name"
+                                id="first_name"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="First Name"
                                 required
@@ -145,7 +145,7 @@ const Signuppage = () => {
                             />
                             <input
                                 type="text"
-                                id="name"
+                                id="last_name"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Last Name"
                                 required
@@ -156,7 +156,7 @@ const Signuppage = () => {
                         </div>
                         <input
                             type="email"
-                            id="name"
+                            id="email"
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Email"
                             required
@@ -166,7 +166,7 @@ const Signuppage = () => {
                         <div className='flex items-center relative'>
                             <input
                                 type={showPassword ? 'text' : 'password'}
-                                id="name"
+                                id="password"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Create Password"
                                 required
@@ -201,7 +201,7 @@ const Signuppage = () => {
                         <div className='flex items-center relative'>
                             <input
                                type={showconfirmPassword ? 'text' : 'password'}
-                                id="name"
+                                id="confirm_password"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Confirm Password"
                                 value={confirmPassword}

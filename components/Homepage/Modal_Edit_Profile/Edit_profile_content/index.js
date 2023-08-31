@@ -127,7 +127,7 @@ const Edit_profile_content = () => {
                     <form>
                         <input
                             type="compant"
-                            id="name"
+                            id="profile_name"
                             className="appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Brand Name"
                             // value={brand_details?.brand?.name}
@@ -135,7 +135,7 @@ const Edit_profile_content = () => {
                         />
                         <input
                             type="text"
-                            id="name"
+                            id="website"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Brand Website"
                             // value={brand_details?.brand?.website}
@@ -147,7 +147,7 @@ const Edit_profile_content = () => {
                             <input
                                 key={index}
                                 type="text"
-                                id="name"
+                                id="category"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Brand Type"
                                 value={item?.name}
@@ -222,65 +222,7 @@ const Edit_profile_content = () => {
 
 
                     </form>
-                    {/* <div className="font_size_21  line-height-[26.52px]">
-                        Account Details.
-                    </div>
-                    <form>
-
-
-                        <div className="flex">
-                            <input
-                                type="text"
-                                id="name"
-                                className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="First Name"
-                            />
-                            <input
-                                type="text"
-                                id="name"
-                                className="appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Last Name"
-                            />
-                        </div>
-                        <input
-                            type="email"
-                            id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="exampl@123.com"
-                        />
-                        <input
-                            type="password"
-                            id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Create Password"
-                        />
-                        <input
-                            type="password"
-                            id="name"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Confirm Password"
-                        />
-                        <div className=" flex my-5 justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="myCheckbox"
-                                    className="form-checkbox h-5 w-5 "
-                                    style={{ backgroundColor: Colors.logo_clr }}
-                                />
-                                <label htmlFor="myCheckbox" className="ml-2 text-black font_size_12">
-                                    Send reminders until the form is completed
-
-                                </label>
-                            </div>
-
-                        </div>
-
-                    </form> */}
-                    {/* <Buttons
-                        buttoncss="font_size_24 leading-6 py-3 my-5"
-                        label={"Apply Changes"}
-                    /> */}
+                    
                 </div>
 
 

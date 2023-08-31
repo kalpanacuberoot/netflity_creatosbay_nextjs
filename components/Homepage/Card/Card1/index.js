@@ -57,7 +57,7 @@ const Home_Card1 = ({ items }) => {
                 </div>
                 <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                     <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                        <div className="font_size_17 ">Reels creators {items?.creators?.length}</div>
+                        <div className="font_size_17 ">Creators {items?.creators?.length}</div>
                         <div
                             className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
                             style={{ backgroundColor: Colors.delay_clr }}
@@ -82,12 +82,12 @@ const Home_Card1 = ({ items }) => {
                                 typesetting industry......
                             </>
                         )}
-                        <div
+                        {/* <div
                             className="text-red-600 font_size_12"
                             onClick={() => setCardfirstshowmore(!cardfirstshowmore)}
                         >
                             {cardfirstshowmore ? "Less More" : "Read More"}
-                        </div>
+                        </div> */}
                     </div>
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
                         <h6>{start_date} - {end_date}</h6>

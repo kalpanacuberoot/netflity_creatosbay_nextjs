@@ -78,7 +78,7 @@ const Forgotpage = () => {
               <form onSubmit={handleSubmit}>
                 <input
                   type="email"
-                  id="name"
+                  id="email"
                   className="appearance-none border rounded-md w-full bg-gray-100 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Email"
                   value={email}

@@ -99,7 +99,7 @@ const Brand1page = ({ onClick }) => {
                     <form >
                         <input
                             type="compant"
-                            id="name"
+                            id="company_name"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Company Name"
                             value={companyName}
@@ -108,7 +108,7 @@ const Brand1page = ({ onClick }) => {
                         />
                         <input
                             type="password"
-                            id="name"
+                            id="password"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Create Password"
                             value={password}
