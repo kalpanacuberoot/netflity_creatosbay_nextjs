@@ -24,8 +24,8 @@ const Loginpage = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
     try {
 
       const postData = {
@@ -143,7 +143,7 @@ const Loginpage = () => {
                   className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-4"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/signup"}>Sign up </Link>
+                  <Link href={"/signup"}>Sign Up </Link>
                 </span>
               </h4>
               <h1 className="my-5  font-bold text-left text-gray-900   ">
@@ -203,7 +203,7 @@ const Loginpage = () => {
                       type="checkbox"
                       id="myCheckbox"
                       className="form-checkbox h-5 w-5 "
-                      required
+                      // required
                       style={{ backgroundColor: Colors.logo_clr }}
                     />
                     <label htmlFor="myCheckbox" className=" ml-2 text-black">

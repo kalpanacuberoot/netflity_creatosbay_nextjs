@@ -28,29 +28,6 @@ const Brand1page = ({ onClick }) => {
         setOpen(!true)
     }
 
-    // const getCompanyCategories = async() => {
-    //    
-    //     console.log("brand dcreens------------", token);
-    //     try {
-
-    //         const headers = {
-    //             'Authorization': `Bearer ${token?.token}`,
-
-    //         }
-    //         const getResponse = await apiCall(`${url}/categories`, 'get', headers);
-    //         console.log('GET feedbacks response:', getResponse);
-    //         if (getResponse.ok) {
-
-    //             console.log('categories result------------', result);
-    //         } else {
-    //             console.error('Error:', response.statusText);
-    //             alert('categories api response else', response.statusText)
-    //         }
-
-    //     } catch (error) {
-    //         console.error('Get response register catrch error-------------', error);
-    //     }
-    // };
     const getCompanyCategories = async () => {
       
         const cookieValue = JSON.parse(Cookies.get('user_data'))
