@@ -114,12 +114,10 @@ const Homepage = () => {
 
       <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
         <div
-          className="auto-cols-max  px-5 py-5  w-1/5 h-screen"
+          className="auto-cols-max  px-5 py-5  w-1/4"
           style={{ backgroundColor: Colors.white_clr }}
         >
-          <div>
-            <Left_Dashboard />
-          </div>
+          <Left_Dashboard />
         </div>
         <div
           // className="grid grid-flow-col border w-100 px-3"
@@ -166,7 +164,6 @@ const Homepage = () => {
                 <Home_Card1 key={index} items={item} />
               </>
             ))
-
 
               :
               <div className="flex flex-col">
