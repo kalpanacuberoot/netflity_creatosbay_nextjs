@@ -7,7 +7,7 @@ import Colors from "@/styles/Colors";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import { useRouter } from 'next/navigation';
 
 const Supportpage = () => {

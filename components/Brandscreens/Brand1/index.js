@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Brand2page from "../Brand2";
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import Cookies from 'js-cookie';
 
 const Brand1page = ({ onClick }) => {

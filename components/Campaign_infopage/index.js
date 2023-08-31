@@ -10,7 +10,7 @@ import Image_popup from "./ImagePopup";
 import Image_content from "./ImagePopup/Image_content";
 // import CalendarStripeCard from '../components/CalendarStripeCard';
 import Cookies from 'js-cookie';
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';

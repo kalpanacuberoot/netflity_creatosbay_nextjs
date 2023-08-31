@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import { useRouter } from "next/router";
 
 const Image_content = ({ onPopupData }) => {
