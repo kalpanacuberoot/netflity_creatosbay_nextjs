@@ -81,7 +81,7 @@ const Left_Dashboard = () => {
 
 
 
-    }, []);
+    }, [brand_user]);
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
