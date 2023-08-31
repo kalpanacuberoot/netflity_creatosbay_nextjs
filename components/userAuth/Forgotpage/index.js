@@ -71,7 +71,7 @@ const Forgotpage = () => {
                   <Link href={"/login"}>Login </Link>
                 </span>
               </h4>
-              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+              <h1 className="my-5  font-bold text-left text-gray-900   ">
                 Forgot Your Password?.
               </h1>
 
@@ -79,7 +79,7 @@ const Forgotpage = () => {
                 <input
                   type="email"
                   id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none border rounded-md w-full bg-gray-100 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

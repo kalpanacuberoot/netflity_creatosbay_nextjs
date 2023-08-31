@@ -144,18 +144,18 @@ const Verifypage = () => {
     <>
       <div className="container h-full flex bg-zinc-100 items-center height-70 px-10">
         <div className=" auto-col-max w-full">
-          <div className="flex justify-center height-70  items-center px-10 ">
-            <div className="p-10  bg-white border-gray-300 border-solid w-full rounded-lg border-1">
+          <div className="flex justify-center height-70  items-center p-5  xl:p-10 lg:p-10">
+            <div className="p-5  xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full rounded-lg border-1">
               <h4>
                 Don&apos;t have an account ?
                 <span
-                  className="  pl-3 font-bold"
+                   className="shadow-lg bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-3"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/login"}>Log in </Link>
+                  <Link href={"/login"}>Login </Link>
                 </span>
               </h4>
-              <h1 className="mt-0 mb-4   font-bold text-left text-gray-900   ">
+              <h1 className="mt-0 mb-4 pt-3   font-bold text-left text-gray-900   ">
                 Enter Verify Code
               </h1>
 
@@ -194,19 +194,19 @@ const Verifypage = () => {
                   onChange={handleConfirmPasswordChange}
                 />
                 {!passwordsMatch && <p>Passwords do not match</p>}
-                <div className=" flex my-5 justify-between">
+                {email && <div className=" mt-4 flex justify-between">
                   <div className="flex items-center">
                     <label className="ml-2" style={{ color: Colors.pink_clr }}>
                       Code is sent to {email}
                     </label>
                   </div>
-                </div>
+                </div>}
                 {/* <div>Verifying email for: {email}</div>; */}
 
                
                 <button
                   type="submit"
-                  className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
+                  className=" rounded-3xl  text-white w-full py-3 px-4 my-5 focus:outline-none focus:shadow-outline"
                   style={{ background: Colors.logo_clr }}
                 >
                   Continue
