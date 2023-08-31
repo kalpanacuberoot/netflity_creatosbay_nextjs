@@ -114,7 +114,7 @@ const Signuppage = () => {
                     <Terms_of_service_content />
                 </div>
             </Terms_of_service>
-            <div className="container p-4 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+            <div className="container p-5 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
                 <div className="bg-white p-5 rounded-md  xl:p-10 lg:p-10">
                     <h4 className=" text-base">
                         {" "}
@@ -127,7 +127,7 @@ const Signuppage = () => {
                             <Link href={"/login"}>Login </Link>
                         </span>
                     </h4>
-                    <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+                    <h1 className="mt-5 mb-5  font-bold text-left text-gray-900   ">
                         Create New Account.
                     </h1>
 
