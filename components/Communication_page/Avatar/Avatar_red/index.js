@@ -8,7 +8,7 @@ const Avatar_red = () => {
 
             <div className="flex items-center space-x-4 p-2  my-2">
                 <div className="relative">
-                    {/* <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""/> */}
+                  
                     <Image
                         // className="w-10 h-10 rounded-full"
                         width={44}

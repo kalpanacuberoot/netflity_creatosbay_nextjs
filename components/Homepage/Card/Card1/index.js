@@ -1,6 +1,7 @@
 import Images from "@/images";
 import Colors from "@/styles/Colors";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Home_Card1 = ({ items }) => {
@@ -38,7 +39,7 @@ const Home_Card1 = ({ items }) => {
 
     return (
         <>
-            <div className="my-2 mx-2 h-auto ">
+            <div className="my-2 mx-2 h-auto " key={items?.id}>
                 <div className="relative">
                     <Image
                         src={Images.card_img}
@@ -91,9 +92,11 @@ const Home_Card1 = ({ items }) => {
                     </div>
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
                         <h6>{start_date} - {end_date}</h6>
+                        <Link href={'/communication'}>
                         <div className="w-100 rounded-full border edit_button_clr py-1">
                             <buttton> Check Details</buttton>
                         </div>
+                        </Link>
                     </div>
                 </div>
             </div>

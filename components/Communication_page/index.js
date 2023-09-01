@@ -42,7 +42,7 @@ const Communication_page = () => {
                     <div className="flex flex-row items-start  justify-between w-full ">
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/8">
                             <Searchcomm />
-                            <div className=" p-4 border shadow rounded m-3">
+                            <div className=" p-4 border shadow rounded m-3 ">
                                 <div className="flex flex-row items-center justify-between ">
                                     <div className="font_size_21">
                                         Active Conversations
@@ -103,7 +103,7 @@ const Communication_page = () => {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3  me-3 w-4/8">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3  me-3 w-4/8 h-screen">
                             <div className="flex flex-row items-center p-4 justify-between">
                                 <Avatar_without_badge />
                                 <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
@@ -124,19 +124,19 @@ const Communication_page = () => {
                                 </div>
                             </div>
                             <hr className="" />
-                            <div className="p-4 h-screen">
+                            <div className="p-5">
 
 
                                 <Image
                                     src={Images.chat_msg}
                                     width={510}
-                                    height={450}
+                                    height={250}
                                     alt=""
                                     className=""
                                 />
                             </div>
                             <hr />
-                            <div className="p-4">
+                            <div className="p-5">
 
                                 <Chat />
                             </div>

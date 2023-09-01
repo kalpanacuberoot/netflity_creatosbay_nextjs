@@ -175,7 +175,7 @@ const Left_Dashboard = () => {
                 </div>
             </Modal_Invite_members>
             <Modal_Edit_Profile isOpen={isModalOpen_edit_prof} onClose={() => setIsModalOpen_edit_prof(false)}>
-                <div className="relative w-full max-w-2xl max-h-full">
+                <div className="relative w-full max-w-2xl max-h-3xl">
                     <Edit_profile_content />
                 </div>
             </Modal_Edit_Profile>
