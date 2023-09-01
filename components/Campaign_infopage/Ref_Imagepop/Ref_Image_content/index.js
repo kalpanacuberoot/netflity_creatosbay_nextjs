@@ -204,7 +204,7 @@ const Ref_Image_content = ({ refpopupData }) => {
                                         // Triggered when "Company Logo" text is clicked
                                         style={{ cursor: 'grabbing' }}
                                     >
-                                        Upload Reference Image
+                                       Upload Media
                                     </button>
                                 </div>
 

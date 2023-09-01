@@ -19,10 +19,11 @@ const ModalHeader = () => {
                         <span className="sr-only">Close modal</span> */}
 
 
-                        <span className="w-10 absolute bottom-0 right-10 transform translate-y-1/4 popup_logo rounded-full">
+                        <span className="w-30 absolute bottom-0 right-10 transform translate-y-1/4 popup_logo rounded-full">
                             <Image
                                 src={Images.popup_logo}
                                 alt=""
+                                className=""
                             />
                         </span>
 

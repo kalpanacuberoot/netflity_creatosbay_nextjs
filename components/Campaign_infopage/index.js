@@ -199,7 +199,7 @@ const Campaign_infopage = () => {
         onClose={() => setIsModalOpen(false)}
       // onSubmit={handlePopupData}   
       >
-        <div className="relative w-full max-w-2xl max-h-full">
+        <div className="relative w-screen max-w-4xl max-h-full  min-w-xl ">
 
           <Image_content onPopupData={handlePopupData} />
         </div>
@@ -208,7 +208,7 @@ const Campaign_infopage = () => {
         isOpen={isModalOpenRef}
         onClose={() => setIsModalOpenRef(false)}
       >
-        <div className="relative w-full max-w-2xl max-h-full">
+        <div className="relative w-screen max-w-2xl max-h-full   min-w-xl">
           <Ref_Image_content refpopupData={handleRefPopupData} />
         </div>
       </Ref_Imagepop>
@@ -420,14 +420,16 @@ const Campaign_infopage = () => {
 
 
                   {/* date picker end */}
-                  <div>
+                  <div className=''>
                     {/* <h2>Campaign Info Page date range</h2> */}
                     {startRangeDate !== null && endRangeDate !== null && (
                       <p>
                         Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
                       </p>
                     )}
+                    <div className='text-center w-full' style={{color:Colors.logo_clr}}>We required min 15 days to complete the campaign</div>
                   </div>
+                  
                 </div>
                 <div className="my-3">
                   <h4>Content Reference</h4>

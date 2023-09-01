@@ -135,7 +135,7 @@ const Image_content = ({ onPopupData }) => {
     return (
         <>
 
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full">
 
                 <ModalHeader />
                 <div className="space-y-6 container-fluid p-14 pb-5">
@@ -152,9 +152,9 @@ const Image_content = ({ onPopupData }) => {
 
                             />
                         </div>
-                        <div className=" ">
+                        <div className="  w-full">
                             <div
-                                className="  border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                className="  w-full border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                             >
                                 <label
                                     htmlFor="fileInput"
@@ -194,13 +194,13 @@ const Image_content = ({ onPopupData }) => {
                                     {/* <h6>{file ? file?.name : " Image not found"}</h6> */}
 
                                 </label>
-                                <div className=" p-10">
+                                <div className=" w-full p-10">
                                     <button
                                         className=" text-base  edit_button_clr  cursor-grabbing p-3 rounded"
                                         // Triggered when "Company Logo" text is clicked
                                         style={{ cursor: 'grabbing' }}
                                     >
-                                        Product Upload Image
+                                         Upload Media
                                     </button>
                                 </div>
                             </div>
