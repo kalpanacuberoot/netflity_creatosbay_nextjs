@@ -11,8 +11,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Filters_popup_page from "../Filters_popup_page";
+import { useRouter } from "next/router";
 
 const Marketplace_page = () => {
+
+    const router = useRouter();
 
     const [creatordata, setCreatordata] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +39,7 @@ const Marketplace_page = () => {
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, [creatordata,isOpen]);
+    }, [creatordata, isOpen]);
 
 
     const handleSubmit = async () => {
@@ -85,6 +88,14 @@ const Marketplace_page = () => {
 
 
     console.log("creatordata", creatordata);
+
+    const onProfileDetail = (index) => {
+
+        console.log("onProfileDetail",index);
+        router.push('/creator_profile');
+
+        Cookies.set('creator_profile_id', JSON.stringify(index.id));
+    }
 
 
     const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
@@ -146,7 +157,7 @@ const Marketplace_page = () => {
                     </div>
 
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
-                        {creatordata?.length > 0 && creatordata.map((item, index) => {
+                        {creatordata?.length > 0 ? creatordata.map((item, index) => {
                             return (
                                 <div className=" bg-white p-3 rounded-lg" key={index}>
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
@@ -193,20 +204,41 @@ const Marketplace_page = () => {
                                             }
                                         </div>
                                     </div>
-                                    <Link
+                                    {/* <Link
                                         href={{
                                             pathname: "/creator_profile",
                                             query: { data: JSON.stringify({ key: item?.id }) },
                                         }}
-                                    >
-                                        <button className="w-full rounded-full p-2 mt-3" style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}>View profile</button>
-                                    </Link>
+                                    > */}
+                                        <button 
+                                        className="w-full rounded-full p-2 mt-3" 
+                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                        onClick={() => onProfileDetail(item,index)}
+                                        >
+                                            View profile
+                                        </button>
+                                    {/* </Link> */}
                                 </div>
                             )
                         }
 
 
-                        )}
+                        )
+                            :
+
+                            <>
+                                <div className="flex flex-col">
+                                    <h1>
+                                        {"No Campaigns Found"}
+                                    </h1>
+                                    <Link href={'/campaign_info'}>
+                                        <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
+                                            Start Campaign
+                                        </button>
+                                    </Link>
+                                </div>
+                            </>
+                        }
 
 
                         {/* <Marketplace_card />

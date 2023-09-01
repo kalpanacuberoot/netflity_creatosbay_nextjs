@@ -41,10 +41,11 @@ const Creators_profilepage = () => {
     }
 
 
-    const parsedData = JSON?.parse(data);
+    // const parsedData = JSON?.parse(data);
     const cookieValue = JSON.parse(Cookies.get('user_data'));
-    console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
-    Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
+    const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
+    // console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
+    // Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
     Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
 
     try {
@@ -54,7 +55,12 @@ const Creators_profilepage = () => {
         'Content-Type': 'application/json',
       };
 
-      const response = await fetch(`${url}/creators/${parsedData?.key}`, {
+      // const response = await fetch(`${url}/creators/${parsedData?.key}`, {
+      //   method: 'Get',
+      //   headers: headers,
+
+      // });
+      const response = await fetch(`${url}/creators/${creator_profile_id}`, {
         method: 'Get',
         headers: headers,
 
