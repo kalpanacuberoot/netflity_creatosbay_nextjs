@@ -199,7 +199,7 @@ const Campaign_infopage = () => {
         onClose={() => setIsModalOpen(false)}
       // onSubmit={handlePopupData}   
       >
-        <div className="relative w-screen max-w-4xl max-h-full  min-w-xl ">
+        <div className="relative w-screen max-w-2xl max-h-full  min-w-xl ">
 
           <Image_content onPopupData={handlePopupData} />
         </div>
