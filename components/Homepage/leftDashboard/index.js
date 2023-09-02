@@ -14,7 +14,7 @@ import Notification_popup from "../Notification_popup";
 import Notification_content from "../Notification_popup/Notification_content";
 import Cookies from "js-cookie";
 import Modal_change_password from "../Modal_change_password";
-import { isEmpty, url } from "@/generalfunation";
+import { isEmpty, url } from "@/generalfunctions";
 import Change_password_content from "../Modal_change_password/Change_password_content";
 import { useRouter } from "next/router";
 import { ToastContainer } from 'react-toastify';

@@ -8,7 +8,7 @@ import Home_Card1 from "../Homepage/Card/Card1";
 import Home_Card2 from "../Homepage/Card/Card2";
 import Home_Card3 from "../Homepage/Card/Card3";
 import Home_Card4 from "../Homepage/Card/Card4";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 

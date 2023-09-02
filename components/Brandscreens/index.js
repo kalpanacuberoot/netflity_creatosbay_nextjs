@@ -4,7 +4,7 @@ import Brand2page from "./Brand2";
 import { useRouter } from 'next/navigation';
 import Colors from "@/styles/Colors";
 import Link from "next/link";
-import { apiCall, isEmpty, url } from "@/generalfunation";
+import { apiCall, isEmpty, url } from "@/generalfunctions";
 import Cookies from 'js-cookie';
 import DropdownWithCheckboxes from "../MultiSelectDropdown";
 import { ToastContainer } from 'react-toastify';

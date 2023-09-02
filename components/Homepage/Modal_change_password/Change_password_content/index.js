@@ -2,7 +2,7 @@ import Colors from "@/styles/Colors";
 import ModalHeader from "../../ModalHeader";
 import { useState } from "react";
 import Buttons from "@/components/Button";
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';

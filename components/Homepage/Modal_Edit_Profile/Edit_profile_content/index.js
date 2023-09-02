@@ -6,7 +6,7 @@ import Colors from "@/styles/Colors";
 import Social_media_icons from "@/components/four_social_media";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 
 const Edit_profile_content = () => {
 

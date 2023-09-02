@@ -1,11 +1,11 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import Creators_popup from "./Creators_popup";
 import Creators_popup_content from "./Creators_popup/Creators_popup_content";
 import Image from "next/image";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import Images from "@/images";
 
@@ -32,7 +32,7 @@ const Creators_profilepage = () => {
 
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
 
     const { data } = router.query;
     if (data) {
@@ -90,7 +90,7 @@ const Creators_profilepage = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+ }, [creator_details?.user?.name, router.query]);
 
   console.log("creator_details", creator_details);
 
