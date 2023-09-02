@@ -65,7 +65,7 @@ const Left_Dashboard = () => {
             console.error('Cookie "brand_detail" is empty or not defined');
         }
 
-
+        getUser_Brand();
 
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -82,7 +82,7 @@ const Left_Dashboard = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
 
-        getUser_Brand();
+
 
     }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -251,7 +251,7 @@ const Left_Dashboard = () => {
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
                     ref={settingdropdownRef}
                 >
-                    <div onClick={() => setIsModalOpen_notification(true) &&  setDropdown_menu(false)}>
+                    <div onClick={() => setIsModalOpen_notification(true) && setDropdown_menu(false)}>
                         <Image
                             src={Images.notification}
                             width={20}
@@ -267,7 +267,7 @@ const Left_Dashboard = () => {
                         height={30}
                         className='my-1 mx-1'
                         alt=""
-                        onClick={() => setDropdown_menu(!dropdown_menu) &&  setIsModalOpen_notification(false)}
+                        onClick={() => setDropdown_menu(!dropdown_menu) && setIsModalOpen_notification(false)}
                     />
                     {/* <Image
                         src={Images.dropdown_icon}
