@@ -47,9 +47,8 @@ const Left_Dashboard = () => {
         router.reload();
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-
-
 
         const brand_details = Cookies.get('brand_detail');
         if (brand_details) {
@@ -84,7 +83,7 @@ const Left_Dashboard = () => {
 
 
 
-    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); 
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
