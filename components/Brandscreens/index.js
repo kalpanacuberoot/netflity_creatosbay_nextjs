@@ -156,6 +156,7 @@ const Brandscreens = () => {
                 const responseData = await response.json();
                 console.log('brands response:', responseData);
 
+                Cookies.set('brand_detail', JSON.stringify(responseData?.data), { expires: 106500 });
                 Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {
@@ -266,7 +267,7 @@ const Brandscreens = () => {
                             {/* <form > */}
                             <input
                                 type="compant"
-                                id="name"
+                                id="company_name"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Brand Name"
                                 value={companyName}
@@ -276,7 +277,7 @@ const Brandscreens = () => {
                             />
                             <input
                                 type="url"
-                                id="name"
+                                id="website"
                                 className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Add Website URL or Social Links"
                                 value={website}
@@ -313,27 +314,11 @@ const Brandscreens = () => {
                                         // value={selectedValues.join(', ')}
                                         value={selectedValues.map((item) => item.name).join(', ')}
                                         readOnly
-                                        placeholder="Select the Brand Type"
+                                        placeholder="Select the Industry Type"
                                         onClick={() => setMultivalues(!multivalues)}
                                         required
                                     />
-                                    {/* <div className="">
-                                                <svg
-                                                    className=" w-2.5 h-2.5 ml-2.5"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 10 6"
-                                                >
-                                                    <path
-                                                        stroke="currentColor"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="m1 1 4 4 4-4"
-                                                    />
-                                                </svg>
-                                            </div> */}
+
                                 </div>
 
 
@@ -425,13 +410,15 @@ const Brandscreens = () => {
                                                     className="absolute w-screen hidden "
                                                 // Triggered when a file is selected
                                                 />
-                                                <Image
-                                                    src={Images.plus_icon}
-                                                    width={15}
-                                                    height={15}
-                                                    alt=""
-                                                    className="mx-auto cursor-default m-5 mb-0"
-                                                />
+                                                {!file && (
+                                                    <Image
+                                                        src={Images.plus_icon}
+                                                        width={15}
+                                                        height={15}
+                                                        alt=""
+                                                        className="mx-auto cursor-default m-5 mb-0"
+                                                    />
+                                                )}
                                             </div>
                                             {previewImage && (
                                                 <Image
@@ -446,16 +433,18 @@ const Brandscreens = () => {
                                             {file && (
                                                 <p className="text-base text-center">{file?.name}</p>
                                             )}
-
-                                            <div
-                                                className=" text-base text-gray-300 "
-                                            // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
-                                            // style={{ cursor: 'grabbing' }}
-                                            >
-                                                Company Logo(Upload Image)
-                                            </div>
-                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
-
+                                            {!file && (
+                                                <>
+                                                    <div
+                                                        className=" text-base text-gray-300 "
+                                                    // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
+                                                    // style={{ cursor: 'grabbing' }}
+                                                    >
+                                                        Company Logo(Upload Image)
+                                                    </div>
+                                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
+                                                </>
+                                            )}
                                         </label>
 
                                     </div>

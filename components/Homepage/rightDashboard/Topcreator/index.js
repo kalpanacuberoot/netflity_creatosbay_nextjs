@@ -342,11 +342,11 @@ const Top_creator = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-full text-center'>
+            {/* <div className='w-full text-center'>
                 <button className='start_campaign_btn px-5 py-1 w-48 rounded-full bg-white my-3'>
                     View All
                 </button>
-            </div>
+            </div> */}
         </div>
     )
 }

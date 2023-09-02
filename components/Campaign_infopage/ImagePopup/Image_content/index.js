@@ -23,7 +23,7 @@ const Image_content = ({ onPopupData }) => {
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
 
-    
+
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -135,7 +135,7 @@ const Image_content = ({ onPopupData }) => {
     return (
         <>
 
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
 
                 <ModalHeader />
                 <div className="space-y-6 container-fluid p-14 pb-5">
@@ -154,14 +154,14 @@ const Image_content = ({ onPopupData }) => {
                         </div>
                         <div className=" ">
                             <div
-                                className="  border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                className=" border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
                             >
                                 <label
                                     htmlFor="fileInput"
                                     style={{ borderColor: Colors.logo_clr }}
-                                    className="    w-auto"
+                                    className=" w-auto"
                                 >
-                                    <div className="">
+                                    <div className=" w-full text-center">
                                         <input
                                             id="fileInput"
                                             type="file"
@@ -169,13 +169,15 @@ const Image_content = ({ onPopupData }) => {
                                             className="hidden absolute w-full"
                                             onChange={handleFileChange} // Triggered when a file is selected
                                         />
-                                        <Image
-                                            src={Images.plus_icon}
-                                            width={15}
-                                            height={15}
-                                            alt=""
-                                            className=" cursor-default m-5 mb-0"
-                                        />
+                                        {!file && (
+                                            <Image
+                                                src={Images.plus_icon}
+                                                width={15}
+                                                height={15}
+                                                alt=""
+                                                className=" cursor-default m-5 mb-0 mx-auto"
+                                            />
+                                        )}
                                     </div>
                                     {previewImage && (
                                         <Image
@@ -192,17 +194,18 @@ const Image_content = ({ onPopupData }) => {
                                     )}
 
                                     {/* <h6>{file ? file?.name : " Image not found"}</h6> */}
+                                    {!file && (
+
+                                        <div className="p-10 text-base   text-gray-300 p-5 rounded"
+
+                                        >
+                                            Upload Media
+
+                                        </div>
+                                    )}
 
                                 </label>
-                                <div className=" p-10">
-                                    <button
-                                        className=" text-base  edit_button_clr  cursor-grabbing p-3 rounded"
-                                        // Triggered when "Company Logo" text is clicked
-                                        style={{ cursor: 'grabbing' }}
-                                    >
-                                        Product Upload Image
-                                    </button>
-                                </div>
+
                             </div>
 
                         </div>

@@ -114,20 +114,20 @@ const Signuppage = () => {
                     <Terms_of_service_content />
                 </div>
             </Terms_of_service>
-            <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
-                <div className="bg-white p-5 rounded-md">
+            <div className="container p-5 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+                <div className="bg-white p-5 rounded-md  xl:p-10 lg:p-10">
                     <h4 className=" text-base">
                         {" "}
                         Already a member ?{" "}
                         <span
-                            className="  pl-3 font-bold"
+                            className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400"
                             style={{ color: Colors.logo_clr }}
                         >
                             {" "}
                             <Link href={"/login"}>Login </Link>
                         </span>
                     </h4>
-                    <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+                    <h1 className="mt-5 mb-5  font-bold text-left text-gray-900   ">
                         Create New Account.
                     </h1>
 
@@ -135,7 +135,7 @@ const Signuppage = () => {
                         <div className="flex">
                             <input
                                 type="text"
-                                id="name"
+                                id="first_name"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="First Name"
                                 required
@@ -145,7 +145,7 @@ const Signuppage = () => {
                             />
                             <input
                                 type="text"
-                                id="name"
+                                id="last_name"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Last Name"
                                 required
@@ -156,7 +156,7 @@ const Signuppage = () => {
                         </div>
                         <input
                             type="email"
-                            id="name"
+                            id="email"
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Email"
                             required
@@ -166,7 +166,7 @@ const Signuppage = () => {
                         <div className='flex items-center relative'>
                             <input
                                 type={showPassword ? 'text' : 'password'}
-                                id="name"
+                                id="password"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Create Password"
                                 required
@@ -201,7 +201,7 @@ const Signuppage = () => {
                         <div className='flex items-center relative'>
                             <input
                                type={showconfirmPassword ? 'text' : 'password'}
-                                id="name"
+                                id="confirm_password"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Confirm Password"
                                 value={confirmPassword}

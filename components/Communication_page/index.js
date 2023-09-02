@@ -9,8 +9,57 @@ import Avatar_red from "./Avatar/Avatar_red"
 import Avatar_green_bg from "./Avatar/Avatar_green_bg"
 import Avatar_without_badge from "./Avatar/Avatar_without_badge"
 import Chat from "./Chat"
+import Cookies from "js-cookie"
+import { useEffect } from "react"
+import { fetchApiData } from "@/fetchApiData"
+import { useRouter } from "next/router"
 
 const Communication_page = () => {
+
+    const router = useRouter();
+
+    // const getCompanyCraetors = async () => {
+
+    //     const cookieValue = JSON.parse(Cookies.get('user_data'))
+    //     console.log('categories cookieValue------------1', cookieValue?.token);
+
+    //     const campaign_id = JSON.parse(Cookies.get('campaign_id'));
+    //     try {
+    //         const token = "Bearer 9|HsdYLOxCJahGFPsQRhhLp3YFWNJ3atV0h5HU7WvU"; // Replace with your actual access token
+    //         const responseData = await fetchApiData('/campaigns/1', 'GET', null, {}, token);
+    //         console.log('campaigns communication------', responseData)
+    //     }
+    //     catch (error) {
+    //         console.error('Error: communication', error);
+    //     }
+        // try {
+        //     const response = await fetchApiData(`${url}/campaigns/${campaign_id}`, {
+        //         method: 'GET',
+        //         headers: {
+        //             'Authorization': `Bearer ${cookieValue?.token}`,
+        //         },
+
+        //     });
+
+        //     console.log('campaigns communication------', response)
+
+        //     if (response.ok) {
+        //         const result = await response.json();
+        //         console.log("campaigns creator amount result------------", result?.data);
+        //         setCampaigndata(result?.data)
+        //     } else {
+        //         console.error('Error: communication', response?.statusText);
+
+        //     }
+        // } catch (error) {
+        //     console.error('Error: communication', error);
+        // }
+    // };
+
+    // useEffect(() => {
+    //     getCompanyCraetors();
+    // }, [])
+
     return (
 
         <>
@@ -42,7 +91,7 @@ const Communication_page = () => {
                     <div className="flex flex-row items-start  justify-between w-full ">
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/8">
                             <Searchcomm />
-                            <div className=" p-4 border shadow rounded m-3">
+                            <div className=" p-4 border shadow rounded m-3 ">
                                 <div className="flex flex-row items-center justify-between ">
                                     <div className="font_size_21">
                                         Active Conversations
@@ -103,7 +152,7 @@ const Communication_page = () => {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3  me-3 w-4/8">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3  me-3 w-4/8 h-screen">
                             <div className="flex flex-row items-center p-4 justify-between">
                                 <Avatar_without_badge />
                                 <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
@@ -124,19 +173,19 @@ const Communication_page = () => {
                                 </div>
                             </div>
                             <hr className="" />
-                            <div className="p-4 h-screen">
+                            <div className="p-5">
 
 
                                 <Image
                                     src={Images.chat_msg}
                                     width={510}
-                                    height={450}
+                                    height={250}
                                     alt=""
                                     className=""
                                 />
                             </div>
                             <hr />
-                            <div className="p-4">
+                            <div className="p-5">
 
                                 <Chat />
                             </div>
@@ -221,29 +270,29 @@ const Communication_page = () => {
                                 <div className="flex px-4 items-center">
                                     <label
                                         htmlFor="first_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
                                         Image Count
                                     </label>
-                                    <input
+                                    {/* <input
                                         type="number"
                                         id="first_name"
-                                        class="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                                        className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
                                         placeholder="Image Count"
-                                        required />
+                                        required /> */}
                                     <div className="px-3">0/2</div>
                                 </div>
                                 <div className="flex px-4 items-center">
                                     <label
                                         htmlFor="first_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
                                         Video Count
                                     </label>
-                                    <input
+                                    {/* <input
                                         type="number"
                                         id="first_name"
-                                        class="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                                        className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
                                         placeholder="Video Count"
-                                        required />
+                                        required /> */}
                                     <div className="px-3">0/2</div>
                                 </div>
                                 <div className="flex px-4 items-center">

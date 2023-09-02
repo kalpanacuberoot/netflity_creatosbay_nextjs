@@ -37,7 +37,7 @@ const Left_Dashboard = () => {
     const [alluser_accounts, setAlluser_accounts] = useState(false);
     const dropdownRef = useRef(null);
     const [cookie_user_brand, setCookie_user_brand] = useState(null);
-
+    const settingdropdownRef = useRef(null);
 
     const onSwitchBrand = (item, index) => {
         console.log("onSwitchBrand", item, index);
@@ -47,9 +47,8 @@ const Left_Dashboard = () => {
         router.reload();
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-
-
 
         const brand_details = Cookies.get('brand_detail');
         if (brand_details) {
@@ -71,6 +70,9 @@ const Left_Dashboard = () => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setAlluser_accounts(false);
             }
+            if (settingdropdownRef.current && !settingdropdownRef.current.contains(event.target)) {
+                setDropdown_menu(false);
+            }
         }
 
         document.addEventListener('mousedown', handleClickOutside);
@@ -81,28 +83,13 @@ const Left_Dashboard = () => {
 
 
 
-    }, [brand_user]);
+    }, []); 
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
     };
 
     const getUser_Brand = async () => {
-
-        // const brand_details = Cookies.get('brand_detail');
-        // if (brand_details) {
-        //     try {
-        //         const brand_detail_name = JSON.parse(brand_details);
-        //         // Now, you can access properties of the object
-        //         console.log("brand_user--dwndbawb", brand_user, brand_detail_name);
-        //         setCookie_user_brand(brand_detail_name)
-        //     } catch (error) {
-        //         console.error('Error parsing JSON from cookie:', error);
-        //     }
-        // } else {
-        //     console.error('Cookie "brand_detail" is empty or not defined');
-        // }
-
 
         const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
@@ -132,7 +119,7 @@ const Left_Dashboard = () => {
 
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData?.status) {
+                if (responseData?.status === "success") {
                     // toast.success('brandusers Name', {
                     //     position: 'top-center',
                     //     autoClose: 5000,
@@ -166,7 +153,7 @@ const Left_Dashboard = () => {
 
 
     return (
-        <div className="" ref={dropdownRef}>
+        <div className="h-screen">
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -187,7 +174,7 @@ const Left_Dashboard = () => {
                 </div>
             </Modal_Invite_members>
             <Modal_Edit_Profile isOpen={isModalOpen_edit_prof} onClose={() => setIsModalOpen_edit_prof(false)}>
-                <div className="relative w-full max-w-2xl max-h-full">
+                <div className="relative w-full max-w-2xl max-h-3xl">
                     <Edit_profile_content />
                 </div>
             </Modal_Edit_Profile>
@@ -211,7 +198,7 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef}>
 
                 <Image
                     src={Images.profile_user}
@@ -228,7 +215,7 @@ const Left_Dashboard = () => {
                             {brand_user?.length > 0 && brand_user.map((item, index) => {
                                 // const isCurrent = item.isCurrent;
                                 const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
-                                console.log("isCurrent left dashboard",isCurrent);
+                                console.log("isCurrent left dashboard", isCurrent);
                                 return (
 
                                     <div
@@ -261,9 +248,9 @@ const Left_Dashboard = () => {
 
 
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
-                    onClick={() => setDropdown_menu(!dropdown_menu)}
+                    ref={settingdropdownRef}
                 >
-                    <div onClick={() => setIsModalOpen_notification(true)}>
+                    <div onClick={() => setIsModalOpen_notification(true) && setDropdown_menu(false)}>
                         <Image
                             src={Images.notification}
                             width={20}
@@ -274,18 +261,19 @@ const Left_Dashboard = () => {
                     </div>
 
                     <Image
-                        src={Images.settings}
-                        width={20}
+                        src={Images.dropdown_icon}
+                        width={15}
                         height={30}
-                        className='my-2 mx-1'
+                        className='my-1 mx-1'
                         alt=""
+                        onClick={() => setDropdown_menu(!dropdown_menu) && setIsModalOpen_notification(false)}
                     />
                     {/* <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
-                        alt=""
+                        alt=""settings
                     /> */}
 
                 </div>
@@ -388,14 +376,14 @@ const Left_Dashboard = () => {
             <div className=' text-center'>
 
                 {cookie_user_brand && (
-                    <h4 className='font-bold'>{cookie_user_brand?.brand?.name}</h4>
+                    <h4 className='font-bold'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
                 )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
-                <div className='w-100 rounded-full border edit_button_clr py-1'
-
+                <div className='w-100 rounded-full border edit_button_clr py-1 cursor-pointer'
+                    onClick={() => setIsModalOpen_edit_prof(true)}
                 >
                     <button
-                        onClick={() => setIsModalOpen_edit_prof(true)}
+
                     >
                         Edit
                     </button>

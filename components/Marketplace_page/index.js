@@ -11,8 +11,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Filters_popup_page from "../Filters_popup_page";
+import { useRouter } from "next/router";
 
 const Marketplace_page = () => {
+
+    const router = useRouter();
 
     const [creatordata, setCreatordata] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -36,23 +39,11 @@ const Marketplace_page = () => {
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, []);
+    }, [ isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
 
-        // const cookieValue = Cookies.get('user_data'); // Get the cookie value
-
-        // let parsedUserData = null;
-
-        // if (cookieValue) {
-        //     try {
-        //         parsedUserData = JSON.parse(cookieValue); // Parse the JSON if the cookie value is defined
-        //     } catch (error) {
-        //         // Handle JSON parsing error, if necessary
-        //         console.error('Error parsing user_data cookie:', error);
-        //     }
-        // }
         const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
@@ -69,7 +60,7 @@ const Marketplace_page = () => {
 
             });
 
-            if (response?.ok) {
+            if (response?.ok === true) {
                 const responseData = await response.json();
                 console.log('creators response:', responseData?.data?.data);
                 setCreatordata(responseData?.data?.data)
@@ -77,10 +68,10 @@ const Marketplace_page = () => {
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {
-                    toast.success('Brand Successfully Created', {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
+                    // toast.success('Brand Successfully Created', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
 
                 } else {
                     console.error('Error:', responseData.message);
@@ -97,9 +88,16 @@ const Marketplace_page = () => {
 
 
     console.log("creatordata", creatordata);
-    // useEffect(() => {
-    //     handleSubmit();
-    // }, [])
+
+    const onProfileDetail = (index) => {
+
+        console.log("onProfileDetail",index);
+        router.push('/creator_profile');
+
+        Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+        // Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+    }
+
 
     const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
@@ -135,7 +133,7 @@ const Marketplace_page = () => {
                             <div
                                 style={{ background: Colors.white_clr }}
                                 className="rounded-md flex flex-row justify-between items-center px-3 py-2"
-                                // onClick={toggleDropdown}
+                            // onClick={toggleDropdown}
 
                             >
 
@@ -160,7 +158,7 @@ const Marketplace_page = () => {
                     </div>
 
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
-                        {creatordata?.length > 0 && creatordata.map((item, index) => {
+                        {creatordata?.length > 0 ? creatordata.map((item, index) => {
                             return (
                                 <div className=" bg-white p-3 rounded-lg" key={index}>
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
@@ -190,8 +188,8 @@ const Marketplace_page = () => {
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                        <div className="flex gap-4"><h3>x</h3>
-                                            <h3>|</h3></div>
+                                        {/* <div className="flex gap-4"><h3>x</h3>
+                                            <h3>|</h3></div> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h4>{item?.user?.name}</h4></div>
@@ -207,20 +205,41 @@ const Marketplace_page = () => {
                                             }
                                         </div>
                                     </div>
-                                    <Link
+                                    {/* <Link
                                         href={{
                                             pathname: "/creator_profile",
                                             query: { data: JSON.stringify({ key: item?.id }) },
                                         }}
-                                    >
-                                        <button className="w-full rounded-full p-2 mt-3" style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}>View profile</button>
-                                    </Link>
+                                    > */}
+                                        <button 
+                                        className="w-full rounded-full p-2 mt-3" 
+                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                        onClick={() => onProfileDetail(item,index)}
+                                        >
+                                            View profile
+                                        </button>
+                                    {/* </Link> */}
                                 </div>
                             )
                         }
 
 
-                        )}
+                        )
+                            :
+
+                            <>
+                                <div className="flex flex-col">
+                                    <h1>
+                                        {"No Campaigns Found"}
+                                    </h1>
+                                    <Link href={'/campaign_info'}>
+                                        <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
+                                            Start Campaign
+                                        </button>
+                                    </Link>
+                                </div>
+                            </>
+                        }
 
 
                         {/* <Marketplace_card />
