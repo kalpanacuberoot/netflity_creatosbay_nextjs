@@ -161,7 +161,7 @@ const Homepage = () => {
 
             {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
               <>
-                <Home_Card1 key={index} items={item} />
+                <Home_Card1 items={item} />
               </>
             ))
 

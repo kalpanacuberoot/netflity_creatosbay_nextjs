@@ -1,5 +1,6 @@
 import Images from "@/images";
 import Colors from "@/styles/Colors";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,6 +11,10 @@ const Home_Card1 = ({ items }) => {
     const [end_date, setEnd_date] = useState(null);
 
     useEffect(() => {
+
+        Cookies.set('campaign_id', JSON.stringify(items?.id), { expires: 106500 });
+        Cookies.set('campaign_name', JSON.stringify(items?.name), { expires: 106500 });
+
         const staring_dateparts = items?.starting_date.split("-");
         // Check if the array has enough elements
         if (staring_dateparts?.length === 3) {
@@ -34,6 +39,8 @@ const Home_Card1 = ({ items }) => {
         }
     
         console.log("items", items);
+
+
     },[items])
 
 

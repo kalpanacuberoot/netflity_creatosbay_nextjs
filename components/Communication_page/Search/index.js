@@ -5,7 +5,7 @@ const Searchcomm = () => {
 
 
             <form className="flex items-center m-3">
-                <label for="voice-search" className="sr-only">Search</label>
+                <label htmlFor="voice-search" className="sr-only">Search</label>
                 <div className="relative w-full">
 
                     <input type="text" id="voice-search"

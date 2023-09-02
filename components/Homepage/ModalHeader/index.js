@@ -24,6 +24,8 @@ const ModalHeader = () => {
                                 src={Images.popup_logo}
                                 alt=""
                                 className=""
+                                width={250}
+                                height={50}
                             />
                         </span>
 

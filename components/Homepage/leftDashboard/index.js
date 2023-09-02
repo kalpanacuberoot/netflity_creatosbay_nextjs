@@ -65,7 +65,7 @@ const Left_Dashboard = () => {
             console.error('Cookie "brand_detail" is empty or not defined');
         }
 
-        getUser_Brand();
+
 
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -82,9 +82,9 @@ const Left_Dashboard = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
 
+        getUser_Brand();
 
-
-    }, []);
+    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
@@ -120,7 +120,7 @@ const Left_Dashboard = () => {
 
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData?.status==="success") {
+                if (responseData?.status === "success") {
                     // toast.success('brandusers Name', {
                     //     position: 'top-center',
                     //     autoClose: 5000,
@@ -199,7 +199,7 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 '  ref={dropdownRef}>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef}>
 
                 <Image
                     src={Images.profile_user}
@@ -216,7 +216,7 @@ const Left_Dashboard = () => {
                             {brand_user?.length > 0 && brand_user.map((item, index) => {
                                 // const isCurrent = item.isCurrent;
                                 const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
-                                console.log("isCurrent left dashboard",isCurrent);
+                                console.log("isCurrent left dashboard", isCurrent);
                                 return (
 
                                     <div
@@ -249,9 +249,9 @@ const Left_Dashboard = () => {
 
 
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
-                  ref={ settingdropdownRef} 
+                    ref={settingdropdownRef}
                 >
-                    <div onClick={() => setIsModalOpen_notification(true)}>
+                    <div onClick={() => setIsModalOpen_notification(true) &&  setDropdown_menu(false)}>
                         <Image
                             src={Images.notification}
                             width={20}
@@ -262,19 +262,19 @@ const Left_Dashboard = () => {
                     </div>
 
                     <Image
-                        src={Images.settings}
-                        width={20}
+                        src={Images.dropdown_icon}
+                        width={15}
                         height={30}
-                        className='my-2 mx-1'
+                        className='my-1 mx-1'
                         alt=""
-                        onClick={() => setDropdown_menu(!dropdown_menu)}
+                        onClick={() => setDropdown_menu(!dropdown_menu) &&  setIsModalOpen_notification(false)}
                     />
                     {/* <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
-                        alt=""
+                        alt=""settings
                     /> */}
 
                 </div>
@@ -380,11 +380,11 @@ const Left_Dashboard = () => {
                     <h4 className='font-bold'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
                 )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
-                <div className='w-100 rounded-full border edit_button_clr py-1'
-
+                <div className='w-100 rounded-full border edit_button_clr py-1 cursor-pointer'
+                    onClick={() => setIsModalOpen_edit_prof(true)}
                 >
                     <button
-                        onClick={() => setIsModalOpen_edit_prof(true)}
+
                     >
                         Edit
                     </button>

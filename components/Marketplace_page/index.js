@@ -39,7 +39,7 @@ const Marketplace_page = () => {
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, [creatordata, isOpen]);
+    }, [ isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
@@ -68,10 +68,10 @@ const Marketplace_page = () => {
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {
-                    toast.success('Brand Successfully Created', {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
+                    // toast.success('Brand Successfully Created', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
 
                 } else {
                     console.error('Error:', responseData.message);
@@ -94,7 +94,8 @@ const Marketplace_page = () => {
         console.log("onProfileDetail",index);
         router.push('/creator_profile');
 
-        Cookies.set('creator_profile_id', JSON.stringify(index.id));
+        Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+        // Cookies.set('creator_profile_id', JSON.stringify(index?.id));
     }
 
 
@@ -187,8 +188,8 @@ const Marketplace_page = () => {
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                        <div className="flex gap-4"><h3>x</h3>
-                                            <h3>|</h3></div>
+                                        {/* <div className="flex gap-4"><h3>x</h3>
+                                            <h3>|</h3></div> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h4>{item?.user?.name}</h4></div>

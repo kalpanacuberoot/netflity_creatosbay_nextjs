@@ -1,5 +1,6 @@
-import { useRouter } from "next/router"
 
+
+import { useRouter } from 'next/router';
 
 
 export const isEmpty = (value) => {
@@ -10,9 +11,6 @@ export const isEmpty = (value) => {
     return false
   }
 }
-// Assuming you have axios imported or fetch available in your project
-
-// Wrapper function for API calls
 
 export const url = 'https://backend.creatorsbay.app/api'
 export const apiCall = async (url, method, data = null, headers = {}) => {
@@ -76,21 +74,22 @@ export const getApiCall = async (url, method, headers = {}) => {
       const responseData = await response.json();
       return responseData;
     }
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-
-
-
-      
-
-    } catch (error) {
-      console.error('Error:', error);
-      // if (error.message) {
-      //   alert('go to login page')
-
-
-      // }
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
     }
-  };
+
+
+
+
+
+  } catch (error) {
+    console.error('Error:', error);
+    // if (error.message) {
+    //   alert('go to login page')
+
+
+    // }
+  }
+};
+
 

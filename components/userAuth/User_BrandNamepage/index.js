@@ -80,14 +80,14 @@ const User_BrandNamepage = () => {
         const active_account = Cookies.get('brand_detail');
         if (active_account !== undefined || null) {
             const current_account = JSON?.parse(active_account)
-            console.log("active_account in user_brand_page", active_account,current_account);
+            console.log("active_account in user_brand_page", active_account, current_account);
             // const current_account = JSON?.parse(active_account)
-          setUser_active_account(current_account?.brand?.id);
+            setUser_active_account(current_account?.brand?.id);
 
 
         }
 
-        
+
     }, [])
 
     console.log("brand_user", brand_user);
@@ -111,25 +111,25 @@ const User_BrandNamepage = () => {
                             <h1 className="my-3">Choose Brand Account</h1>
                             <div className="flex flex-col items-center justify-center ">
                                 {brand_user.length > 0 && brand_user?.map((item, index) => {
-                                    const isCurrent = item?.brand?.id === user_active_account
+                                    const isCurrent = item?.brand?.id === user_active_account;
                                     console.log("isCurrent user brand name", isCurrent);
                                     return (
-                                        <>
-                                           
-                                            <div
-                                                className={`border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-4 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
-                                                onClick={() => onBrand_details(item, index)}
-                                                key={index}
-                                            >
-                                                <Image className="mr-2 rounded-full"
-                                                    src={item?.brand?.logo}
-                                                    alt="Jese image"
-                                                    width={60}
-                                                    height={60}
-                                                />
-                                                {item?.brand?.name}
-                                            </div>
-                                        </>
+
+
+                                        <div
+                                            className={`border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-4 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
+                                            onClick={() => onBrand_details(item, index)}
+                                            key={index}
+                                        >
+                                            <Image className="mr-2 rounded-full"
+                                                src={item?.brand?.logo}
+                                                alt="Jese image"
+                                                width={60}
+                                                height={60}
+                                            />
+                                            {item?.brand?.name}
+                                        </div>
+
                                     )
                                 })}
 

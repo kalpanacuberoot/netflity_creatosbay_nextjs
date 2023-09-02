@@ -36,8 +36,8 @@ const Marketplace_card = () => {
                 </div>
                 <div className="flex justify-between mb-2 mt-2">
                     <div> <h2 className="font-bold">Lily_youg</h2></div>
-                    <div className="flex gap-4"><h3>x</h3>
-                        <h3>|</h3></div>
+                    {/* <div className="flex gap-4"><h3>x</h3> */}
+                        {/* <h3>|</h3></div> */}
                 </div>
                 <div className="flex justify-between mb-2 mt-2">
                     <div> <h4>Lily_youg</h4></div>

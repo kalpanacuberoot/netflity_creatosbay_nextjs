@@ -98,7 +98,7 @@ const Creators_profilepage = () => {
   useEffect(() => {
 
     handleSubmit();
-  }, [handleSubmit]);
+  }, []);
 
   function convertHeight(heightCms) {
     const inchesPerFoot = 12;
@@ -136,19 +136,19 @@ console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
         >
           <Left_Dashboard />
         </div>
-        <div className="m-2 w-full auto-cols-max ">
+        <div className="m-2 w-full auto-cols-max border">
           <div
             style={{ backgroundColor: Colors.white_clr }}
-            className="auto-cols-max  p-3 rounded-md flex flex-row"
+            className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             {/* right******** */}
 
-            <div className="p-10 border rounded-md shadow-md m-2 divider_line w-2/3 relative">
+            <div className="p-10 rounded-md shadow-md m-2 divider_line w-2/3 relative h-auto">
               <div
-                className=" flex justify-between pb-4"
+                className=" flex justify-between pb-4 "
                 style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
               >
-                <div className="flex gap-2 justify-center align-middle">
+                <div className="flex gap-2 justify-center align-middle ">
                   <div>
                     <Image
                       width={500}
@@ -239,7 +239,7 @@ console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
 
               </div>
 
-              <div className="grid grid-cols-3 mt-8">
+              <div className="grid grid-cols-3 mt-8 ">
                 <div>
                   <h4 className="text-gray-400">Height</h4>
                   <h3>{heightInFeetAndInches}</h3>
@@ -253,7 +253,7 @@ console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
                   <h3>00000k</h3>
                 </div>
               </div>
-              <div className="grid grid-cols-3 mt-8">
+              <div className="grid grid-cols-3 mt-8 ">
                 <div>
                   <h4 className="text-gray-400">Skin Color</h4>
                   <h3>{creator_details?.skintype?.name}</h3>
@@ -267,7 +267,7 @@ console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
                   <h3>{creator_details?.hairtype?.name}</h3>
                 </div>
               </div>
-              <div className="grid grid-cols-3 mt-8">
+              <div className="grid grid-cols-3 mt-8 ">
                 <div>
                   <h4 className="text-gray-400">Kids</h4>
                   <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
@@ -282,7 +282,7 @@ console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
                 </div>
 
               </div>
-              <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0">
+              <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0 ">
                 <button
                   className=" w-full rounded-full h-10"
                   style={{

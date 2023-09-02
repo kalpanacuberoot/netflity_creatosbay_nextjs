@@ -2,7 +2,7 @@ const Chat = () => {
     return (
         <>
             <form className="flex items-center">
-                <label for="voice-search" className="sr-only">Search</label>
+                <label htmlFor="voice-search" className="sr-only">Search</label>
                 <div className="relative w-full overflow-y-auto">
 
                     <input type="text" id="voice-search"

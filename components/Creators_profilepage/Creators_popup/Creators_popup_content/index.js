@@ -24,20 +24,23 @@ const Creators_popup_content = () => {
     const handleToggle = () => {
         setIsToggled(!isToggled);
     };
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
        
         try {
             const cookieValue = JSON.parse(Cookies.get('user_data'));
             console.log('categories cookieValue------------1', cookieValue?.token);
             const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-            const creator_id = JSON.parse(Cookies.get('creator_id'));
-            const creator_name = JSON.parse(Cookies.get('creator_name'));
-            const campaign_name = JSON.parse(Cookies.get('campaign_name'));
+            // const creator_id = JSON.parse(Cookies.get('creator_id'));
+            const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
+            // const creator_name = JSON.parse(Cookies.get('creator_name'));
+            // const campaign_name = JSON.parse(Cookies.get('campaign_name'));
             console.log("creator_id campaign_id",creator_id,campaign_id);
 
             const postData = {
                 "campaign_id": campaign_id,
-                "creator_id": creator_id,
+                "creator_id": creator_profile_id,
                 "image_count": imageCount,
                 "video_count": videoCount,
                 "approved": false
@@ -53,11 +56,14 @@ const Creators_popup_content = () => {
             console.log('POST response campaigncreators-------------:', postResponse);
             if (postResponse?.status) {
 
-            
-                toast.success(`${creator_name} has been added to ${campaign_name}`, {
+                toast.success(` to the campaign `, {
                     position: 'top-center',
                     autoClose: 5000,
                 });
+                // toast.success(`${creator_name} has been added to ${campaign_name}`, {
+                //     position: 'top-center',
+                //     autoClose: 5000,
+                // });
 
                 setIsopen(true);
             } else {
@@ -101,7 +107,7 @@ const Creators_popup_content = () => {
 
                                 <h3>How many images or videos this creator should create?</h3>
                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0 flex flex-row w-full items-center my-1">
-                                    <label className="block text-gray-700 text-base mb-2 me-3" htmlForor="grid-first-name">
+                                    <label className="block text-gray-700 text-base mb-2 me-3" htmlFor="grid-first-name">
                                         Image
                                     </label>
                                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -114,7 +120,7 @@ const Creators_popup_content = () => {
 
                                 </div>
                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0 flex flex-row w-full items-center my-1">
-                                    <label className="block text-gray-700 text-base mb-2 me-3" htmlForor="grid-first-name">
+                                    <label className="block text-gray-700 text-base mb-2 me-3" htmlFor="grid-first-name">
                                         Video
                                     </label>
                                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -129,7 +135,7 @@ const Creators_popup_content = () => {
                                 <Buttons
                                     buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                                     label={"Confirm Button"}
-                                    onClick={() => handleSubmit()}
+                                    onClick={(e) => handleSubmit(e)}
                                 />
                             </>
                         }
