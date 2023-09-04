@@ -38,6 +38,19 @@ jobs:
         with:
           node-version: 18.16.0
 
+      - name: Set up environment variables
+        run: |
+          echo "SITE_URL=${{ secrets.STAGING_DOMAIN }}" >> .env
+          echo "IMG_DOMAINS=${{ secrets.STAGING_IMG_DOMAINS }}" >> .env
+          echo "API_BASE_URL=${{ secrets.STAGING_API_BASE_URL }}" >> .env
+          echo "CDN_URL=${{ secrets.STAGING_CDN_URL }}" >> .env
+          echo "PAYU_MERCHANT_KEY=${{ secrets.TEST_PAYU_MERCHANT_KEY }}" >> .env
+          echo "PAYU_MERCHANT_SALT1=${{ secrets.TEST_PAYU_MERCHANT_SALT1 }}" >> .env
+          echo "PAYU_MERCHANT_SALT2=${{ secrets.TEST_PAYU_MERCHANT_SALT2 }}" >> .env
+          echo "PAYU_CLIENT_ID=${{ secrets.TEST_PAYU_CLIENT_ID }}" >> .env
+          echo "PAYU_CLIENT_SECRET=${{ secrets.TEST_PAYU_CLIENT_SECRET }}" >> .env
+          echo "PAYU_URL=${{ secrets.TEST_PAYU_URL }}" >> .env
+
       - name: Install dependencies
         run: npm ci --cache ~/.npm --prefer-offline --silent
 
