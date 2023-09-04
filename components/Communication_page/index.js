@@ -10,55 +10,87 @@ import Avatar_green_bg from "./Avatar/Avatar_green_bg"
 import Avatar_without_badge from "./Avatar/Avatar_without_badge"
 import Chat from "./Chat"
 import Cookies from "js-cookie"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { fetchApiData } from "@/fetchApiData"
 import { useRouter } from "next/router"
+import { url } from "@/generalfunctions"
 
 const Communication_page = () => {
 
     const router = useRouter();
 
-    // const getCompanyCraetors = async () => {
+    const [campaign_data, setCampaign_data] = useState([]);
 
-    //     const cookieValue = JSON.parse(Cookies.get('user_data'))
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
+    const getCompanyCraetors = async () => {
 
-    //     const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-    //     try {
-    //         const token = "Bearer 9|HsdYLOxCJahGFPsQRhhLp3YFWNJ3atV0h5HU7WvU"; // Replace with your actual access token
-    //         const responseData = await fetchApiData('/campaigns/1', 'GET', null, {}, token);
-    //         console.log('campaigns communication------', responseData)
-    //     }
-    //     catch (error) {
-    //         console.error('Error: communication', error);
-    //     }
-        // try {
-        //     const response = await fetchApiData(`${url}/campaigns/${campaign_id}`, {
-        //         method: 'GET',
-        //         headers: {
-        //             'Authorization': `Bearer ${cookieValue?.token}`,
-        //         },
+        const cookieValue = JSON.parse(Cookies.get('user_data'))
+        console.log('categories cookieValue------------1', cookieValue?.token);
 
-        //     });
+        const campaign_id = JSON.parse(Cookies.get('campaign_id'));
+        const apiUrl = process.env.API_URL + url; // Use the environment variable
 
-        //     console.log('campaigns communication------', response)
+        try {
+            const requestOptions = {
 
-        //     if (response.ok) {
-        //         const result = await response.json();
-        //         console.log("campaigns creator amount result------------", result?.data);
-        //         setCampaigndata(result?.data)
-        //     } else {
-        //         console.error('Error: communication', response?.statusText);
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${cookieValue?.token}` // Include the token if provided
+                },
+            }
 
-        //     }
-        // } catch (error) {
-        //     console.error('Error: communication', error);
-        // }
-    // };
 
-    // useEffect(() => {
-    //     getCompanyCraetors();
-    // }, [])
+            const response = await fetch(`${url}/campaigns/${campaign_id}`, requestOptions);
+            console.log('campaigns communication------', response)
+
+            if (response.status === 401) {
+                toast.error("Session Expired: Please login again to continue.", {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+                router.push('/login');
+            } else if (response.status === 429) {
+                toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+                router.push('/login');
+                // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+            } else if (response.status === 500) {
+                toast.error("Server Error: Please wait while we fix this problem for you.", {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+                router.push('/login');
+            } else if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            // return await response.json();
+            const responseData = await response.json();
+            console.log('campaigns communication response:', responseData?.data);
+            setCampaign_data(responseData?.data);
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+
+    };
+
+    useEffect(() => {
+        getCompanyCraetors();
+    }, [])
+
+    console.log("commmmmmmm", campaign_data);
+
+    const filteredInactiveCreators = campaign_data?.creators?.filter(creator => creator.approved === 0);
+    const filteredActiveCreators = campaign_data?.creators?.filter(creator => creator.approved === 1);
+
+    console.log('filteredCreators', filteredInactiveCreators, filteredActiveCreators);
+
+
+    // const matchingCreator = creators.find(creator => creator.creator_id === storedCreatorId);
+
 
     return (
 
@@ -89,9 +121,15 @@ const Communication_page = () => {
 
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full ">
+
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/8">
                             <Searchcomm />
-                            <div className=" p-4 border shadow rounded m-3 ">
+                            {/* {filteredActiveCreators?.length > 0 ?
+                                filteredActiveCreators?.map((active, index) => ( */}
+                            <div className=" p-4 border shadow rounded m-3 "
+                            //  key={index}
+                            >
+
                                 <div className="flex flex-row items-center justify-between ">
                                     <div className="font_size_21">
                                         Active Conversations
@@ -102,26 +140,33 @@ const Communication_page = () => {
                                         4
                                     </span>
                                 </div>
+
+
                                 <hr className="" />
                                 <div className="">
-                                    {/* <Searchcomm /> */}
                                     <div className="py-3">
                                         <Avatar_green_bg />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
-                                        {/* <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
-                                        {/* <Avatar_green width={44} height={44} />
-                                        <Avatar_red />
-                                        <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
                                     </div>
 
                                 </div>
                             </div>
-                            <div className="  p-4 border shadow rounded m-3">
+                            {/* 
+                                ))
+                                :
+                                <div> no data found</div>
+
+                            } */}
+
+
+                            {/* {filteredInactiveCreators.length>0 ? 
+                            filteredInactiveCreators?.map((inactive, index) => ( */}
+                            <div className="  p-4 border shadow rounded m-3"
+                            // key={index}
+                            >
                                 <div className="flex flex-row items-center justify-between ">
                                     <div className="font_size_21">
                                         InActive Conversations
@@ -134,26 +179,26 @@ const Communication_page = () => {
                                 </div>
                                 <hr className="" />
                                 <div className="">
-                                    {/* <Searchcomm /> */}
+
                                     <div className="py-3">
                                         <Avatar_green_bg />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
-                                        {/* <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
-                                        {/* <Avatar_green width={44} height={44} />
-                                        <Avatar_red />
-                                        <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
                                     </div>
 
                                 </div>
                             </div>
+                            {/* ))
+                        :
+                        <div> no data found</div>
+                        } */}
+
                         </div>
+
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3  me-3 w-4/8 h-screen">
-                            <div className="flex flex-row items-center p-4 justify-between">
+                            <div className="flex flex-row items-center p-4 justify-between ">
                                 <Avatar_without_badge />
                                 <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
                                     {/* <Image
@@ -200,18 +245,43 @@ const Communication_page = () => {
 
                             <hr className="" />
                             <div className=" border shadow rounded m-3">
-                                <div className="p-4 pb-0">
-                                    <Avatar_green width={38} height={38} />
+                                <div className="p-4">
+                                    {/* <Avatar_green width={38} height={38} /> */}
+                                    <h3>{campaign_data?.name}</h3>
                                 </div>
                                 <div className="px-4">
-                                    <Image
+                                {campaign_data?.products?.length > 0 && campaign_data?.products.map((item, index) => (
+                                        <>
+                                            {/* <div>{item?.name}</div> */}
+                                            <Image
+                                                src={item?.link}
+                                                height={216}
+                                                width={278}
+                                                className="mx-auto"
+                                                alt=""
+                                            />
+                                        </>
+                                    ))}
+                                     {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
+                                        <>
+                                            {/* <div>{item?.name}</div> */}
+                                            <Image
+                                                src={item?.link}
+                                                height={216}
+                                                width={278}
+                                                className="mx-auto"
+                                                alt=""
+                                            />
+                                        </>
+                                    ))}
+                                    {/* <Image
                                         src={Images.communication_one}
                                         height={216}
                                         width={278}
                                         className="mx-auto"
                                         alt=""
-                                    />
-                                    <div className="flex flex-row items-center justify-evenly py-2 flex-wrap ">
+                                    /> */}
+                                    {/* <div className="flex flex-row items-center justify-evenly py-2 flex-wrap ">
                                         <Image
                                             src={Images.communication_two}
                                             width={61}
@@ -236,7 +306,7 @@ const Communication_page = () => {
                                             height={61}
                                             alt=""
                                         />
-                                    </div>
+                                    </div> */}
                                     {/* <div className="flex flex-row items-center flex-wrap border rounded-full px-3 py-2"></div> */}
                                     <div className="border rounded-full px-3 py-2">
                                         <div className="font_size_10" style={{ color: Colors.orange_clr, lineHeight: '11.82px' }}>
@@ -247,7 +317,7 @@ const Communication_page = () => {
                                         </div>
                                     </div>
                                     <p className="font_size_16 communication_text py-2">
-                                        Qorem ipsum Lorem Ipsum is simply dummy text of
+                                        {/* Qorem ipsum Lorem Ipsum is simply dummy text of
                                         the printing and typesetting industry. Lorem Ipsum
                                         has been the industry&apos;s standard dummy text ever
                                         since the 1500s, when an unknown printer took a
@@ -255,51 +325,52 @@ const Communication_page = () => {
                                         specimen book. It has survived not only five
                                         centuries, but also the leap into electronic
                                         typesetting, remaining essentially unchanged. It
-                                        was popularised in the 1960s with the release of
-                                        {/* Letraset sheets containing Lorem Ipsum passages, */}
-                                        {/* and more recently with desktop publishing software
-                                        like Aldus PageMaker including versions of Lorem
-                                        Ipsum.Qorem ipsum Lorem Ipsum is simply dummy
-                                        text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry&apos;s standard dummy text
-                                        ever since the 1500s. */}
+                                        was popularised in the 1960s with the release of */}
+                                        {campaign_data?.description}
+
                                     </p>
+                                   
                                 </div>
+
+
                             </div>
-                            <div className=" border shadow rounded mx-3 my-4">
-                                <div className="flex px-4 items-center">
-                                    <label
-                                        htmlFor="first_name"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                        Image Count
-                                    </label>
-                                    {/* <input
+                            {campaign_data?.creators?.length > 0 && campaign_data?.creators.map((item, index) => (
+                                <div className=" border shadow rounded mx-3 my-4">
+                                    <div className="flex px-4 items-center">
+                                        <label
+                                            htmlFor="first_name"
+                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                            Image Count
+                                        </label>
+                                        {/* <input
                                         type="number"
                                         id="first_name"
                                         className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
                                         placeholder="Image Count"
                                         required /> */}
-                                    <div className="px-3">0/2</div>
-                                </div>
-                                <div className="flex px-4 items-center">
-                                    <label
-                                        htmlFor="first_name"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                        Video Count
-                                    </label>
-                                    {/* <input
+                                        <div className="px-3">{item?.image_count}/2</div>
+                                    </div>
+                                    <div className="flex px-4 items-center">
+                                        <label
+                                            htmlFor="first_name"
+                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                            Video Count
+                                        </label>
+                                        {/* <input
                                         type="number"
                                         id="first_name"
                                         className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
                                         placeholder="Video Count"
                                         required /> */}
-                                    <div className="px-3">0/2</div>
+                                        <div className="px-3">{item?.video_count}/2</div>
+                                    </div>
+                                    <div className="flex px-4 items-center">
+                                        <div>Revision Submitted</div>
+                                        <div className="px-5">0/2</div>
+                                    </div>
                                 </div>
-                                <div className="flex px-4 items-center">
-                                    <div>Revision Submitted</div>
-                                    <div className="px-5">0/2</div>
-                                </div>
-                            </div>
+                            ))}
+
                         </div>
                     </div>
 

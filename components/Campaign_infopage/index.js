@@ -242,7 +242,7 @@ const Campaign_infopage = () => {
                 </h2>
                 <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
                 {/* <p className="divider_line">fuyfudydyd</p> */}
-                {/* <p class="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
+                {/* <p className="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
                 <hr className="divider_line my-5" />
                 <div className="my-3">
                   <h4 className="">Campaign Name</h4>

@@ -442,7 +442,7 @@ const Brandscreens = () => {
                                                     >
                                                         Company Logo(Upload Image)
                                                     </div>
-                                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
+                                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
                                                 </>
                                             )}
                                         </label>
