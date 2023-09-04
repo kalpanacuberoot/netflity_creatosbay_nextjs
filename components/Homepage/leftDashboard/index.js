@@ -1,7 +1,7 @@
 import Images from "@/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Terms_of_service from "../Termsofservice";
 import Terms_of_service_content from "../Termsofservice/Terms_of_service_content";
 import Modal_logout from "../Modal_logout";
@@ -12,17 +12,132 @@ import Modal_Edit_Profile from "../Modal_Edit_Profile";
 import Edit_profile_content from "../Modal_Edit_Profile/Edit_profile_content";
 import Notification_popup from "../Notification_popup";
 import Notification_content from "../Notification_popup/Notification_content";
+import Cookies from "js-cookie";
+import Modal_change_password from "../Modal_change_password";
+import { isEmpty, url } from "@/generalfunctions";
+import Change_password_content from "../Modal_change_password/Change_password_content";
+import { useRouter } from "next/router";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 
 const Left_Dashboard = () => {
+    const router = useRouter();
 
+    const [brand_user, setBrand_user] = useState([]);
     const [dropdown_menu, setDropdown_menu] = useState(false);
     const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
     const [isModalOpen_invite_mem, setIsModalOpen_invite_mem] = useState(false);
     const [isModalOpen_edit_prof, setIsModalOpen_edit_prof] = useState(false);
     const [isModalOpen_notification, setIsModalOpen_notification] = useState(false);
+    const [isModalOpen_change_password, setIsModalOpen_change_password] = useState(false);
+    const [alluser_accounts, setAlluser_accounts] = useState(false);
+    const dropdownRef = useRef(null);
+    const [cookie_user_brand, setCookie_user_brand] = useState(null);
+    const settingdropdownRef = useRef(null);
 
+    const onSwitchBrand = (item, index) => {
+        console.log("onSwitchBrand", item, index);
+        // JSON.stringify(Cookies.set('brand_detail',item))
+        const new_user_name = Cookies.set('brand_detail', JSON.stringify(item), { expires: 106500 });
+        setCookie_user_brand(new_user_name);
+        router.reload();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+
+        const brand_details = Cookies.get('brand_detail');
+        if (brand_details) {
+            try {
+                const brand_detail_name = JSON.parse(brand_details);
+                // Now, you can access properties of the object
+                console.log("brand_user--dwndbawb", brand_user, brand_detail_name);
+                setCookie_user_brand(brand_detail_name)
+            } catch (error) {
+                console.error('Error parsing JSON from cookie:', error);
+            }
+        } else {
+            console.error('Cookie "brand_detail" is empty or not defined');
+        }
+
+        getUser_Brand();
+
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setAlluser_accounts(false);
+            }
+            if (settingdropdownRef.current && !settingdropdownRef.current.contains(event.target)) {
+                setDropdown_menu(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+
+
+
+    }, []); 
+
+    const toggleDropdown = () => {
+        setAlluser_accounts(!alluser_accounts);
+    };
+
+    const getUser_Brand = async () => {
+
+        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
+        console.log('categories cookieValue------------1', cookieValue?.token);
+
+        const userId = JSON?.parse(Cookies?.get('user_data'));
+        console.log('categories cookieValue------------1', userId?.user?.id);
+
+        try {
+
+            const headers = {
+                'Authorization': `Bearer ${cookieValue?.token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
+                method: 'Get',
+                headers: headers,
+
+            });
+
+            console.log("response get userbarnd", response);
+
+            if (response?.ok) {
+                const responseData = await response.json();
+                console.log('brandusers response:', responseData?.data?.data);
+
+
+                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+
+                if (responseData?.status === "success") {
+                    // toast.success('brandusers Name', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
+                    setBrand_user(responseData?.data?.data)
+
+                } else {
+                    console.error('Error:', responseData.message);
+                    // alert('Brand creation failed');
+                }
+            } else {
+                console.error('Error:', response.statusText);
+                // alert('Brand creation failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const openModal = () => {
         setIsModalOpen_terms_service(true);
@@ -32,8 +147,13 @@ const Left_Dashboard = () => {
         setIsModalOpen_terms_service(false);
     };
 
+    console.log("brand_user--dwndbawb1", brand_user, cookie_user_brand);
+
+
+
+
     return (
-        <div>
+        <div className="h-screen">
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -54,7 +174,7 @@ const Left_Dashboard = () => {
                 </div>
             </Modal_Invite_members>
             <Modal_Edit_Profile isOpen={isModalOpen_edit_prof} onClose={() => setIsModalOpen_edit_prof(false)}>
-                <div className="relative w-full max-w-2xl max-h-full">
+                <div className="relative w-full max-w-2xl max-h-3xl">
                     <Edit_profile_content />
                 </div>
             </Modal_Edit_Profile>
@@ -63,6 +183,11 @@ const Left_Dashboard = () => {
                     <Notification_content />
                 </div>
             </Notification_popup>
+            <Modal_change_password isOpen={isModalOpen_change_password} onClose={() => setIsModalOpen_change_password(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-3xl ">
+                    <Change_password_content />
+                </div>
+            </Modal_change_password>
             <div className=''>
                 <Image
                     src={Images.company_logo}
@@ -71,39 +196,61 @@ const Left_Dashboard = () => {
                     className=' mx-auto'
                 />
             </div>
-            {/* <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-            </svg></button>
 
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                    </li>
-                </ul>
-            </div> */}
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2'>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef}>
 
                 <Image
                     src={Images.profile_user}
                     width={35}
                     height={30}
                     alt=""
+                    onClick={toggleDropdown}
                 />
+                {alluser_accounts &&
+                    <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
+
+                        <div className='w-full px-3 py-2'>
+
+                            {brand_user?.length > 0 && brand_user.map((item, index) => {
+                                // const isCurrent = item.isCurrent;
+                                const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
+                                console.log("isCurrent left dashboard", isCurrent);
+                                return (
+
+                                    <div
+                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : 'button_clr'}`}
+                                        // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                        key={index}
+                                    >
+                                        <Image
+                                            src={item?.brand?.logo}
+                                            width={30}
+                                            height={30}
+                                            className='rounded-full bg-white'
+                                            alt=""
+                                        />
+                                        <button
+                                            className='text-base w-48 dropdown_text text-center'
+                                            onClick={() => onSwitchBrand(item, index)}
+                                        >
+                                            {item?.brand?.name}
+                                        </button>
+                                    </div>
+
+                                )
+                            })
+                            }
+
+                        </div>
+                    </div>
+                }
+
+
                 <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight '
-                    onClick={() => setDropdown_menu(!dropdown_menu)}
+                    ref={settingdropdownRef}
                 >
-                    <div onClick={() => setIsModalOpen_notification(true)}>
+                    <div onClick={() => setIsModalOpen_notification(true) && setDropdown_menu(false)}>
                         <Image
                             src={Images.notification}
                             width={20}
@@ -114,109 +261,129 @@ const Left_Dashboard = () => {
                     </div>
 
                     <Image
-                        src={Images.settings}
-                        width={20}
+                        src={Images.dropdown_icon}
+                        width={15}
                         height={30}
-                        className='my-2 mx-1'
+                        className='my-1 mx-1'
                         alt=""
+                        onClick={() => setDropdown_menu(!dropdown_menu) && setIsModalOpen_notification(false)}
                     />
                     {/* <Image
                         src={Images.dropdown_icon}
                         width={20}
                         height={5}
                         className='my-2 mx-1'
-                        alt=""
+                        alt=""settings
                     /> */}
-                    
+
                 </div>
                 {dropdown_menu &&
-                        <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
+                    <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
 
-                            <div className='w-full px-3 py-2'>
+                        <div className='w-full px-3 py-2'>
 
-                                <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            >
+                                <Image
+                                    src={Images.market_place_icon}
+                                    width={20}
+                                    className=' '
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpen_invite_mem(true)}
                                 >
-                                    <Image
-                                        src={Images.market_place_icon}
-                                        width={18}
-                                        className=' '
-                                        alt=""
-                                    />
-                                    <button
-                                        className=' w-48 dropdown_text text-center'
-                                        onClick={() => setIsModalOpen_invite_mem(true)}
-                                    >
-                                        Invite Members
-                                    </button>
-                                </div>
-                                <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    Invite Members
+                                </button>
+                            </div>
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
+                            >
+                                <Image
+                                    src={Images.support_icon}
+                                    width={20}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpenlogout(true)}
                                 >
-                                    <Image
-                                        src={Images.support_icon}
-                                        width={18}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className=' w-48 dropdown_text text-center'
-                                        onClick={() => setIsModalOpenlogout(true)}
-                                    >
-                                        Support
-                                    </button>
-                                </div>
-                                <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    Support
+                                </button>
+                            </div>
+                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
 
+                            >
+                                <Image
+                                    src={Images.terms_of_service}
+                                    width={20}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className="w-48 dropdown_text rounded-lg"
+                                    onClick={openModal}
                                 >
-                                    <Image
-                                        src={Images.terms_of_service}
-                                        width={18}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className="w-48 dropdown_text rounded-lg"
-                                        onClick={openModal}
-                                    >
-                                        Terms of services
-                                    </button>
-                                    {/* <button
+                                    Terms of services
+                                </button>
+                                {/* <button
                                     className=' w-48 dropdown_text text-center'
                                 >
                                     
                                 </button> */}
-                                </div>
-                                <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
-
-                                >
-                                    <Image
-                                        src={Images.logout}
-                                        width={18}
-                                        height={10}
-                                        className=''
-                                        alt=""
-                                    />
-                                    <button
-                                        className="w-48 dropdown_text rounded-lg"
-                                        onClick={() => setIsModalOpenlogout(true)}
-                                    >
-                                        Sign Out
-                                    </button>
-                                </div>
-
                             </div>
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.profile_user}
+                                    width={20}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className=' w-48 dropdown_text text-center'
+                                    onClick={() => setIsModalOpen_change_password(true)}
+                                >
+                                    Change Password
+                                </button>
+                            </div>
+                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+
+                            >
+                                <Image
+                                    src={Images.logout}
+                                    width={20}
+                                    height={18}
+                                    className=''
+                                    alt=""
+                                />
+                                <button
+                                    className="w-48 dropdown_text rounded-lg"
+                                    onClick={() => setIsModalOpenlogout(true)}
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+
                         </div>
-                    }
+                    </div>
+                }
 
             </div>
             <div className=' text-center'>
-                <h4 className='font-bold'>Creatorbay Inc.</h4>
-                <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5>
-                <div className='w-100 rounded-full border edit_button_clr py-1'
 
+                {cookie_user_brand && (
+                    <h4 className='font-bold'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
+                )}
+                {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
+                <div className='w-100 rounded-full border edit_button_clr py-1 cursor-pointer'
+                    onClick={() => setIsModalOpen_edit_prof(true)}
                 >
                     <button
-                        onClick={() => setIsModalOpen_edit_prof(true)}
+
                     >
                         Edit
                     </button>

@@ -1,12 +1,13 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import Creators_popup from "./Creators_popup";
 import Creators_popup_content from "./Creators_popup/Creators_popup_content";
 import Image from "next/image";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import Cookies from "js-cookie";
+import Images from "@/images";
 
 const Creators_profilepage = () => {
 
@@ -31,10 +32,7 @@ const Creators_profilepage = () => {
 
   const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
 
-
-
-
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
 
     const { data } = router.query;
     if (data) {
@@ -43,10 +41,11 @@ const Creators_profilepage = () => {
     }
 
 
-    const parsedData = JSON?.parse(data);
+    // const parsedData = JSON?.parse(data);
     const cookieValue = JSON.parse(Cookies.get('user_data'));
-    console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
-    Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
+    const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
+    // console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
+    // Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
     Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
 
     try {
@@ -56,7 +55,12 @@ const Creators_profilepage = () => {
         'Content-Type': 'application/json',
       };
 
-      const response = await fetch(`${url}/creators/${parsedData?.key}`, {
+      // const response = await fetch(`${url}/creators/${parsedData?.key}`, {
+      //   method: 'Get',
+      //   headers: headers,
+
+      // });
+      const response = await fetch(`${url}/creators/${creator_profile_id}`, {
         method: 'Get',
         headers: headers,
 
@@ -86,7 +90,7 @@ const Creators_profilepage = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+ }, [creator_details?.user?.name, router.query]);
 
   console.log("creator_details", creator_details);
 
@@ -94,7 +98,20 @@ const Creators_profilepage = () => {
   useEffect(() => {
 
     handleSubmit();
-  }, [handleSubmit]);
+  }, []);
+
+  function convertHeight(heightCms) {
+    const inchesPerFoot = 12;
+    const feet = Math.floor(heightCms / (inchesPerFoot * 2.54));
+    const inches = Math.round((heightCms / 2.54) % inchesPerFoot);
+    
+    return `${feet}' ${inches}"`;
+}
+
+// Example usage
+const heightInCms = creator_details?.height;
+const heightInFeetAndInches = convertHeight(heightInCms);
+console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
 
 
   return (
@@ -119,25 +136,26 @@ const Creators_profilepage = () => {
         >
           <Left_Dashboard />
         </div>
-        <div className="m-2 w-full auto-cols-max ">
+        <div className="m-2 w-full auto-cols-max border">
           <div
             style={{ backgroundColor: Colors.white_clr }}
-            className="auto-cols-max  p-3 rounded-md flex flex-row"
+            className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
             {/* right******** */}
 
-            <div className="p-10 border rounded-md shadow-md m-2 divider_line w-2/3 relative">
+            <div className="p-10 rounded-md shadow-md m-2 divider_line w-2/3 relative h-auto">
               <div
-                className=" flex justify-between pb-4"
+                className=" flex justify-between pb-4 "
                 style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
               >
-                <div className="flex gap-2 justify-center align-middle">
+                <div className="flex gap-2 justify-center align-middle ">
                   <div>
                     <Image
                       width={500}
                       height={100}
                       className="w-10 h-10 object-cover rounded-full"
-                      src={imageUrl}
+                      // src={imageUrl}
+                      src={creator_details?.profile_pic}
                       alt=""
                     />
                   </div>
@@ -153,7 +171,7 @@ const Creators_profilepage = () => {
                       width={500}
                       height={100}
                       className="w-4 h-4  "
-                      src={imageUrl}
+                      src={Images.fill_star}
                       alt=""
                     />
                   </div>
@@ -164,7 +182,7 @@ const Creators_profilepage = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 mt-8">
+              {/* <div className="grid grid-cols-3 mt-8">
                 <div>
                   <h4 className="text-gray-400">Followers</h4>
                   <h3>00000k</h3>
@@ -178,7 +196,7 @@ const Creators_profilepage = () => {
                   <h3>00000k</h3>
                 </div>
               </div>
-              <div className="grid grid-cols-3 mt-8">
+              <div className="grid grid-cols-3 mt-8">0
                 <div>
                   <h4 className="text-gray-400">Location</h4>
                   <h3>{creator_details?.city}</h3>
@@ -205,59 +223,66 @@ const Creators_profilepage = () => {
                   <h4 className="text-gray-400">CPE</h4>
                   <h3>00000k</h3>
                 </div>
-              </div>
-              <div className="pt-5">
+              </div> */}
+              <div className="pt-5 pb-3"
+                style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
+              >
                 <div
                   className="pb-3 "
-                  style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
+
                 >
                   <h3>About me</h3>
                 </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Height</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Weight</h4>
-                    <h3>00000k</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Hairs</h4>
-                    <h3>00000k</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Skin Color</h4>
-                    <h3>{creator_details?.skintype?.name}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Eye Color</h4>
-                    <h3>{creator_details?.eyetype?.name}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Hairs Color</h4>
-                    <h3>{creator_details?.hairtype?.name}</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 mt-8">
-                  <div>
-                    <h4 className="text-gray-400">Kids</h4>
-                    <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400">Pets</h4>
-                    <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
-                  </div>
+                <h4 className=" pt-5 mb-5">
+                  {creator_details?.bio}
+                </h4>
 
+              </div>
+
+              <div className="grid grid-cols-3 mt-8 ">
+                <div>
+                  <h4 className="text-gray-400">Height</h4>
+                  <h3>{heightInFeetAndInches}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Weight</h4>
+                  <h3>{creator_details?.weight}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Hairs</h4>
+                  <h3>00000k</h3>
                 </div>
               </div>
-              <h4 className=" pt-5 mb-5">
-                {creator_details?.bio}
-              </h4>
+              <div className="grid grid-cols-3 mt-8 ">
+                <div>
+                  <h4 className="text-gray-400">Skin Color</h4>
+                  <h3>{creator_details?.skintype?.name}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Eye Color</h4>
+                  <h3>{creator_details?.eyetype?.name}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Hairs Color</h4>
+                  <h3>{creator_details?.hairtype?.name}</h3>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 mt-8 ">
+                <div>
+                  <h4 className="text-gray-400">Kids</h4>
+                  <h3>{creator_details?.kids === 0 ? "No" : "Yes"}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Pets</h4>
+                  <h3>{creator_details?.pets === 0 ? "No" : "Yes"}</h3>
+                </div>
+                <div>
+                  <h4 className="text-gray-400">Location</h4>
+                  <h3>{creator_details?.city}</h3>
+                </div>
 
-              <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0">
+              </div>
+              <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0 ">
                 <button
                   className=" w-full rounded-full h-10"
                   style={{

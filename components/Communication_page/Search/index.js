@@ -4,8 +4,8 @@ const Searchcomm = () => {
             {/* search */}
 
 
-            <form className="flex items-center">
-                <label for="voice-search" className="sr-only">Search</label>
+            <form className="flex items-center m-3">
+                <label htmlFor="voice-search" className="sr-only">Search</label>
                 <div className="relative w-full">
 
                     <input type="text" id="voice-search"

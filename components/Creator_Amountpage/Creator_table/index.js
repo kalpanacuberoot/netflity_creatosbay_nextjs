@@ -1,4 +1,4 @@
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 import Images from "@/images"
 import Colors from "@/styles/Colors"
 import Cookies from "js-cookie";

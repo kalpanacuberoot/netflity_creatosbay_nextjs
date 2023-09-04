@@ -1,23 +1,50 @@
 import Colors from "@/styles/Colors";
 import Left_Dashboard from "../Homepage/leftDashboard";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Images from "@/images";
 import Image from "next/image";
 import Marketplace_card from "./Marketplace_card";
 import Link from "next/link";
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import Filters_popup_page from "../Filters_popup_page";
+import { useRouter } from "next/router";
 
 const Marketplace_page = () => {
 
+    const router = useRouter();
+
     const [creatordata, setCreatordata] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    useEffect(() => {
+
+        handleSubmit();
+        const handleOutsideClick = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleOutsideClick);
+
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, [ isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
+
+        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -33,7 +60,7 @@ const Marketplace_page = () => {
 
             });
 
-            if (response?.ok) {
+            if (response?.ok === true) {
                 const responseData = await response.json();
                 console.log('creators response:', responseData?.data?.data);
                 setCreatordata(responseData?.data?.data)
@@ -41,10 +68,10 @@ const Marketplace_page = () => {
                 // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
                 if (responseData.status) {
-                    toast.success('Brand Successfully Created', {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
+                    // toast.success('Brand Successfully Created', {
+                    //     position: 'top-center',
+                    //     autoClose: 5000,
+                    // });
 
                 } else {
                     console.error('Error:', responseData.message);
@@ -60,28 +87,17 @@ const Marketplace_page = () => {
     };
 
 
-    // const handleSubmit = async () => {
-
-    //     const cookieValue = JSON.parse(Cookies.get('user_data'));
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
-    //     try {
-
-    //         const headers = {
-    //             'Authorization': `Bearer ${cookieValue?.token}`,
-
-    //         };
-    //         const getResponse = await apiCall(`${url}/creators`, 'get', headers);
-    //         console.log('GET creator response: ', getResponse);
-
-
-    //     } catch (error) {
-    //         console.error('POST response creator catrch error-------------', error);
-    //     }
-    // };
     console.log("creatordata", creatordata);
-    useEffect(() => {
-        handleSubmit();
-    }, [])
+
+    const onProfileDetail = (index) => {
+
+        console.log("onProfileDetail",index);
+        router.push('/creator_profile');
+
+        Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+        // Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+    }
+
 
     const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
@@ -89,15 +105,16 @@ const Marketplace_page = () => {
             <div
                 className="flex container_capmapign_info w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
+                ref={dropdownRef}
             >
                 <div
-                    className="auto-cols-max  px-5 py-5 border w-1/5"
+                    className="auto-cols-max  px-5 py-5 border w-1/5 h-screen"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
                 </div>
 
-                <div className="m-2 w-full auto-cols-max text-start p-2"
+                <div className="m-2 w-full auto-cols-max text-start p-2  h-screen"
 
                 >
                     <div
@@ -112,9 +129,14 @@ const Marketplace_page = () => {
                                 </div>
                                 <div className="font_size_21">Showing 12 of 100 Influencers</div>
                             </div>
+
                             <div
                                 style={{ background: Colors.white_clr }}
-                                className="rounded-md flex flex-row justify-between items-center px-3 py-2">
+                                className="rounded-md flex flex-row justify-between items-center px-3 py-2"
+                            // onClick={toggleDropdown}
+
+                            >
+
                                 <button className="font_size_21 mx-4">
                                     Filters
                                 </button>
@@ -125,11 +147,18 @@ const Marketplace_page = () => {
                                     alt=""
                                 />
                             </div>
+                            {isOpen &&
+                                <div className='z-10 w-96 mt-10 top-14 right-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 divide-gray-100 shadow dark:bg-gray-700 border rounded-md'>
+                                    <Filters_popup_page />
+                                </div>
+                            }
+
+
                         </div>
                     </div>
 
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
-                        {creatordata?.length > 0 && creatordata.map((item, index) => {
+                        {creatordata?.length > 0 ? creatordata.map((item, index) => {
                             return (
                                 <div className=" bg-white p-3 rounded-lg" key={index}>
                                     <div className="grid grid-cols-3 rounded-md gap-1" >
@@ -155,15 +184,12 @@ const Marketplace_page = () => {
                                             alt=""
                                         />
 
-                                        {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
 
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                                        <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                        <div className="flex gap-4"><h3>x</h3>
-                                            <h3>|</h3></div>
+                                        {/* <div className="flex gap-4"><h3>x</h3>
+                                            <h3>|</h3></div> */}
                                     </div>
                                     <div className="flex justify-between mb-2 mt-2">
                                         <div> <h4>{item?.user?.name}</h4></div>
@@ -173,26 +199,47 @@ const Marketplace_page = () => {
 
                                                     <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
                                                         {categories_item?.name}
-                                                    </h6>      
-                                            )
+                                                    </h6>
+                                                )
                                             })
-                                        }
+                                            }
                                         </div>
                                     </div>
-                                    <Link
+                                    {/* <Link
                                         href={{
                                             pathname: "/creator_profile",
                                             query: { data: JSON.stringify({ key: item?.id }) },
                                         }}
-                                    >
-                                        <button className="w-full rounded-full p-2 mt-3" style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}>View profile</button>
-                                    </Link>
+                                    > */}
+                                        <button 
+                                        className="w-full rounded-full p-2 mt-3" 
+                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                        onClick={() => onProfileDetail(item,index)}
+                                        >
+                                            View profile
+                                        </button>
+                                    {/* </Link> */}
                                 </div>
                             )
                         }
 
 
-                        )}
+                        )
+                            :
+
+                            <>
+                                <div className="flex flex-col">
+                                    <h1>
+                                        {"No Campaigns Found"}
+                                    </h1>
+                                    <Link href={'/campaign_info'}>
+                                        <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
+                                            Start Campaign
+                                        </button>
+                                    </Link>
+                                </div>
+                            </>
+                        }
 
 
                         {/* <Marketplace_card />

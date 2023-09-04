@@ -9,7 +9,7 @@ import Buttons from "../Button";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { url } from "@/generalfunation";
+import { url } from "@/generalfunctions";
 
 const Creator_Amountpage = () => {
 

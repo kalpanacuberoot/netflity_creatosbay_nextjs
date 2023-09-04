@@ -7,24 +7,33 @@ import Colors from "@/styles/Colors";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { apiCall, url } from "@/generalfunation";
+import { apiCall, url } from "@/generalfunctions";
 import { useRouter } from 'next/navigation';
 
 const Supportpage = () => {
 
   const router = useRouter();
 
+  const maxCharacters = 250;
+
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [options, setOptions] = useState('');
-  const [desc,setDesc] = useState('');
+  const [desc, setDesc] = useState('');
   const dropdown_options = [
-    "Select your option",
+    "Support Type",
     "suggestion",
     "query",
     "support",
     "complain",
   ]
+
+  const handleTextChange = (event) => {
+    const newText = event.target.value;
+    if (newText.length <= maxCharacters) {
+      setDesc(newText);
+    }
+  };
 
 
   // console.log("token",token);
@@ -45,8 +54,8 @@ const Supportpage = () => {
       const headers = {
         'Authorization': `Bearer ${cookieValue?.token}`,
       }
-      
-      const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData,headers);
+
+      const postResponse = await apiCall(`${url}/feedbacks`, 'post', postData, headers);
 
       console.log('support response-------------:', postResponse);
       if (postResponse?.status) {
@@ -79,11 +88,11 @@ const Supportpage = () => {
   return (
     <>
       {/* <div className="container h-full flex bg-zinc-100 items-center height-70 px-10"> */}
-      <div className="container p-4 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+      <div className="container p-4 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
         <div className=" auto-col-max w-full">
 
-          <div className="flex items-center w-full justify-center">
-            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5">
+          <div className="flex items-center justify-start w-full">
+            <div className=" bg-white border-gray-300 border-solid rounded-lg border-1 p-5 xl:p-10 lg:p-10">
               <h1 className="font-bold text-left text-gray-900   ">
                 Need Help And Support
               </h1>
@@ -91,16 +100,16 @@ const Supportpage = () => {
               <form onSubmit={handleSubmit}>
                 <input
                   type="email"
-                  id="name"
+                  id="email"
                   className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Michal.mosiak12@gmail.com"
+                  placeholder="Email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   type="number"
-                  id="name"
+                  id="contact_no"
                   className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Contact No."
                   required
@@ -150,14 +159,19 @@ const Supportpage = () => {
                   className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   rows={3}
                   value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                  minLength={0}
-                  maxLength={250}
+                  onChange={handleTextChange}
+                  // placeholder={`Max Characters: ${maxCharacters}`}
+                // onChange={(e) => setDesc(e.target.value)}
+                // minLength={0}
+                // maxLength={250}
                 ></textarea>
                 <div className="flex items-center justify-end pt-4 pb-4">
-                  <label style={{ color: Colors.pink_clr }}>
+                  {/* <label style={{ color: Colors.pink_clr }}>
                     Max Characters : 0 / 250
-                  </label>
+                  </label> */}
+                  <div  style={{ color: Colors.pink_clr }}>
+                    {desc?.length} / {maxCharacters} characters
+                  </div>
                 </div>
 
                 <button
