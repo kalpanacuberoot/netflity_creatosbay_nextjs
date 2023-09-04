@@ -28,29 +28,6 @@ const Brand1page = ({ onClick }) => {
         setOpen(!true)
     }
 
-    // const getCompanyCategories = async() => {
-    //    
-    //     console.log("brand dcreens------------", token);
-    //     try {
-
-    //         const headers = {
-    //             'Authorization': `Bearer ${token?.token}`,
-
-    //         }
-    //         const getResponse = await apiCall(`${url}/categories`, 'get', headers);
-    //         console.log('GET feedbacks response:', getResponse);
-    //         if (getResponse.ok) {
-
-    //             console.log('categories result------------', result);
-    //         } else {
-    //             console.error('Error:', response.statusText);
-    //             alert('categories api response else', response.statusText)
-    //         }
-
-    //     } catch (error) {
-    //         console.error('Get response register catrch error-------------', error);
-    //     }
-    // };
     const getCompanyCategories = async () => {
       
         const cookieValue = JSON.parse(Cookies.get('user_data'))
@@ -122,7 +99,7 @@ const Brand1page = ({ onClick }) => {
                     <form >
                         <input
                             type="compant"
-                            id="name"
+                            id="company_name"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Company Name"
                             value={companyName}
@@ -131,7 +108,7 @@ const Brand1page = ({ onClick }) => {
                         />
                         <input
                             type="password"
-                            id="name"
+                            id="password"
                             className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Create Password"
                             value={password}

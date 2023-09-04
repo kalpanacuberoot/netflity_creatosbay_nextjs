@@ -105,7 +105,7 @@ const Change_password_content = () => {
                             <div className="flex flex-col">
                                 <input
                                     type="password"
-
+                                    id="current_password"
                                     className="appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     placeholder="Current Password"
                                     value={currentpassword}
@@ -114,7 +114,7 @@ const Change_password_content = () => {
                                 />
                                 <input
                                     type="password"
-                                    id="name"
+                                    id="new_password"
                                     className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     placeholder="Create New Password"
                                     required
@@ -125,7 +125,7 @@ const Change_password_content = () => {
                                 />
                                 <input
                                     type="password"
-                                    id="name"
+                                    id="confirm_password"
                                     className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     placeholder="Confirm New Password"
                                     value={confirmPassword}

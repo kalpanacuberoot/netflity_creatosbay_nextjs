@@ -9,7 +9,7 @@ const Avatar_green_bg = () => {
 
             <div className="flex items-center space-x-4 bg-gray-50 p-2 my-2 rounded-md" style={{background:Colors.gray2}}>
                 <div className="relative">
-                    {/* <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""/> */}
+                   
                     <Image
                         // className="w-10 h-10 rounded-full"
                         width={44}

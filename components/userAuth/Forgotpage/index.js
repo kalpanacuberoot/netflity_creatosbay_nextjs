@@ -60,27 +60,27 @@ const Forgotpage = () => {
     <>
       <div className="container h-full flex bg-zinc-100 items-center height-70 px-10">
         <div className=" auto-col-max w-full">
-          <div className="flex justify-center  height-70  items-center px-10 ">
-            <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+          <div className="flex justify-center p-5 xl:p-10 lg:p-10">
+            <div className="p-5   xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
               <h4>
-                Don`&apos;t have an account ?
+                Don&apos;t have an account ?
                 <span
-                  className="  pl-3 font-bold"
+                   className="shadow-lg bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-3"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/login"}>Log in </Link>
+                  <Link href={"/login"}>Login </Link>
                 </span>
               </h4>
-              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+              <h1 className="my-5  font-bold text-left text-gray-900   ">
                 Forgot Your Password?.
               </h1>
 
               <form onSubmit={handleSubmit}>
                 <input
                   type="email"
-                  id="name"
-                  className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Michal.mosiak12@gmail.com"
+                  id="email"
+                  className="appearance-none border rounded-md w-full bg-gray-100 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

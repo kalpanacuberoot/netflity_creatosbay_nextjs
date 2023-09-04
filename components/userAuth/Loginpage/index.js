@@ -133,20 +133,20 @@ const Loginpage = () => {
           <Terms_of_service_content />
         </div>
       </Terms_of_service>
-      <div className="container p-4 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
+      <div className="container p-5 xl:p-10 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
         <div className=" auto-col-max w-full height-70">
           <div className="flex justify-center  items-center px-10 ">
-            <div className="p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+            <div className="p-5  xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
               <h4>
                 Don&apos;t have an account ?
                 <span
-                  className="  pl-3 font-bold"
+                  className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-4"
                   style={{ color: Colors.logo_clr }}
                 >
-                  <Link href={"/signup"}>Sign up </Link>
+                  <Link href={"/signup"}>Sign Up </Link>
                 </span>
               </h4>
-              <h1 className="mt-0 mb-5  font-bold text-left text-gray-900   ">
+              <h1 className="my-5  font-bold text-left text-gray-900   ">
                 Welcome back.
               </h1>
 
@@ -155,7 +155,7 @@ const Loginpage = () => {
                 <input
                   type="email"
                   id="email"
-                  className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Email"
                   required
                   value={email}
@@ -203,7 +203,7 @@ const Loginpage = () => {
                       type="checkbox"
                       id="myCheckbox"
                       className="form-checkbox h-5 w-5 "
-                      required
+                      // required
                       style={{ backgroundColor: Colors.logo_clr }}
                     />
                     <label htmlFor="myCheckbox" className=" ml-2 text-black">

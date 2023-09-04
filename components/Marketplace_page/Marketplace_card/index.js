@@ -10,14 +10,7 @@ const Marketplace_card = () => {
         <>
             <div className=" bg-white p-3 rounded-lg">
                 <div className="grid grid-cols-3 rounded-md gap-1" >
-                    {/* <Image
-                    src={Images.avatar1}
-                    alt="" className="rounded-tl-lg rounded-bl-lg"
-                    /> */}
-                    {/* <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tl-lg rounded-bl-lg" />
 
-                    <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" />
-                    <img src="https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA" alt="" className="rounded-tr-lg rounded-br-lg" /> */}
                     <Image
                         width={500}
                         height={100}
@@ -43,8 +36,8 @@ const Marketplace_card = () => {
                 </div>
                 <div className="flex justify-between mb-2 mt-2">
                     <div> <h2 className="font-bold">Lily_youg</h2></div>
-                    <div className="flex gap-4"><h3>x</h3>
-                        <h3>|</h3></div>
+                    {/* <div className="flex gap-4"><h3>x</h3> */}
+                        {/* <h3>|</h3></div> */}
                 </div>
                 <div className="flex justify-between mb-2 mt-2">
                     <div> <h4>Lily_youg</h4></div>

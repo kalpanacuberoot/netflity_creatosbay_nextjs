@@ -55,7 +55,7 @@ const Ref_Image_content = ({ refpopupData }) => {
 
     const handleRefUploadClick = async () => {
         // handleFileChange();
-        {handleImageClick(refImage2)}
+        { handleImageClick(refImage2) }
         if (!file2) {
             alert('Please select an image to upload.');
             return;
@@ -159,9 +159,9 @@ const Ref_Image_content = ({ refpopupData }) => {
                                 <label
                                     htmlFor="reffileInput"
                                     style={{ borderColor: Colors.logo_clr }}
-                                    className="w-auto"
+                                    className=" "
                                 >
-                                    <div className="">
+                                    <div className=" w-full text-center">
                                         <input
                                             id="reffileInput"
                                             type="file"
@@ -171,13 +171,15 @@ const Ref_Image_content = ({ refpopupData }) => {
                                             className="hidden absolute w-full"
                                             onChange={handleRefFileChange} // Triggered when a file is selected
                                         />
-                                        <Image
-                                            src={Images.plus_icon}
-                                            width={15}
-                                            height={15}
-                                            alt=""
-                                            className=" cursor-default m-5 mb-0"
-                                        />
+                                        {!file2 && (
+                                            <Image
+                                                src={Images.plus_icon}
+                                                width={15}
+                                                height={15}
+                                                alt=""
+                                                className="cursor-default mx-auto m-5 "
+                                            />
+                                        )}
                                     </div>
                                     {previewRefImage && (
                                         <Image
@@ -193,20 +195,16 @@ const Ref_Image_content = ({ refpopupData }) => {
                                         <h6 className="text-base text-center">{file2?.name}</h6>
                                     )}
 
-                                </label>
+                                    {!file2 && (
 
-                                {/* <h6>{link ? link?.name : "Choose the image"}</h6> */}
-                                <div className="p-10"
-                                // onClick={handleUploadClick}
-                                >
-                                    <button
-                                        className=" text-base  edit_button_clr p-5 rounded"
-                                        // Triggered when "Company Logo" text is clicked
-                                        style={{ cursor: 'grabbing' }}
-                                    >
-                                        Upload Reference Image
-                                    </button>
-                                </div>
+                                        <div className="p-10 text-base   text-gray-300 p-5 rounded"
+
+                                        >
+                                            Upload Media
+
+                                        </div>
+                                    )}
+                                </label>
 
                             </div>
 
