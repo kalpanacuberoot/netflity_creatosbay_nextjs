@@ -55,6 +55,7 @@ import facebook_inv_mem from './facebook_inv_mem.png';
 import show_eye from './show_eye.png';
 import hide_eye from './hide_eye.png';
 import loader_gif from './loader.gif';
+import chat_box_placeholder from './chat_box_placeholder.jpg';
 
 export default {
     'company_logo':company_logo,
@@ -114,4 +115,5 @@ export default {
     'show_eye':show_eye,
     'hide_eye':hide_eye,
     'loader_gif':loader_gif,
+    'chat_box_placeholder':chat_box_placeholder,
 };
