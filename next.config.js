@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com"],
 
-    domains: ['t4.ftcdn.net','imgs.search.brave.com', 'creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com'], // Add the domain(s) you need here
+    domains: ['t4.ftcdn.net','imgs.search.brave.com', 'creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com','duckduckgo.com'], // Add the domain(s) you need here
    
 
   },

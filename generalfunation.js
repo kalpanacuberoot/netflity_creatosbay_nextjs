@@ -14,84 +14,46 @@ export const isEmpty = (value) => {
 
 // Wrapper function for API calls
 
-export const url = 'https://backend.creatorsbay.app/api'
-export const apiCall = async (url, method, data = null, headers = {}) => {
+// export const url = 'https://backend.creatorsbay.app/api'
+// api.js (Utility file)
+
+export const url = 'https://backend.creatorsbay.app/api'; // Replace with your API endpoint
+
+// Wrapper function for making GET requests
+export async function getApiData(endpoint) {
   try {
-    const options = {
-      method,
-      // headers,
-      headers: {
-        ...headers, // Keep any additional headers you may have passed
-        'Accept': 'application/json', // Add the Accept header
-      },
-    };
-
-    if (method.toLowerCase() === 'post') {
-      options.headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(data);
-    }
-
-    const response = await fetch(url, options); // Use axios instead if you prefer
-
+    const response = await fetch(`${apiUrl}/${endpoint}`);
     if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
+      throw new Error('Network response was not ok');
     }
-
-    const responseData = await response.json();
-
-    return responseData;
+    const data = await response.json();
+    return data;
   } catch (error) {
-
-    if (error.message) {
-      alert('go to login page')
-
-    }
-    throw new Error(`API call error: ${error.message}`);
-
+    throw new Error(`Error fetching data: ${error.message}`);
   }
 }
 
-export const getApiCall = async (url, method, headers = {}) => {
-
-  const router = useRouter();
-
+// Wrapper function for making POST requests
+export async function postApiData(endpoint, requestData) {
   try {
-
-    const options = {
-      method,
-      // headers,
+    const response = await fetch(`${apiUrl}/${endpoint}`, {
+      method: 'POST',
       headers: {
-        ...headers, // Keep any additional headers you may have passed
-        'Accept': 'application/json', // Add the Accept header
+        'Content-Type': 'application/json',
       },
-    };
+      body: JSON.stringify(requestData),
+    });
 
-    if (method.toLowerCase() === 'get') {
-      options.headers['Content-Type'] = 'application/json';
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
 
-    const response = await fetch(url, options);
-    const responseData = await response.json();
-    if (response.ok) {
-      const responseData = await response.json();
-      return responseData;
-    }
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`Error posting data: ${error.message}`);
+  }
+}
 
-
-
-      
-
-    } catch (error) {
-      console.error('Error:', error);
-      if (error.message) {
-        alert('go to login page')
-
-
-      }
-    }
-  };
 
 
