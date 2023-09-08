@@ -4,8 +4,26 @@ import Images from "@/images";
 import Image from "next/image";
 import Date_range_picker from "./daterangepicker";
 import Invoice_Table from "./Invoicetable";
+import { useState } from "react";
 
 const Invoicepage = () => {
+
+    const [totalAmount, setTotalAmount] = useState(1000);
+    const usageChargePercent = 15;
+    const gstRate = 18;
+
+    const calculateAmountWithGST = (amount) => {
+        const gstAmount = (amount * gstRate) / 100;
+        return amount + gstAmount;
+    };
+
+    const firstAmount = totalAmount / 2;
+    const secondAmount = totalAmount / 2;
+    const firstAmountWithGST = calculateAmountWithGST(firstAmount);
+    const secondAmountWithGST = calculateAmountWithGST(secondAmount);
+
+    const refundAmount = usageChargePercent * totalAmount / 100;
+
 
     return (
         <>
@@ -97,6 +115,21 @@ const Invoicepage = () => {
                         <div className="py-5">
                             <Invoice_Table />
                         </div>
+                    </div>
+                    <div>
+                        <h1>Total Amount: {totalAmount}</h1>
+                        <h2>First Amount:</h2>
+                        <p>Base Amount: {firstAmount}</p>
+                        <p>GST ({gstRate}%): {calculateAmountWithGST(firstAmount) - firstAmount}</p>
+                        <p>Total: {firstAmountWithGST}</p>
+                        <h2>Second Amount:</h2>
+                        <p>Base Amount: {secondAmount}</p>
+                        <p>GST ({gstRate}%): {calculateAmountWithGST(secondAmount) - secondAmount}</p>
+                        <p>Total: {secondAmountWithGST}</p>
+                        <button onClick={() => console.log('Accept')} >Accept</button>
+                        <button onClick={() => console.log('Reject')} >Reject</button>
+                        <h2>Refund Amount:</h2>
+                        <p>{refundAmount}</p>
                     </div>
                 </div>
             </div>

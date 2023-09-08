@@ -11,6 +11,7 @@ export default function Document() {
           href="https://fonts.googleapis.com/css?family=Futura:400,700&display=swap"
           rel="stylesheet"
         />
+        <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
       </Head>
       <body>
         <Main />

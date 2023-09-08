@@ -209,8 +209,8 @@ button {
   border-radius: 10px;
   margin: 10px;
   text-align: right;
-   width: fit-content;
-   margin-left: auto;
+  width: fit-content;
+  margin-left: auto;
 }
 
 .right-text-message {
@@ -219,8 +219,8 @@ button {
   border-radius: 10px;
   margin: 10px;
   text-align: right;
-   width: fit-content;
-   margin-left: auto;
+  width: fit-content;
+  margin-left: auto;
 }
 
 /* ChatBox.css */
@@ -231,6 +231,57 @@ button {
 }
 
 /* Style as needed */
+/* Invoice Styles */
+.invoice-container {
+  font-family: Arial, sans-serif;
+  /* margin: 20px; */
+  border: 1px solid #ccc;
+  /* padding: 20px; */
+  background-color: #fff;
+}
+
+.invoice-header {
+  text-align: center;
+}
+
+.invoice-header h1 {
+  font-size: 24px;
+}
+
+.invoice-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.invoice-info,
+.invoice-client {
+  width: 45%;
+}
+
+.invoice-items {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.invoice-items th,
+.invoice-items td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.invoice-items th {
+  background-color: #f2f2f2;
+}
+
+.invoice-total {
+  /* margin-top: 20px; */
+  text-align: right;
+}
+
+/* Add more CSS styles as needed */
 
 
 /* end messages */
