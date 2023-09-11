@@ -5,10 +5,13 @@ import Image from "next/image";
 import Date_range_picker from "./daterangepicker";
 import Invoice_Table from "./Invoicetable";
 import { useState } from "react";
+import User_Modal from "./User_Modal";
+import User_Modal_form from "./User_Modal/User_Modal_form";
 
 const Invoicepage = () => {
 
     const [totalAmount, setTotalAmount] = useState(1000);
+    const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
     const usageChargePercent = 15;
     const gstRate = 18;
 
@@ -26,7 +29,10 @@ const Invoicepage = () => {
 
 
     return (
+
         <>
+
+           
             <div
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}

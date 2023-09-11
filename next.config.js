@@ -11,6 +11,7 @@ const nextConfig = {
   env: {
     API_URL: 'https://backend.creatorsbay.app/api',
   },
+  
 }
 
 

@@ -35,11 +35,11 @@ const PDFGenerator = () => {
         Download PDF
       </button>
       <div id="invoice">
-        {/* Place your HTML content here */}
+       
         <h1>Your Invoice</h1>
-        <p>Invoice details go here...</p>
+        {/* <p>Invoice details go here...</p>
         ndskjfhkjwhgjj
-        <Creator_invoice_pdf_page/>
+        <Creator_invoice_pdf_page/> */}
       </div>
     </div>
   );
