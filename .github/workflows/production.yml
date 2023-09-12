@@ -40,16 +40,16 @@ jobs:
 
       - name: Set up environment variables
         run: |
-          echo "SITE_URL=${{ secrets.MAIN_DOMAIN }}" >> .env
-          echo "IMG_DOMAINS=${{ secrets.MAIN_IMG_DOMAINS }}" >> .env
-          echo "API_BASE_URL=${{ secrets.MAIN_API_BASE_URL }}" >> .env
-          echo "CDN_URL=${{ secrets.MAIN_CDN_URL }}" >> .env
-          echo "PAYU_MERCHANT_KEY=${{ secrets.LIVE_PAYU_MERCHANT_KEY }}" >> .env
-          echo "PAYU_MERCHANT_SALT1=${{ secrets.LIVE_PAYU_MERCHANT_SALT1 }}" >> .env
-          echo "PAYU_MERCHANT_SALT2=${{ secrets.LIVE_PAYU_MERCHANT_SALT2 }}" >> .env
-          echo "PAYU_CLIENT_ID=${{ secrets.LIVE_PAYU_CLIENT_ID }}" >> .env
-          echo "PAYU_CLIENT_SECRET=${{ secrets.LIVE_PAYU_CLIENT_SECRET }}" >> .env
-          echo "PAYU_URL=${{ secrets.LIVE_PAYU_URL }}" >> .env
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.MAIN_DOMAIN }}" >> .env
+          echo "NEXT_PUBLIC_IMG_DOMAINS=${{ secrets.MAIN_IMG_DOMAINS }}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.MAIN_API_BASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_CDN_URL=${{ secrets.MAIN_CDN_URL }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_MERCHANT_KEY=${{ secrets.LIVE_PAYU_MERCHANT_KEY }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_MERCHANT_SALT1=${{ secrets.LIVE_PAYU_MERCHANT_SALT1 }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_MERCHANT_SALT2=${{ secrets.LIVE_PAYU_MERCHANT_SALT2 }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_CLIENT_ID=${{ secrets.LIVE_PAYU_CLIENT_ID }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_CLIENT_SECRET=${{ secrets.LIVE_PAYU_CLIENT_SECRET }}" >> .env
+          echo "NEXT_PUBLIC_PAYU_URL=${{ secrets.LIVE_PAYU_URL }}" >> .env
 
       - name: Install dependencies
         run: npm ci --cache ~/.npm --prefer-offline --silent
