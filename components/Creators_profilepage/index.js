@@ -98,6 +98,7 @@ const Creators_profilepage = () => {
   useEffect(() => {
 
     handleSubmit();
+   
   }, []);
 
   function convertHeight(heightCms) {

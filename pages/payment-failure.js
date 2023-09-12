@@ -1,10 +1,9 @@
-import Payment_successpage from "@/components/Payment_Gatewaypage/Payment_successpage"
-
+import Payment_failurepage from "@/components/Payment_Gatewaypage/Payment_failurepage";
 
 const Payment_failure = () => {
   return (
     <>
-      <h1>Payment Failure</h1>
+     <Payment_failurepage/>
     </>
   )
 }

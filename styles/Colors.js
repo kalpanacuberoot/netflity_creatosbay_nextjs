@@ -19,4 +19,5 @@ export default {
   logo_light_clr:'#9357ff1c',
   blue_clr:'#275E96',
   notification_green:'#22BB55',
+  red_clr:'#FF0000',
 };
