@@ -20,7 +20,7 @@ const Creator_Amountpage = () => {
 
     const [campaigndata, setCampaigndata] = useState(null);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
-    const [totalAmount, setTotalAmount] = useState(1000);
+    const [totalAmount, setTotalAmount] = useState(Cookies.get('creator_amount'));
 
     const usageChargePercent = 15;
     const gstRate = 18;
@@ -33,6 +33,8 @@ const Creator_Amountpage = () => {
     const firstAmount = totalAmount / 2;
     const secondAmount = totalAmount / 2;
     const firstAmountWithGST = calculateAmountWithGST(firstAmount);
+
+    Cookies.set('firstAmountWithGST',firstAmountWithGST);
     const secondAmountWithGST = calculateAmountWithGST(secondAmount);
 
     const refundAmount = usageChargePercent * totalAmount / 100;

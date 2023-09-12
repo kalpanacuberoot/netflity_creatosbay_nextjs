@@ -48,7 +48,9 @@ const Creators_form_content = () => {
     const campaign_id = Cookies.get('campaign_id');
     const campaign_name = Cookies.get('campaign_name');
 
-    const amount = 1000;
+    const amount = Cookies.get('firstAmountWithGST')
+
+    // const amount = 590;
 
     console.log("PAYU_MERCHANT_KEY1", key);
 

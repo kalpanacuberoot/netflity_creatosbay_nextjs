@@ -84,6 +84,11 @@ const Creator_table = ({ creatorData }) => {
 
     console.log("creator_name",creator_name?.user?.name);
 
+    const result = (creatorData?.image_count || 0) * 500 + (creatorData?.video_count || 0) * 500;
+
+console.log(result); 
+Cookies.set('creator_amount',result)
+
     return (
         <>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -98,7 +103,8 @@ const Creator_table = ({ creatorData }) => {
                     {creatorData?.video_count}
                 </td>
                 <td className="px-6 py-4">
-                    6000.00
+                {result}
+                
                 </td>
 
             </tr>
