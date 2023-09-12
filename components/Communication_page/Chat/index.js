@@ -200,7 +200,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
         
         getAllMessages();
 
-    }, []);
+    }, []);   // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log("messages----", allMessages);
 
 
