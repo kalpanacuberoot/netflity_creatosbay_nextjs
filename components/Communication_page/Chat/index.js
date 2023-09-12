@@ -43,7 +43,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-        const apiUrl = process.env.API_URL + url; // Use the environment variable
+        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url; // Use the environment variable
 
         // const creatorId = JSON.parse(Cookies.get('brand_detail'))
         // console.log("brand detail creator_id", creatorId?.creator);
