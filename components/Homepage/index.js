@@ -155,7 +155,7 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap h-full overflow-y-auto"
+            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap overflow-y-auto"
             style={{ backgroundColor: Colors.white_clr }}
           >
 

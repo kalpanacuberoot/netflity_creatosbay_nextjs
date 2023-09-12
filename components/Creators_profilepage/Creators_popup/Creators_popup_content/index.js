@@ -24,20 +24,22 @@ const Creators_popup_content = () => {
     const handleToggle = () => {
         setIsToggled(!isToggled);
     };
-    const handleSubmit = async (e) => {
 
-        e.preventDefault();
-       
+   
+    const handleSubmit = async () => {
+        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        console.log('categories cookieValue------------1', cookieValue?.token);
+        const campaign_id = JSON.parse(Cookies.get('campaign_id'));
+        // const creator_id = JSON.parse(Cookies.get('creator_id'));
+        const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
+        const creator_name = JSON.parse(Cookies.get('creator_name'));
+        const campaign_name = JSON.parse(Cookies.get('campaign_name'));
+
+        // e.preventDefault();
+        console.log("imageCount",imageCount,videoCount,campaign_id,creator_profile_id);
         try {
-            const cookieValue = JSON.parse(Cookies.get('user_data'));
-            console.log('categories cookieValue------------1', cookieValue?.token);
-            const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-            // const creator_id = JSON.parse(Cookies.get('creator_id'));
-            const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
-            // const creator_name = JSON.parse(Cookies.get('creator_name'));
-            // const campaign_name = JSON.parse(Cookies.get('campaign_name'));
-            console.log("creator_id campaign_id",creator_id,campaign_id);
-
+            
+            
             const postData = {
                 "campaign_id": campaign_id,
                 "creator_id": creator_profile_id,
@@ -46,9 +48,12 @@ const Creators_popup_content = () => {
                 "approved": false
             };
 
+            console.log('campaigncreators',postData);
+
             const headers = {
                 'Authorization': `Bearer ${cookieValue?.token}`,
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
+                // 'Accept':'application/json',
             };
 
             const postResponse = await apiCall(`${url}/campaigncreators`, 'post', postData,headers);
@@ -56,7 +61,7 @@ const Creators_popup_content = () => {
             console.log('POST response campaigncreators-------------:', postResponse);
             if (postResponse?.status) {
 
-                toast.success(` to the campaign `, {
+                toast.success(`${creator_name} to the campaign ${campaign_name}`, {
                     position: 'top-center',
                     autoClose: 5000,
                 });
@@ -77,10 +82,10 @@ const Creators_popup_content = () => {
 
         } catch (error) {
             // console.error('POST response register catrch error-------------', error);
-            // toast.error('please register yourself or login again after sometime', {
-            //     position: 'top-center',
-            //     autoClose: 5000,
-            // });
+            toast.error('please register yourself or login again after sometime', {
+                position: 'top-center',
+                autoClose: 5000,
+            });
         }
     };
 
@@ -135,7 +140,7 @@ const Creators_popup_content = () => {
                                 <Buttons
                                     buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                                     label={"Confirm Button"}
-                                    onClick={(e) => handleSubmit(e)}
+                                    onClick={() => handleSubmit()}
                                 />
                             </>
                         }

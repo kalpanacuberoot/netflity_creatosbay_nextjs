@@ -12,9 +12,30 @@ const Creator_table = ({ creatorData }) => {
 
     const handleSubmit = async () => {
 
-        const creator_id = JSON.parse(Cookies.get('creator_id'));
-        console.log("creator_id campaign_id", creator_id);
+        // const creator_id = JSON.parse(Cookies.get('creator_id'));
+        // console.log("creator_id campaign_id", creator_id);
+       
+        const creator_id = Cookies.get('creator_id');
+        const creator_profile_id = Cookies.get('creator_profile_id');
 
+        let creatorId = null;
+
+        if (creator_id) {
+            try {
+                creatorId = JSON.parse(brand_detail);
+            } catch (error) {
+                console.error('Error parsing brand_detail:', error);
+            }
+        }
+
+        if (!creatorId && creator_profile_id) {
+            try {
+                creatorId = JSON.parse(brandIds);
+            } catch (error) {
+                console.error('Error parsing brand_ids:', error);
+            }
+        }
+        console.log('creator_profile_id:', creator_profile_id);
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('categories cookieValue-----parsedData-------1', cookieValue?.token);
 
@@ -25,7 +46,7 @@ const Creator_table = ({ creatorData }) => {
                 'Content-Type': 'application/json',
             };
 
-            const response = await fetch(`${url}/creators/${creator_id}`, {
+            const response = await fetch(`${url}/creators/${creator_profile_id}`, {
                 method: 'Get',
                 headers: headers,
 

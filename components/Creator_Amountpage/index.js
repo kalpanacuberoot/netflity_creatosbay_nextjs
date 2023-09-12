@@ -10,13 +10,32 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { url } from "@/generalfunctions";
+import Modal_Creators_details_form from "./Modal_Creators_details_form";
+import Creators_form_content from "./Modal_Creators_details_form/Creators_form_content";
+import Creator_invoice_pdf_page from "../Invoicepage/Creator_invoice_pdf";
 
 const Creator_Amountpage = () => {
 
     const router = useRouter();
 
     const [campaigndata, setCampaigndata] = useState(null);
+    const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
+    const [totalAmount, setTotalAmount] = useState(1000);
 
+    const usageChargePercent = 15;
+    const gstRate = 18;
+
+    const calculateAmountWithGST = (amount) => {
+        const gstAmount = (amount * gstRate) / 100;
+        return amount + gstAmount;
+    };
+
+    const firstAmount = totalAmount / 2;
+    const secondAmount = totalAmount / 2;
+    const firstAmountWithGST = calculateAmountWithGST(firstAmount);
+    const secondAmountWithGST = calculateAmountWithGST(secondAmount);
+
+    const refundAmount = usageChargePercent * totalAmount / 100;
 
     const getCompanyCraetors = async () => {
 
@@ -24,8 +43,29 @@ const Creator_Amountpage = () => {
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-        const creator_id = JSON.parse(Cookies.get('creator_id'));
-        console.log("creator_id campaign_id", creator_id, campaign_id);
+        const creator_id = Cookies.get('creator_id');
+        const creator_profile_id = Cookies.get('creator_profile_id');
+
+        let creatorId = null;
+
+        if (creator_id) {
+            try {
+                creatorId = JSON.parse(brand_detail);
+            } catch (error) {
+                console.error('Error parsing brand_detail:', error);
+            }
+        }
+
+        if (!creatorId && creator_profile_id) {
+            try {
+                creatorId = JSON.parse(brandIds);
+            } catch (error) {
+                console.error('Error parsing brand_ids:', error);
+            }
+        }
+        console.log('creator_profile_id:', creator_profile_id);
+        // const creator_id = JSON.parse(Cookies.get('creator_id'));
+        // console.log("creator_id campaign_id", creator_id, campaign_id);
 
         try {
             const response = await fetch(`${url}/campaigns/${campaign_id}`, {
@@ -54,11 +94,25 @@ const Creator_Amountpage = () => {
 
     useEffect(() => {
         getCompanyCraetors();
-    }, [])
+    }, []);
+
+    const handleSubmit = () => {
+        // router.push('/payment_gateway')  
+        setIsModalOpenlogout(true)
+    }
 
 
     return (
         <>
+
+            <Modal_Creators_details_form isOpen={isModalOpenlogout} onClose={() => setIsModalOpenlogout(false)}>
+
+                <div className="relative w-full max-w-2xl max-h-full">
+
+                    <Creators_form_content />
+                </div>
+
+            </Modal_Creators_details_form>
             <div
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
@@ -150,30 +204,76 @@ const Creator_Amountpage = () => {
                                         </thead>
                                         {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
                                             return (
-                                                <tbody  key={index}>
+                                                <tbody key={index}>
 
                                                     <Creator_table creatorData={creator_item} T={console.log("creator_item", creator_item)} />
                                                 </tbody>
 
                                             )
                                         })
-                                    :
-                                    "No Creator is found"
-                                    }
+                                            :
+                                            "No Creator is found"
+                                        }
                                     </table>
                                 </div>
 
+
                             </div>
+
+                        </div>
+                        <div className="invoice-total">
+
+                            <table className="ms-auto">
+                                <tr>
+                                    <th>Sub Total :</th>
+                                    <td>{totalAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <th>First Amount :</th>
+                                    <td>{firstAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <th>GST (18%) :</th>
+                                    <td> {calculateAmountWithGST(firstAmount) - firstAmount}.00</td>
+                                </tr>
+                                <tr className="font-bold" style={{ color: Colors.pink_clr }}>
+                                    <th>Total Amount :</th>
+                                    <td>{firstAmountWithGST}.00</td>
+                                </tr>
+
+
+                            </table>
+
+
+
                         </div>
 
+                        {/* <Creator_invoice_pdf_page/> */}
 
+                        {/* <div>
+                            <h1>Total Amount: {totalAmount}</h1>
+                            <h2>First Amount:</h2>
+                            <p>Base Amount: {firstAmount}</p>
+                            <p>GST ({gstRate}%): {calculateAmountWithGST(firstAmount) - firstAmount}</p>
+                            <p>Total: {firstAmountWithGST}</p>
+                            <h2>Second Amount:</h2>
+                            <p>Base Amount: {secondAmount}</p>
+                            <p>GST ({gstRate}%): {calculateAmountWithGST(secondAmount) - secondAmount}</p>
+                            <p>Total: {secondAmountWithGST}</p>
+                            <button onClick={() => console.log('Accept')} >Accept</button>
+                            <button onClick={() => console.log('Reject')} >Reject</button>
+                            <h2>Refund Amount:</h2>
+                            <p>{refundAmount}</p>
+                        </div> */}
                         <div className="w-32  ms-auto">
                             <Buttons
                                 label={"Continue"}
                                 buttoncss={"bottom-0"}
-                                onClick={() => router.push('/payment_gateway')}
+                                // onClick={() => router.push('/payment_gateway')}
+                                onClick={() => handleSubmit()}
                             />
                         </div>
+
                     </div>
                 </div>
             </div>

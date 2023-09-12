@@ -117,8 +117,8 @@ const Supportpage = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   pattern="[0-9]{10}" title="10 digit number is required"
                 />
-                {/* <div class="relative inline-block w-full">
-                  <select class="block appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline">
+                {/* <div className="relative inline-block w-full">
+                  <select className="block appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline">
 
                     {options.map((item, index) => (
                       <option key={index}
@@ -127,11 +127,11 @@ const Supportpage = () => {
                     ))}
                   </select>
                   <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+                    className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
                     style={{ color: Colors.pink_clr }}
                   >
                     <svg
-                      class="fill-current h-4 w-4"
+                      className="fill-current h-4 w-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                     >

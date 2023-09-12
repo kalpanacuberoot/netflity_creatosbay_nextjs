@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
 
-export const fetchApiData = async (url, method, data = null, headers = {}, loaderElement, token = null) => {
+export const fetchApiData = async (url, method, data = null, headers = {}, loaderElement, token = null,router) => {
 
     const apiUrl = process.env.API_URL + url; // Use the environment variable
 

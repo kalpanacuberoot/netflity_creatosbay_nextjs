@@ -1,6 +1,3 @@
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,6 +66,7 @@ p {
   font-size: 17px;
   font-weight: 400;
 }
+
 .font_size_18 {
   font-size: 18px;
   font-weight: 400;
@@ -83,9 +81,11 @@ p {
   font-size: 21px;
   font-weight: 500;
 }
+
 .font_size_24 {
   font-size: 24px;
 }
+
 .font_size_31 {
   font-size: 31px;
   font-weight: 500;
@@ -95,6 +95,7 @@ p {
   font-size: 40px;
   font-weight: 700;
 }
+
 .font_size_42 {
   font-size: 42px;
 }
@@ -106,9 +107,7 @@ p {
   /* max-height: 336px; */
 }
 
-.edit_profile_ht{
- 
-}
+.edit_profile_ht {}
 
 
 button {
@@ -189,6 +188,104 @@ button {
   height: 13vh;
 }
 
+/* messages */
+/* Your CSS file (e.g., styles.css) */
+/* ChatMessage.css */
+.left-message {
+  /* background-color: #f2f2f2; */
+  /* background-color: blue; */
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  text-align: left;
+  /* color: white; */
+  width: fit-content;
+}
+
+.right-message {
+  /* background-color: #4caf50; */
+  /* color: white; */
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  text-align: right;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.right-text-message {
+
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  text-align: right;
+  width: fit-content;
+  margin-left: auto;
+}
+
+/* ChatBox.css */
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Style as needed */
+/* Invoice Styles */
+.invoice-container {
+  font-family: Arial, sans-serif;
+  /* margin: 20px; */
+  border: 1px solid #ccc;
+  /* padding: 20px; */
+  background-color: #fff;
+}
+
+.invoice-header {
+  text-align: center;
+}
+
+.invoice-header h1 {
+  font-size: 24px;
+}
+
+.invoice-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.invoice-info,
+.invoice-client {
+  width: 25%;
+}
+
+.invoice-items {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.invoice-items th,
+.invoice-items td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.invoice-items th {
+  background-color: #f2f2f2;
+}
+
+.invoice-total {
+  /* margin-top: 20px; */
+  text-align: right;
+}
+
+/* Add more CSS styles as needed */
+
+
+/* end messages */
+
 .bg-image {
   background-image: url('../images/pop_bg.png');
   background-size: cover;
@@ -229,7 +326,7 @@ button {
   /* overflow-y: auto; */
   /* overflow-y: scroll; */
   /* text-overflow: clip clip; */
-  overflow-y:scroll; 
+  overflow-y: scroll;
 }
 
 /* components/SwitchToggle.module.css */
@@ -270,15 +367,15 @@ button {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #2196F3;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -373,13 +470,15 @@ logo-slider img {
   color: #fff;
 }
 
-input:focus{
+input:focus {
   border-color: #9357FF;
 }
-textarea:focus{
+
+textarea:focus {
   border-color: #9357FF;
 }
-select:focus{
+
+select:focus {
   border-color: #9357FF;
 }
 

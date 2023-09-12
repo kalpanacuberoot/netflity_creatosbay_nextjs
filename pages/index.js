@@ -56,12 +56,12 @@ const index = () => {
   return (
     <>
 
-      <Modal_onboarding_screens isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      {/* <Modal_onboarding_screens isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="relative w-full max-w-4xl max-h-full min-w-xl min-h-0">
 
           <Onbording_content tabs={tabs} isOpen={isModalOpen} onClose={closeModal} />
         </div>
-      </Modal_onboarding_screens>
+      </Modal_onboarding_screens> */}
       <div className=' container flex flex-row justify-between items-center'>
         <div className='auto-cols-max h-screen border children_layout'>
           <Layout>

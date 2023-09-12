@@ -46,7 +46,7 @@ const Creators_profilepage = () => {
     const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
     // console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
     // Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
-    Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
+    
 
     try {
 
@@ -112,7 +112,7 @@ const Creators_profilepage = () => {
 const heightInCms = creator_details?.height;
 const heightInFeetAndInches = convertHeight(heightInCms);
 console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
-
+Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
 
   return (
     <>

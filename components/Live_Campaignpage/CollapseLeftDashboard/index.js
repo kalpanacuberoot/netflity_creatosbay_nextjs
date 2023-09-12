@@ -24,7 +24,7 @@ const CollapseLeftDashboard = () => {
                         alt=""
                         className="mx-auto"
                     />
-                    <div class="absolute inset-y-0 top-8 fixed left-10 flex items-center pl-3 pointer-events-none">
+                    <div className="absolute inset-y-0 top-8 fixed left-10 flex items-center pl-3 pointer-events-none">
                     <Image
                             src={Images.notification_left_collapse_icon}
                             width={24}

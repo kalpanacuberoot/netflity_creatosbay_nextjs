@@ -1,10 +1,28 @@
 import Images from "@/images"
 import Colors from "@/styles/Colors"
 import Image from "next/image"
+import Link from "next/link"
+import PDFGenerator from "../PDFGenerator"
+import Creator_invoice_pdf_page from "../Creator_invoice_pdf"
+import User_Modal from "../User_Modal"
+import User_Modal_form from "../User_Modal/User_Modal_form"
+import { useState } from "react"
 
 const Invoice_Table = () => {
+
+    const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
+
     return (
         <>
+
+            <User_Modal isOpen={isModalOpenlogout} onClose={() => setIsModalOpenlogout(false)}>
+
+                <div className="relative w-full max-w-2xl max-h-full">
+
+                    <User_Modal_form />
+                </div>
+
+            </User_Modal>
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg border">
                 <table className="text-center w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -25,16 +43,23 @@ const Invoice_Table = () => {
                             <th scope="col" className="px-6 py-5">
                                 Credited On
                             </th>
-                            <th scope="col" className="px-6 py-5">
-                                Download
-                            </th>
+                            <Link href={'/creator_invoice_pdf'}>
+                                <button>
+                                    <th scope="col" className="px-6 py-5">
+                                        Download
+                                    </th>
+                                </button>
+                            </Link>
                             {/* <th scope="col" className="px-6 py-3">
                                 <span className="sr-only">Edit</span>
                             </th> */}
+                            <th scope="col" className="px-6 py-5">
+                                Actions
+                            </th>
                         </tr>
-                        
+
                     </thead>
-                    
+
                     <tbody>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -63,7 +88,7 @@ const Invoice_Table = () => {
                                     12/06/23
                                 </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 border">
                                 <Image
                                     src={Images.download_icon}
                                     width={40}
@@ -71,10 +96,13 @@ const Invoice_Table = () => {
                                     alt=""
                                     className="mx-auto"
                                 />
+                                <PDFGenerator />
                             </td>
-                            {/* <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td> */}
+                            <td className="px-6 py-4 text-right">
+                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                onClick={() => setIsModalOpenlogout(true)}
+                                >Edit</a>
+                            </td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
