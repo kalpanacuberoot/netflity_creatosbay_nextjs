@@ -4,7 +4,7 @@ import Payment_successpage from "@/components/Payment_Gatewaypage/Payment_succes
 const Payment_payu_success = () => {
   return (
     <>
-      <h1>Payment Success</h1>
+       <Payment_successpage />
     </>
   )
 }

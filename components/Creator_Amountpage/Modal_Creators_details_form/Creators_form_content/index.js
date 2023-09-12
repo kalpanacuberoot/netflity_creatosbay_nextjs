@@ -1,3 +1,4 @@
+require('dotenv').config();
 import Images from "@/images";
 import Image from "next/image";
 
@@ -13,6 +14,7 @@ import { useRouter } from "next/router";
 import ModalHeader from "@/components/Homepage/ModalHeader";
 import md5 from 'crypto-js/md5';
 import sha512 from 'crypto-js/sha512';
+
 
 const Creators_form_content = () => {
 
@@ -30,33 +32,29 @@ const Creators_form_content = () => {
     const [pincode, setPincode] = useState('');
     const [gstin, setGstin] = useState('');
 
+   
+    const key = process.env.NEXT_PUBLIC_PAYU_MERCHANT_KEY;   
+    
+    console.log("PAYU_MERCHANT_KEY", process.env.NEXT_PUBLIC_PAYU_MERCHANT_KEY);
 
-    // const key = process.env.PAYU_MERCHANT_KEY;             
-    const salt = process.env.PAYU_MERCHANT_SALT2;
-    const payu_url = process.env.PAYU_URL;
-    const key = "rAI8gg";
-    // const salt = "MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDYOj+2W8ND8u00fYhV7ghwuBByDNJmDCIg7WzQE+SOBgOpARj7X8UOMr8idZCTbt+o898gObxNz8nNe4pBxLhJkMwaX3sHEgM9bDxkcOz7+RfZHnw41Bpair/1nTBaRBIgDNIzdPfOdxyET50oof/qrL9L4qpISXy/NiDSLgtOZcF6mev+zP+1FiklEXCu2IsqHVwyMMt7ynwS27t3m+ZliMKsPdXL5X0JrKD8TtchrNBzAphJctpQAjgNOL/+VUpHLQeQcks+0O1i/oXqiJ64akHumoGkFHRNaMdbmlUxgp7npmSjMnyCi9O3crcsZEFlyKSx0AwI3E7qgBu1Kz13AgMBAAECggEBAMJwVtywVb4jlESwYcoL29Eo47j7aLPVU1dSyZevW8aPB/mRABsD+tqSrafaGmFJwZxXeJys7nT2Vl0OK7yKnsGgkLlihOpNu1Yfn4setSy8yUI4FLKxoOUsggPnDxUMw1PI07jsBO7H03/za7qfOteX8gnWURPh6Wi0zvzR5N7gIIPVXj9xCHG6lgbr+bBQe5ranW7QUleDcVImpGtJUZAdI3fYmYQujePTWlyEc9nTUCdgA9lV7w27p5pnqzQfrJJq86P5RZHUNEw6GV5I0pw2hAPJQ1fIaB4vLEZhQ9Y3lExwznG8AC1gzu9U92PqhZRTM8U8jEpVXmHelHun5kECgYEA9UAEYYXvj5dqgS9xm71fb+nUvKsiv3KPWEWDvQWpgI6ITsUhoK7dGHURs/FmhoSKvuUVk1ebdao6ShKaMhRuZ4NmtoVqJOZ3rWzXomi3NjCEZ7h97SCPnMbz5QD/y+PK8+Rk0NvC44v9hQas9TORtNDAsLBm1Ck7DhQf4KIcL+ECgYEA4bSQ753fukoPlagGTVi+nSH6xS7f24PmWOq9OfYezmrxnaFoTFvQqhuI62sl0rnVJqQgexAcWMbweWjkkAaV1p1KJlsSvgMzPo+YPHtblrg0vKZTqi5V95XI9Wz3ps4shps0tOzUrS2UkMut29K3z2jc8q3ACa5NRyXoqJnV+FcCgYEAq8PmTZdMrTjTMx9TZkw/p1YR1QHXGFbX5m7pUV3B1XP+K40NfEh8OUDk4S5VLClwMzqm3cch7ksHABH/RMvid0Ukjvjp2mY/s4rji6/jgWSBl1MzfvyrGJaPAvisLtSftClmIpGH8W5+ZMjEIge4KPd7vUQPANDPt5CIsv9W1oECgYEAiL3VpWZXekyOXpP6pXejnB1PCZGZjCvALZSh6fDDvzkpgt+cCc8Cf1zJOh+jPaTaj1uWVhhvpBV68YNsHhnvQ6PtnYlFtJrJvBhRGit+VLTrNnPqcks6SBKWOqK283croK19ZDOrsfPQc10CyxBBzkXwvpInq3XPWdCMwUDaUmcCgYEAsiAOPU/0U3+zdHhzmUUTCIoQlm4gltNXmu1QuDruOdxDrhFNAVSkwhBD/IrwY6LRBOtAhk5oyakAZ1xw6GXZ24w1xH32DXoSWzYJSCFveFnwoSiLusvjn4isQls2FuFZR8uGuKg1+SZMOQ0EloGfgwfikP+Tu73HDMoPPsqQqqU=";
-    // const payu_url = "https://test.payu.in/_payment";
-    // const site_url = "https://pro-coral-equally.ngrok-free.app";
+    const salt = process.env.NEXT_PUBLIC_PAYU_MERCHANT_SALT2;
+    const payu_url = process.env.NEXT_PUBLIC_PAYU_URL;
+    
+    // const site_url = "https://pro-coral-equally.ngrok-free.app/";
     const site_url = "https://staging.creatorsbay.app/";
     const country = "India";
     const api_version = 1;
-    // Get below details from cookies
-    // const campaign_idgdgdf = Cookies.get('campaign_id');
-    // console.log("campaign_idgdgdf",campaign_idgdgdf);
+
     const campaign_id = Cookies.get('campaign_id');
     const campaign_name = Cookies.get('campaign_name');
 
-    // Get below details from calculation
-    const amount = 1000;
+    const amount = Cookies.get('firstAmountWithGST')
 
-    console.log("PAYU_MERCHANT_KEY", key);
-    // Get below details from env (replace with your actual environment variables)
+    // const amount = 590;
 
+    console.log("PAYU_MERCHANT_KEY1", key);
 
-    // Generate below data
-    const state_text = ''; // Initialize as empty string (we'll update this in useEffect)
-    const transation_id = md5(campaign_id).toString();
+    const txnid = md5(campaign_id).toString();
     const productinfo = `Campaign: ${campaign_name}`;
     const surl = `${site_url}payment-success`;
     const furl = `${site_url}payment-failure`;
@@ -137,7 +135,7 @@ const Creators_form_content = () => {
         // Perform your task here
          hash = sha512([
                 key ?? '',
-                transation_id ?? '',
+                txnid ?? '',
                 amount ?? '',
                 productinfo ?? '',
                 firstname ?? '',
@@ -240,21 +238,21 @@ const Creators_form_content = () => {
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 me-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                             <input id="gstin" type="text" name="gstin"
-                                placeholder="GSTIN"
+                                placeholder="Gstin"
                                 value={gstin}
                                 onChange={(e) => setGstin(e.target.value)}
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                         </div>
 
-                        <input id="address_line_1" type="text" name="address_1"
-                            placeholder="Address 1"
+                        <input id="address1" type="text" name="address_1"
+                            placeholder="Address Line 1"
                             value={address1}
                             onChange={(e) => setAddress1(e.target.value)}
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 me-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
-                        <input id="address_line_2" type="text" name="address_2"
-                            placeholder="Address 2"
+                        <input id="address2" type="text" name="address_2"
+                            placeholder="Address Line 2"
                             value={address2}
                             onChange={(e) => setAddress2(e.target.value)}
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -270,7 +268,7 @@ const Creators_form_content = () => {
                                 value={key}
 
                             />
-                            <input type="hidden" name="txnid" id="txnid" value={transation_id} />
+                            <input type="hidden" name="txnid" id="txnid" value={txnid} />
                             <input type="hidden" name="productinfo" id="productinfo" value={productinfo} />
                             <input type="hidden" name="amount" id="amount" value={amount} />
                             <input type="hidden" name="email" id="email" value={email} />
@@ -295,7 +293,7 @@ const Creators_form_content = () => {
                             <input type="hidden" name="udf3" id="udf3" value={udf3} />
                             <input type="hidden" name="udf4" id="udf4" value={udf4} />
                             <input type="hidden" name="udf5" id="udf5" value={udf5} />
-                            <input type="submit" value="Pay" className="font_size_24 leading-6 py-3 button_clr my-3"
+                            <input type="submit" value="Pay" className="font_size_24 leading-6 py-3 bg-purple-600 rounded-lg text-white my-3 w-full"
                                 onClick={paybuttonClick}
                             />
 
