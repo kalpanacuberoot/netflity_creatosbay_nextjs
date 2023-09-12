@@ -238,21 +238,21 @@ const Creators_form_content = () => {
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 me-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                             <input id="gstin" type="text" name="gstin"
-                                placeholder="GSTIN"
+                                placeholder="Gstin"
                                 value={gstin}
                                 onChange={(e) => setGstin(e.target.value)}
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                         </div>
 
-                        <input id="address_line_1" type="text" name="address_1"
-                            placeholder="Address 1"
+                        <input id="address1" type="text" name="address_1"
+                            placeholder="Address Line 1"
                             value={address1}
                             onChange={(e) => setAddress1(e.target.value)}
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 me-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
-                        <input id="address_line_2" type="text" name="address_2"
-                            placeholder="Address 2"
+                        <input id="address2" type="text" name="address_2"
+                            placeholder="Address Line 2"
                             value={address2}
                             onChange={(e) => setAddress2(e.target.value)}
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -293,7 +293,7 @@ const Creators_form_content = () => {
                             <input type="hidden" name="udf3" id="udf3" value={udf3} />
                             <input type="hidden" name="udf4" id="udf4" value={udf4} />
                             <input type="hidden" name="udf5" id="udf5" value={udf5} />
-                            <input type="submit" value="Pay" className="font_size_24 leading-6 py-3 button_clr my-3"
+                            <input type="submit" value="Pay" className="font_size_24 leading-6 py-3 bg-purple-600 rounded-lg text-white my-3 w-full"
                                 onClick={paybuttonClick}
                             />
 

@@ -34,7 +34,7 @@ const Creator_Amountpage = () => {
     const secondAmount = totalAmount / 2;
     const firstAmountWithGST = calculateAmountWithGST(firstAmount);
 
-    Cookies.set('firstAmountWithGST',firstAmountWithGST);
+    Cookies.set('firstAmountWithGST', firstAmountWithGST);
     const secondAmountWithGST = calculateAmountWithGST(secondAmount);
 
     const refundAmount = usageChargePercent * totalAmount / 100;
@@ -180,7 +180,7 @@ const Creator_Amountpage = () => {
                     <div style={{ backgroundColor: Colors.white_clr }}
                         className="rounded-md container-fluid h-screen p-5 my-2 flex flex-col justify-between"
                     >
-                        <div className="font_size_31 ">
+                        <div className="font_size_31 p-10">
                             {campaigndata?.name}
                             <div className="py-5">
 
@@ -192,10 +192,16 @@ const Creator_Amountpage = () => {
                                                     Creator Name
                                                 </th>
                                                 <th scope="col" className="px-6 py-5">
-                                                    Image
+                                                    unit price image
                                                 </th>
                                                 <th scope="col" className="px-6 py-5">
-                                                    Video
+                                                    Images
+                                                </th>
+                                                <th scope="col" className="px-6 py-5">
+                                                    unit price video
+                                                </th>
+                                                <th scope="col" className="px-6 py-5">
+                                                    Videos
                                                 </th>
                                                 <th scope="col" className="px-6 py-5">
                                                     Payout
@@ -221,36 +227,36 @@ const Creator_Amountpage = () => {
 
 
                             </div>
+                            <div className="invoice-total text-base mt-5">
 
+                                <table className="ms-auto">
+                                    <tr>
+                                        <th>Sub Total :</th>
+                                        <td>{totalAmount}.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th>First Amount :</th>
+                                        <td>{firstAmount}.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th>GST (18%) :</th>
+                                        <td> {calculateAmountWithGST(firstAmount) - firstAmount}.00</td>
+                                    </tr>
+                                    <tr className="font-bold" style={{ color: Colors.pink_clr }}>
+                                        <th>Total Amount :</th>
+                                        <td>{firstAmountWithGST}.00</td>
+                                    </tr>
+
+
+                                </table>
+
+
+
+                            </div>
                         </div>
-                        <div className="invoice-total">
-
-                            <table className="ms-auto">
-                                <tr>
-                                    <th>Sub Total :</th>
-                                    <td>{totalAmount}.00</td>
-                                </tr>
-                                <tr>
-                                    <th>First Amount :</th>
-                                    <td>{firstAmount}.00</td>
-                                </tr>
-                                <tr>
-                                    <th>GST (18%) :</th>
-                                    <td> {calculateAmountWithGST(firstAmount) - firstAmount}.00</td>
-                                </tr>
-                                <tr className="font-bold" style={{ color: Colors.pink_clr }}>
-                                    <th>Total Amount :</th>
-                                    <td>{firstAmountWithGST}.00</td>
-                                </tr>
 
 
-                            </table>
-
-
-
-                        </div>
-
-                        {/* <Creator_invoice_pdf_page/> */}
+                        {/* <Creator_invoice_pdf_page /> */}
 
                         {/* <div>
                             <h1>Total Amount: {totalAmount}</h1>
@@ -267,10 +273,10 @@ const Creator_Amountpage = () => {
                             <h2>Refund Amount:</h2>
                             <p>{refundAmount}</p>
                         </div> */}
-                        <div className="w-32  ms-auto">
+                        <div className=" my-5  ms-auto mb-10 text-xl">
                             <Buttons
                                 label={"Continue"}
-                                buttoncss={"bottom-0"}
+                                buttoncss={"bottom-0 py-3 px-5 "}
                                 // onClick={() => router.push('/payment_gateway')}
                                 onClick={() => handleSubmit()}
                             />

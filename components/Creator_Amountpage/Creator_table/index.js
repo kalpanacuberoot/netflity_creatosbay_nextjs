@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 
 const Creator_table = ({ creatorData }) => {
 
-    const [creator_name,setCreator_name] = useState(null);
+    const [creator_name, setCreator_name] = useState(null);
     console.log("creatorData table", creatorData?.id);
 
     const handleSubmit = async () => {
 
         // const creator_id = JSON.parse(Cookies.get('creator_id'));
         // console.log("creator_id campaign_id", creator_id);
-       
+
         const creator_id = Cookies.get('creator_id');
         const creator_profile_id = Cookies.get('creator_profile_id');
 
@@ -80,14 +80,14 @@ const Creator_table = ({ creatorData }) => {
 
     useEffect(() => {
         handleSubmit();
-    },[])
+    }, [])
 
-    console.log("creator_name",creator_name?.user?.name);
+    console.log("creator_name", creator_name?.user?.name);
 
     const result = (creatorData?.image_count || 0) * 500 + (creatorData?.video_count || 0) * 500;
 
-console.log(result); 
-Cookies.set('creator_amount',result)
+    console.log(result);
+    Cookies.set('creator_amount', result)
 
     return (
         <>
@@ -97,14 +97,26 @@ Cookies.set('creator_amount',result)
 
                 </th>
                 <td className="px-6 py-4">
+                    500
+                </td>
+                <td className="px-6 py-4">
                     {creatorData?.image_count}
+                </td>
+                <td className="px-6 py-4">
+                    500
                 </td>
                 <td className="px-6 py-4">
                     {creatorData?.video_count}
                 </td>
+                {/* <td className="px-6 py-4">
+                    {creatorData?.image_count}
+                </td>
                 <td className="px-6 py-4">
-                {result}
-                
+                    {creatorData?.video_count}
+                </td> */}
+                <td className="px-6 py-4">
+                    {result}
+
                 </td>
 
             </tr>
