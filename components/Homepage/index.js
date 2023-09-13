@@ -25,8 +25,24 @@ const Homepage = () => {
   const router = useRouter();
 
   const [campaign_data, setCampaign_data] = useState([]);
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(campaign_data.length / itemsPerPage);
 
+  // Calculate the start and end index for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
+  // Get the data for the current page
+  const currentPageData = campaign_data.slice(startIndex, endIndex);
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
 
   const allCampaignData = async () => {
 
@@ -155,13 +171,14 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap overflow-y-auto"
+            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
             style={{ backgroundColor: Colors.white_clr }}
           >
 
-            {campaign_data.length > 0 ? campaign_data?.map((item, index) => (
+            {currentPageData.length > 0 ? currentPageData?.map((item, index) => (
               <>
                 <Home_Card1 items={item} />
+
               </>
             ))
 
@@ -177,6 +194,24 @@ const Homepage = () => {
                 </Link>
               </div>
             }
+
+           {/* Pagination controls */}
+            <div className=" w-full mt-5">
+              <div className="w-1/4 ms-auto mx-2">
+                <button onClick={() => handlePageChange(currentPage - 1)} className="px-3 edit_button_clr mx-3 rounded">Previous</button>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    style={{ fontWeight: currentPage === index + 1 ? 'bold' : 'normal' }}
+                    className="mx-2"
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+                <button onClick={() => handlePageChange(currentPage + 1)} className="px-3 edit_button_clr mx-3 rounded">Next</button>
+              </div>
+            </div> 
           </div>
         </div>
 
