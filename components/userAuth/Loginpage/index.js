@@ -43,7 +43,7 @@ const Loginpage = () => {
           autoClose: 5000,
         });
         getUser_Brand();
-        // router.push('/user_brand_name');
+        // router.push('/brand-selection');
       } else {
         // console.error('Error:', postResponse?.statusText);
         // alert('logibn api response else', postResponse?.statusText)
@@ -107,7 +107,7 @@ const Loginpage = () => {
           if (responseData?.data?.data.length === 0) {
             router.push('/brand'); // Redirect to the brand page
           } else {
-            router.push('/user_brand_name'); // Redirect to the brand_user page
+            router.push('/brand-selection'); // Redirect to the brand_user page
           }
           // setBrand_user(responseData?.data?.data)
 

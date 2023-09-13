@@ -70,7 +70,7 @@ const User_BrandNamepage = () => {
     //     if (brand_user.length === 0) {
     //       router.push('/brand'); // Redirect to the brand page
     //     } else {
-    //       router.push('/user_brand_name'); // Redirect to the brand_user page
+    //       router.push('/brand-selection'); // Redirect to the brand_user page
     //     }
     //   }, [brand_user, router]);
 
