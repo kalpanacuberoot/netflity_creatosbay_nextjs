@@ -17,36 +17,25 @@ const Creators_profilepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [creator_details, setCreator_details] = useState(null);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const convertHeight = (heightCms) => {
+    const inchesPerFoot = 12;
+    const feet = Math.floor(heightCms / (inchesPerFoot * 2.54));
+    const inches = Math.round((heightCms / 2.54) % inchesPerFoot);
 
-  const toggleDropdownf = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+    return `${feet}' ${inches}"`;
+  }
 
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
+  // Example usage
+  const heightInCms = creator_details?.height;
+  const heightInFeetAndInches = convertHeight(heightInCms);
+  console.log('heightInFeetAndInches', heightInFeetAndInches); // Output: 5' 5"
+  Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
+  console.log("creator_details", creator_details);
 
-  const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
+  const handleSubmit = async () => {
 
-  const handleSubmit = useCallback(async () => {
-
-    const { data } = router.query;
-    if (data) {
-      const parsedData = JSON.parse(data);
-      console.log("Received Data:", parsedData);
-    }
-
-
-    // const parsedData = JSON?.parse(data);
     const cookieValue = JSON.parse(Cookies.get('user_data'));
     const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
-    // console.log('categories cookieValue-----parsedData-------1', cookieValue?.token, parsedData?.key);
-    // Cookies.set('creator_id', JSON.stringify(parsedData?.key), { expires: 106500 });
-    
 
     try {
 
@@ -55,11 +44,7 @@ const Creators_profilepage = () => {
         'Content-Type': 'application/json',
       };
 
-      // const response = await fetch(`${url}/creators/${parsedData?.key}`, {
-      //   method: 'Get',
-      //   headers: headers,
 
-      // });
       const response = await fetch(`${url}/creators/${creator_profile_id}`, {
         method: 'Get',
         headers: headers,
@@ -71,56 +56,26 @@ const Creators_profilepage = () => {
         console.log('creator_details response:', responseData?.data);
         setCreator_details(responseData?.data)
 
-        // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
-
-        if (responseData.status) {
-          // toast.success('Brand Successfully Created', {
-          //     position: 'top-center',
-          //     autoClose: 5000,
-          // });
-
-        } else {
-          console.error('Error:', responseData.message);
-          // alert('Brand creation failed');
-        }
       } else {
         console.error('Error:', response.statusText);
-        // alert('Brand creation failed');
       }
     } catch (error) {
       console.error('Error:', error);
     }
- }, [creator_details?.user?.name, router.query]);
-
-  console.log("creator_details", creator_details);
+  };
 
 
   useEffect(() => {
 
     handleSubmit();
-   
+
   }, []);
-
-  function convertHeight(heightCms) {
-    const inchesPerFoot = 12;
-    const feet = Math.floor(heightCms / (inchesPerFoot * 2.54));
-    const inches = Math.round((heightCms / 2.54) % inchesPerFoot);
-    
-    return `${feet}' ${inches}"`;
-}
-
-// Example usage
-const heightInCms = creator_details?.height;
-const heightInFeetAndInches = convertHeight(heightInCms);
-console.log('heightInFeetAndInches',heightInFeetAndInches); // Output: 5' 5"
-Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expires: 106500 });
 
   return (
     <>
 
       <Creators_popup isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-      // onSubmit={handlePopupData}   
       >
         <div className="relative w-full max-w-2xl max-h-full">
 
@@ -152,16 +107,15 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                 <div className="flex gap-2 justify-center align-middle ">
                   <div>
                     <Image
-                      width={500}
+                      width={50}
                       height={100}
-                      className="w-10 h-10 object-cover rounded-full"
-                      // src={imageUrl}
-                      src={creator_details?.profile_pic}
-                      alt=""
+                      className=" object-cover rounded-full"
+                      src={creator_details ? creator_details?.profile_pic : ""}
+                      alt="Creator_name"
                     />
                   </div>
                   <div className="flex flex-col  ">
-                    <h3>{creator_details?.user?.name}</h3>
+                    <h3>{creator_details ? creator_details?.user?.name : ""}</h3>
                     <p>I like Yor confidence</p>
                   </div>
                 </div>
@@ -173,7 +127,7 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                       height={100}
                       className="w-4 h-4  "
                       src={Images.fill_star}
-                      alt=""
+                      alt="star"
                     />
                   </div>
                   <div className="flex flex-col justify-center">
@@ -183,48 +137,6 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                 </div>
               </div>
 
-              {/* <div className="grid grid-cols-3 mt-8">
-                <div>
-                  <h4 className="text-gray-400">Followers</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">Reach</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">Impression</h4>
-                  <h3>00000k</h3>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 mt-8">0
-                <div>
-                  <h4 className="text-gray-400">Location</h4>
-                  <h3>{creator_details?.city}</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">Engagement Rate</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">Avg. </h4>
-                  <h3>00000k</h3>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 mt-8">
-                <div>
-                  <h4 className="text-gray-400">Website Click</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">Avg Likes</h4>
-                  <h3>00000k</h3>
-                </div>
-                <div>
-                  <h4 className="text-gray-400">CPE</h4>
-                  <h3>00000k</h3>
-                </div>
-              </div> */}
               <div className="pt-5 pb-3"
                 style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
               >
@@ -235,7 +147,7 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                   <h3>About me</h3>
                 </div>
                 <h4 className=" pt-5 mb-5">
-                  {creator_details?.bio}
+                  {creator_details ? creator_details?.bio : ""}
                 </h4>
 
               </div>
@@ -247,7 +159,7 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                 </div>
                 <div>
                   <h4 className="text-gray-400">Weight</h4>
-                  <h3>{creator_details?.weight}</h3>
+                  <h3>{creator_details ? creator_details?.weight : ""}</h3>
                 </div>
                 <div>
                   <h4 className="text-gray-400">Hairs</h4>
@@ -257,15 +169,15 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
               <div className="grid grid-cols-3 mt-8 ">
                 <div>
                   <h4 className="text-gray-400">Skin Color</h4>
-                  <h3>{creator_details?.skintype?.name}</h3>
+                  <h3>{creator_details ? creator_details?.skintype?.name : ""}</h3>
                 </div>
                 <div>
                   <h4 className="text-gray-400">Eye Color</h4>
-                  <h3>{creator_details?.eyetype?.name}</h3>
+                  <h3>{creator_details ? creator_details?.eyetype?.name : ""}</h3>
                 </div>
                 <div>
                   <h4 className="text-gray-400">Hairs Color</h4>
-                  <h3>{creator_details?.hairtype?.name}</h3>
+                  <h3>{creator_details ? creator_details?.hairtype?.name : ""}</h3>
                 </div>
               </div>
               <div className="grid grid-cols-3 mt-8 ">
@@ -279,7 +191,7 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                 </div>
                 <div>
                   <h4 className="text-gray-400">Location</h4>
-                  <h3>{creator_details?.city}</h3>
+                  <h3>{creator_details ? creator_details?.city : ""}</h3>
                 </div>
 
               </div>
@@ -324,36 +236,16 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                       borderColor: Colors.logo_clr,
                       color: Colors.logo_clr,
                     }}
-                    onClick={toggleDropdownf}
+
                   >
                     videos
                   </h3>
 
-                  <div className="relative inline-block text-left">
-                    {isDropdownOpen && (
-                      <div
-                        className="origin-top-right absolute right-0 mt-10 w-96  rounded-md shadow-lg bg-gray-500 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        role="menu"
-                        aria-orientation="vertical"
-                      >
-                        <button
-                          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-                          onClick={closeDropdown}
-                        >
-                          XXXXXXXXXXXXXXXX
-                        </button>
-                        <div>
-                          jgjgjhg
-                        </div>
-                      </div>
-                    )}
-                  </div>
+
                   <h3
                     className=" pl-3 pr-3 border-2 rounded-full inline-flex "
                     type="button"
-                    onClick={toggleDropdown}
-                    aria-expanded={isOpen}
-                    // aria-haspopup="true"
+
                     style={{
                       borderColor: Colors.logo_clr,
                       color: Colors.logo_clr,
@@ -364,188 +256,87 @@ Cookies.set('creator_name', JSON.stringify(creator_details?.user?.name), { expir
                 </div>
               </div>
 
-              {/* dropdown notifiaction ************* */}
-              <div className="relative inline-block text-left">
-                {isOpen && (
-                  <div
-                    className="origin-top-right absolute right-0 mt-2 w-96  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                  >
-                    <div className="py-1" role="none">
-                      <div
-                        className=" flex justify-between align-middle  p-4 items-center"
-                        style={{
-                          borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)",
-                        }}
-                      >
-                        <h2>Notification</h2>
-                        <button className="bg-purple-100 p-2 rounded-md w-12 h-10  ">
-                          5
-                        </button>
-                      </div>
-                      <div className="p-5">
-                        <div className=" bg-purple-100 rounded-md mt-7 p-5">
-                          <div className=" flex justify-between gap-5">
-                            <div className="  ">
-                              <h4 className="mb-3">Something has happened</h4>
-                              <h6>
-                                Lucas ipsum dolor sit amet chewbacca aayla
-                                dantooine obi-wan atrivis.
-                              </h6>
-                            </div>
-                            <p>x</p>
-                          </div>
-                          <h5 className="text-right">12:18</h5>
-                        </div>
-                        <div className=" bg-purple-100 rounded-md mt-7 p-5">
-                          <div className=" flex justify-between gap-5">
-                            <div> &</div>
-                            <div>
-                              <h4 className="mb-3 font-bold text-green-700">
-                                Well done Anakin!
-                              </h4>
-                              <h6>
-                                Qrygg elomin kashyyyk skirata. Oswaft mirta
-                                omwati kohl shmi.
-                              </h6>
-                            </div>
-                            <p>x</p>
-                          </div>
-                          <h5 className="text-right">13 H ago</h5>
-                        </div>
-                        <div className=" bg-purple-100 rounded-md mt-7 p-5">
-                          <div className=" flex justify-between gap-5">
-                            <div> &</div>
-                            <div>
-                              <h4 className="mb-3 font-bold text-green-700">
-                                Well done Anakin!
-                              </h4>
-                              <h6>
-                                Qrygg elomin kashyyyk skirata. Oswaft mirta
-                                omwati kohl shmi.
-                              </h6>
-                            </div>
-                            <p>x</p>
-                          </div>
-                          <h5 className="text-right">13 H ago</h5>
-                        </div>
-                        <div className=" bg-purple-100 rounded-md mt-7 p-5">
-                          <div className=" flex justify-between gap-5">
-                            <div> &</div>
-                            <div>
-                              <h4 className="mb-3 font-bold text-green-700">
-                                Well done Anakin!
-                              </h4>
-                              <h6>
-                                Qrygg elomin kashyyyk skirata. Oswaft mirta
-                                omwati kohl shmi.
-                              </h6>
-                            </div>
-                            <p>x</p>
-                          </div>
-                          <h5 className="text-right">13 H ago</h5>
-                        </div>
-                        <div className=" bg-purple-100 rounded-md mt-7 p-5">
-                          <div className=" flex justify-between gap-5">
-                            <div> &</div>
-                            <div>
-                              <h4 className="mb-3 font-bold text-green-700">
-                                Well done Anakin!
-                              </h4>
-                              <h6>
-                                Qrygg elomin kashyyyk skirata. Oswaft mirta
-                                omwati kohl shmi.
-                              </h6>
-                            </div>
-                            <p>x</p>
-                          </div>
-                          <h5 className="text-right">13 H ago</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+
               {/* dropdown ************* */}
 
-              <div className="grid h-full grid-cols-2 gap-5 overflow-y-scroll mt-10">
+              {/* <div className="grid h-full grid-cols-2 gap-5 overflow-y-scroll mt-10 min-h-screen"> */}
+              <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10">
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
                 <Image
                   width={500}
                   height={100}
-                  className="h-60 rounded-lg"
-                  src={imageUrl}
-                  alt=""
+                  className=" rounded-lg"
+                  src={Images.creator_profile_img}
+                  alt="Post"
                 />
               </div>
             </div>

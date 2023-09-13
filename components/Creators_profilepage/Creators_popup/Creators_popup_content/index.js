@@ -42,7 +42,7 @@ const Creators_popup_content = () => {
             
             const postData = {
                 "campaign_id": campaign_id,
-                "creator_id": creator_profile_id,
+                "creator_id": creator_profile_id[0],
                 "image_count": imageCount,
                 "video_count": videoCount,
                 "approved": false
@@ -97,6 +97,8 @@ const Creators_popup_content = () => {
     //     });
     //     setIsopen(true);
     // }
+
+    
 
 
     return (
