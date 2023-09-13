@@ -83,7 +83,7 @@ const Left_Dashboard = () => {
 
 
 
-    }, []); 
+    }, []);
 
     const toggleDropdown = () => {
         setAlluser_accounts(!alluser_accounts);
@@ -198,7 +198,7 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef}>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef && settingdropdownRef}>
 
                 <Image
                     src={Images.profile_user}
@@ -283,6 +283,7 @@ const Left_Dashboard = () => {
                         <div className='w-full px-3 py-2'>
 
                             <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                onClick={() => setIsModalOpen_invite_mem(true)}
                             >
                                 <Image
                                     src={Images.market_place_icon}
@@ -292,29 +293,31 @@ const Left_Dashboard = () => {
                                 />
                                 <button
                                     className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpen_invite_mem(true)}
+
                                 >
                                     Invite Members
                                 </button>
                             </div>
-                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
-
-                            >
-                                <Image
-                                    src={Images.support_icon}
-                                    width={20}
-                                    className=''
-                                    alt=""
-                                />
-                                <button
-                                    className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpenlogout(true)}
+                            <Link href={'/support'}>
+                                <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                // onClick={() => setIsModalOpenlogout(true)}
                                 >
-                                    Support
-                                </button>
-                            </div>
-                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                    <Image
+                                        src={Images.support_icon}
+                                        width={20}
+                                        className=''
+                                        alt=""
+                                    />
+                                    <button
+                                        className=' w-48 dropdown_text text-center'
 
+                                    >
+                                        Support
+                                    </button>
+                                </div>
+                            </Link>
+                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                onClick={openModal}
                             >
                                 <Image
                                     src={Images.terms_of_service}
@@ -324,7 +327,7 @@ const Left_Dashboard = () => {
                                 />
                                 <button
                                     className="w-48 dropdown_text rounded-lg"
-                                    onClick={openModal}
+
                                 >
                                     Terms of services
                                 </button>
@@ -335,7 +338,7 @@ const Left_Dashboard = () => {
                                 </button> */}
                             </div>
                             <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
-
+                                onClick={() => setIsModalOpen_change_password(true)}
                             >
                                 <Image
                                     src={Images.profile_user}
@@ -345,13 +348,13 @@ const Left_Dashboard = () => {
                                 />
                                 <button
                                     className=' w-48 dropdown_text text-center'
-                                    onClick={() => setIsModalOpen_change_password(true)}
+
                                 >
                                     Change Password
                                 </button>
                             </div>
                             <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
-
+                                onClick={() => setIsModalOpenlogout(true)}
                             >
                                 <Image
                                     src={Images.logout}
@@ -362,7 +365,7 @@ const Left_Dashboard = () => {
                                 />
                                 <button
                                     className="w-48 dropdown_text rounded-lg"
-                                    onClick={() => setIsModalOpenlogout(true)}
+
                                 >
                                     Sign Out
                                 </button>
@@ -397,29 +400,6 @@ const Left_Dashboard = () => {
                     <div className='items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
 
                     >
-                        {/* {home_icon && 
-                    <Image
-                    src={Images.campaign_icon}
-                    width={22}
-                    className='button_clr'
-                />
-                }
-                
-                {!home_icon && 
-                <Image
-                    src={Images.home_icon}
-                    width={22}
-                    className='button_clr '
-                />}
-                <button
-                    className='w-32 text-start'
-                    onMouseEnter={() =>setHome_icon(true)}
-                    onMouseLeave={() => setHome_icon(false)}
-                >
-                    Home
-                </button> */}
-
-
 
                         <Image
                             src={Images.home_icon}
