@@ -39,7 +39,7 @@ const Marketplace_page = () => {
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, [ isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
@@ -91,11 +91,26 @@ const Marketplace_page = () => {
 
     const onProfileDetail = (index) => {
 
-        console.log("onProfileDetail",index);
+        console.log("onProfileDetail", index);
         router.push('/creator_profile');
 
         Cookies.set('creator_profile_id', JSON.stringify(index?.id));
-        // Cookies.set('creator_profile_id', JSON.stringify(index?.id));
+        const existingCookieData = Cookies.get('selected_creator_id');
+
+        // Parse the existing data from JSON or initialize it as an empty array if the cookie is not set yet
+        const existingDataArray = existingCookieData ? JSON.parse(existingCookieData) : [];
+
+        // Check if the ID is already in the array before adding it
+        if (!existingDataArray.includes(index?.id)) {
+            // Add the new indexId to the existing data array
+            existingDataArray.push(index?.id);
+            console.log("existingDataArray", existingDataArray);
+
+            // Set the updated data in the cookie
+            Cookies.set('selected_creator_id', JSON.stringify(existingDataArray));
+        }
+
+
     }
 
 
@@ -159,68 +174,161 @@ const Marketplace_page = () => {
 
                     <div className="m-2 w-full grid grid-cols-3 gap-3">
                         {creatordata?.length > 0 ? creatordata.map((item, index) => {
-                            return (
-                                <div className=" bg-white p-3 rounded-lg" key={index}>
-                                    <div className="grid grid-cols-3 rounded-md gap-1" >
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={imageUrl}
-                                            alt=""
-                                        />
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={imageUrl}
-                                            alt=""
-                                        />
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={imageUrl}
-                                            alt=""
-                                        />
+
+                            const existingCookieData = Cookies.get('selected_creator_id');
+
+                            console.log("existingDataArray--------", existingCookieData, item?.id);
+
+                            console.log("creatordatacreatordata", item?.id);
+                            const existingDataArray = existingCookieData;
+                            const valueToMatch = item?.id;
+
+                            if (existingDataArray.includes(valueToMatch)) {
+                                console.log(`${valueToMatch} is found in the array.`);
 
 
-                                    </div>
-                                    <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                        {/* <div className="flex gap-4"><h3>x</h3>
+                                console.log("existingDataArray-----3---", existingDataArray, valueToMatch);
+                                if(valueToMatch){
+                                return (
+                                   
+                                    <>
+                                    
+                                        <div className='border-4 border-purple-500 bg-white p-3 rounded-lg' key={index}>
+                                            <div className="grid grid-cols-3 rounded-md gap-1" >
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+
+
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                                                {/* <div className="flex gap-4"><h3>x</h3>
                                             <h3>|</h3></div> */}
-                                    </div>
-                                    <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h4>{item?.user?.name}</h4></div>
-                                        <div className="flex" key={index}>
-                                            {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                                                return (
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h4>{item?.user?.name}</h4></div>
+                                                <div className="flex" key={index}>
+                                                    {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                                                        return (
 
-                                                    <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                                                        {categories_item?.name}
-                                                    </h6>
-                                                )
-                                            })
-                                            }
-                                        </div>
-                                    </div>
-                                    {/* <Link
+                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                                {categories_item?.name}
+                                                            </h6>
+                                                        )
+                                                    })
+                                                    }
+                                                </div>
+                                            </div>
+                                            {/* <Link
                                         href={{
                                             pathname: "/creator_profile",
                                             query: { data: JSON.stringify({ key: item?.id }) },
                                         }}
                                     > */}
-                                        <button 
-                                        className="w-full rounded-full p-2 mt-3" 
-                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                                        onClick={() => onProfileDetail(item,index)}
-                                        >
-                                            View profile
-                                        </button>
-                                    {/* </Link> */}
-                                </div>
-                            )
+                                            <button
+                                                className="w-full rounded-full p-2 mt-3"
+                                                style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                                onClick={() => onProfileDetail(item, index)}
+                                            >
+                                                View profile
+                                            </button>
+                                            {/* </Link> */}
+                                        </div>
+                                
+                                    </>
+                                )
+                            }
+                           
+
+                            } else {
+                                // console.log(`${valueToMatch} is not found in the array.`);
+                                return (
+                                   
+                                    <>
+                                    
+                                        <div className='bg-white p-3 rounded-lg' key={index}>
+                                            <div className="grid grid-cols-3 rounded-md gap-1" >
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={imageUrl}
+                                                    alt=""
+                                                />
+
+
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                                                {/* <div className="flex gap-4"><h3>x</h3>
+                                            <h3>|</h3></div> */}
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h4>{item?.user?.name}</h4></div>
+                                                <div className="flex" key={index}>
+                                                    {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                                                        return (
+
+                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                                {categories_item?.name}
+                                                            </h6>
+                                                        )
+                                                    })
+                                                    }
+                                                </div>
+                                            </div>
+                                            {/* <Link
+                                        href={{
+                                            pathname: "/creator_profile",
+                                            query: { data: JSON.stringify({ key: item?.id }) },
+                                        }}
+                                    > */}
+                                            <button
+                                                className="w-full rounded-full p-2 mt-3"
+                                                style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                                onClick={() => onProfileDetail(item, index)}
+                                            >
+                                                View profile
+                                            </button>
+                                            {/* </Link> */}
+                                        </div>
+                                
+                                    </>
+                                )
+                            }
                         }
 
 
@@ -241,15 +349,6 @@ const Marketplace_page = () => {
                             </>
                         }
 
-
-                        {/* <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card />
-                        <Marketplace_card /> */}
                     </div>
                 </div>
             </div>
