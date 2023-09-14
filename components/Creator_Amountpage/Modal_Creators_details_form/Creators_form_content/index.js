@@ -40,8 +40,8 @@ const Creators_form_content = () => {
     const salt = process.env.NEXT_PUBLIC_PAYU_MERCHANT_SALT2;
     const payu_url = process.env.NEXT_PUBLIC_PAYU_URL;
     
-    // const site_url = "https://pro-coral-equally.ngrok-free.app/";
-    const site_url = "https://staging.creatorsbay.app/";
+    const site_url = "https://pro-coral-equally.ngrok-free.app/";
+    // const site_url = "https://staging.creatorsbay.app/";
     const country = "India";
     const api_version = 1;
 

@@ -2,7 +2,6 @@ import Colors from "@/styles/Colors"
 import Left_Dashboard from "../Homepage/leftDashboard"
 import Images from "@/images";
 import Image from "next/image";
-
 import Date_range_picker from "../Invoicepage/daterangepicker";
 import Creator_table from "./Creator_table";
 import Buttons from "../Button";
@@ -20,24 +19,9 @@ const Creator_Amountpage = () => {
 
     const [campaigndata, setCampaigndata] = useState(null);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
-    const [totalAmount, setTotalAmount] = useState(Cookies.get('creator_amount'));
+    const [totalAmount, setTotalAmount] = useState(Cookies.get('all_creator_amount'));
+    // const [creatorTotalAmount, setCreatorTotalAmount] = useState(0);
 
-    const usageChargePercent = 15;
-    const gstRate = 18;
-
-    const calculateAmountWithGST = (amount) => {
-        const gstAmount = (amount * gstRate) / 100;
-        return amount + gstAmount;
-    };
-
-    const firstAmount = totalAmount / 2;
-    const secondAmount = totalAmount / 2;
-    const firstAmountWithGST = calculateAmountWithGST(firstAmount);
-
-    Cookies.set('firstAmountWithGST', firstAmountWithGST);
-    const secondAmountWithGST = calculateAmountWithGST(secondAmount);
-
-    const refundAmount = usageChargePercent * totalAmount / 100;
 
     const getCompanyCraetors = async () => {
 
@@ -103,6 +87,54 @@ const Creator_Amountpage = () => {
         setIsModalOpenlogout(true)
     }
 
+    // console.log("creatorTotalAmount",creatorTotalAmount);
+
+    const selectedCreatorIds = [2, 1]; // The array of creator_id values to match
+
+    const filteredCreators = campaigndata?.creators?.filter((creator) => {
+        return selectedCreatorIds.includes(creator.creator_id);
+    });
+
+    console.log("filteredCreators", filteredCreators);
+
+    // Check if filteredCreators is defined and not null
+    if (filteredCreators && filteredCreators.length > 0) {
+        // Initialize a variable to store the total amount
+        let totalCreatorAmount = 0;
+
+        // Iterate through the filteredCreators array and calculate the total amount
+        filteredCreators.forEach((creator_item) => {
+            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+            totalCreatorAmount += creatorAmount;
+        });
+
+        Cookies.set('all_creator_amount',totalCreatorAmount)
+
+        // Now, the variable 'totalAmount' contains the total amount for all creators
+        console.log('Total Amount for All Creators:', totalCreatorAmount);
+    } else {
+        console.log('No creators found or filteredCreators is undefined.');
+    }
+
+
+    console.log('Total Amount for All Creators:adasd', totalAmount);
+
+    const usageChargePercent = 15;
+    const gstRate = 18;
+
+    const calculateAmountWithGST = (amount) => {
+        const gstAmount = (amount * gstRate) / 100;
+        return amount + gstAmount;
+    };
+
+    const firstAmount = totalAmount / 2;
+    const secondAmount = totalAmount / 2;
+    const firstAmountWithGST = calculateAmountWithGST(firstAmount);
+
+    // Cookies.set('firstAmountWithGST', firstAmountWithGST);
+    const secondAmountWithGST = calculateAmountWithGST(secondAmount);
+
+    const refundAmount = usageChargePercent * totalAmount / 100;
 
     return (
         <>
@@ -178,7 +210,7 @@ const Creator_Amountpage = () => {
                     </div> */}
                     {/* invoices data */}
                     <div style={{ backgroundColor: Colors.white_clr }}
-                        className="rounded-md container-fluid h-screen p-5 my-2 flex flex-col justify-between"
+                        className="rounded-md container-fluid h-screen p-5 my-2 flex flex-col justify-between min-h-screen overflow-y-auto"
                     >
                         <div className="font_size_31 p-10">
                             {campaigndata?.name}
@@ -206,22 +238,71 @@ const Creator_Amountpage = () => {
                                                 <th scope="col" className="px-6 py-5">
                                                     Payout
                                                 </th>
+                                                <th scope="col" className="px-6 py-5">
+                                                    Actions
+                                                </th>
 
                                             </tr>
 
                                         </thead>
-                                        {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
+                                        {/* {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
+
+                                            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+
+                                            console.log('creatorAmount', creatorAmount);
+
+                                            const currentTotalAmount = creatorAmount[creator_item.creator_id] || 0;
+
+                                            console.log('currentTotalAmount', currentTotalAmount);
+
+                                            // setTotalAmount((prevTotal) => prevTotal + creatorAmount); // Update total amount
+                                            // Update the total amount for this creator_id
+                                            setTotalAmount((prevTotalAmounts) => ({
+                                                ...prevTotalAmounts,
+                                                [creator_item.creator_id]: currentTotalAmount + creatorAmount,
+                                            }));
+
                                             return (
                                                 <tbody key={index}>
+                                                    {Object.keys(totalAmount).map((creatorId) => (
+                                                        <div key={creatorId}>
+                                                            Creator ID: {creatorId}, Total Amount: {totalAmount[creatorId]}
+                                                        </div>
+                                                    ))}
 
-                                                    <Creator_table creatorData={creator_item} T={console.log("creator_item", creator_item)} />
+
+                                                    {/* <Creator_table creatorData={creator_item} T={console.log("creator_item", creator_item)} /> */}
+                                        {/* <div>Total Amount for All Creators: {totalAmount}</div>
                                                 </tbody>
 
                                             )
                                         })
                                             :
                                             "No Creator is found"
+                                        // } */}
+
+                                        {filteredCreators?.length > 0 ? filteredCreators.map((creator_item, index) => {
+
+                                            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+
+                                            // setTotalAmount((prevTotal) => prevTotal + creatorAmount); // Update total amount
+
+                                            console.log('creatorAmount', creatorAmount);
+
+                                            return (
+                                                <>
+                                                    <tbody key={index}>
+                                                        <Creator_table creatorData={creator_item} />
+                                                    </tbody>
+                                                </>
+                                            )
+                                        })
+                                            :
+                                            "No Creator is found"
                                         }
+
+
+
                                     </table>
                                 </div>
 
