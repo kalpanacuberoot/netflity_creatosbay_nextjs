@@ -24,7 +24,7 @@ const Communication_page = () => {
     const [activeData, setActiveData] = useState([]);
     const [inactiveData, setInactiveData] = useState([]);
     const creatorIds = campaign_data?.creators?.map((item) => item.id);
-    const [blankchat, setBlankchat] = useState(false);
+    const [blankchat, setBlankchat] = useState(true);
     const [campaign_creator_id, setCampaign_creator_id] = useState([]);
     const [creator_count, setCreator_count] = useState([]);
 
@@ -167,12 +167,12 @@ const Communication_page = () => {
         console.log("creator_count", creator_counts);
         setCreator_count(creator_counts);
         setCreators(inactive?.data);
-       
+
     }
 
 
     const chat_creator_id = creator_count.map((item) => item?.creator_id);
-    console.log("creator_count", creator_count);
+    console.log("creator_count", creator_count, creators.id);
 
     return (
 
@@ -290,7 +290,7 @@ const Communication_page = () => {
                         </div>
                         <div className=" h-screen w-4/8 rounded-md my-3 overflow-y-auto me-3" style={{ background: Colors.white_clr }}>
 
-                            <div className=" bg-zinc-100">
+                            <div className=" bg-zinc-100 h-full">
                                 {blankchat &&
                                     <div className="flex flex-col items-center p-4 h-full justify-center max-w-lg mx-auto">
                                         <Image
@@ -307,40 +307,61 @@ const Communication_page = () => {
 
                                 {!blankchat &&
                                     <>
-                                        {creators && <div className="flex flex-row items-center p-4 justify-between ">
-                                            <Avatar_without_badge item={creators} />
-                                            <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
-                                                {creator_count?.length >0 && creator_count?.slice(0,1).map((item, index) => {
-                                                    
-                                                    return (
-                                                        <>
-                                                            <button
-                                                                type="button"
-                                                                className={
-                                                                    `focus:outline-none text-white ${item?.approved === 0
-                                                                        ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
-                                                                        : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
-                                                                    } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
-                                                                }
+                                        {creators &&
+                                            <>
+                                                <div className="flex flex-row items-center p-4 justify-between ">
+                                                    <Avatar_without_badge item={creators} />
+                                                    <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
+                                                        {creator_count?.length > 0 && creator_count?.slice(0, 1).map((item, index) => {
 
-                                                            >
-                                                                {item?.approved === 0 ? "Inactive" : "active"}
-                                                            </button>
+                                                            return (
+                                                                <>
+                                                                    <button
+                                                                        type="button"
+                                                                        className={
+                                                                            `focus:outline-none text-white ${item?.approved === 0
+                                                                                ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
+                                                                                : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
+                                                                            } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
+                                                                        }
 
-                                                        </>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>}
+                                                                    >
+                                                                        {item?.approved === 0 ? "Inactive" : "active"}
+                                                                    </button>
+
+                                                                </>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+
+
+                                            </>
+                                        }
                                         <hr className="" />
+                                        {/* {creator_count?.length > 0 && creator_count.map((item, index) => (
+                                            <>
 
-                                        <div className="p-5 h-screen flex flex-col justify-evenly">
 
-                                            <Chat
-                                                creatorId={chat_creator_id}
-                                                chatcreator_data={creators}
-                                            />
-                                        </div>
+                                                <div className="p-5 h-screen flex flex-col justify-evenly">
+
+                                                    <Chat
+                                                    creatorId={chat_creator_id}
+                                                    chatcreator_data={creators}
+                                                />
+                                                    <Chat
+                                                        creatorId={creator_count.creator_id}
+                                                        chatcreator_data={chat_creator_id}
+                                                    />
+                                                </div>
+                                            </>
+                                        ))} */}
+
+                                        <Chat
+                                            creatorId={creator_count}
+                                            chatcreator_data={chat_creator_id}
+                                        />
+
                                     </>
                                 }
 

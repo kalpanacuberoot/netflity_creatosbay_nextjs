@@ -24,8 +24,8 @@ const Logout_content = () => {
             const response = await fetch(`${url}/logout`, {
                 method: 'POST',
                 headers: {
-                    'Accept':'application/json',
-                    'Content-Type':'application/json',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${cookieValue?.token}`,
                 },
             });
@@ -34,13 +34,17 @@ const Logout_content = () => {
 
             if (response) {
                 const data = await response.json();
-                
+
                 console.log("onLogout", data);
                 toast.success('onLogout Successfully', {
                     position: 'top-center',
                     autoClose: 2000,
                 });
                 router.push('/login');
+                const cookies = Object.keys(Cookies.get());
+                cookies.forEach(cookie => {
+                    Cookies.remove(cookie);
+                });
                 // Cookies.remove('brand_id');
                 // Cookies.remove('user_data');
 

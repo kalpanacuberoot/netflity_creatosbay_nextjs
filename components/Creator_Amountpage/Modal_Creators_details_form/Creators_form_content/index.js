@@ -48,14 +48,18 @@ const Creators_form_content = () => {
     const campaign_id = Cookies.get('campaign_id');
     const campaign_name = Cookies.get('campaign_name');
 
-    const amount = Cookies.get('firstAmountWithGST')
+    // const amount = Cookies.get('firstAmountWithGST')
+    const amount = JSON.parse(Cookies.get('all_creator_amount'));
 
+    console.log("amount foum payu",amount);
     // const amount = 590;
 
     console.log("PAYU_MERCHANT_KEY1", key);
 
     const txnid = md5(campaign_id).toString();
     const productinfo = `Campaign: ${campaign_name}`;
+    // const surl = `${site_url}payment-success`;
+    // const furl = `${site_url}payment-failure`;
     const surl = `${site_url}payment-success`;
     const furl = `${site_url}payment-failure`;
     const curl = `${site_url}payment-cancelled`;

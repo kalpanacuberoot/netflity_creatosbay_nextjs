@@ -14,15 +14,15 @@ const Home = () => {
                 Make Your Brand a next <br /> social media star &#x2B50;
               </h1>
               <h4 className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl pt-5 mobile_para">
-                Sets the width of the element to a specific width of 64
-                pixels. Additionally, you can combine the w-1/2 className with
-                other utility classNamees or use responsive variants to apply
-                different widths at different screen
+              At CreatorsBay, we are driven by a clear vision and a strong mission that guide our every action.
+               Our vision is to create a thriving online platform that empowers talented but lesser-known creators
+                while providing brands with high-quality, authentic content for marketing and promotions at affordable costs.
+
               </h4>
-              <h4 className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl pt-4 mobile_para">
+              {/* <h4 className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl pt-4 mobile_para">
                 different widths at different screen sizes. For example,
                 md:w-2/3 sets the width of the element
-              </h4>
+              </h4> */}
               <div className="flex justify-between pt-5 mt-5 align-middle items-center home_buttons">
                 <Link href={'/login'}
                   className="flex  tracking-wider align-middle justify-center items-center text-white w-full text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl rounded-full px-6 lg:px-8 xl:py-4 py-2 bg-cyan-600 get_started_btn"
