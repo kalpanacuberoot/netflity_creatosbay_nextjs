@@ -27,6 +27,7 @@ const Homepage = () => {
   const [campaign_data, setCampaign_data] = useState([]);
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
+
   // Calculate the total number of pages
   const totalPages = Math.ceil(campaign_data.length / itemsPerPage);
 
@@ -52,6 +53,8 @@ const Homepage = () => {
     const brand_detail = Cookies.get('brand_detail');
     const brandIds = Cookies.get('brand_id');
 
+    console.log('brandIds:', brand_detail);
+
     let brandId = null;
 
     if (brand_detail) {
@@ -69,7 +72,7 @@ const Homepage = () => {
         console.error('Error parsing brand_ids:', error);
       }
     }
-    console.log('brandId:', brandId);
+    console.log('brandId:', brandIds);    
     try {
 
       const headers = {
@@ -120,7 +123,7 @@ const Homepage = () => {
     allCampaignData();
   }, [])
 
-  console.log("campaign_data", campaign_data);
+  console.log("campaign_data", campaign_data, currentPageData);
 
   return (
     <>
@@ -171,7 +174,7 @@ const Homepage = () => {
             </div>
           </div>
           <div
-            className="flex flex-row justify-evenly items-start py-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
+            className="flex flex-row justify-evenly items-start p-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
             style={{ backgroundColor: Colors.white_clr }}
           >
 
@@ -183,35 +186,48 @@ const Homepage = () => {
             ))
 
               :
-              <div className="flex flex-col">
-                <h1>
-                  {"No Campaigns Found"}
-                </h1>
-                <Link href={'/campaign_info'}>
-                  <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
-                    Start Campaign
-                  </button>
-                </Link>
+              <div className="w-full h-full flex flex-col items-center justify-center rounded p-10">
+                <div className=" justify-center">
+                  <Image
+                    src={Images.no_campaign_found}
+                    width={100}
+                    height={100}
+                    alt=""
+                    className="w-96 rounded-t-lg "
+                  />
+                  <div className="flex flex-col border px-5 py-5 rounded-b-lg">
+                    <h1 className="py-5   ">
+                      {"No Campaigns Found"}
+                    </h1>
+                    <Link href={'/campaign_info'}>
+                      <button className="start_campaign_btn px-5 py-1 rounded-full w-48">
+                        Start Campaign
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            }
+            {/* Pagination controls */}
+            {currentPageData?.length > 0 &&
+              <div className=" w-full mt-5">
+                <div className="w-1/4 ms-auto mx-2">
+                  <button onClick={() => handlePageChange(currentPage - 1)} className="px-3 edit_button_clr mx-3 rounded">Previous</button>
+                  {Array.from({ length: totalPages }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePageChange(index + 1)}
+                      style={{ fontWeight: currentPage === index + 1 ? 'bold' : 'normal' }}
+                      className="mx-2"
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                  <button onClick={() => handlePageChange(currentPage + 1)} className="px-3 edit_button_clr mx-3 rounded">Next</button>
+                </div>
               </div>
             }
 
-           {/* Pagination controls */}
-            <div className=" w-full mt-5">
-              <div className="w-1/4 ms-auto mx-2">
-                <button onClick={() => handlePageChange(currentPage - 1)} className="px-3 edit_button_clr mx-3 rounded">Previous</button>
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    style={{ fontWeight: currentPage === index + 1 ? 'bold' : 'normal' }}
-                    className="mx-2"
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-                <button onClick={() => handlePageChange(currentPage + 1)} className="px-3 edit_button_clr mx-3 rounded">Next</button>
-              </div>
-            </div> 
           </div>
         </div>
 
@@ -223,7 +239,7 @@ const Homepage = () => {
           <Right_side_Dashboard />
         </div>
         <ToastContainer />
-      </div>
+      </div >
 
     </>
   );

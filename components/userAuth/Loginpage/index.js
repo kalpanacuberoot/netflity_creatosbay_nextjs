@@ -23,6 +23,7 @@ const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [brandData,setBrandData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +107,13 @@ const Loginpage = () => {
           // });
           if (responseData?.data?.data.length === 0) {
             router.push('/brand'); // Redirect to the brand page
-          } else {
+          } 
+          else if (responseData?.data?.data?.length === 1) {
+            Cookies.set('brand_detail', JSON.stringify(responseData?.data?.data[0]));
+            setBrandData(responseData?.data?.data[0]);
+            router.push('/home');
+          }
+          else {
             router.push('/brand-selection'); // Redirect to the brand_user page
           }
           // setBrand_user(responseData?.data?.data)
@@ -123,6 +130,8 @@ const Loginpage = () => {
       console.error('Error:', error);
     }
   };
+
+  console.log("brand_detailbrand_detail",brandData);
 
 
   return (
@@ -150,7 +159,9 @@ const Loginpage = () => {
                 Welcome back.
               </h1>
 
-              <form onSubmit={handleSubmit}>
+              <form 
+              onSubmit={handleSubmit}
+              >
 
                 <input
                   type="email"

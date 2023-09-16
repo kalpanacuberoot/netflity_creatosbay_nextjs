@@ -242,7 +242,7 @@ const Signuppage = () => {
                                     required
                                 />
                                 <label htmlFor="myCheckbox" className="ml-2 text-black">
-                                    I accept co. Name{" "}
+                                    I accept Creatorsbay{" "}
 
                                 </label>
                                 <span style={{ color: Colors.pink_clr }}
@@ -250,7 +250,7 @@ const Signuppage = () => {
                                     className='ms-2 cursor-pointer'
                                 >
                                     {" "}
-                                    Terms & Condition
+                                    terms & conditions
                                 </span>
                             </div>
                             <Link href={"/forgot"}>

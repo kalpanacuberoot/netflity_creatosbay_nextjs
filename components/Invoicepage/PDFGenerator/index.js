@@ -1,45 +1,92 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Creator_invoice_pdf_page from '../Creator_invoice_pdf';
+import html2pdf from 'html2pdf.js';
 
 const PDFGenerator = () => {
-  // const generatePDF = async () => {
-  //   const contentDiv = document.createElement('div');
-  //   contentDiv.innerHTML = contentToConvert;
 
-  //   const canvas = await html2canvas(contentDiv);
-  //   const imgData = canvas.toDataURL('image/png');
-
-  //   const pdf = new jsPDF('p', 'mm', 'a4');
-  //   pdf.addImage(imgData, 'PNG', 0, 0, 210, 297); // Adjust dimensions as needed
-  //   pdf.save('invoice.pdf'); // Specify the desired PDF filename
-  // };
+  const invoiceRef = useRef(null);
+  const [showContent, setShowContent] = useState(true);
 
   const handleDownload = () => {
-    const element = document.getElementById("invoice");
+    // Create a new jsPDF instance
+    const pdf = new jsPDF();
 
-    if (!element) {
-      console.error("Element with ID 'invoice' not found.");
-      return;
-    }
+    // Get the element containing the invoice content
+    const element = document.getElementById('invoice');
 
-    html2pdf()
-      .from(element)
-      .save();
+    // Convert the HTML element to an image using html2canvas
+    html2canvas(element).then((canvas) => {
+      // Get the image data URL from the canvas
+      const imageData = canvas.toDataURL('image/png');
+
+      // Add the image to the PDF
+      pdf.addImage(imageData, 'PNG', 10, 10, 190, 0);
+
+      // Save or open the PDF
+      pdf.save('invoice.pdf');
+    });
+  };
+
+  // const handleDownload = () => {
+
+  //   setShowContent(false); // Hide content when generating the PDF
+
+  //   // Create a new jsPDF instance
+  //   const pdf = new jsPDF();
+
+  //   // Get the element containing the invoice content
+  //   const element = document.getElementById('invoice');
+
+  //   // Convert the HTML element to an image using html2canvas
+  //   html2canvas(element).then((canvas) => {
+  //     // Get the image data URL from the canvas
+  //     const imageData = canvas.toDataURL('image/png');
+
+  //     // Add the image to the PDF
+  //     pdf.addImage(imageData, 'PNG', 10, 10, 190, 0);
+
+  //     // Save or open the PDF
+  //     pdf.save('invoice.pdf');
+  //     setShowContent(true);
+  //   });
+  // };
+
+  const pdfRef = useRef(null);
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.text(content, 10, 10); // Replace with your PDF content
+
+    // Save the PDF in a ref so it can be accessed later
+    pdfRef.current = doc;
+  };
+
+  const hidePDF = () => {
+    // Clear the PDF content in the ref to hide it
+    pdfRef.current = null;
   };
 
   return (
-    <div>
-      <button id="downloadPdf" onClick={handleDownload}>
+    <div className='hidden'>
+      <button className="border ">
         Download PDF
       </button>
-      <div id="invoice">
-       
-        <h1>Your Invoice</h1>
-        {/* <p>Invoice details go here...</p>
-        ndskjfhkjwhgjj
-        <Creator_invoice_pdf_page/> */}
+      <button onClick={generatePDF}>Generate PDF</button>
+      <button onClick={hidePDF}>Hide PDF</button>
+      {pdfRef.current && (
+        <iframe
+          src={pdfRef.current.output('bloburl')}
+          width="100%"
+          height="500px"
+          title="PDF Preview"
+        />
+      )}
+      <div className=''>
+
+        <Creator_invoice_pdf_page />
+
       </div>
     </div>
   );

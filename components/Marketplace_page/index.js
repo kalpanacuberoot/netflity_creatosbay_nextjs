@@ -101,7 +101,7 @@ const Marketplace_page = () => {
         const existingDataArray = existingCookieData ? JSON.parse(existingCookieData) : [];
 
         // Check if the ID is already in the array before adding it
-        if (!existingDataArray.includes(index?.id)) {
+        if (existingDataArray && index && !existingDataArray.includes(index?.id)) {
             // Add the new indexId to the existing data array
             existingDataArray.push(index?.id);
             console.log("existingDataArray", existingDataArray);
@@ -183,7 +183,7 @@ const Marketplace_page = () => {
                             const existingDataArray = existingCookieData;
                             const valueToMatch = item?.id;
 
-                            if (existingDataArray.includes(valueToMatch)) {
+                            if (existingDataArray && existingDataArray?.includes(valueToMatch)) {
                                 console.log(`${valueToMatch} is found in the array.`);
 
 
@@ -271,21 +271,24 @@ const Marketplace_page = () => {
                                                     width={500}
                                                     height={100}
                                                     className="w-full h-64 object-cover"
-                                                    src={imageUrl}
+                                                    // src={imageUrl}
+                                                    src={item?.profile_pic}
                                                     alt=""
                                                 />
                                                 <Image
                                                     width={500}
                                                     height={100}
                                                     className="w-full h-64 object-cover"
-                                                    src={imageUrl}
+                                                    // src={imageUrl}
+                                                    src={item?.profile_pic}
                                                     alt=""
                                                 />
                                                 <Image
                                                     width={500}
                                                     height={100}
                                                     className="w-full h-64 object-cover"
-                                                    src={imageUrl}
+                                                    // src={imageUrl}
+                                                    src={item?.profile_pic}
                                                     alt=""
                                                 />
 

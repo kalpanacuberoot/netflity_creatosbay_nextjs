@@ -188,7 +188,7 @@ const Left_Dashboard = () => {
                     <Change_password_content />
                 </div>
             </Modal_change_password>
-            <div className=''>
+            <div className='my-10'>
                 <Image
                     src={Images.company_logo}
                     width={100} height={100}
@@ -198,15 +198,32 @@ const Left_Dashboard = () => {
             </div>
 
 
-            <div className='border relative flex flex-row my-5 justify-between rounded-full pe-2 ' ref={dropdownRef && settingdropdownRef}>
+            <div className='border relative flex flex-row my-5 justify-between rounded-full ' ref={dropdownRef && settingdropdownRef}>
+                {brand_user?.length > 0 && brand_user.map((item, index) => {
+                    // const isCurrent = item.isCurrent;
+                    const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
+                    console.log("isCurrent left dashboard", isCurrent);
+                    return (
 
-                <Image
-                    src={Images.profile_user}
-                    width={35}
-                    height={30}
-                    alt=""
-                    onClick={toggleDropdown}
-                />
+                        <div
+                            className=' my-2 ms-3 w-100 rounded-full flex flex-row justify-evenly cursor-pointer'
+                            // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            key={index}
+                        >
+                            <Image
+                                src={item?.brand?.logo}
+                                width={35}
+                                height={30}
+                                alt=""
+                                onClick={toggleDropdown}
+                            />
+
+                        </div>
+
+                    )
+                })
+                }
+
                 {alluser_accounts &&
                     <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
 
@@ -219,7 +236,7 @@ const Left_Dashboard = () => {
                                 return (
 
                                     <div
-                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'bg-amber-400 text-white' : 'button_clr'}`}
+                                        className={`py-1 my-2 ps-3 w-100 rounded-full border flex flex-row justify-evenly ${isCurrent ? 'border-yellow-500' : 'button_clr'}`}
                                         // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
                                         key={index}
                                     >
@@ -236,13 +253,28 @@ const Left_Dashboard = () => {
                                         >
                                             {item?.brand?.name}
                                         </button>
+
+
                                     </div>
 
                                 )
                             })
                             }
+                            <Link href={'/brand'}>
+                                <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                    <Image
+                                        src={Images.add_button_black_clr}
+                                        width={20}
+                                        height={20}
+                                        alt=""
+                                        className="me-3 cursor-pointer"
+                                    />
+                                    <button> Create New Brand</button>
+                                </div>
+                            </Link>
 
                         </div>
+
                     </div>
                 }
 
@@ -282,12 +314,12 @@ const Left_Dashboard = () => {
 
                         <div className='w-full px-3 py-2'>
 
-                            <div className='py-1 ps-3 items-center w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1 ps-3 items-center w-100 rounded-full flex flex-row justify-evenly'
                                 onClick={() => setIsModalOpen_invite_mem(true)}
                             >
                                 <Image
                                     src={Images.market_place_icon}
-                                    width={20}
+                                    width={25}
                                     className=' '
                                     alt=""
                                 />
@@ -299,12 +331,12 @@ const Left_Dashboard = () => {
                                 </button>
                             </div>
                             <Link href={'/support'}>
-                                <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                                <div className='py-1 my-2 ps-3 w-100 rounded-full flex flex-row justify-evenly'
                                 // onClick={() => setIsModalOpenlogout(true)}
                                 >
                                     <Image
                                         src={Images.support_icon}
-                                        width={20}
+                                        width={25}
                                         className=''
                                         alt=""
                                     />
@@ -316,12 +348,12 @@ const Left_Dashboard = () => {
                                     </button>
                                 </div>
                             </Link>
-                            <div className='py-1  ps-3 my-2 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1  ps-3 my-2 w-100 rounded-full flex flex-row justify-evenly'
                                 onClick={openModal}
                             >
                                 <Image
                                     src={Images.terms_of_service}
-                                    width={20}
+                                    width={25}
                                     className=''
                                     alt=""
                                 />
@@ -337,12 +369,12 @@ const Left_Dashboard = () => {
                                     
                                 </button> */}
                             </div>
-                            <div className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1 my-2 ps-3 w-100 rounded-full flex flex-row justify-evenly'
                                 onClick={() => setIsModalOpen_change_password(true)}
                             >
                                 <Image
                                     src={Images.profile_user}
-                                    width={20}
+                                    width={25}
                                     className=''
                                     alt=""
                                 />
@@ -353,12 +385,12 @@ const Left_Dashboard = () => {
                                     Change Password
                                 </button>
                             </div>
-                            <div className='py-1 my-2  ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
+                            <div className='py-1 my-2  ps-3 w-100 rounded-full flex flex-row justify-evenly'
                                 onClick={() => setIsModalOpenlogout(true)}
                             >
                                 <Image
                                     src={Images.logout}
-                                    width={20}
+                                    width={25}
                                     height={18}
                                     className=''
                                     alt=""
@@ -376,13 +408,13 @@ const Left_Dashboard = () => {
                 }
 
             </div>
-            <div className=' text-center'>
+            <div className=' text-center my-10'>
 
                 {cookie_user_brand && (
-                    <h4 className='font-bold'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
+                    <h4 className='font-bold my-5'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
                 )}
                 {/* <h5 className='px-2 mb-2'>Neque orro quisquam est qui dolorem</h5> */}
-                <div className='w-100 rounded-full border edit_button_clr py-1 cursor-pointer'
+                <div className='w-100 rounded-full bg-slate-800 text-white py-1 cursor-pointer'
                     onClick={() => setIsModalOpen_edit_prof(true)}
                 >
                     <button
@@ -394,34 +426,33 @@ const Left_Dashboard = () => {
 
             </div>
 
-            <div className='mt-5'>
+            <div className='mt-10'>
                 <Link href={'/home'}>
 
-                    <div className='items-center w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className='my-5 items-center w-100 rounded-full py-1 flex flex-row justify-evenly'
 
                     >
 
                         <Image
                             src={Images.home_icon}
-                            width={22}
+                            width={25}
                             className=' '
                             alt=""
                         />
                         <button
                             className='w-32 text-start'
-
                         >
                             Home
                         </button>
                     </div>
                 </Link>
                 <Link href={'/live_campaign'}>
-                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className=' my-5 w-100 rounded-full py-1 flex flex-row justify-evenly'
 
                     >
                         <Image
                             src={Images.campaign_icon}
-                            width={22}
+                            width={25}
                             className=''
                             alt=""
                         />
@@ -433,12 +464,12 @@ const Left_Dashboard = () => {
                     </div>
                 </Link>
                 <Link href={'/marketplace'}>
-                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className=' my-5 w-100 rounded-full py-1 flex flex-row justify-evenly'
 
                     >
                         <Image
                             src={Images.market_place_icon}
-                            width={22}
+                            width={25}
                             className=''
                             alt=""
                         />
@@ -450,12 +481,12 @@ const Left_Dashboard = () => {
                     </div>
                 </Link>
                 <Link href={'/communication'}>
-                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className=' my-5 w-100 rounded-full  py-1 flex flex-row justify-evenly'
 
                     >
                         <Image
                             src={Images.chats_icon}
-                            width={22}
+                            width={25}
                             className=''
                             alt=""
                         />
@@ -467,12 +498,12 @@ const Left_Dashboard = () => {
                     </div>
                 </Link>
                 <Link href={'/invoice'}>
-                    <div className=' my-5 w-100 rounded-full border button_clr py-1 flex flex-row justify-evenly'
+                    <div className=' my-5 w-100 rounded-full  py-1 flex flex-row justify-evenly'
 
                     >
                         <Image
                             src={Images.invoices_icon}
-                            width={22}
+                            width={25}
                             className=''
                             alt=""
                         />
