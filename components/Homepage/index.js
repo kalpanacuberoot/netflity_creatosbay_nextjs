@@ -18,6 +18,8 @@ import Cookies from "js-cookie";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { ca } from "date-fns/locale";
+import Campaign_infopage from "../Campaign_infopage";
 
 
 const Homepage = () => {
@@ -25,105 +27,121 @@ const Homepage = () => {
   const router = useRouter();
 
   const [campaign_data, setCampaign_data] = useState([]);
-  const itemsPerPage = 6;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
 
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(campaign_data.length / itemsPerPage);
-
-  // Calculate the start and end index for the current page
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  // Get the data for the current page
-  const currentPageData = campaign_data.slice(startIndex, endIndex);
-
-  // Function to handle page change
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
-  const allCampaignData = async () => {
-
-    const cookieValue = JSON.parse(Cookies.get('user_data'));
-    console.log('categories cookieValue------------1', cookieValue?.token);
-
-    const brand_detail = Cookies.get('brand_detail');
-    const brandIds = Cookies.get('brand_id');
-
-    console.log('brandIds:', brand_detail);
-
-    let brandId = null;
-
-    if (brand_detail) {
-      try {
-        brandId = JSON.parse(brand_detail)?.brand?.id;
-      } catch (error) {
-        console.error('Error parsing brand_detail:', error);
-      }
-    }
-
-    if (!brandId && brandIds) {
-      try {
-        brandId = JSON.parse(brandIds);
-      } catch (error) {
-        console.error('Error parsing brand_ids:', error);
-      }
-    }
-    console.log('brandId:', brandIds);    
-    try {
-
-      const headers = {
-        'Authorization': `Bearer ${cookieValue?.token}`,
-      };
-      // const getResponse = await getApiCall(`${url}/campaigns?brand=${brandId}`, 'get', headers);
-      const response = await fetch(`${url}/campaigns?brand=${brandId}`, {
-        method: 'Get',
-        headers: headers,
-
-      });
-      if (response.status === 429) {
-        const retryAfter = parseInt(response.headers.get('Retry-After')) || 60; // Default to 60 seconds
-        console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
-        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000)); // Convert seconds to milliseconds
-        return makeRequest(); // Retry the request
-      }
-
-      console.log('GET campaigns?brand=1 response:', response);
-      if (response?.ok) {
-        const responseData = await response.json();
-        console.log('campaigns response:', responseData?.data?.data);
-
-        if (responseData.status) {
-          // toast.success('All campaigns', {
-          //   position: 'top-center',
-          //   autoClose: 5000,
-          // });
-
-          setCampaign_data(responseData?.data?.data);
-          // setBrand_user(responseData?.data?.data)
-
-        } else {
-          console.error('Error:', responseData.message);
-          // alert('Brand creation failed');
-        }
-      } else {
-        console.error('Error:', response.statusText);
-        // alert('Brand creation failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
 
 
   useEffect(() => {
-    allCampaignData();
-  }, [])
 
-  console.log("campaign_data", campaign_data, currentPageData);
+
+    const allCampaignData = async () => {
+
+      const cookieValue = JSON.parse(Cookies.get('user_data'));
+      console.log('categories cookieValue------------1', cookieValue?.token);
+
+      const brand_detail = Cookies.get('brand_detail');
+      const brandIds = Cookies.get('brand_id');
+
+      console.log('brandIds:', brand_detail);
+
+      let brandId = null;
+
+      if (brand_detail) {
+        try {
+          brandId = JSON.parse(brand_detail)?.brand?.id;
+        } catch (error) {
+          console.error('Error parsing brand_detail:', error);
+        }
+      }
+
+      if (!brandId && brandIds) {
+        try {
+          brandId = JSON.parse(brandIds);
+        } catch (error) {
+          console.error('Error parsing brand_ids:', error);
+        }
+      }
+      console.log('brandId:', brandIds);
+
+      // const startIndex = (currentPage - 1) * perPage;
+
+      try {
+
+        const headers = {
+          'Authorization': `Bearer ${cookieValue?.token}`,
+        };
+        // const getResponse = await getApiCall(`${url}/campaigns?brand=${brandId}`, 'get', headers);
+        const response = await fetch(`${url}/campaigns?brand=${brandId}&&per_page=55&order=desc`, {
+          method: 'Get',
+          headers: headers,
+
+        });
+        if (response.status === 429) {
+          const retryAfter = parseInt(response.headers.get('Retry-After')) || 60; // Default to 60 seconds
+          console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
+          await new Promise(resolve => setTimeout(resolve, retryAfter * 1000)); // Convert seconds to milliseconds
+          return makeRequest(); // Retry the request
+        }
+
+        console.log('GET campaigns?brand=1 response:', response);
+        if (response?.ok) {
+          const responseData = await response.json();
+          console.log('campaigns response:', responseData?.data?.data);
+          const campaignData = responseData?.data?.data;
+
+          if (responseData.status) {
+            setCampaign_data(campaignData);
+
+            // toast.success('All campaigns', {
+            //   position: 'top-center',
+            //   autoClose: 5000,
+            // });
+
+            // setCampaign_data(responseData?.data?.data);
+            // setBrand_user(responseData?.data?.data)
+
+          } else {
+            console.error('Error:', responseData.message);
+            // alert('Brand creation failed');
+          }
+        } else {
+          console.error('Error:', response.statusText);
+          // alert('Brand creation failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    // Fetch data based on currentPage and perPage values
+
+    allCampaignData();
+  }, []);
+
+  console.log("campaign_data", campaign_data);
+
+  const itemsPerPage = 6;
+
+  // Calculate the end index based on the start index and items per page
+  const endIndex = startIndex + itemsPerPage;
+
+  // Slice the data array to get the items to display
+  const itemsToShow = campaign_data.slice(startIndex, endIndex);
+
+  console.log("itemsToShow", itemsToShow);
+
+  // Function to handle the "Next" button click
+  const handleNextClick = () => {
+    setStartIndex(startIndex + itemsPerPage);
+  };
+
+  const handlePreviousClick = () => {
+    setStartIndex(startIndex - itemsPerPage);
+  };
+
+  const handleStart = () =>{
+    return (<Campaign_infopage/>)
+  };
+
 
   return (
     <>
@@ -132,12 +150,12 @@ const Homepage = () => {
       </div> */}
 
       <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5  w-1/4"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
         <div
           // className="grid grid-flow-col border w-100 px-3"
           className="w-full auto-cols-max me-3 ps-5 rounded-md pb-3 "
@@ -158,11 +176,11 @@ const Homepage = () => {
                 </div>
 
                 <h3>Your content is just a click away !</h3>
-                <Link href={'/campaign_info'}>
-                  <button className="start_campaign_btn px-5 py-1 rounded-full w-48">
+                {/* <Link href={'/campaign_info'}> */}
+                  <button className="start_campaign_btn px-5 py-1 rounded-full w-48" onClick={() => handleStart()} >
                     Start Campaign
                   </button>
-                </Link>
+                {/* </Link> */}
               </div>
               <Image
                 src={Images.home_title_bg}
@@ -178,9 +196,9 @@ const Homepage = () => {
             style={{ backgroundColor: Colors.white_clr }}
           >
 
-            {currentPageData.length > 0 ? currentPageData?.map((item, index) => (
+            {itemsToShow?.length > 0 ? itemsToShow?.map((item, index) => (
               <>
-                <Home_Card1 items={item} />
+                <Home_Card1 items={item} key={index} />
 
               </>
             ))
@@ -208,25 +226,22 @@ const Homepage = () => {
                 </div>
               </div>
             }
-            {/* Pagination controls */}
-            {currentPageData?.length > 0 &&
-              <div className=" w-full mt-5">
-                <div className="w-1/4 ms-auto mx-2">
-                  <button onClick={() => handlePageChange(currentPage - 1)} className="px-3 edit_button_clr mx-3 rounded">Previous</button>
-                  {Array.from({ length: totalPages }).map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handlePageChange(index + 1)}
-                      style={{ fontWeight: currentPage === index + 1 ? 'bold' : 'normal' }}
-                      className="mx-2"
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
-                  <button onClick={() => handlePageChange(currentPage + 1)} className="px-3 edit_button_clr mx-3 rounded">Next</button>
-                </div>
+
+            {itemsToShow?.length > 0 &&
+              <div className="w-full text-end p-5 mx-2">
+
+                {/* Add a "Next" button */}
+                {/* <button onClick={handleNextClick} className=" edit_button_clr py-2 px-5 rounded">Next</button> */}
+                <button onClick={handlePreviousClick} disabled={startIndex === 0} className=" edit_button_clr py-2 px-5 rounded mx-3">
+                  Previous
+                </button>
+                <button onClick={handleNextClick} disabled={endIndex >= campaign_data.length} className=" edit_button_clr py-2 px-5 rounded mx-3">
+                  Next
+                </button>
               </div>
             }
+
+
 
           </div>
         </div>

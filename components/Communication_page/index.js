@@ -68,7 +68,7 @@ const Communication_page = () => {
                         console.log("activeCreatorIds", inactiveCreatorIds);
                         // Fetch data for active creators
                         const activeCreatorPromises = activeCreatorIds.map(id => {
-                            return fetch(`${url}/creators/${id?.creator_id}`, {
+                            return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
                                 headers: headers,
                             })
@@ -82,7 +82,7 @@ const Communication_page = () => {
 
                         // Fetch data for inactive creators
                         const inactiveCreatorPromises = inactiveCreatorIds.map(id => {
-                            return fetch(`${url}/creators/${id?.creator_id}`, {
+                            return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
                                 headers: headers,
                             })
@@ -177,16 +177,16 @@ const Communication_page = () => {
     return (
 
         <>
-            <div className="flex container_invoice container w-full"
+            <div className="flex container_invoice w-full "
                 style={{ background: Colors.logo_background_clr }}
             >
-                <div className="auto-cols-max  px-3 py-5 border w-1/7"
+                {/* <div className="auto-cols-max  px-3 py-5 border w-1/7"
                     style={{ background: Colors.white_clr }}
                 >
                     <CollapseLeftDashboard />
-                </div>
+                </div> */}
 
-                <div className="m-2 w-screen auto-cols-max text-start p-2 "
+                <div className="m-2  auto-cols-max text-start p-2  w-full"
 
                 >
                     <div
@@ -204,7 +204,7 @@ const Communication_page = () => {
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full">
 
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/8 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-1/4 h-screen overflow-y-auto">
                             <Searchcomm />
                             {/* {filteredActiveCreators?.length > 0 ?
                                 filteredActiveCreators?.map((active, index) => ( */}
@@ -288,7 +288,7 @@ const Communication_page = () => {
                         } */}
 
                         </div>
-                        <div className=" h-screen w-4/8 rounded-md my-3 overflow-y-auto me-3" style={{ background: Colors.white_clr }}>
+                        <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
 
                             <div className=" bg-zinc-100 h-full">
                                 {blankchat &&
@@ -369,7 +369,7 @@ const Communication_page = () => {
 
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/8  h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-1/4 h-screen overflow-y-auto">
 
                             <div className="font_size_21  p-4">
                                 Campaign info
@@ -382,9 +382,28 @@ const Communication_page = () => {
                                     <h3>{campaign_data?.name}</h3>
                                 </div>
                                 <div className="px-4">
+
+                                    {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
+                                        <>
+                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>Products</h3>
+                                            <h3>{item.name}</h3>
+                                            <h4>{item.description}</h4>
+                                            <Image
+                                                src={item?.link}
+                                                height={200}
+                                                width={200}
+                                                className="mx-auto"
+                                                alt={item.name}
+                                                key={index}
+                                            />
+                                        </>
+                                    ))}
+
                                     {campaign_data?.products?.length > 0 && campaign_data?.products.map((item, index) => (
                                         <>
-                                            <div>{item?.name}</div>
+                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>References</h3>
+                                            <h3>{item.name}</h3>
+                                            <h4>{item.description}</h4>
                                             <Image
                                                 key={index}
                                                 src={item?.link}
@@ -395,18 +414,6 @@ const Communication_page = () => {
                                             />
                                         </>
                                     ))}
-                                    {/* {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
-                                        <>
-                                            
-                                            <Image
-                                                src={item?.link}
-                                                height={216}
-                                                width={278}
-                                                className="mx-auto"
-                                                alt=""
-                                            />
-                                        </>
-                                    ))} */}
                                     {/* <Image
                                         src={Images.communication_one}
                                         height={216}
@@ -441,14 +448,14 @@ const Communication_page = () => {
                                         />
                                     </div> */}
                                     {/* <div className="flex flex-row items-center flex-wrap border rounded-full px-3 py-2"></div> */}
-                                    <div className="border rounded-full px-3 py-2">
+                                    {/* <div className="border rounded-full px-3 py-2">
                                         <div className="font_size_10" style={{ color: Colors.orange_clr, lineHeight: '11.82px' }}>
                                             Useful Link :-
                                         </div>
                                         <div className="font_size_12" style={{ color: Colors.orange_clr, lineHeight: '14.18px' }}>
                                             https://www.LoremIpsum.com/LoremIpsum.php?gen+link
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <p className="font_size_16 communication_text py-2">
                                         {/* Qorem ipsum Lorem Ipsum is simply dummy text of
                                         the printing and typesetting industry. Lorem Ipsum

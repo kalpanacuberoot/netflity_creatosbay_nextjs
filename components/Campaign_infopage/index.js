@@ -92,7 +92,7 @@ const Campaign_infopage = () => {
         console.error('Error parsing brand_ids:', error);
       }
     }
-    console.log('brandId:', brandId);
+    console.log('brandId:campaign_info', brandId);
 
     try {
 
@@ -118,7 +118,7 @@ const Campaign_infopage = () => {
         Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
         Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
 
-        toast.success(postResponse?.message, {
+        toast.success('Campaign is created Successfully', {
           position: 'top-center',
           autoClose: 5000,
         });
@@ -216,12 +216,12 @@ const Campaign_infopage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5 w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
 
 
         <div className="m-2 w-full auto-cols-max ">

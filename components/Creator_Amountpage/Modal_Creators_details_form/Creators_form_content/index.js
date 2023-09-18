@@ -49,7 +49,7 @@ const Creators_form_content = () => {
     const campaign_name = Cookies.get('campaign_name');
 
     // const amount = Cookies.get('firstAmountWithGST')
-    const amount = JSON.parse(Cookies.get('all_creator_amount'));
+    const amount = 1000;
 
     console.log("amount foum payu",amount);
     // const amount = 590;
@@ -58,9 +58,9 @@ const Creators_form_content = () => {
 
     const txnid = md5(campaign_id).toString();
     const productinfo = `Campaign: ${campaign_name}`;
-    // const surl = `${site_url}payment-success`;
-    // const furl = `${site_url}payment-failure`;
     const surl = `${site_url}payment-success`;
+    // const furl = `${site_url}payment-failure`;
+    // const surl = 'https://webhook.site/a5aae46d-36ab-4092-8aba-5464aaf8a406';
     const furl = `${site_url}payment-failure`;
     const curl = `${site_url}payment-cancelled`;
     const udf1 = campaign_id;

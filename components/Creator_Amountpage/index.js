@@ -19,7 +19,7 @@ const Creator_Amountpage = () => {
 
     const [campaigndata, setCampaigndata] = useState(null);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
-    const [totalAmount, setTotalAmount] = useState(Cookies.get('all_creator_amount'));
+    const [totalAmount, setTotalAmount] = useState([]);
     // const [creatorTotalAmount, setCreatorTotalAmount] = useState(0);
 
 
@@ -79,7 +79,22 @@ const Creator_Amountpage = () => {
     };
 
     useEffect(() => {
+        // Attempt to get the cookie value
+        const cookieValue = Cookies.get('all_creator_amount');
+
+        if (cookieValue) {
+            try {
+                // Parse the cookie value as JSON and set it to totalAmount
+                const parsedValue = JSON.parse(cookieValue);
+                setTotalAmount(parsedValue);
+            } catch (error) {
+                console.error('Error parsing cookie value:', error);
+                // Handle the error gracefully, e.g., set a default value or show an error message
+            }
+        }
+
         getCompanyCraetors();
+
     }, []);
 
     const handleSubmit = () => {
@@ -108,7 +123,7 @@ const Creator_Amountpage = () => {
             totalCreatorAmount += creatorAmount;
         });
 
-        Cookies.set('all_creator_amount',totalCreatorAmount)
+        Cookies.set('all_creator_amount', totalCreatorAmount);
 
         // Now, the variable 'totalAmount' contains the total amount for all creators
         console.log('Total Amount for All Creators:', totalCreatorAmount);
@@ -151,12 +166,12 @@ const Creator_Amountpage = () => {
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
-                <div
+                {/* <div
                     className="auto-cols-max  px-5 py-5 border w-1/5"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
-                </div>
+                </div> */}
                 {/* top section */}
                 <div className="m-2 w-full auto-cols-max ">
                     {/* <div

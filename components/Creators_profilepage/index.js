@@ -16,6 +16,7 @@ const Creators_profilepage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [creator_details, setCreator_details] = useState(null);
+  const [hasReloaded, setHasReloaded] = useState(false);
 
   const convertHeight = (heightCms) => {
     const inchesPerFoot = 12;
@@ -71,13 +72,54 @@ const Creators_profilepage = () => {
 
   }, []);
 
+  const handleReload = () => {
+    // if (!hasReloaded) {
+    //   window.location.reload();
+    //   setHasReloaded(true); // Set the state to indicate that the reload has occurred
+    //   setIsModalOpen(true)
+    // }
+    setIsModalOpen(true)
+    // window.location.reload();
+
+  };
+
+  // const links = [
+  //   "https://www.youtube.com/shorts/5S9W8onR_9I",
+  //   "https://www.youtube.com/shorts/2B2-joqRoHc",
+  //   "https://www.youtube.com/shorts/iqJafrKSrhM",
+  //   "https://www.instagram.com/reel/CwWw3_BoIGL",
+  //   "https://www.instagram.com/p/CuwZHA5rWPV",
+  //   "https://www.instagram.com/reel/CsFgzPeIGkq",
+  // ];  
+
+  console.log("creadtor+deauodl", creator_details?.portfolios.map((item) => item?.link));
+
+  const links = creator_details?.portfolios.map((item) => item?.link);
+
+  function filterURL(link) {
+    var url_parts = new URL(link);
+    if (url_parts.host === "www.youtube.com") {
+      return (
+        "https://www.youtube.com" +
+        url_parts.pathname.replace("shorts", "embed") +
+        "?rel=0&controls=0&showinfo=0"
+      );
+    } else if (url_parts.host === "www.instagram.com") {
+      return "https://www.instagram.com" + url_parts.pathname + "/embed/";
+    } else {
+      return "";
+    }
+  }
+
+  console.log("filterURL(links[0])", links);
+
   return (
     <>
 
       <Creators_popup isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="relative w-full max-w-2xl max-h-full">
+        <div className="relative w-full max-w-3xl max-h-full">
 
           <Creators_popup_content />
         </div>
@@ -86,12 +128,12 @@ const Creators_profilepage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5 border w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
         <div className="m-2 w-full auto-cols-max border">
           <div
             style={{ backgroundColor: Colors.white_clr }}
@@ -212,7 +254,8 @@ const Creators_profilepage = () => {
                     background: Colors.logo_clr,
                     color: Colors.white_clr,
                   }}
-                  onClick={() => setIsModalOpen(true)}
+                  // onClick={() => setIsModalOpen(true) && window.location.reload()}
+                  onClick={handleReload}
                 >
                   {" "}
                   Send Campaign
@@ -260,8 +303,8 @@ const Creators_profilepage = () => {
               {/* dropdown ************* */}
 
               {/* <div className="grid h-full grid-cols-2 gap-5 overflow-y-scroll mt-10 min-h-screen"> */}
-              <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10">
-                <Image
+              <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10 portfolio">
+                {/* <Image
                   width={500}
                   height={100}
                   className=" rounded-lg"
@@ -337,7 +380,103 @@ const Creators_profilepage = () => {
                   className=" rounded-lg"
                   src={Images.creator_profile_img}
                   alt="Post"
-                />
+                /> */}
+                {/* <div class="col col1">
+                  <div class="row" id="slot1">
+                  </div>
+                  <div class="row" id="slot3">
+                  </div>
+                  <div class="row" id="slot5">
+                  </div>
+                </div>
+                <div class="col col1">
+                  <div class="row" id="slot2">
+                  </div>
+                  <div class="row" id="slot4">
+                  </div>
+                  <div class="row" id="slot6">
+                  </div>
+                </div> */}
+                {/* <div className="col col1">
+                  <div className="row" id="slot1">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[0])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="row" id="slot3">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[2])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="row" id="slot5">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[4])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+                <div className="col col1">
+                  <div className="row" id="slot2">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[1])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="row" id="slot4">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[3])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="row" id="slot6">
+                    <div className="icontainer">
+                      <iframe
+                        src={filterURL(links[5])}
+                        scrolling="no"
+                        height="360"
+                        frameBorder="0"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div> */}
+                {/* <div className="col col1"> */}
+                  {links && links?.map((link, index) => (
+                    <div className="row mt-5 " id={`slot${index + 1}`} key={index}>
+                      <div className="icontainer ">
+                        <iframe
+                          src={filterURL(link)}
+                          scrolling="no"
+                          height="360"
+                          width="250"
+                          frameBorder="0"
+                          className=""
+                        ></iframe>
+                      </div>
+                    </div>
+                  ))}
+                {/* </div> */}
               </div>
             </div>
           </div>

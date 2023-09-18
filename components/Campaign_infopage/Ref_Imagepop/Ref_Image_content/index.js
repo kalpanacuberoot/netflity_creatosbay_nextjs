@@ -52,10 +52,9 @@ const Ref_Image_content = ({ refpopupData }) => {
 
 
     console.log("fileslected and ref", file2);
-
     const handleRefUploadClick = async () => {
         // handleFileChange();
-        { handleImageClick(refImage2) }
+        // { handleImageClick(refImage2) }
         if (!file2) {
             alert('Please select an image to upload.');
             return;
@@ -73,7 +72,7 @@ const Ref_Image_content = ({ refpopupData }) => {
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
                     'Accept': '/application/json',
-
+                    // 'Content-Type':'multipart/form-data'
                 },
                 body: formData,
             });
@@ -82,16 +81,17 @@ const Ref_Image_content = ({ refpopupData }) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("image response ok", data?.url);
-                toast.success('reference Image Uploaded Successfully', {
+                console.log("image response ok ", data?.url);
+                toast.error('Image upload failed', {
                     position: 'top-center',
                     autoClose: 5000,
                 });
                 // alert('Image uploaded successfully.');
-                setFile2(data?.url)
+                setFile2(data?.url);
+                console.log("filedsgdsgdsg", file2);
             } else {
                 // alert('Image upload failed.');
-                toast.error('Image upload failed', {
+                toast.success(' Image Uploaded Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
                 });
@@ -103,15 +103,20 @@ const Ref_Image_content = ({ refpopupData }) => {
                 autoClose: 3000, // Close the toast after 3 seconds0
             });
         }
+       
     };
+
+
+    console.log("dftyftyfrefernce", file2);
 
     const sendRefDataToParent = () => {
 
-        const link = `${IMAGE_URL}/uploads/${file2?.name}`;
-        console.log('imgrddsa product popup----1', file2, link)
+        // const link = `${IMAGE_URL}/uploads/${file2}`;
+        const link = file2;
+        console.log('imgrddsa refernce popup----1', file2, link)
 
         handleRefUploadClick();
-        console.log('imgrddsa product popup-----2', file2)
+        console.log('imgrddsa reference popup-----2', file2)
 
         const data = [
             {
@@ -121,15 +126,54 @@ const Ref_Image_content = ({ refpopupData }) => {
             },
         ]
 
-        console.log("popupdata---", data);
-        // Call the callback function with the data to send to the parent
-        // onPopupData(data);
+        console.log("popupdata---reference", data);
+
         refpopupData(data);
         toast.success('Data is saved', {
-            position: 'top-center', // Set the toast position
-            autoClose: 3000, // Close the toast after 3 seconds0
+            position: 'top-center',
+            autoClose: 3000,
         });
+       
     };
+    // sendRefDataToParent();
+
+   
+
+    // const sendRefDataToParent = async () => {
+    //     // Check if file2 is selected
+    //     if (!file2) {
+    //         alert('Please select an image to upload.');
+    //         return;
+    //     }
+
+    //     // Call handleRefUploadClick() and wait for it to complete
+    //     try {
+    //         console.log('file2 before calling handleRefUploadClick:', file2);
+    //        const fileData =  await handleRefUploadClick();
+    //         console.log('imgrddsa reference popup-----2', file2,fileData);
+
+    //         const data = [
+    //             {
+    //                 link: file2,
+    //                 description,
+    //                 name,
+    //             },
+    //         ];
+
+    //         console.log('popupdata---reference', data);
+    //         // Call the callback function with the data to send to the parent
+    //         // onPopupData(data);
+    //         refpopupData(data);
+    //         toast.success('Data is saved', {
+    //             position: 'top-center',
+    //             autoClose: 3000,
+    //         });
+    //     } catch (error) {
+    //         console.error('Error in sendRefDataToParent:', error);
+    //     }
+    // };
+
+
 
 
     return (

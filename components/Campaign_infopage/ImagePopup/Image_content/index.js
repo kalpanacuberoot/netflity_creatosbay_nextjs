@@ -100,8 +100,11 @@ const Image_content = ({ onPopupData }) => {
         }
     };
 
+    console.log("dfdsafdsfds",file);
+
     const sendDataToParent = () => {
-        const link = `${IMAGE_URL}/uploads/${file?.name}`;
+        // const link = `${IMAGE_URL}/uploads/${file?.name}`;
+        const link = file;
         console.log('imgrddsa product popup----1', file, link)
 
         handleUploadClick();
@@ -109,15 +112,13 @@ const Image_content = ({ onPopupData }) => {
 
         const data = [
             {
-                link,
+                link:file,
                 description,
                 name,
             },
         ]
 
-        console.log("popupdata---", file,
-            description,
-            name,);
+        console.log("popupdata---", data);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
         onPopupData(data);
