@@ -53,7 +53,7 @@ const Invoicepage = () => {
 
                         <div className="text-white shadow-md rounded-md mx-3 p-4">
                             <div className="font_size_31">
-                                Overdue
+                                Completed
                                 <div className="flex flex-row justify-between items-center">
                                     <h1>157</h1>
                                     <Image
@@ -79,7 +79,7 @@ const Invoicepage = () => {
                         </div>
                         <div className="text-white shadow-md rounded-md mx-3 p-4">
                             <div className="font_size_31">
-                                Unpaid
+                                Pending 
                                 <div className="flex flex-row justify-between items-center">
                                     <h1>57</h1>
                                     <Image
@@ -99,13 +99,13 @@ const Invoicepage = () => {
                         <div className="font_size_31 ">
                             Recent invoices
                         </div>
-                        <div className="rounded-md flex flex-row justify-between border p-3">
+                        {/* <div className="rounded-md flex flex-row justify-between border p-3">
                             <div>
                                 <label className="relative block">
                                     <span className="sr-only">Search</span>
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                         <Image src={Images.search_icon} alt="" width={16} height={16} />
-                                        {/* <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">gfdgdfg</svg> */}
+                                      
                                     </span>
                                     <input
                                         className=" placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
@@ -117,12 +117,12 @@ const Invoicepage = () => {
                             <div className="">
                                 <Date_range_picker />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="py-5">
                             <Invoice_Table />
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <h1>Total Amount: {totalAmount}</h1>
                         <h2>First Amount:</h2>
                         <p>Base Amount: {firstAmount}</p>
@@ -136,7 +136,7 @@ const Invoicepage = () => {
                         <button onClick={() => console.log('Reject')} >Reject</button>
                         <h2>Refund Amount:</h2>
                         <p>{refundAmount}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
