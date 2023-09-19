@@ -13,9 +13,11 @@ const Home_Card1 = ({ items }) => {
     const [start_date, setStart_date] = useState(null);
     const [end_date, setEnd_date] = useState(null);
 
+    console.log("Home_Card1", items);
+
     useEffect(() => {
 
-       
+
 
         const staring_dateparts = items?.starting_date.split("-");
         // Check if the array has enough elements
@@ -55,25 +57,33 @@ const Home_Card1 = ({ items }) => {
     return (
         <>
             <div className="my-5 mx-2 " key={items?.id}>
-                <div className="relative">
-                    <Image
-                        src={Images.card_img}
-                        width={500}
-                        height={100}
-                        alt=""
-                        className=" mx-auto"
-                    />
-                    {/* <Image
-                        src={Images.reel_creator_card}
-                        width={50}
-                        height={50}
-                        alt=""
-                        className="reel_creator_card mx-auto"
-                    /> */}
+                <div className="relative flex">
+                  
+                    {items?.references?.length>0 && items?.references.map((item) =>
+                        <Image
+                            src={item ? item.link : Images.card_img}
+                            width={350}
+                            height={100}
+                            alt=""
+                            className=" mx-auto border rounded-t-lg"
+                        />
+                    )}
+                    {items?.products?.length>0 && items?.products.map((item) =>
+                        <Image
+                            src={item ? item.link : Images.card_img}
+                            width={500}
+                            height={100}
+                            alt=""
+                            className=" mx-auto"
+                        />
+                    )}
+                   
+
+
                 </div>
                 <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                     <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                        <div className="font_size_17 flex items-center">Creators
+                        <div className="font_size_17 flex items-center">Creators    
                             <span
                                 // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
                                 className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">
@@ -114,9 +124,9 @@ const Home_Card1 = ({ items }) => {
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
                         <h6>{start_date} - {end_date}</h6>
                         {/* <Link href={'/communication'}> */}
-                            <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer"  onClick={() => handleId(items)}>
-                                <buttton> Check Details</buttton>
-                            </div>
+                        <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(items)}>
+                            <buttton> Check Details</buttton>
+                        </div>
                         {/* </Link> */}
                     </div>
                 </div>
