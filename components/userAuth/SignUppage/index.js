@@ -43,7 +43,7 @@ const Signuppage = () => {
 
                 body: JSON.stringify(options),
             });
-
+                
             console.log('register response------', response)
 
             if (response.ok) {

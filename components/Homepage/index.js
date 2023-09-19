@@ -28,8 +28,11 @@ const Homepage = () => {
 
   const [campaign_data, setCampaign_data] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
+  const [showChild, setShowChild] = useState(false);
 
-
+  const handleButtonClick = () => {
+    setShowChild(true); // Set the state to display the ChildComponent
+  };
 
   useEffect(() => {
 
@@ -138,24 +141,26 @@ const Homepage = () => {
     setStartIndex(startIndex - itemsPerPage);
   };
 
-  const handleStart = () =>{
-    return (<Campaign_infopage/>)
-  };
+  // const handleStart = () =>{
+  //   return (<Campaign_infopage/>)
+  // };
 
 
   return (
     <>
+     {/* Conditionally render the ChildComponent */}
+     {/* {showChild && <Campaign_infopage />} */}
       {/* <div id="defaultModal" tabindex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <Terms_of_service />
       </div> */}
 
       <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
-        {/* <div
+        <div
           className="auto-cols-max  px-5 py-5  w-1/4"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div> */}
+        </div>
         <div
           // className="grid grid-flow-col border w-100 px-3"
           className="w-full auto-cols-max me-3 ps-5 rounded-md pb-3 "
@@ -176,11 +181,11 @@ const Homepage = () => {
                 </div>
 
                 <h3>Your content is just a click away !</h3>
-                {/* <Link href={'/campaign_info'}> */}
-                  <button className="start_campaign_btn px-5 py-1 rounded-full w-48" onClick={() => handleStart()} >
+                <Link href={'/campaign_info'}>
+                  <button className="start_campaign_btn px-5 py-1 rounded-full w-48" >
                     Start Campaign
                   </button>
-                {/* </Link> */}
+                </Link>
               </div>
               <Image
                 src={Images.home_title_bg}
@@ -218,20 +223,18 @@ const Homepage = () => {
                       {"No Campaigns Found"}
                     </h1>
                     <Link href={'/campaign_info'}>
-                      <button className="start_campaign_btn px-5 py-1 rounded-full w-48">
+                   
+                      <button className="start_campaign_btn px-5 py-1 rounded-full w-48"  >
                         Start Campaign
                       </button>
-                    </Link>
+                      </Link>
                   </div>
                 </div>
               </div>
             }
 
-            {itemsToShow?.length > 0 &&
+            {campaign_data?.length > 6 &&
               <div className="w-full text-end p-5 mx-2">
-
-                {/* Add a "Next" button */}
-                {/* <button onClick={handleNextClick} className=" edit_button_clr py-2 px-5 rounded">Next</button> */}
                 <button onClick={handlePreviousClick} disabled={startIndex === 0} className=" edit_button_clr py-2 px-5 rounded mx-3">
                   Previous
                 </button>
@@ -247,7 +250,7 @@ const Homepage = () => {
         </div>
 
         <div
-          // className="grid grid-flow-col border"
+         
           className="w-96 auto-cols-max rounded-md grid grid-cols-1 divide-y mt-4"
         >
 

@@ -118,7 +118,7 @@ const Marketplace_page = () => {
     return (
         <>
             <div
-                className="flex container_capmapign_info w-full"
+                className="flex container_capmapign_info p-3 "
                 style={{ backgroundColor: Colors.button_light_clr }}
                 ref={dropdownRef}
             >
@@ -129,13 +129,13 @@ const Marketplace_page = () => {
                     <Left_Dashboard />
                 </div>
 
-                <div className="m-2 w-full auto-cols-max text-start p-2  h-screen"
+                <div className="w-full auto-cols-max text-start m-0 h-screen px-3"
 
                 >
                     <div
                         style={{ background: Colors.invoice_gradient_clr }}
                         // style={style}
-                        className="auto-cols-max p-3 rounded-md flex flex-row"
+                        className="auto-cols-max p-3 rounded-md flex flex-row "
                     >
                         <div className="flex flex-row justify-between items-center  w-full">
                             <div style={{ color: Colors.white_clr }}>
@@ -172,7 +172,7 @@ const Marketplace_page = () => {
                         </div>
                     </div>
 
-                    <div className="m-2 w-full grid grid-cols-3 gap-3">
+                    <div className=" w-full flex m-0  pt-4 ">
                         {creatordata?.length > 0 ? creatordata.map((item, index) => {
 
                             const existingCookieData = Cookies.get('selected_creator_id');
@@ -183,155 +183,198 @@ const Marketplace_page = () => {
                             const existingDataArray = existingCookieData;
                             const valueToMatch = item?.id;
 
-                            if (existingDataArray && existingDataArray?.includes(valueToMatch)) {
-                                console.log(`${valueToMatch} is found in the array.`);
+                            // if (existingDataArray && existingDataArray?.includes(valueToMatch)) {
+                            //     console.log(`${valueToMatch} is found in the array.`);
 
 
-                                console.log("existingDataArray-----3---", existingDataArray, valueToMatch);
-                                if(valueToMatch){
-                                return (
-                                   
-                                    <>
-                                    
-                                        <div className='border-4 border-purple-500 bg-white p-3 rounded-lg' key={index}>
-                                            <div className="grid grid-cols-3 rounded-md gap-1" >
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    src={imageUrl}
-                                                    alt=""
-                                                />
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    src={imageUrl}
-                                                    alt=""
-                                                />
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    src={imageUrl}
-                                                    alt=""
-                                                />
+                            //     console.log("existingDataArray-----3---", existingDataArray, valueToMatch);
+                            //     if (valueToMatch) {
+                            //         return (
+
+                            //             <>
+
+                            //                 <div className='border-4 border-purple-500 bg-white p-3 rounded-lg' key={index}>
+                            //                     <div className="grid grid-cols-3 rounded-md gap-1" >
+                            //                         <Image
+                            //                             width={500}
+                            //                             height={100}
+                            //                             className="w-full h-64 object-cover"
+                            //                             src={imageUrl}
+                            //                             alt=""
+                            //                         />
+                            //                         <Image
+                            //                             width={500}
+                            //                             height={100}
+                            //                             className="w-full h-64 object-cover"
+                            //                             src={imageUrl}
+                            //                             alt=""
+                            //                         />
+                            //                         <Image
+                            //                             width={500}
+                            //                             height={100}
+                            //                             className="w-full h-64 object-cover"
+                            //                             src={imageUrl}
+                            //                             alt=""
+                            //                         />
 
 
-                                            </div>
-                                            <div className="flex justify-between mb-2 mt-2">
-                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                                {/* <div className="flex gap-4"><h3>x</h3>
-                                            <h3>|</h3></div> */}
-                                            </div>
-                                            <div className="flex justify-between mb-2 mt-2">
-                                                <div> <h4>{item?.user?.name}</h4></div>
-                                                <div className="flex" key={index}>
-                                                    {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                                                        return (
+                            //                     </div>
+                            //                     <div className="flex justify-between mb-2 mt-2">
+                            //                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
 
-                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                                                                {categories_item?.name}
-                                                            </h6>
-                                                        )
-                                                    })
-                                                    }
-                                                </div>
-                                            </div>
-                                            {/* <Link
-                                        href={{
-                                            pathname: "/creator_profile",
-                                            query: { data: JSON.stringify({ key: item?.id }) },
-                                        }}
-                                    > */}
-                                            <button
-                                                className="w-full rounded-full p-2 mt-3"
-                                                style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                                                onClick={() => onProfileDetail(item, index)}
-                                            >
-                                                View profile
-                                            </button>
-                                            {/* </Link> */}
+                            //                     </div>
+                            //                     <div className="flex justify-between mb-2 mt-2">
+                            //                         <div> <h4>{item?.user?.name}</h4></div>
+                            //                         <div className="flex" key={index}>
+                            //                             {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                            //                                 return (
+
+                            //                                     <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                            //                                         {categories_item?.name}
+                            //                                     </h6>
+                            //                                 )
+                            //                             })
+                            //                             }
+                            //                         </div>
+                            //                     </div>
+
+                            //                     <button
+                            //                         className="w-full rounded-full p-2 mt-3"
+                            //                         style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                            //                         onClick={() => onProfileDetail(item, index)}
+                            //                     >
+                            //                         View profile
+                            //                     </button>
+                            //                     {/* </Link> */}
+                            //                 </div>
+
+                            //             </>
+                            //         )
+                            //     }
+
+
+                            // } else {
+                            //     console.log(`${valueToMatch} is not found in the array.`);
+                            //     return (
+
+                            //         <>
+
+                            //             <div className='bg-white p-3 rounded-lg m-2' key={index}>
+                            //                 <div className="grid grid-cols-3 rounded-md gap-1" >
+                            //                     <Image
+                            //                         width={500}
+                            //                         height={100}
+                            //                         className="w-full h-64 object-cover"
+                            //                         // src={imageUrl}
+                            //                         src={item?.profile_pic}
+                            //                         alt=""
+                            //                     />
+                            //                     <Image
+                            //                         width={500}
+                            //                         height={100}
+                            //                         className="w-full h-64 object-cover"
+                            //                         // src={imageUrl}
+                            //                         src={item?.profile_pic}
+                            //                         alt=""
+                            //                     />
+                            //                     <Image
+                            //                         width={500}
+                            //                         height={100}
+                            //                         className="w-full h-64 object-cover"
+                            //                         // src={imageUrl}
+                            //                         src={item?.profile_pic}
+                            //                         alt=""
+                            //                     />
+
+
+                            //                 </div>
+                            //                 <div className="flex justify-between mb-2 mt-2">
+                            //                     <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                            //                     {/* <div className="flex gap-4"><h3>x</h3>
+                            //                 <h3>|</h3></div> */}
+                            //                 </div>
+                            //                 <div className="flex justify-between mb-2 mt-2">
+                            //                     <div> <h4>{item?.user?.name}</h4></div>
+                            //                     <div className="flex" key={index}>
+                            //                         {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                            //                             return (
+
+                            //                                 <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                            //                                     {categories_item?.name}
+                            //                                 </h6>
+                            //                             )
+                            //                         })
+                            //                         }
+                            //                     </div>
+                            //                 </div>
+
+                            //                 <button
+                            //                     className="w-full rounded-full p-2 mt-3"
+                            //                     style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                            //                     onClick={() => onProfileDetail(item, index)}
+                            //                 >
+                            //                     View profile
+                            //                 </button>
+                            //                 {/* </Link> */}
+                            //             </div>
+
+                            //         </>
+                            //     )
+                            // }
+                            return (
+                                <div className='bg-white p-3 rounded-lg m-2' key={index}>
+                                    <div className="grid grid-cols-3 rounded-md gap-1" >
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={item?.profile_pic}
+                                            alt=""
+                                        />
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={item?.profile_pic}
+                                            alt=""
+                                        />
+                                        <Image
+                                            width={500}
+                                            height={100}
+                                            className="w-full h-64 object-cover"
+                                            src={item?.profile_pic}
+                                            alt=""
+                                        />
+
+
+                                    </div>
+                                    <div className="flex justify-between mb-2 mt-2">
+                                        <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                                    </div>
+                                    <div className="flex justify-between mb-2 mt-2">
+                                        <div> <h4>{item?.user?.name}</h4></div>
+                                        <div className="flex" key={index}>
+                                            {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                                                return (
+
+                                                    <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                        {categories_item?.name}
+                                                    </h6>
+                                                )
+                                            })
+                                            }
                                         </div>
-                                
-                                    </>
-                                )
-                            }
-                           
+                                    </div>
 
-                            } else {
-                                // console.log(`${valueToMatch} is not found in the array.`);
-                                return (
-                                   
-                                    <>
-                                    
-                                        <div className='bg-white p-3 rounded-lg' key={index}>
-                                            <div className="grid grid-cols-3 rounded-md gap-1" >
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    // src={imageUrl}
-                                                    src={item?.profile_pic}
-                                                    alt=""
-                                                />
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    // src={imageUrl}
-                                                    src={item?.profile_pic}
-                                                    alt=""
-                                                />
-                                                <Image
-                                                    width={500}
-                                                    height={100}
-                                                    className="w-full h-64 object-cover"
-                                                    // src={imageUrl}
-                                                    src={item?.profile_pic}
-                                                    alt=""
-                                                />
-
-
-                                            </div>
-                                            <div className="flex justify-between mb-2 mt-2">
-                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                                {/* <div className="flex gap-4"><h3>x</h3>
-                                            <h3>|</h3></div> */}
-                                            </div>
-                                            <div className="flex justify-between mb-2 mt-2">
-                                                <div> <h4>{item?.user?.name}</h4></div>
-                                                <div className="flex" key={index}>
-                                                    {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                                                        return (
-
-                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                                                                {categories_item?.name}
-                                                            </h6>
-                                                        )
-                                                    })
-                                                    }
-                                                </div>
-                                            </div>
-                                            {/* <Link
-                                        href={{
-                                            pathname: "/creator_profile",
-                                            query: { data: JSON.stringify({ key: item?.id }) },
-                                        }}
-                                    > */}
-                                            <button
-                                                className="w-full rounded-full p-2 mt-3"
-                                                style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                                                onClick={() => onProfileDetail(item, index)}
-                                            >
-                                                View profile
-                                            </button>
-                                            {/* </Link> */}
-                                        </div>
-                                
-                                    </>
-                                )
-                            }
+                                    <button
+                                        className="w-full rounded-full p-2 mt-3"
+                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                        onClick={() => onProfileDetail(item, index)}
+                                    >
+                                        View profile
+                                    </button>
+                                </div>
+                            )
                         }
 
 

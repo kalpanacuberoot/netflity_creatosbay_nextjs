@@ -19,7 +19,7 @@ const Creator_Amountpage = () => {
 
     const [campaigndata, setCampaigndata] = useState(null);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
-    const [totalAmount, setTotalAmount] = useState([]);
+    const [totalAmount, setTotalAmount] = useState();
     // const [creatorTotalAmount, setCreatorTotalAmount] = useState(0);
 
 
@@ -69,6 +69,17 @@ const Creator_Amountpage = () => {
                 const result = await response.json();
                 console.log("campaigns creator amount result------------", result?.data);
                 setCampaigndata(result?.data)
+                const selectedCreatorIds = JSON.parse(Cookies.get('selected_creator_id')); // The array of creator_id values to match
+                console.log("selectedCreatorIds", selectedCreatorIds);
+                // const filteredCreators = campaigndata?.creators?.filter((creator) => {
+                //     return selectedCreatorIds.includes(creator.creator_id);
+                // });
+                const filteredCreators = result?.data?.creators?.filter((creator) => {
+                    return creator.creator_id
+                }); 
+                console.log("filteredCreators",filteredCreators);
+                calculateAndSetTotalCreatorAmount(filteredCreators);
+
             } else {
                 console.error('Error:', response?.statusText);
 
@@ -104,35 +115,52 @@ const Creator_Amountpage = () => {
 
     // console.log("creatorTotalAmount",creatorTotalAmount);
 
-    const selectedCreatorIds = [2, 1]; // The array of creator_id values to match
+    // const selectedCreatorIds = JSON.parse(Cookies.get('selected_creator_id')); // The array of creator_id values to match
 
-    const filteredCreators = campaigndata?.creators?.filter((creator) => {
-        return selectedCreatorIds.includes(creator.creator_id);
-    });
+    // const filteredCreators = campaigndata?.creators?.filter((creator) => {
+    //     return selectedCreatorIds.includes(creator.creator_id);
+    // });
 
-    console.log("filteredCreators", filteredCreators);
-
-    // Check if filteredCreators is defined and not null
-    if (filteredCreators && filteredCreators.length > 0) {
-        // Initialize a variable to store the total amount
-        let totalCreatorAmount = 0;
-
-        // Iterate through the filteredCreators array and calculate the total amount
-        filteredCreators.forEach((creator_item) => {
-            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
-            totalCreatorAmount += creatorAmount;
-        });
-
-        Cookies.set('all_creator_amount', totalCreatorAmount);
-
-        // Now, the variable 'totalAmount' contains the total amount for all creators
-        console.log('Total Amount for All Creators:', totalCreatorAmount);
-    } else {
-        console.log('No creators found or filteredCreators is undefined.');
-    }
+    // console.log("filteredCreators", filteredCreators);
 
 
-    console.log('Total Amount for All Creators:adasd', totalAmount);
+    // if (filteredCreators && filteredCreators.length > 0) {
+
+    //     let totalCreatorAmount = 0;
+
+
+    //     filteredCreators.forEach((creator_item) => {
+    //         const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+    //         totalCreatorAmount += creatorAmount;
+    //     });
+
+    //     Cookies.set('all_creator_amount', totalCreatorAmount);
+
+
+    //     console.log('Total Amount for All Creators:', totalCreatorAmount);
+    // } else {
+    //     console.log('No creators found or filteredCreators is undefined.');
+    // }
+
+
+    // console.log('Total Amount for All Creators:adasd', totalAmount);
+
+    const calculateAndSetTotalCreatorAmount = (filteredCreators) => {
+        if (filteredCreators && filteredCreators.length > 0) {
+            let totalCreatorAmount = 0;
+            filteredCreators.forEach((creator_item) => {
+                const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+                totalCreatorAmount += creatorAmount;
+                setTotalAmount(totalCreatorAmount)
+            });
+            Cookies.set('all_creator_amount', totalCreatorAmount);
+            console.log('Total Amount for All Creators:', totalCreatorAmount);
+        } else {
+            console.log('No creators found or creators array is undefined.');
+        }
+    };
+
+
 
     const usageChargePercent = 15;
     const gstRate = 18;
@@ -150,6 +178,7 @@ const Creator_Amountpage = () => {
     const secondAmountWithGST = calculateAmountWithGST(secondAmount);
 
     const refundAmount = usageChargePercent * totalAmount / 100;
+    console.log("campaigndatacampaigndata", campaigndata);
 
     return (
         <>
@@ -158,7 +187,7 @@ const Creator_Amountpage = () => {
 
                 <div className="relative w-full max-w-2xl max-h-full">
 
-                    <Creators_form_content />
+                    <Creators_form_content totalAmount={totalAmount} />
                 </div>
 
             </Modal_Creators_details_form>
@@ -166,63 +195,15 @@ const Creator_Amountpage = () => {
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
-                {/* <div
+                <div
                     className="auto-cols-max  px-5 py-5 border w-1/5"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
-                </div> */}
+                </div>
                 {/* top section */}
                 <div className="m-2 w-full auto-cols-max ">
-                    {/* <div
-                        style={{ background: Colors.invoice_gradient_clr }}
-                        // style={style}
-                        className="auto-cols-max  p-3 rounded-md flex flex-row grid grid-cols-3"
-                    >
 
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Overdue
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>157</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Paid
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>02</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Unpaid
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>57</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div> */}
                     {/* invoices data */}
                     <div style={{ backgroundColor: Colors.white_clr }}
                         className="rounded-md container-fluid h-screen p-5 my-2 flex flex-col justify-between min-h-screen overflow-y-auto"
@@ -238,15 +219,15 @@ const Creator_Amountpage = () => {
                                                 <th scope="col" className="px-6 py-5">
                                                     Creator Name
                                                 </th>
-                                                <th scope="col" className="px-6 py-5">
+                                                {/* <th scope="col" className="px-6 py-5">
                                                     unit price image
-                                                </th>
+                                                </th> */}
                                                 <th scope="col" className="px-6 py-5">
                                                     Images
                                                 </th>
-                                                <th scope="col" className="px-6 py-5">
+                                                {/* <th scope="col" className="px-6 py-5">
                                                     unit price video
-                                                </th>
+                                                </th> */}
                                                 <th scope="col" className="px-6 py-5">
                                                     Videos
                                                 </th>
@@ -260,53 +241,19 @@ const Creator_Amountpage = () => {
                                             </tr>
 
                                         </thead>
-                                        {/* {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
-
-                                            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
-
-                                            console.log('creatorAmount', creatorAmount);
-
-                                            const currentTotalAmount = creatorAmount[creator_item.creator_id] || 0;
-
-                                            console.log('currentTotalAmount', currentTotalAmount);
-
-                                            // setTotalAmount((prevTotal) => prevTotal + creatorAmount); // Update total amount
-                                            // Update the total amount for this creator_id
-                                            setTotalAmount((prevTotalAmounts) => ({
-                                                ...prevTotalAmounts,
-                                                [creator_item.creator_id]: currentTotalAmount + creatorAmount,
-                                            }));
-
-                                            return (
-                                                <tbody key={index}>
-                                                    {Object.keys(totalAmount).map((creatorId) => (
-                                                        <div key={creatorId}>
-                                                            Creator ID: {creatorId}, Total Amount: {totalAmount[creatorId]}
-                                                        </div>
-                                                    ))}
 
 
-                                                    {/* <Creator_table creatorData={creator_item} T={console.log("creator_item", creator_item)} /> */}
-                                        {/* <div>Total Amount for All Creators: {totalAmount}</div>
-                                                </tbody>
+                                        {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
 
-                                            )
-                                        })
-                                            :
-                                            "No Creator is found"
-                                        // } */}
-
-                                        {filteredCreators?.length > 0 ? filteredCreators.map((creator_item, index) => {
-
-                                            const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
+                                            // const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
 
                                             // setTotalAmount((prevTotal) => prevTotal + creatorAmount); // Update total amount
 
-                                            console.log('creatorAmount', creatorAmount);
+                                            // console.log('creatorAmount', creatorAmount);
 
                                             return (
                                                 <>
-                                                    <tbody key={index}>
+                                                    <tbody key={index} >
                                                         <Creator_table creatorData={creator_item} />
                                                     </tbody>
                                                 </>

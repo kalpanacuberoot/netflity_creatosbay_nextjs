@@ -16,7 +16,7 @@ import md5 from 'crypto-js/md5';
 import sha512 from 'crypto-js/sha512';
 
 
-const Creators_form_content = () => {
+const Creators_form_content = ({totalAmount}) => {
 
     const router = useRouter();
 
@@ -49,7 +49,7 @@ const Creators_form_content = () => {
     const campaign_name = Cookies.get('campaign_name');
 
     // const amount = Cookies.get('firstAmountWithGST')
-    const amount = 1000;
+    const amount = totalAmount;
 
     console.log("amount foum payu",amount);
     // const amount = 590;
@@ -297,7 +297,8 @@ const Creators_form_content = () => {
                             <input type="hidden" name="udf3" id="udf3" value={udf3} />
                             <input type="hidden" name="udf4" id="udf4" value={udf4} />
                             <input type="hidden" name="udf5" id="udf5" value={udf5} />
-                            <input type="submit" value="Pay" className="font_size_24 leading-6 py-3 bg-purple-600 rounded-lg text-white my-3 w-full"
+                            <input type="submit" value="Pay" 
+                            className="font_size_24 leading-6 py-3 bg-purple-600 rounded-lg text-white my-3 w-full cursor-pointer"
                                 onClick={paybuttonClick}
                             />
 

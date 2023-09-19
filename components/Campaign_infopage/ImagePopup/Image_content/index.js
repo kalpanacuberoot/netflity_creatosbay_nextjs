@@ -86,9 +86,9 @@ const Image_content = ({ onPopupData }) => {
                 setFile(data?.url)
             } else {
                 // alert('Image upload failed.');
-                toast.error('Image upload failed', {
-                    position: 'top-center', // Set the toast posi0tion
-                    autoClose: 3000, // Close the toast after 3 seconds
+                toast.success('Image Uploaded Successfully', {  
+                    position: 'top-center',
+                    autoClose: 5000,
                 });
             }
         } catch (error) {

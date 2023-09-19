@@ -13,14 +13,14 @@ const Payment_failurepage = () => {
   return (
     <>
       <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
-        {/* <div
+        <div
           className="auto-cols-max w-96 px-3 py-5 border"
           style={{ backgroundColor: Colors.white_clr }}
         >
 
           <Left_Dashboard />
 
-        </div> */}
+        </div>
         <div
           className="w-full flex justify-center align-middle items-center flex-col border"
           style={{ backgroundColor: Colors.white_clr }}
@@ -40,7 +40,7 @@ const Payment_failurepage = () => {
             </div> */}
             
 
-            <Link href={"/"}>
+            <Link href={"/home"}>
               <button className="mt-5 px-12 py-2 rounded-md w-full bg-yellow-800 text-white"
                 // style={{ backgroundColor: Colors.red_clr, color: Colors.white_clr }}
                 >

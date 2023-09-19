@@ -216,12 +216,12 @@ const Campaign_infopage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        {/* <div
+        <div
           className="auto-cols-max  px-5 py-5 w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div> */}
+        </div>
 
 
         <div className="m-2 w-full auto-cols-max ">

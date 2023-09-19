@@ -208,7 +208,7 @@ const Edit_profile_content = () => {
                         ))
                             
                         }
-                        {/* <div>
+                        <div>
                             <button
                                 onClick={() => setMultivalues(!multivalues)}
                                 id="dropdownBgHoverButton"
@@ -279,7 +279,7 @@ const Edit_profile_content = () => {
                                     </ul>
                                 </div>
                             }
-                        </div> */}
+                        </div>
 
                         {/* <div className="relative">
                             <select

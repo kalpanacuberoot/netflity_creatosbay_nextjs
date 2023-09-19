@@ -112,6 +112,7 @@ const Loginpage = () => {
             Cookies.set('brand_detail', JSON.stringify(responseData?.data?.data[0]));
             setBrandData(responseData?.data?.data[0]);
             router.push('/home');
+            // router.push('/brand_home');
           }
           else {
             router.push('/brand-selection'); // Redirect to the brand_user page
@@ -166,7 +167,7 @@ const Loginpage = () => {
                 <input
                   type="email"
                   id="email"
-                  className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" focus:border-gray-500 focus:ring-gray-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Email"
                   required
                   value={email}
@@ -178,7 +179,7 @@ const Loginpage = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
-                    className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className=" focus:border-gray-500 focus:ring-gray-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     // placeholder="Create Password"
                     placeholder="Password"
                     required

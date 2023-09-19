@@ -25,9 +25,9 @@ const Creator_table = ({ creatorData }) => {
 
     const [creator_name, setCreator_name] = useState(null);
     const [showPDF, setShowPDF] = useState(false);
-    console.log("creatorData table", creatorData?.creator_id);
+    console.log("creatorData table", creatorData);
     const pdfRef = useRef(null);
-    
+        
 
     const handleSubmit = async () => {
 
@@ -140,15 +140,15 @@ const Creator_table = ({ creatorData }) => {
                     <h4> {creator_name?.user?.name}</h4>
 
                 </th>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                     500
-                </td>
+                </td> */}
                 <td className="px-6 py-4">
                     {creatorData?.image_count}
                 </td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                     500
-                </td>
+                </td> */}
                 <td className="px-6 py-4">
                     {creatorData?.video_count}
                 </td>

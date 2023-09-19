@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 import { fetchApiData } from "@/fetchApiData"
 import { useRouter } from "next/router"
 import { url } from "@/generalfunctions"
+import Link from "next/link"
 
 const Communication_page = () => {
 
@@ -180,11 +181,11 @@ const Communication_page = () => {
             <div className="flex container_invoice w-full "
                 style={{ background: Colors.logo_background_clr }}
             >
-                {/* <div className="auto-cols-max  px-3 py-5 border w-1/7"
+                <div className="auto-cols-max  px-3 py-5 border w-1/7"
                     style={{ background: Colors.white_clr }}
                 >
                     <CollapseLeftDashboard />
-                </div> */}
+                </div>
 
                 <div className="m-2  auto-cols-max text-start p-2  w-full"
 
@@ -204,7 +205,7 @@ const Communication_page = () => {
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full">
 
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-1/4 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-1/3 h-screen overflow-y-auto">
                             <Searchcomm />
                             {/* {filteredActiveCreators?.length > 0 ?
                                 filteredActiveCreators?.map((active, index) => ( */}
@@ -268,11 +269,47 @@ const Communication_page = () => {
                                 <div className="">
 
                                     <div className="py-3">
-                                        {uniqueData?.length > 0 && uniqueData.map((inactive, index) => (
-                                            <>
-                                                <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
-                                            </>
-                                        ))}
+                                        {uniqueData?.length > 0 ?
+                                            <div>
+                                                {uniqueData.map((inactive, index) => (
+                                                    <>
+                                                        <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
+
+                                                    </>
+                                                ))}
+                                                <Link href={'/marketplace'}>
+                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                        <Image
+                                                            src={Images.add_button_black_clr}
+                                                            width={20}
+                                                            height={20}
+                                                            alt=""
+                                                            className="me-3 cursor-pointer"
+                                                        />
+                                                        <button> Create Creators</button>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                            :
+
+                                            <div>
+                                                No Creators yet
+                                                <Link href={'/marketplace'}>
+                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                        <Image
+                                                            src={Images.add_button_black_clr}
+                                                            width={20}
+                                                            height={20}
+                                                            alt=""
+                                                            className="me-3 cursor-pointer"
+                                                        />
+                                                        <button> Create Creators</button>
+                                                    </div>
+                                                </Link>
+                                            </div>
+
+                                        }
+
 
                                         {/* <Avatar_green width={44} height={44} />
                                         <Avatar_red />
@@ -369,7 +406,7 @@ const Communication_page = () => {
 
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-1/4 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-1/3 h-screen overflow-y-auto">
 
                             <div className="font_size_21  p-4">
                                 Campaign info
