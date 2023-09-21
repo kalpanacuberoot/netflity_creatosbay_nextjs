@@ -8,8 +8,8 @@ const Creator_invoice_pdf_page = () => {
 
 
             <div className=' flex items-center flex-col justify-center h-full  bg-zinc-100'>
-            {/* <div className={hideContent ? 'hide-content ' : 'absolute'}> */}
-                <div className="invoice-container max-w-5xl mx-auto rounded  p-10">
+                {/* <div className={hideContent ? 'hide-content ' : 'absolute'}> */}
+                <div className="invoice-container max-w-5xl mx-auto rounded w-full p-10">
                     <div className="invoice-header flex items-center justify-between">
                         <div className="flex items-center  divide-x-[3px] ">
                             <Image
@@ -41,7 +41,7 @@ const Creator_invoice_pdf_page = () => {
                         </div>
                         <div className="invoice-client">
                             <h5 className="font-bold">Invoice To:</h5>
-                            <h5> Name: John Doe</h5>
+                            <h5>    Brand Name: John Doe</h5>
                             <h5> Address: 123 Main St, City, State</h5>
                             <h5> PinCode: 121001</h5>
                             <h5 className="mb-2"> Mobile No.: 1234567890</h5>
@@ -56,15 +56,15 @@ const Creator_invoice_pdf_page = () => {
                                     <th scope="col" className="px-6 py-5">
                                         Creator Name
                                     </th>
-                                    <th scope="col" className="px-6 py-5">
+                                    {/* <th scope="col" className="px-6 py-5">
                                         unit price image
-                                    </th>
+                                    </th> */}
                                     <th scope="col" className="px-6 py-5">
                                         Images
                                     </th>
-                                    <th scope="col" className="px-6 py-5">
+                                    {/* <th scope="col" className="px-6 py-5">
                                         unit price video
-                                    </th>
+                                    </th> */}
                                     <th scope="col" className="px-6 py-5">
                                         Videos
                                     </th>
@@ -82,15 +82,15 @@ const Creator_invoice_pdf_page = () => {
                                     <td className="px-6 py-4">
                                         Creator 2
                                     </td>
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         500
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         1
                                     </td>
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         500
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         1
                                     </td>
@@ -104,15 +104,15 @@ const Creator_invoice_pdf_page = () => {
                                     <td className="px-6 py-4">
                                         Creator 2
                                     </td>
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         500
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         2
                                     </td>
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         500
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         2
                                     </td>
@@ -127,28 +127,36 @@ const Creator_invoice_pdf_page = () => {
                         </table>
                     </div>
 
+                    <div className="text-left my-3">
+                       Being 50% of the final deal value amounting  to ₹ 3000.00    
+                    </div>
+
                     <div className="invoice-total mt-5">
 
                         <table className="ms-auto">
                             <tr>
                                 <th>Sub Total :</th>
-                                <td>3000.00</td>
-                            </tr>
-                            <tr>
-                                <th>First Amount :</th>
                                 <td>1500.00</td>
                             </tr>
+                            {/* <tr>
+                                <th>50% Amount :</th>   
+                                <td>1500.00</td>
+                            </tr> */}
                             <tr>
                                 <th>GST (18%) :</th>
                                 <td>270.00</td>
                             </tr>
                             <tr className="font-bold mb-1" style={{ color: Colors.pink_clr }}>
                                 <th>Total Amount :</th>
+                                {/* <td>1500.00 + 270.00</td> */}
                                 <td>1770.00</td>
                             </tr>
 
                         </table>
 
+                    </div>
+                    <div className="text-left my-3">
+                         50% of the total amount (other half) will be given after completion of the campaign.
                     </div>
                     <div className="text-center text-gray-300">Note: This is computer generated, no signature is required.</div>
                 </div>
