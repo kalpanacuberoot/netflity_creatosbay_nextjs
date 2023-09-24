@@ -4,7 +4,7 @@ import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import Social_media_icons from "@/components/four_social_media";
 import ModalHeader from "@/components/Homepage/ModalHeader";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
@@ -22,11 +22,12 @@ const Image_content = ({ onPopupData }) => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
-
+    const refImage1 = useRef(null);         
 
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
+        console.log("fileslected and product", file, selectedFile);
         if (selectedFile) {
             // Create a FileReader instance
             const reader = new FileReader();
@@ -168,6 +169,7 @@ const Image_content = ({ onPopupData }) => {
                                             type="file"
                                             accept="image/*"
                                             className="hidden absolute w-full"
+                                            ref={refImage1}
                                             onChange={handleFileChange} // Triggered when a file is selected
                                         />
                                         {!file && (
@@ -176,14 +178,14 @@ const Image_content = ({ onPopupData }) => {
                                                 width={15}
                                                 height={15}
                                                 alt=""
-                                                className=" cursor-default m-5 mb-0 mx-auto"
+                                                className=" cursor-default m-5  mx-auto"
                                             />
                                         )}
                                     </div>
                                     {previewImage && (
                                         <Image
                                             src={previewImage}
-                                            alt="Selected"
+                                            alt="Selected product preview" 
                                             style={{ maxWidth: '100%', maxHeight: '300px' }}
                                             width={50}
                                             height={50}
