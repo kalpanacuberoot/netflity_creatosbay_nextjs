@@ -113,7 +113,7 @@ const Creator_Amountpage = () => {
         setIsModalOpenlogout(true)
     }
 
-    
+
 
     const calculateAndSetTotalCreatorAmount = (filteredCreators) => {
         if (filteredCreators && filteredCreators.length > 0) {
@@ -165,21 +165,17 @@ const Creator_Amountpage = () => {
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
-                {/* <div
-                    className="auto-cols-max  px-5 py-5 border w-1/5"
-                    style={{ backgroundColor: Colors.white_clr }}
-                >
-                    <Left_Dashboard />
-                </div> */}
-                {/* top section */}
+
                 <div className="m-2 w-full auto-cols-max ">
 
-                    {/* invoices data */}
                     <div style={{ backgroundColor: Colors.white_clr }}
-                        className="rounded-md container-fluid h-screen p-5 my-2 flex flex-col justify-between min-h-screen overflow-y-auto"
+                        className="rounded-md container-fluid h-screen p-5 my-2 mx-2 flex flex-col justify-between min-h-screen overflow-y-auto "
                     >
-                        <div className="font_size_31 p-10">
-                            {campaigndata?.name}
+                        <div className="font_size_31 p-10  rounded-lg">
+                            <div className="font_size_31 font-bold py-5 px-5 text-white rounded-md" style={{ background: Colors.invoice_gradient_clr }}>
+                                {campaigndata?.name}
+                            </div>
+                            {/* <hr className="my-4 border-3 border"/> */}
                             <div className="py-5">
 
                                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg border">
@@ -189,20 +185,16 @@ const Creator_Amountpage = () => {
                                                 <th scope="col" className="px-6 py-5">
                                                     Creator Name
                                                 </th>
-                                                {/* <th scope="col" className="px-6 py-5">
-                                                    unit price image
-                                                </th> */}
+
                                                 <th scope="col" className="px-6 py-5">
                                                     Images
                                                 </th>
-                                                {/* <th scope="col" className="px-6 py-5">
-                                                    unit price video
-                                                </th> */}
+
                                                 <th scope="col" className="px-6 py-5">
                                                     Videos
                                                 </th>
                                                 <th scope="col" className="px-6 py-5">
-                                                    Payout
+                                                    Amount
                                                 </th>
                                                 <th scope="col" className="px-6 py-5">
                                                     Actions
@@ -214,12 +206,6 @@ const Creator_Amountpage = () => {
 
 
                                         {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
-
-                                            // const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
-
-                                            // setTotalAmount((prevTotal) => prevTotal + creatorAmount); // Update total amount
-
-                                            // console.log('creatorAmount', creatorAmount);
 
                                             return (
                                                 <>
@@ -240,15 +226,15 @@ const Creator_Amountpage = () => {
 
 
                             </div>
-                            <div className="invoice-total text-base mt-5">
+                            <div className="invoice-total text-lg mt-5">
 
-                                <table className="ms-auto">
+                                <table className="ms-auto ">
                                     <tr>
                                         <th>Sub Total :</th>
                                         <td>{totalAmount}.00</td>
                                     </tr>
                                     <tr>
-                                        <th>First Amount :</th>
+                                        <th>50% Amount :</th>
                                         <td>{firstAmount}.00</td>
                                     </tr>
                                     <tr>

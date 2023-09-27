@@ -8,7 +8,6 @@ const Creator_invoice_pdf_page = () => {
 
 
             <div className=' flex items-center flex-col justify-center h-full  bg-zinc-100'>
-                {/* <div className={hideContent ? 'hide-content ' : 'absolute'}> */}
                 <div className="invoice-container max-w-5xl mx-auto rounded w-full p-10">
                     <div className="invoice-header flex items-center justify-between">
                         <div className="flex items-center  divide-x-[3px] ">
@@ -20,13 +19,11 @@ const Creator_invoice_pdf_page = () => {
                                 className="me-3"
                             />
 
-                            {/* <div className=" border-r-4 ms-5"> </div> */}
-
                             <h1 className="font-bold ps-3">CreatorsBay</h1>
 
                         </div>
                         <h1>TAX INVOICE </h1>
-                        {/* Your logo or header here */}
+                       
                     </div>
                     <div className="invoice-details">
                         <div className="invoice-info">
@@ -56,15 +53,11 @@ const Creator_invoice_pdf_page = () => {
                                     <th scope="col" className="px-6 py-5">
                                         Creator Name
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-5">
-                                        unit price image
-                                    </th> */}
+                                   
                                     <th scope="col" className="px-6 py-5">
                                         Images
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-5">
-                                        unit price video
-                                    </th> */}
+                                   
                                     <th scope="col" className="px-6 py-5">
                                         Videos
                                     </th>
@@ -82,15 +75,11 @@ const Creator_invoice_pdf_page = () => {
                                     <td className="px-6 py-4">
                                         Creator 2
                                     </td>
-                                    {/* <td className="px-6 py-4">
-                                        500
-                                    </td> */}
+                                   
                                     <td className="px-6 py-4">
                                         1
                                     </td>
-                                    {/* <td className="px-6 py-4">
-                                        500
-                                    </td> */}
+                                    
                                     <td className="px-6 py-4">
                                         1
                                     </td>
@@ -104,15 +93,11 @@ const Creator_invoice_pdf_page = () => {
                                     <td className="px-6 py-4">
                                         Creator 2
                                     </td>
-                                    {/* <td className="px-6 py-4">
-                                        500
-                                    </td> */}
+                                    
                                     <td className="px-6 py-4">
                                         2
                                     </td>
-                                    {/* <td className="px-6 py-4">
-                                        500
-                                    </td> */}
+                                    
                                     <td className="px-6 py-4">
                                         2
                                     </td>

@@ -318,6 +318,30 @@ button {
 
 }
 
+.state_select {
+  width: 100%;
+  position: relative;
+}
+
+
+.state_select select {
+  width: 100%;
+}
+
+.state_select::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 1rem;
+  height: 1.2rem;
+  width: 1.2rem;
+  top: 35%;
+  /* background-image: url("./images/dropdown_icon.png") */
+  background-image: url("../images/dropdown_grey_clr.png");
+  /* border:5px solid green; */
+  background-size: cover;
+}
+
 .dropdown_select {
   width: 100%;
   position: relative;

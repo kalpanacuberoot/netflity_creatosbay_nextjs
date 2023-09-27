@@ -134,10 +134,10 @@ const Creators_form_content = ({ totalAmount }) => {
 
     function paybuttonClick(event) {
         const payment_form = document.getElementById('payment_form');
-      
+
         // Prevent the default form submission behavior
         event.preventDefault();
-      
+
         // Validate fields
         const firstname = document.getElementById("first_name").value;
         const lastname = document.getElementById("last_name").value;
@@ -149,58 +149,58 @@ const Creators_form_content = ({ totalAmount }) => {
         const gstin = document.getElementById("gstin").value;
         const address1 = document.getElementById("address1").value;
         const address2 = document.getElementById("address2").value;
-      
+
         if (
-          firstname === "" ||
-          lastname === "" ||
-          email === "" ||
-          state === "" ||
-          city === "" ||
-          phone === "" ||
-          pincode === "" ||
-          gstin === "" ||
-          address1 === "" ||
-          address2 === ""
+            firstname === "" ||
+            lastname === "" ||
+            email === "" ||
+            state === "" ||
+            city === "" ||
+            phone === "" ||
+            pincode === "" ||
+            gstin === "" ||
+            address1 === "" ||
+            address2 === ""
         ) {
-          // Display an error message or take any other appropriate action
-          toast.error("Please fill out all the required fields.", {
-            position: 'top-center',
-            autoClose: 5000,
-          });
-          return false; // Prevent form submission
+            // Display an error message or take any other appropriate action
+            toast.error("Please fill out all the required fields.", {
+                position: 'top-center',
+                autoClose: 5000,
+            });
+            return false; // Prevent form submission
         }
-      
+
         // Generate the hash and set it in the form
         hash = sha512([
-          key ?? '',
-          txnid ?? '',
-          amount ?? '',
-          productinfo ?? '',
-          firstname ?? '',
-          email ?? '',
-          udf1 ?? '',
-          udf2 ?? '',
-          udf3 ?? '',
-          udf4 ?? '',
-          udf5 ?? '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          salt ?? ''
+            key ?? '',
+            txnid ?? '',
+            amount ?? '',
+            productinfo ?? '',
+            firstname ?? '',
+            email ?? '',
+            udf1 ?? '',
+            udf2 ?? '',
+            udf3 ?? '',
+            udf4 ?? '',
+            udf5 ?? '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            salt ?? ''
         ].join('|')).toString();
         document.getElementById("hash").value = hash;
         console.log("hash value:", hash, key);
-      
+
         // Now, submit the form
         payment_form.submit();
         const billingform = [
-            firstname,lastname,email,state,city,phone,pincode,gstin,address1,address2,
-            key,txnid,amount,productinfo,firstname,email,udf1,udf2,udf3,udf4,udf5,curl,surl,furl,hash
+            firstname, lastname, email, state, city, phone, pincode, gstin, address1, address2,
+            key, txnid, amount, productinfo, firstname, email, udf1, udf2, udf3, udf4, udf5, curl, surl, furl, hash
         ]
-        console.log('billingformbillingform',billingform);
-      }
+        console.log('billingformbillingform', billingform);
+    }
 
     console.log("selected state", statesData);
 
@@ -241,23 +241,25 @@ const Creators_form_content = ({ totalAmount }) => {
                             className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 my-2 me-2 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
-                        <select id="state_name" name="state"
-                            onChange={(e) => setState(e.target.value)}
-                            value={state}
-                            className="select focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        >
-                            <option value="" disabled>Select State</option>
-                            {/* <option value="26" selected>Uttar Pradesh</option> */}
-                            {statesData && statesData.map((item, index) => (
-                                <option
-                                    value={item?.name}
-                                    key={index}
-                                    defaultValue
+                        <div className="state_select">
+                            <select id="state_name" name="state "
+                                onChange={(e) => setState(e.target.value)}
+                                value={state}
+                                className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-3 bg-gray-100 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required
+                            >
+                                <option value="" disabled>Select State</option>
+                                {/* <option value="26" selected>Uttar Pradesh</option> */}
+                                {statesData && statesData.map((item, index) => (
+                                    <option
+                                        value={item?.name}
+                                        key={index}
+                                        defaultValue
 
-                                >{item?.name}</option>
-                            ))}
-                        </select>
+                                    >{item?.name}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="flex flex-row">
                             <input id="city_name" type="text" name="city"
                                 placeholder="City"
