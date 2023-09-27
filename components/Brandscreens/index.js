@@ -245,7 +245,8 @@ const Brandscreens = () => {
     useEffect(() => {
         getCompanyCategories();
         // handleSubmit();
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) 
 
     const handleSelect = (event, selectedItem) => {
         const value = selectedItem; // Pass the entire item as the value

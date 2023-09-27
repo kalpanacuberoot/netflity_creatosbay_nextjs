@@ -4,12 +4,11 @@ import All_routing from "./all_routing"
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
-const Campaign = () => {
+const Campaign_info = () => {
 
     const router = useRouter();
 
     if (typeof window !== 'undefined') {
-        const router = useRouter();
 
         const user_data = Cookies.get('user_data');
         const brand_detail = Cookies.get('brand_detail');
@@ -25,13 +24,7 @@ const Campaign = () => {
             } catch (err) {
                 console.log("errdvvd");
             }
-
-
         }
-        // else {
-        //     router.push('/campaign_info')
-        // }
-        // Use the router here
     }
 
     return (
@@ -43,4 +36,4 @@ const Campaign = () => {
     )
 }
 
-export default Campaign
+export default Campaign_info

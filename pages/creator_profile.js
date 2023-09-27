@@ -9,7 +9,6 @@ const Creator_profile = () => {
     const router = useRouter();
 
     if (typeof window !== 'undefined') {
-        const router = useRouter();
 
         const user_data = Cookies.get('user_data');
         const brand_detail = Cookies.get('brand_detail');

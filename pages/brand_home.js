@@ -78,7 +78,6 @@ const Brand_home = ({children}) => {
     router.reload();
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
 
     const brand_details = Cookies.get('brand_detail');
@@ -114,7 +113,7 @@ const Brand_home = ({children}) => {
 
 
 
-  }, []);
+  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const toggleDropdown = () => {
     setAlluser_accounts(!alluser_accounts);

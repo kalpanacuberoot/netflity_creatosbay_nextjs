@@ -148,6 +148,7 @@ const Homepage = () => {
     // Fetch data based on currentPage and perPage values
 
     allCampaignData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("campaign_data", campaign_data);

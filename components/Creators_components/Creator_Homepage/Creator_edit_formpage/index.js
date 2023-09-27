@@ -837,7 +837,7 @@ const Creator_edit_formpage = () => {
 
                                     <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
                                 </div>
-                                ''
+                                &apos;&apos;
                             </div>
 
 
@@ -860,7 +860,7 @@ const Creator_edit_formpage = () => {
 
                                     <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
                                 </div>
-                                '
+                                &apos;
                             </div>
                             <div className="flex items-center">
                                 <button

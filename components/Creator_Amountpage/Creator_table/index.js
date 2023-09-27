@@ -7,7 +7,7 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import html2pdf from 'html2pdf.js';
+
 import Creator_invoice_pdf_page from "@/components/Invoicepage/Creator_invoice_pdf";
 import { Document, Page } from 'react-pdf';
 
@@ -99,6 +99,7 @@ const Creator_table = ({ creatorData }) => {
 
     useEffect(() => {
         handleSubmit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

@@ -76,8 +76,8 @@ const Creator_Amountpage = () => {
                 // });
                 const filteredCreators = result?.data?.creators?.filter((creator) => {
                     return creator.creator_id
-                }); 
-                console.log("filteredCreators",filteredCreators);
+                });
+                console.log("filteredCreators", filteredCreators);
                 calculateAndSetTotalCreatorAmount(filteredCreators);
 
             } else {
@@ -105,7 +105,7 @@ const Creator_Amountpage = () => {
         }
 
         getCompanyCraetors();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSubmit = () => {
@@ -113,37 +113,7 @@ const Creator_Amountpage = () => {
         setIsModalOpenlogout(true)
     }
 
-    // console.log("creatorTotalAmount",creatorTotalAmount);
-
-    // const selectedCreatorIds = JSON.parse(Cookies.get('selected_creator_id')); // The array of creator_id values to match
-
-    // const filteredCreators = campaigndata?.creators?.filter((creator) => {
-    //     return selectedCreatorIds.includes(creator.creator_id);
-    // });
-
-    // console.log("filteredCreators", filteredCreators);
-
-
-    // if (filteredCreators && filteredCreators.length > 0) {
-
-    //     let totalCreatorAmount = 0;
-
-
-    //     filteredCreators.forEach((creator_item) => {
-    //         const creatorAmount = (creator_item?.image_count || 0) * 500 + (creator_item?.video_count || 0) * 500;
-    //         totalCreatorAmount += creatorAmount;
-    //     });
-
-    //     Cookies.set('all_creator_amount', totalCreatorAmount);
-
-
-    //     console.log('Total Amount for All Creators:', totalCreatorAmount);
-    // } else {
-    //     console.log('No creators found or filteredCreators is undefined.');
-    // }
-
-
-    // console.log('Total Amount for All Creators:adasd', totalAmount);
+    
 
     const calculateAndSetTotalCreatorAmount = (filteredCreators) => {
         if (filteredCreators && filteredCreators.length > 0) {

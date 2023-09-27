@@ -236,7 +236,7 @@ const Creators_profilepage = () => {
                 <div >
                   <h4 className="text-gray-400">Languages</h4>
                   {creator_details?.languages.map((item) =>
-                    <h3>{item?.name}</h3>
+                    <h3 key={item?.id}>{item?.name}</h3>
                   )}
                 </div>
 
@@ -340,7 +340,7 @@ const Creators_profilepage = () => {
               <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10 portfolio">
 
                 {links?.length > 0 ? links?.map((link, index) => (
-                  <div className="row mt-5 " id={`slot${index + 1}`} key={index}>
+                  <div className="row mt-5 " id={`slot${index + 1}`} key={link?.id}>
                     <div className="icontainer ">
                       <iframe
                         src={filterURL(link)}

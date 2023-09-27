@@ -143,7 +143,7 @@ const Communication_page = () => {
     useEffect(() => {
 
         Creator_campaignData();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const uniqueData = [];
@@ -341,6 +341,7 @@ const Communication_page = () => {
                                             width={150}
                                             height={150}
                                             className="rounded"
+                                            alt=""
                                         />
                                         <span className="text-center py-5">
                                             Make calls, share your screen and get a faster experience when you download the Windows app.

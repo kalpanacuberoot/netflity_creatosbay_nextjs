@@ -56,11 +56,12 @@ const Home_Card1 = ({ items }) => {
 
     return (
         <>
-            <div className="my-5 mx-2 " key={items?.id}>
+            <div className="my-5 mx-2 " key={index}>
                 <div className="relative flex">
-                  
-                    {items?.references?.length>0 && items?.references.map((item) =>
+
+                    {items?.references?.length > 0 && items?.references.map((item) =>
                         <Image
+                            key={item?.id}
                             src={item ? item.link : Images.card_img}
                             width={350}
                             height={100}
@@ -68,8 +69,9 @@ const Home_Card1 = ({ items }) => {
                             className=" mx-auto border rounded-t-lg"
                         />
                     )}
-                    {items?.products?.length>0 && items?.products.map((item) =>
+                    {items?.products?.length > 0 && items?.products.map((item) =>
                         <Image
+                            key={item?.id}
                             src={item ? item.link : Images.card_img}
                             width={500}
                             height={100}
@@ -77,13 +79,13 @@ const Home_Card1 = ({ items }) => {
                             className=" mx-auto"
                         />
                     )}
-                   
+
 
 
                 </div>
                 <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                     <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                        <div className="font_size_17 flex items-center">Creators    
+                        <div className="font_size_17 flex items-center">Creators
                             <span
                                 // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
                                 className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">

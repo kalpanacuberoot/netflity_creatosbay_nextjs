@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Creator_invoice_pdf_page from '../Creator_invoice_pdf';
-import html2pdf from 'html2pdf.js';
 
 const PDFGenerator = () => {
 
   const invoiceRef = useRef(null);
   const [showContent, setShowContent] = useState(true);
 
+  
   const handleDownload = () => {
     // Create a new jsPDF instance
     const pdf = new jsPDF();

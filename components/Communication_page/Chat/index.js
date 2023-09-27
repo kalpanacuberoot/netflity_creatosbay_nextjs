@@ -212,8 +212,8 @@ const Chat = ({ creatorId, chatcreator_data }) => {
             getAllMessages();
         }
 
-
-    }, [creatorId]);   // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [creatorId]);
     console.log("messages----", allMessages, msgtext);
 
 
@@ -271,7 +271,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
 
                         return (
                             <>
-                                <div className="px-10 py-5 overflow-y-auto"  style={{ backgroundColor: Colors.light_bg_clr }}>
+                                <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }}>
                                     <div className={`chat-message shadow-lg ${messageClass}`}>
                                         {message?.data}
                                     </div>
@@ -282,16 +282,16 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                     })
                         :
                         <div className="mx-10 px-5 flex items-start bg-yellow-500 rounded p-3">
-                             <Image
+                            <Image
                                 src={Images.lock_black_clr}
                                 width={15}
                                 height={15}
                                 alt=""
                                 className="me-5"
-                                />
+                            />
                             <div className='chat-message text-sm '>
-                               
-                               Messages are end-to-end encrypted. No one outside of this chat, not even Creatorsbay, can read or listen to them.
+
+                                Messages are end-to-end encrypted. No one outside of this chat, not even Creatorsbay, can read or listen to them.
                             </div>
 
                         </div>

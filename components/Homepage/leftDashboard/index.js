@@ -50,10 +50,7 @@ const Left_Dashboard = () => {
         router.reload();
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-
-        // router.push('/home');
 
         const brand_details = Cookies.get('brand_detail');
         if (brand_details) {
@@ -86,7 +83,7 @@ const Left_Dashboard = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
 
-      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, []);
 

@@ -10,12 +10,18 @@ const Creator_single_profilepage = () => {
 
     const router = useRouter();
 
-    const creator_details = JSON.parse(Cookies.get('creator_profile_id'))[0]
+    // Get creator_details from the cookie
+    const creatorProfileCookie = Cookies.get('creator_profile_id');
+    const creator_details = creatorProfileCookie ? JSON.parse(creatorProfileCookie)[0] : null;
     console.log("creator_details", creator_details);
 
-    const links = creator_details?.portfolios.map((item) => item?.link);
+    // const links = creator_details?.portfolios.map((item) => item?.link);
+    const links = creator_details?.portfolios.map((item) => filterURL(item?.link));
 
     function filterURL(link) {
+
+        if (!link) return ''; // Handle empty or undefined links
+
         var url_parts = new URL(link);
         if (url_parts.host === "www.youtube.com") {
             return (
@@ -123,7 +129,7 @@ const Creator_single_profilepage = () => {
                                 <div >
                                     <h4 className="text-gray-400">Languages</h4>
                                     {creator_details?.languages ? creator_details?.languages.map((item) =>
-                                        <h3>{item?.name}</h3>
+                                        <h3 key={item?.id}>{item?.name}</h3>
                                     ) :
                                         ""
                                     }
@@ -241,7 +247,7 @@ const Creator_single_profilepage = () => {
                             <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10 portfolio">
 
                                 {links?.length > 0 ? links?.map((link, index) => (
-                                    <div className="row mt-5 " id={`slot${index + 1}`} key={index}>
+                                    <div className="row mt-5 " id={`slot${index + 1}`} key={link?.id}>
                                         <div className="icontainer ">
                                             <iframe
                                                 src={filterURL(link)}

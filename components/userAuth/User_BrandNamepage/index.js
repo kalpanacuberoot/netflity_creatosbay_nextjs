@@ -27,7 +27,7 @@ const User_BrandNamepage = () => {
             console.log('categories cookieValue------------1', cookieValue);
             const checkBrand = JSON.parse(cookieValue)?.user?.type
 
-            if (typeof cookieValue === 'undefined'  || checkBrand !== 'brand') {
+            if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
                 console.log('User not authenticated, navigating to login page...');
                 router.push('/login'); // Replace '/login' with the actual login page URL
                 console.log('categories cookieValue----brand--------userId', cookieValue?.token);
@@ -103,6 +103,7 @@ const User_BrandNamepage = () => {
             // const current_account = JSON?.parse(active_account)
             setUser_active_account(current_account?.brand?.id);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     console.log("brand_user", brand_user);
