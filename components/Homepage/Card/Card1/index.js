@@ -70,7 +70,7 @@ const Home_Card1 = ({ items }) => {
                             />
                         )}
                     </div>
-                    <div className="max-h-64 border rounded-t-lg">
+                    <div className="max-h-64 border rounded-t-lg ">
                         {items?.products?.length > 0 && items?.products.map((item) =>
                             <Image
                                 key={item?.id}
