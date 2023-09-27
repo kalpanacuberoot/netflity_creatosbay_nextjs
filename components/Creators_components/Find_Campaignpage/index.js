@@ -51,6 +51,9 @@ const Find_Campaignpage = () => {
                     </div>
                     <div className="flex flex-row flex-wrap items-start  justify-evenly">
                         <Creator_Card />
+                        <Creator_Card />
+                        <Creator_Card />
+                        
                     </div>
 
                 </div>

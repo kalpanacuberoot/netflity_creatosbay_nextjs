@@ -12,11 +12,11 @@ const Creator_Invoicespage = () => {
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
 
-                <div className="m-2 w-full auto-cols-max ">
+                <div className="m-4 w-full auto-cols-max ">
                     <div
                         style={{ background: Colors.invoice_gradient_clr }}
                         // style={style}
-                        className="auto-cols-max  p-3 rounded-md flex flex-row grid grid-cols-3"
+                        className="auto-cols-max  p-4 rounded-md flex flex-row grid grid-cols-3 mb-4"
                     >
 
                         <div className="text-white shadow-md rounded-md mx-3 p-4">
@@ -61,7 +61,7 @@ const Creator_Invoicespage = () => {
 
                     </div>
 
-                    <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 my-2">
+                    <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-10 my-2">
                         <div className="font_size_31 ">
                             Recent invoices
                         </div>

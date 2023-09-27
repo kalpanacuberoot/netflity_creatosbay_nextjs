@@ -18,7 +18,7 @@ const Creator_invoice_table = () => {
                             </th>
 
                             <th scope="col" className="px-6 py-5">
-                                Months
+                                Month
                             </th>
                             <th scope="col" className="px-6 py-5">
                                 Year
@@ -48,10 +48,6 @@ const Creator_invoice_table = () => {
                             <td className="px-6 py-4">
                                 Jhon Smith
                             </td>
-                            {/* <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
-                            </th> */}
                             <td className="px-6 py-4">
                                 June
                             </td>
@@ -77,7 +73,7 @@ const Creator_invoice_table = () => {
                                 </div>
                             </td>
                             <Link href={'/creator_invoice_pdf'}>
-                                <td className="px-6 py-4 border">
+                                <td className="px-6 py-4">
                                     <Image
                                         src={Images.download_icon}
                                         width={40}
@@ -88,11 +84,7 @@ const Creator_invoice_table = () => {
                                     {/* <PDFGenerator /> */}
                                 </td>
                             </Link>
-                            {/* <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                    onClick={() => setIsModalOpenlogout(true)}
-                                >Edit</a>
-                            </td> */}
+                           
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td className="px-6 py-4">
@@ -101,10 +93,7 @@ const Creator_invoice_table = () => {
                             <td className="px-6 py-4">
                                 Jhon Smith
                             </td>
-                            {/* <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
-                            </th> */}
+                           
                             <td className="px-6 py-4">
                                 June
                             </td>
@@ -139,9 +128,7 @@ const Creator_invoice_table = () => {
                                     />
                                 </td>
                             </Link>
-                            {/* <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td> */}
+                          
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td className="px-6 py-4">
@@ -150,10 +137,7 @@ const Creator_invoice_table = () => {
                             <td className="px-6 py-4">
                                 Jhon Smith
                             </td>
-                            {/* <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
-                            </th> */}
+                           
                             <td className="px-6 py-4">
                                 June
                             </td>
@@ -188,9 +172,7 @@ const Creator_invoice_table = () => {
                                     />
                                 </td>
                             </Link>
-                            {/* <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td> */}
+                           
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td className="px-6 py-4">
@@ -199,10 +181,7 @@ const Creator_invoice_table = () => {
                             <td className="px-6 py-4">
                                 Jhon Smith
                             </td>
-                            {/* <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
-                            </th> */}
+                           
                             <td className="px-6 py-4">
                                 June
                             </td>

@@ -1,8 +1,13 @@
 import Colors from "@/styles/Colors"
 import Creator_avatar_red from "./Creator_avatar_red"
 import Creator_chats from "./Creator_chats"
+import Avatar_without_badge from "@/components/Communication_page/Avatar/Avatar_without_badge"
+import Brand_Avatar_withoutbadge from "./Brand_Avatar_withoutbadge"
+import { useRouter } from "next/router"
 
 const Creator_Chatspage = () => {
+
+    const router = useRouter();
     return (
         <>
 
@@ -71,18 +76,33 @@ const Creator_Chatspage = () => {
                                 <div className="">
 
                                     <div className="py-3">
-                                        <Creator_avatar_red/>
+                                        <Creator_avatar_red />
                                     </div>
 
                                 </div>
                             </div>
-                           
+
 
                         </div>
                         <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
+                            <div className="flex flex-row items-center p-4 justify-between ">
+                                <Brand_Avatar_withoutbadge />
+                                <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
 
+                                    <button
+                                        type="button"
+                                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+
+                                    >
+                                        {/* {item?.approved === 0 ? "Inactive" : "active"} */}
+                                        Inactive
+                                    </button>
+
+
+                                </div>
+                            </div>
                             <div className=" bg-zinc-100 h-full">
-                                <Creator_chats/>
+                                <Creator_chats />
                             </div>
                         </div>
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
@@ -109,7 +129,7 @@ const Creator_Chatspage = () => {
                                         centuries, but also the leap into electronic
                                         typesetting, remaining essentially unchanged. It
                                         was popularised in the 1960s with the release of
-                                        
+
 
                                     </p>
 
@@ -117,7 +137,7 @@ const Creator_Chatspage = () => {
 
 
                             </div>
-                            
+
                         </div>
                     </div>
 

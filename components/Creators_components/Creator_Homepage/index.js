@@ -2,6 +2,7 @@ import Images from "@/images"
 import Colors from "@/styles/Colors"
 import Image from "next/image"
 import Link from "next/link"
+import Creator_Card from "./Creator_Card"
 
 const Creator_Home = () => {
     return (
@@ -42,84 +43,86 @@ const Creator_Home = () => {
                         className="flex flex-row justify-evenly items-start p-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
                         style={{ backgroundColor: Colors.white_clr }}
                     >
+                        <Creator_Card />
+                        <Creator_Card />
+                        <Creator_Card />    
 
-
-                        <div class="relative p-10 w-full">
-                            <table class="w-full text-xs text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        {/* <div className="relative p-10 w-full">
+                            <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">
+                                <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 font-bold">
+                                        <th scope="col" className="px-6 py-3 font-bold">
                                             S.No.
                                         </th>
-                                        <th scope="col" class="px-6 py-3 font-bold">
+                                        <th scope="col" className="px-6 py-3 font-bold">
                                             Campaign name
                                         </th>
-                                        <th scope="col" class="px-6 py-3 font-bold">
+                                        <th scope="col" className="px-6 py-3 font-bold">
                                             Date
                                         </th>
-                                        <th scope="col" class="px-6 py-3 font-bold">
+                                        <th scope="col" className="px-6 py-3 font-bold">
                                             No. of Creators
                                         </th>
-                                        <th scope="col" class="px-6 py-3 font-bold">
+                                        <th scope="col" className="px-6 py-3 font-bold">
                                             Status
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             1
                                         </th>
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             test
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             12-08-23 - 15-08-23
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             4
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             Draft
                                         </td>
                                     </tr>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             2
                                         </th>
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             test
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             12-08-23 - 15-08-23
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             4
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             Draft
                                         </td>
                                     </tr>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             3
                                         </th>
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             test
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             12-08-23 - 15-08-23
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             4
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td className="px-6 py-4">
                                             Draft
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> */}
 
 
                     </div>

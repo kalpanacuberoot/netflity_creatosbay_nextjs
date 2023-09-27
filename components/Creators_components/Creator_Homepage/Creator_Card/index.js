@@ -1,12 +1,13 @@
 import Images from "@/images"
 import Colors from "@/styles/Colors"
 import Image from "next/image"
+import Link from "next/link"
 
 const Creator_Card = () => {
     return (
         <>
-            <div className="my-5 mx-2 ">
-                <div className="relative flex">
+            <div className="my-5 mx-2">
+                <div className="relative flex ">
 
                     <Image
                         src={Images.card_img}
@@ -41,16 +42,16 @@ const Creator_Card = () => {
                     </div>
                     <h2 className="font-bold ">Creator Card</h2>
                     <div className="font_size_12">
-                       test
+                        test
 
                     </div>
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
                         <h6>10-21-23</h6>
-                        {/* <Link href={'/communication'}> */}
-                        <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(items)}>
-                            <buttton> Check Details</buttton>
-                        </div>
-                        {/* </Link> */}
+                        <Link href={'/creator_chat'}>
+                            <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" >
+                                <buttton> Check Details</buttton>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

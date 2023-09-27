@@ -488,99 +488,6 @@ const Creator_edit_formpage = () => {
     };
 
 
-    // const onHandleSubmit = async (event) => {
-
-    //     event.preventDefault();
-    //     const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
-    //     console.log('categories cookieValue------------1', cookieValue?.token);
-
-    //     try {
-    //         const response = await fetch(`${url}/creators`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Authorization': `Bearer ${cookieValue?.token}`,
-    //                 // 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 "user_id": 4,
-    //                 "state_id": 28,
-    //                 "city": "Lucknow",
-    //                 "gender": "female",
-    //                 "age": 21,
-    //                 "height": 160,
-    //                 "weight": 55,
-    //                 "skin_id": 1,
-    //                 "body_id": 2,
-    //                 "hair_id": 2,
-    //                 "eye_id": 2,
-    //                 "pets": 1,
-    //                 "kids": 0,
-    //                 "bio": "Yo, what's up fam?, your 28-year-old dude living life unfiltered and uncensored right here on the 'gram. From adrenaline-pumping adventures to the latest tech trends, I'm your guide to all things cool and epic. Buckle up as we ride through the city that never sleeps and beyond!",
-    //                 "profile_pic": "https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com/uploads/file_64e9ca9f840239.66480528.jpg",
-    //                 "platforms": [
-    //                     1, 2
-    //                 ],
-    //                 "languages": [
-    //                     1
-    //                 ],
-    //                 "categories": [
-    //                     1, 2
-    //                 ]
-    //                 // "user_id": cookieValue?.user?.id,
-    //                 // "state_id": parseInt(selectedState, 10),
-    //                 // "city": city,
-    //                 // "gender": gender,
-    //                 // "age": parseInt(age, 10),
-    //                 // "height": parseInt(heightCm, 10),
-    //                 // "weight": parseInt(weight, 10),
-    //                 // "skin_id": parseInt(skinType, 10),
-    //                 // "body_id": parseInt(bodyType, 10),
-    //                 // "hair_id": parseInt(hairType, 10),
-    //                 // "eye_id": parseInt(eyeType, 10),
-    //                 // "pets": parseInt(pets, 10),
-    //                 // "kids": parseInt(kids, 10),
-    //                 // "bio": bio,
-    //                 // "profile_pic": file,
-    //                 // "platforms": selectedItemsIds,
-    //                 // "languages": selectedLanguageIds,
-    //                 // "categories": selectedDataArray.map((item) => item?.value)
-    //             }),
-    //         });
-
-    //         if (response.ok) {
-    //             // Request succeeded
-    //             const data = await response.json();
-    //             console.log("setAllApiResponse", data);
-    //             setAllApiResponse(data);
-    //             // Handle the successful response data
-    //         } else if (response.status === 422) {
-    //             // Handle validation errors
-    //             const errorData = await response.json();
-    //             // errorData may contain information about validation errors
-    //             console.error('Validation Errors:', errorData);
-    //             // Display error messages to the user or take appropriate action
-    //         } else {
-    //             // Handle other error cases
-    //             console.error('API Error:', response.status);
-    //             // Handle other error cases as needed
-    //         }
-
-    //         // // Check if the response status code is OK (200)
-    //         // if (response.status === 200) {
-    //         //     const data = await response.json();
-    //         //     console.log("setAllApiResponse",data);
-    //         //     setAllApiResponse(data);
-    //         // } else {
-    //         //     // Handle errors here
-    //         //     console.error('API request failed with status:', response.status);
-    //         // }
-    //     } catch (error) {
-    //         // Handle network or other errors
-    //         console.error('API request error:', error);
-    //     }
-    // }
-
     console.log("categoriesDataskinType", pets);
 
     console.log("selectedItemsIds", selectedItems, selectedItemsIds, platform);
@@ -690,13 +597,18 @@ const Creator_edit_formpage = () => {
     const onHandleSubmit = async (event) => {
 
         event.preventDefault();
+        // if (!file) {
+        //     // Display an error message or take appropriate action for incomplete fields
+        //     console.error('All fields are mandatory. Please fill out all required fields.');
+        //     return;
+        // }
 
         // Validate that all required fields are filled out
-        if (!file || !selectedState || !city || !gender || !age || !heightCm || !weight || !skinType || !bodyType || !hairType || !eyeType || !pets || !kids || !bio || selectedItemsIds.length === 0 || selectedLanguageIds.length === 0 || selectedDataArray.length === 0) {
-            // Display an error message or take appropriate action for incomplete fields
-            console.error('All fields are mandatory. Please fill out all required fields.');
-            return;
-        }
+        // if (!file || !selectedState || !city || !gender || !age || !heightCm || !weight || !skinType || !bodyType || !hairType || !eyeType || !pets || !kids || !bio || selectedItemsIds.length === 0 || selectedLanguageIds.length === 0 || selectedDataArray.length === 0) {
+        //     // Display an error message or take appropriate action for incomplete fields
+        //     console.error('All fields are mandatory. Please fill out all required fields.');
+        //     return;
+        // }
 
         try {
             const uploadedImageData = await handleSubmit();

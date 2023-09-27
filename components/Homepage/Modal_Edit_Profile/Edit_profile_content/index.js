@@ -24,8 +24,18 @@ const Edit_profile_content = () => {
     const [dropdownvalues, setDropdownvalues] = useState([]);
 
     const onEditProfile = async () => {
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
-        console.log('categories cookieValue------------1', cookieValue?.token);
+
+        try {
+            const cookieValue = JSON.parse(Cookies.get('user_data'));
+
+            if (typeof cookieValue === 'undefined') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue------------1', cookieValue?.token);
+            }
+        } catch (error) {
+            console.error('Error parsing user_data cookie:', error);
+        }
 
         const brand_detail = Cookies.get('brand_detail');
         const brandIds = Cookies.get('brand_id');
@@ -89,8 +99,17 @@ const Edit_profile_content = () => {
 
     const getCompanyCategories = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('user_data'))
-        console.log('categories cookieValue------------1', cookieValue?.token);
+        try {
+            const cookieValue = JSON.parse(Cookies.get('user_data'));
+
+            if (typeof cookieValue === 'undefined') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue------------1', cookieValue?.token);
+            }
+        } catch (error) {
+            console.error('Error parsing user_data cookie:', error);
+        }
 
         try {
             const response = await fetch(`${url}/categories`, {
@@ -206,7 +225,7 @@ const Edit_profile_content = () => {
                             />
 
                         ))
-                            
+
                         }
                         <div>
                             <button
