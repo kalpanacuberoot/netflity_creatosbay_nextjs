@@ -8,7 +8,6 @@ import Buttons from "../Button";
 import Calendar_component from "./Calendar";
 import Image_popup from "./ImagePopup";
 import Image_content from "./ImagePopup/Image_content";
-// import CalendarStripeCard from '../components/CalendarStripeCard';
 import Cookies from 'js-cookie';
 import { apiCall, url } from "@/generalfunctions";
 import { ToastContainer } from 'react-toastify';
@@ -36,18 +35,17 @@ const Campaign_infopage = () => {
   const [isModalOpenRef, setIsModalOpenRef] = useState(false);
   const [campaign_name, setCampaign_name] = useState('');
   const [campaign_desc, setCampaign_desc] = useState('');
-  const [popupData, setPopupData] = useState([] ? [] : null); // State to hold popup data
-  const [refpopupData, setRefpopupData] = useState([] ? [] : null); // State to hold popup data
+  const [popupData, setPopupData] = useState([] ? [] : null); 
+  const [refpopupData, setRefpopupData] = useState([] ? [] : null); 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [product_link, setProduct_link] = useState('');
   const [ref_link, setRef_link] = useState('');
 
-  // Function to update state with data from the popup
   const handleRefPopupData = (data) => {
     setPopupData(data);
   };
-  // Function to update state with data from the popup
+
   const handlePopupData = (data) => {
     setRefpopupData(data);
   };
@@ -55,7 +53,6 @@ const Campaign_infopage = () => {
 
 
   useEffect(() => {
-    // Retrieve and parse the query parameters from the URL
     const { start_date, end_date } = router.query;
 
     if (start_date && end_date) {
@@ -78,14 +75,11 @@ const Campaign_infopage = () => {
 
       if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
         console.log('User not authenticated, navigating to login page...');
-        router.push('/login'); // Replace '/login' with the actual login page URL
+        router.push('/login'); 
         console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
       }
       else {
-        // let cookieValue = JSON?.parse(Cookies?.get('user_data'));
-        // console.log('categories cookieValue------------1', cookieValue?.token);
-
 
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('campaigns cookieValue------------1', cookieValue?.token);
@@ -141,25 +135,17 @@ const Campaign_infopage = () => {
               autoClose: 5000,
             });
             router.push('/marketplace')
-            // router.push({
-            //   pathname: '/marketplace',
-            //   query: { apiData: JSON.stringify(data) },
-            // });
+            
           } else {
-            // console.error('Error:', postResponse?.statusText);
-            // alert('logibn api response else', postResponse?.statusText)
+          
             toast.error("PLease enter the correct campaign details", {
               position: 'top-center',
               autoClose: 5000,
             });
           }
-          
+
         } catch (error) {
-          // console.error('POST response register catrch error-------------', error);
-          // toast.error('please enter the valid token campaigns', {
-          //   position: 'top-center',
-          //   autoClose: 5000,
-          // });
+         
         }
       }
     } catch (error) {
@@ -170,7 +156,6 @@ const Campaign_infopage = () => {
   const refpopupData_link = refpopupData.map((item) => item?.link);
   const imagerefArray = refpopupData_link;
 
-  // Use the join method to convert the array to a string
   const imagerefString = imagerefArray.join('');
 
   console.log('imagerefString', imagerefString);
@@ -178,7 +163,6 @@ const Campaign_infopage = () => {
   const propopupData_link = popupData.map((item) => item?.link);
   const imageproArray = propopupData_link;
 
-  // Use the join method to convert the array to a string
   const imageproString = imageproArray.join('');
 
   console.log('imagerefString', imagerefString);
@@ -187,45 +171,40 @@ const Campaign_infopage = () => {
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it is 0-based
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
   }
 
-  // Example usage:
   const start_date = new Date(startDate);
   const end_date = new Date(endDate);
   const startformattedDate = formatDateToYYYYMMDD(start_date);
   const endformattedDate = formatDateToYYYYMMDD(end_date);
-  // console.log(formattedDate); 
+
 
   console.log("startingfate", startDate, endDate, startformattedDate, endformattedDate);
 
   const handleStartDateChange = (date) => {
 
     setStartDate(date);
-    // Calculate the minimum allowed end date (15 days from the start date)
+
     const minEndDate = new Date(date);
     minEndDate.setDate(minEndDate.getDate() + 14);
     if (endDate < minEndDate) {
-      // If the current end date is less than the minimum allowed end date, update the end date
+
       setEndDate(minEndDate);
     }
   };
 
-  // console.log("onPopupData",onPopupData);
-
-
   return (
     <>
       <Image_popup isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      // onSubmit={handlePopupData}   
+        onClose={() => setIsModalOpen(false)}  
       >
         <div className="relative w-screen max-w-2xl max-h-full  min-w-xl ">
 
-          <Image_content onPopupData={handlePopupData} onClose={() => setIsModalOpen(false)}/>
+          <Image_content onPopupData={handlePopupData} onClose={() => setIsModalOpen(false)} />
         </div>
       </Image_popup>
       <Ref_Imagepop
@@ -240,39 +219,25 @@ const Campaign_infopage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        {/* <div
-          className="auto-cols-max  px-5 py-5 w-1/5"
-          style={{ backgroundColor: Colors.white_clr }}
-        >
-          <Left_Dashboard />
-        </div> */}
-
 
         <div className="m-2 w-full auto-cols-max ">
           <div
             style={{ backgroundColor: Colors.white_clr }}
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
-            <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
-              {/* <form
-                onSubmit={handleSubmit}
-              > */}
+            <div className="p-5 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
+
               <div className="">
                 <h1
                   style={{ color: Colors.pending_clr }}
-                  className="font-bold campaign_info_title"
+                  className="font-bold campaign_info_title text-2xl"
                 >
                   Campaign Info
                 </h1>
-                {/* <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5> */}
-                {/* <p className="divider_line">fuyfudydyd</p> */}
-                {/* <p className="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
+               
                 <hr className="divider_line my-5" />
                 <div className="my-3">
-                  <h4 className="mb-2">Campaign Name</h4>
-                  {/* <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6> */}
+                  <h3 className="mb-2">Campaign Name</h3>
 
                   <input
                     type="text"
@@ -284,11 +249,7 @@ const Campaign_infopage = () => {
                   />
                 </div>
                 <div className="my-3">
-                  <h4 className="mb-2">Campaign Description</h4>
-                  {/* <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6> */}
-
+                  <h3 className="mb-2">Campaign Description</h3>
                   <textarea
                     id="message"
                     rows="4"
@@ -300,24 +261,13 @@ const Campaign_infopage = () => {
                 </div>
 
                 <div className="my-3">
-                  <h4 className="mb-2">Product</h4>
-                  {/* <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6> */}
+                  <h3 className="mb-2">Product</h3>
 
                   <div className="flex flex-row justify-between">
                     <div className="border h-48 rounded-md  w-full me-3 shadow-md"
                       onClick={() => setIsModalOpen(true)}
                     >
-                      {/* <input
-                      type="file"
-                      ref={inputFileRef}
-                      onChange={(e) => onFilechange(e)}
-                      hidden
-                      className=""
-                    /> */}
                       <button
-                        // onClick={() => onBtnClick()}
                         className="h-48  w-full "
                       >
                         <Image
@@ -332,7 +282,6 @@ const Campaign_infopage = () => {
                         </p>
                         {imagerefString &&
                           <>
-                            {/* <h3>{imagerefString}</h3> */}
                             <input
                               type="url"
                               value={imagerefString}
@@ -346,28 +295,6 @@ const Campaign_infopage = () => {
 
                     </div>
 
-                    {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md">
-                        <input
-                          type="file"
-                          ref={inputFileRef}
-                          
-                          hidden
-                        />
-                        <button
-                         
-                          className="h-48  w-full"
-                        >
-                          <Image
-                            src={Images.plus_icon}
-                            width={20}
-                            className="mx-auto "
-                            alt=""
-                          />
-                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                            Add Image
-                          </p>
-                        </button>
-                      </div> */}
                   </div>
                   <div className="flex items-center mt-5">
                     <div className="flex-grow border-t border-gray-300"></div>
@@ -375,7 +302,6 @@ const Campaign_infopage = () => {
                     <div className="flex-grow border-t border-gray-300"></div>
                   </div>
                   <div>
-                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
                     <input
                       type="url"
                       id="url"
@@ -387,26 +313,21 @@ const Campaign_infopage = () => {
                   </div>
                 </div>
 
-                {/* <h1>Received data from popup: {popupData?.file}</h1> */}
                 <div className="my-3">
                   <h3 className="mb-2">Timelines</h3>
                   <h6>Set Creating Date</h6>
-
-                  {/* <Calendar_component /> */}
-                  {/* dater pocker start */}
 
                   <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
                     <div className='relative w-full'>
                       <DatePicker
                         selected={startDate}
-                        // onChange={(date) => setStartDate(date)}
                         onChange={handleStartDateChange}
                         selectsStart
                         startDate={startDate}
                         endDate={endDate}
                         placeholderText="Start Date"
                         className="w-full text-center p-2 rounded "
-                        minDate={currentDate} // Set the minimum date to the current date
+                        minDate={currentDate} 
                       />
                       <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
                         <Image
@@ -427,10 +348,9 @@ const Campaign_infopage = () => {
                         selectsEnd
                         startDate={startDate}
                         endDate={endDate}
-                        // minDate={startDate}
                         placeholderText="End Date"
                         className="w-full text-center p-2 rounded "
-                        minDate={startDate || currentDate} // Set the minimum date to the current date
+                        minDate={startDate || currentDate}
                       />
                       <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
                         <Image
@@ -441,11 +361,8 @@ const Campaign_infopage = () => {
                       </div>
                     </div>
                   </div>
-
-
-                  {/* date picker end */}
                   <div className=''>
-                    {/* <h2>Campaign Info Page date range</h2> */}
+                  
                     {startRangeDate !== null && endRangeDate !== null && (
                       <p>
                         Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
@@ -456,18 +373,14 @@ const Campaign_infopage = () => {
 
                 </div>
                 <div className="my-3">
-                  <h4 className="mb-2">Content Reference</h4>
-                  {/* <h6 className="mb-3">
-                    Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6> */}
-
+                  <h3 className="mb-2">Content Reference</h3>
+                 
                   <div className="flex flex-row justify-between">
                     <div className="border h-48 rounded-md  w-full me-3 shadow-md"
                       onClick={() => setIsModalOpenRef(true)}
                     >
 
                       <button
-                        // onClick={() => onBtnClick()}
                         className="h-48  w-full "
                       >
                         <Image
@@ -481,7 +394,6 @@ const Campaign_infopage = () => {
                         </p>
                         {imageproString &&
                           <>
-                            {/* <h3>{imagerefString}</h3> */}
                             <input
                               type="url"
                               value={imageproString}
@@ -494,26 +406,6 @@ const Campaign_infopage = () => {
 
                       </button>
                     </div>
-
-
-                    {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
-                        onClick={() => setIsModalOpenRef(true)}
-                      >
-                        <button
-                         
-                          className="h-48  w-full"
-                        >
-                          <Image
-                            src={Images.plus_icon}
-                            width={20}
-                            className="mx-auto "
-                            alt=""
-                          />
-                          <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                            Add Image
-                          </p>
-                        </button>
-                      </div> */}
                   </div>
                   <div className="flex items-center mt-5">
                     <div className="flex-grow border-t border-gray-300"></div>
@@ -521,7 +413,7 @@ const Campaign_infopage = () => {
                     <div className="flex-grow border-t border-gray-300"></div>
                   </div>
                   <div>
-                    {/* <button className="border w-full my-3 py-2 rounded-md shadow-md">      </button> */}
+              
                     <input
                       type="url"
                       id="url"
@@ -536,21 +428,20 @@ const Campaign_infopage = () => {
                   onClick={handleSubmit}
                 />
               </div>
-              {/* </form> */}
+             
               <ToastContainer />
             </div>
             {/* right */}
             <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4">
               <h3>Today Highlights</h3>
-              {/* <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5> */}
-              {/* <div className="h-full "> */}
+              
               <Image
                 src={Images.campaign_info_imgs}
                 className="image_capign_info w-full"
                 // height={1000}
                 alt=""
               />
-              {/* </div> */}
+            
             </div>
           </div>
         </div>
