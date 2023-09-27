@@ -54,8 +54,8 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
                 if (responseData?.status === "success") {
 
-                    setCreator_img(responseData?.data?.data);
                     Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
+                    setCreator_img(responseData?.data?.data);
 
                 } else {
                     console.error('Error:', responseData.message);
@@ -71,24 +71,6 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
     };
 
-    // useEffect(() => {
-
-    //     creatorImage();
-
-    //     function handleClickOutside(event) {
-           
-    //         if (settingdropdownRef.current && settingdropdownRef.current.contains(event.target)) {
-    //             setDropdown_menu(false);
-    //         }
-    //     }
-
-    //     document.addEventListener('mousedown', handleClickOutside);
-
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-
-    // }, []);
 
     useEffect(() => {
         creatorImage();
@@ -124,7 +106,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                 </div>
             </Creator_logout>
 
-            <div className="h-screen  w-1/5  px-10"  ref={settingdropdownRef}>
+            <div className="h-screen  w-1/5  px-10" ref={settingdropdownRef}>
 
                 <div className='my-10'>
                     <Image
