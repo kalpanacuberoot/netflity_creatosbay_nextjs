@@ -21,41 +21,28 @@ const Ref_Image_content = ({ refpopupData }) => {
     const [previewRefImage, setPreviewRefImage] = useState(null);
     const refImage2 = useRef(null);
 
-    // Function to trigger click event on the file input
-    const handleImageClick = (ref) => () => {
-        ref.current.click();
-    };
-
     const handleRefFileChange = (event) => {
         const selectedRefFile = event.target.files[0];
         console.log("fileslected and ref", file2, selectedRefFile);
         if (selectedRefFile) {
-            // Create a FileReader instance
             const reader = new FileReader();
 
-            // Set up a callback function for when the FileReader has loaded the image
             reader.onloadend = () => {
-                setFile2(selectedRefFile); // Save the selected image file
-                setPreviewRefImage(reader.result); // Set the image preview
+                setFile2(selectedRefFile); 
+                setPreviewRefImage(reader.result); 
             };
-
-            // Read the image file as a data URL
             reader.readAsDataURL(selectedRefFile);
 
         } else {
-            setFile2(null); // Reset the selected image
-            setPreviewRefImage(null); // Reset the image preview
+            setFile2(null); 
+            setPreviewRefImage(null); 
         }
-        // setFile(selectedFile);
-
     };
-
 
     console.log("fileslected and ref", file2);
 
     const handleRefUploadClick = async (refimageUrl) => {
-        // handleFileChange();
-        // { handleImageClick(refImage2) }
+
         if (!file2) {
             alert('Please select an image to upload.');
             return;
@@ -73,13 +60,11 @@ const Ref_Image_content = ({ refpopupData }) => {
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
                     'Accept': '/application/json',
-                    // 'Content-Type':'multipart/form-data'
+
                 },
                 body: formData,
             });
-
             console.log("response image data popup", response);
-
             if (response.ok) {
                 const data = await response.json();
                 setFile2(data?.url)
@@ -88,7 +73,6 @@ const Ref_Image_content = ({ refpopupData }) => {
                     position: 'top-center',
                     autoClose: 2000,
                 });
-                // alert('Image uploaded successfully.');
 
                 await sendRefDataToParent(data?.url);
             }
@@ -99,33 +83,29 @@ const Ref_Image_content = ({ refpopupData }) => {
                 });
             }
             else {
-                // alert('Image upload failed.');
                 toast.error('Image upload failed', {
-                    position: 'top-center', // Set the toast position
-                    autoClose: 3000, // Close the toast after 3 seconds
+                    position: 'top-center', 
+                    autoClose: 3000, 
                 });
             }
         } catch (error) {
             console.error('Error uploading image:', error);
             toast.error('Please uplaod the image again', {
-                position: 'top-center', // Set the toast position
-                autoClose: 3000, // Close the toast after 3 seconds0
+                position: 'top-center', 
+                autoClose: 3000, 
             });
         }
 
-
     };
-
 
 
     console.log("dftyftyfrefernce", file2);
 
     const sendRefDataToParent = async (refimageUrl) => {
-        // const link = `${IMAGE_URL}/uploads/${file?.name}`;
+
         const link = file2;
         console.log('imgrddsa product popup----1', file2, link)
 
-        // handleUploadClick();
         console.log('imgrddsa product popup-----2', file2)
 
         const data = [
@@ -137,47 +117,14 @@ const Ref_Image_content = ({ refpopupData }) => {
         ]
 
         console.log("refpopupdata---", data);
-        // Call the callback function with the data to send to the parent
-        // onPopupData(data);
+
         refpopupData(data);
         toast.success('Data is saved', {
-            position: 'top-center', // Set the toast position
-            autoClose: 3000, // Close the toast after 3 seconds0
+            position: 'top-center', 
+            autoClose: 3000, 
         });
         onClose();
-        // if (!file2) {
-        //     alert('Please select an image to upload.');
-        //     return;
-        // }
-
-        // try {
-
-        //     console.log('Before uploading image'); // Debugging line
-        //     // Call handleRefUploadClick to upload the image
-        //     // await handleRefUploadClick();
-
-        //     const link = file2
-        //     // The image upload is now complete, and the file2 variable should be updated
-        //     console.log('Image upload completed:', file2);
-
-        //     const data = [
-        //         {
-        //             link: file2,
-        //             description,
-        //             name,
-        //         },
-        //     ];
-
-        //     // Send the data to the parent or perform any necessary actions
-        //     refpopupData(data);
-
-        //     toast.success('Data is saved', {
-        //         position: 'top-center',
-        //         autoClose: 3000,
-        //     });
-        // } catch (error) {
-        //     console.error('Error in sendRefDataToParent:', error);
-        // }
+        
     };
 
 
@@ -217,9 +164,8 @@ const Ref_Image_content = ({ refpopupData }) => {
                                             type="file"
                                             accept="image/*"
                                             ref={refImage2}
-                                            // accept=".jpeg. .png, .gif, .jpg"
                                             className="hidden absolute w-full"
-                                        // Triggered when a file is selected
+
                                         />
                                         {!file2 && (
                                             <Image

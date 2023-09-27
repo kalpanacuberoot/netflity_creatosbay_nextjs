@@ -35,12 +35,13 @@ const Campaign_infopage = () => {
   const [isModalOpenRef, setIsModalOpenRef] = useState(false);
   const [campaign_name, setCampaign_name] = useState('');
   const [campaign_desc, setCampaign_desc] = useState('');
-  const [popupData, setPopupData] = useState([] ? [] : null); 
-  const [refpopupData, setRefpopupData] = useState([] ? [] : null); 
+  const [popupData, setPopupData] = useState([] ? [] : null);
+  const [refpopupData, setRefpopupData] = useState([] ? [] : null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [product_link, setProduct_link] = useState('');
   const [ref_link, setRef_link] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleRefPopupData = (data) => {
     setPopupData(data);
@@ -62,7 +63,7 @@ const Campaign_infopage = () => {
   }, [router.query]);
 
   const handleSubmit = async (e) => {
-
+    setLoading(true)
     e.preventDefault();
 
     try {
@@ -75,7 +76,7 @@ const Campaign_infopage = () => {
 
       if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
         console.log('User not authenticated, navigating to login page...');
-        router.push('/login'); 
+        router.push('/login');
         console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
       }
@@ -134,10 +135,11 @@ const Campaign_infopage = () => {
               position: 'top-center',
               autoClose: 5000,
             });
+
             router.push('/marketplace')
-            
+            setLoading(false)
           } else {
-          
+
             toast.error("PLease enter the correct campaign details", {
               position: 'top-center',
               autoClose: 5000,
@@ -145,7 +147,7 @@ const Campaign_infopage = () => {
           }
 
         } catch (error) {
-         
+
         }
       }
     } catch (error) {
@@ -171,7 +173,7 @@ const Campaign_infopage = () => {
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
@@ -199,253 +201,266 @@ const Campaign_infopage = () => {
 
   return (
     <>
-      <Image_popup isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}  
-      >
-        <div className="relative w-screen max-w-2xl max-h-full  min-w-xl ">
-
-          <Image_content onPopupData={handlePopupData} onClose={() => setIsModalOpen(false)} />
+      {loading ? ( // Show loader if loading is true
+        <div className="w-full h-full flex items-center justify-center">
+          <Image
+            width={100}
+            height={100}
+            alt=""
+            src={Images.Loader}
+          />
         </div>
-      </Image_popup>
-      <Ref_Imagepop
-        isOpen={isModalOpenRef}
-        onClose={() => setIsModalOpenRef(false)}
-      >
-        <div className="relative w-screen max-w-2xl max-h-full   min-w-xl">
-          <Ref_Image_content refpopupData={handleRefPopupData} onClose={() => setIsModalOpen(false)} />
-        </div>
-      </Ref_Imagepop>
-      <div
-        className="flex container_capmapign_info w-full"
-        style={{ backgroundColor: Colors.button_light_clr }}
-      >
-
-        <div className="m-2 w-full auto-cols-max ">
-          <div
-            style={{ backgroundColor: Colors.white_clr }}
-            className="auto-cols-max  p-3 rounded-md flex flex-row "
+      ) : (
+        <>
+          <Image_popup isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
           >
-            <div className="p-5 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
+            <div className="relative w-screen max-w-2xl max-h-full  min-w-xl ">
 
-              <div className="">
-                <h1
-                  style={{ color: Colors.pending_clr }}
-                  className="font-bold campaign_info_title text-2xl"
-                >
-                  Campaign Info
-                </h1>
-               
-                <hr className="divider_line my-5" />
-                <div className="my-3">
-                  <h3 className="mb-2">Campaign Name</h3>
-
-                  <input
-                    type="text"
-                    id="small-input"
-                    className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={campaign_name}
-                    onChange={(e) => setCampaign_name(e.target.value)}
-
-                  />
-                </div>
-                <div className="my-3">
-                  <h3 className="mb-2">Campaign Description</h3>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Start Typing..."
-                    value={campaign_desc}
-                    onChange={(e) => setCampaign_desc(e.target.value)}
-                  ></textarea>
-                </div>
-
-                <div className="my-3">
-                  <h3 className="mb-2">Product</h3>
-
-                  <div className="flex flex-row justify-between">
-                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                      onClick={() => setIsModalOpen(true)}
-                    >
-                      <button
-                        className="h-48  w-full "
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
-                        />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
-
-                        </p>
-                        {imagerefString &&
-                          <>
-                            <input
-                              type="url"
-                              value={imagerefString}
-                              className='w-full p-3'
-                              onChange={() => setIsModalOpen(false)}
-                              readOnly
-                            />
-                          </>
-                        }
-                      </button>
-
-                    </div>
-
-                  </div>
-                  <div className="flex items-center mt-5">
-                    <div className="flex-grow border-t border-gray-300"></div>
-                    <div className="px-4 text-gray-600">OR</div>
-                    <div className="flex-grow border-t border-gray-300"></div>
-                  </div>
-                  <div>
-                    <input
-                      type="url"
-                      id="url"
-                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Paste link"
-                      value={product_link}
-                      onChange={(e) => setProduct_link(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div className="my-3">
-                  <h3 className="mb-2">Timelines</h3>
-                  <h6>Set Creating Date</h6>
-
-                  <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
-                    <div className='relative w-full'>
-                      <DatePicker
-                        selected={startDate}
-                        onChange={handleStartDateChange}
-                        selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                        placeholderText="Start Date"
-                        className="w-full text-center p-2 rounded "
-                        minDate={currentDate} 
-                      />
-                      <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
-                        <Image
-                          src={Images.calendar_icon}
-                          alt=""
-                          width={20}
-                        />
-                      </div>
-                    </div>
-
-                    <span className="mx-4 mt-0 text-gray-500">-</span>
-
-                    <div className='relative mt-0 w-full'>
-
-                      <DatePicker
-                        selected={endDate}
-                        onChange={(date) => setEndDate(date)}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        placeholderText="End Date"
-                        className="w-full text-center p-2 rounded "
-                        minDate={startDate || currentDate}
-                      />
-                      <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
-                        <Image
-                          src={Images.calendar_icon}
-                          alt=""
-                          width={20}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className=''>
-                  
-                    {startRangeDate !== null && endRangeDate !== null && (
-                      <p>
-                        Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
-                      </p>
-                    )}
-                    <div className='text-center w-full' style={{ color: Colors.logo_clr }}>We required min 15 days to complete the campaign</div>
-                  </div>
-
-                </div>
-                <div className="my-3">
-                  <h3 className="mb-2">Content Reference</h3>
-                 
-                  <div className="flex flex-row justify-between">
-                    <div className="border h-48 rounded-md  w-full me-3 shadow-md"
-                      onClick={() => setIsModalOpenRef(true)}
-                    >
-
-                      <button
-                        className="h-48  w-full "
-                      >
-                        <Image
-                          src={Images.plus_icon}
-                          width={20}
-                          className="mx-auto "
-                          alt=""
-                        />
-                        <p className="mt-3" style={{ color: Colors.logo_clr }}>
-                          Add Image
-                        </p>
-                        {imageproString &&
-                          <>
-                            <input
-                              type="url"
-                              value={imageproString}
-                              className='w-full p-3'
-                              onChange={() => setIsModalOpenRef(false)}
-                              readOnly
-                            />
-                          </>
-                        }
-
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex items-center mt-5">
-                    <div className="flex-grow border-t border-gray-300"></div>
-                    <div className="px-4 text-gray-600">OR</div>
-                    <div className="flex-grow border-t border-gray-300"></div>
-                  </div>
-                  <div>
-              
-                    <input
-                      type="url"
-                      id="url"
-                      className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Paste link"
-                      value={ref_link}
-                      onChange={(e) => setRef_link(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <Buttons label={"Proceed"} buttoncss={"py-3"}
-                  onClick={handleSubmit}
-                />
-              </div>
-             
-              <ToastContainer />
+              <Image_content onPopupData={handlePopupData} onClose={() => setIsModalOpen(false)} />
             </div>
-            {/* right */}
-            <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4">
-              <h3>Today Highlights</h3>
-              
-              <Image
-                src={Images.campaign_info_imgs}
-                className="image_capign_info w-full"
-                // height={1000}
-                alt=""
-              />
-            
+          </Image_popup>
+          <Ref_Imagepop
+            isOpen={isModalOpenRef}
+            onClose={() => setIsModalOpenRef(false)}
+          >
+            <div className="relative w-screen max-w-2xl max-h-full   min-w-xl">
+              <Ref_Image_content refpopupData={handleRefPopupData} onClose={() => setIsModalOpen(false)} />
+            </div>
+          </Ref_Imagepop>
+          <div
+            className="flex container_capmapign_info w-full"
+            style={{ backgroundColor: Colors.button_light_clr }}
+          >
+
+            <div className="m-2 w-full auto-cols-max ">
+              <div
+                style={{ backgroundColor: Colors.white_clr }}
+                className="auto-cols-max  p-3 rounded-md flex flex-row "
+              >
+                <div className="p-5 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
+
+                  <div className="">
+                    <h1
+                      style={{ color: Colors.pending_clr }}
+                      className="font-bold campaign_info_title text-2xl"
+                    >
+                      Campaign Info
+                    </h1>
+
+                    <hr className="divider_line my-5" />
+                    <div className="my-3">
+                      <h3 className="mb-2">Campaign Name</h3>
+
+                      <input
+                        type="text"
+                        id="small-input"
+                        className="shadow-md block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={campaign_name}
+                        onChange={(e) => setCampaign_name(e.target.value)}
+
+                      />
+                    </div>
+                    <div className="my-3">
+                      <h3 className="mb-2">Campaign Description</h3>
+                      <textarea
+                        id="message"
+                        rows="4"
+                        className=" shadow-mdblock p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Start Typing..."
+                        value={campaign_desc}
+                        onChange={(e) => setCampaign_desc(e.target.value)}
+                      ></textarea>
+                    </div>
+
+                    <div className="my-3">
+                      <h3 className="mb-2">Product</h3>
+
+                      <div className="flex flex-row justify-between">
+                        <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                          onClick={() => setIsModalOpen(true)}
+                        >
+                          <button
+                            className="h-48  w-full "
+                          >
+                            <Image
+                              src={Images.plus_icon}
+                              width={20}
+                              className="mx-auto "
+                              alt=""
+                            />
+                            <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                              Add Image
+
+                            </p>
+                            {imagerefString &&
+                              <>
+                                <input
+                                  type="url"
+                                  value={imagerefString}
+                                  className='w-full p-3'
+                                  onChange={() => setIsModalOpen(false)}
+                                  readOnly
+                                />
+                              </>
+                            }
+                          </button>
+
+                        </div>
+
+                      </div>
+                      <div className="flex items-center mt-5">
+                        <div className="flex-grow border-t border-gray-300"></div>
+                        <div className="px-4 text-gray-600">OR</div>
+                        <div className="flex-grow border-t border-gray-300"></div>
+                      </div>
+                      <div>
+                        <input
+                          type="url"
+                          id="url"
+                          className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          placeholder="Paste link"
+                          value={product_link}
+                          onChange={(e) => setProduct_link(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="my-3">
+                      <h3 className="mb-2">Timelines</h3>
+                      <h6>Set Creating Date</h6>
+
+                      <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
+                        <div className='relative w-full'>
+                          <DatePicker
+                            selected={startDate}
+                            onChange={handleStartDateChange}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            placeholderText="Start Date"
+                            className="w-full text-center p-2 rounded "
+                            minDate={currentDate}
+                          />
+                          <div className="absolute top-2.5 left-0 text-gray-400 ps-2 ">
+                            <Image
+                              src={Images.calendar_icon}
+                              alt=""
+                              width={20}
+                            />
+                          </div>
+                        </div>
+
+                        <span className="mx-4 mt-0 text-gray-500">-</span>
+
+                        <div className='relative mt-0 w-full'>
+
+                          <DatePicker
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            placeholderText="End Date"
+                            className="w-full text-center p-2 rounded "
+                            minDate={startDate || currentDate}
+                          />
+                          <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                            <Image
+                              src={Images.calendar_icon}
+                              alt=""
+                              width={20}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className=''>
+
+                        {startRangeDate !== null && endRangeDate !== null && (
+                          <p>
+                            Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
+                          </p>
+                        )}
+                        <div className='text-center w-full' style={{ color: Colors.logo_clr }}>We required min 15 days to complete the campaign</div>
+                      </div>
+
+                    </div>
+                    <div className="my-3">
+                      <h3 className="mb-2">Content Reference</h3>
+
+                      <div className="flex flex-row justify-between">
+                        <div className="border h-48 rounded-md  w-full me-3 shadow-md"
+                          onClick={() => setIsModalOpenRef(true)}
+                        >
+
+                          <button
+                            className="h-48  w-full "
+                          >
+                            <Image
+                              src={Images.plus_icon}
+                              width={20}
+                              className="mx-auto "
+                              alt=""
+                            />
+                            <p className="mt-3" style={{ color: Colors.logo_clr }}>
+                              Add Image
+                            </p>
+                            {imageproString &&
+                              <>
+                                <input
+                                  type="url"
+                                  value={imageproString}
+                                  className='w-full p-3'
+                                  onChange={() => setIsModalOpenRef(false)}
+                                  readOnly
+                                />
+                              </>
+                            }
+
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-center mt-5">
+                        <div className="flex-grow border-t border-gray-300"></div>
+                        <div className="px-4 text-gray-600">OR</div>
+                        <div className="flex-grow border-t border-gray-300"></div>
+                      </div>
+                      <div>
+
+                        <input
+                          type="url"
+                          id="url"
+                          className="shadow-md appearance-none border rounded-md text-center w-full my-5 bg-white  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          placeholder="Paste link"
+                          value={ref_link}
+                          onChange={(e) => setRef_link(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <Buttons label={"Proceed"} buttoncss={"py-3"}
+                      onClick={handleSubmit}
+                    />
+                  </div>
+
+                  <ToastContainer />
+                </div>
+                {/* right */}
+                <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4">
+                  <h3>Today Highlights</h3>
+
+                  <Image
+                    src={Images.campaign_info_imgs}
+                    className="image_capign_info w-full"
+                    // height={1000}
+                    alt=""
+                  />
+
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

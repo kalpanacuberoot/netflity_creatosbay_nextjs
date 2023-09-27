@@ -30,23 +30,17 @@ const Image_content = ({ onPopupData,onClose }) => {
 
         console.log("product handleFileChange",selectedFile);
         if (selectedFile) {
-            // Create a FileReader instance
             const reader = new FileReader();
 
-            // Set up a callback function for when the FileReader has loaded the image
             reader.onloadend = () => {
-                setFile(selectedFile); // Save the selected image file
-                setPreviewImage(reader.result); // Set the image preview
+                setFile(selectedFile); 
+                setPreviewImage(reader.result); 
             };
-
-            // Read the image file as a data URL
             reader.readAsDataURL(selectedFile);
         } else {
-            setFile(null); // Reset the selected image
-            setPreviewImage(null); // Reset the image preview
+            setFile(null); 
+            setPreviewImage(null); 
         }
-        // setFile(selectedFile);
-
     };
 
 
@@ -54,7 +48,7 @@ const Image_content = ({ onPopupData,onClose }) => {
     console.log("fileslected product image", file);
 
     const handleSubmit = async () => {
-        // handleFileChange();
+
         if (!file) {
             alert('Please select an image to upload.');
             return;
@@ -85,7 +79,6 @@ const Image_content = ({ onPopupData,onClose }) => {
                     position: 'top-center',
                     autoClose: 2000,
                 });
-                // alert('Image uploaded successfully.');
 
                 await sendDataToParent(data?.url);
             } 
@@ -96,17 +89,17 @@ const Image_content = ({ onPopupData,onClose }) => {
                 });
             }
             else {
-                // alert('Image upload failed.');
+
                 toast.error('Image upload failed', {
-                    position: 'top-center', // Set the toast position
-                    autoClose: 3000, // Close the toast after 3 seconds
+                    position: 'top-center', 
+                    autoClose: 3000, 
                 });
             }
         } catch (error) {
             console.error('Error uploading image:', error);
             toast.error('Please uplaod the image again', {
-                position: 'top-center', // Set the toast position
-                autoClose: 3000, // Close the toast after 3 seconds
+                position: 'top-center', 
+                autoClose: 3000, 
             });
         }
     };
@@ -114,13 +107,9 @@ const Image_content = ({ onPopupData,onClose }) => {
     console.log("dfdsafdsfds", file);
 
     const sendDataToParent = async (imageUrl) => {
-        // const link = `${IMAGE_URL}/uploads/${file?.name}`;
+
         const link = file;
         console.log('imgrddsa product popup----1', file, link)
-
-        // handleUploadClick();
-        console.log('imgrddsa product popup-----2', file)
-
         const data = [
             {
                 link: imageUrl,
@@ -130,17 +119,12 @@ const Image_content = ({ onPopupData,onClose }) => {
         ]
 
         console.log("popupdata---", data);
-        // Call the callback function with the data to send to the parent
-        // onPopupData(data);
         onPopupData(data);
         toast.success('Data is saved', {
-            position: 'top-center', // Set the toast position
-            autoClose: 3000, // Close the toast after 3 seconds0
+            position: 'top-center', 
+            autoClose: 3000, 
         });
         onClose();
-        // router.push('/campaign_info')
-
-
     };
 
 
@@ -165,64 +149,7 @@ const Image_content = ({ onPopupData,onClose }) => {
 
                             />
                         </div>
-                        {/* <div className=" ">
-                            <div
-                                className=" border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
-                            >
-                                <label
-                                    htmlFor="fileInput"
-                                    style={{ borderColor: Colors.logo_clr }}
-                                    className=" w-auto"
-                                >
-                                    <div className=" w-full text-center">
-                                        <input
-                                            id="fileInput"
-                                            type="file"
-                                            accept="image/*"
-                                            className="hidden absolute w-full"
-                                            ref={refImage1}
-                                            onChange={handleFileChange} 
-                                        />
-                                        {!file && (
-                                            <Image
-                                                src={Images.plus_icon}
-                                                width={15}
-                                                height={15}
-                                                alt=""
-                                                className=" cursor-default m-5  mx-auto"
-                                            />
-                                        )}
-                                    </div>
-                                    {previewImage && (
-                                        <Image
-                                            src={previewImage}
-                                            alt="Selected product preview" 
-                                            style={{ maxWidth: '100%', maxHeight: '300px' }}
-                                            width={50}
-                                            height={50}
-                                            className="mx-auto"
-                                        />
-                                    )}
-                                    {file && (
-                                        <h6 className="text-base text-center">{file?.name}</h6>
-                                    )}
 
-                                   
-                                    {!file && (
-
-                                        <div className="p-10 text-base   text-gray-300 p-5 rounded"
-
-                                        >
-                                            Upload Media
-
-                                        </div>
-                                    )}
-
-                                </label>
-
-                            </div>
-
-                        </div> */}
                         <div className=" ">
                             <div
                                 className=" focus:border-purple-500 focus:ring-purple-500 border-dotted h-48 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
@@ -239,7 +166,6 @@ const Image_content = ({ onPopupData,onClose }) => {
                                             type="file"
                                             accept="image/*"
                                             className="absolute w-screen hidden "
-                                        // Triggered when a file is selected
                                         />
                                         {!file && (
                                             <Image
@@ -264,18 +190,7 @@ const Image_content = ({ onPopupData,onClose }) => {
                                     {file && (
                                         <p className="text-base text-center">{file?.name}</p>
                                     )}
-                                    {!file && (
-                                        <>
-                                            <div
-                                                className=" text-base text-gray-300 "
-                                            // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
-                                            // style={{ cursor: 'grabbing' }}
-                                            >
-                                                Company Logo(Upload Image)
-                                            </div>
-                                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
-                                        </>
-                                    )}
+                                   
                                 </label>
 
                             </div>
