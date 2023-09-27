@@ -1,0 +1,38 @@
+%button {
+  display: inline-block;
+  cursor: pointer;
+  appearance: none;
+
+  text-decoration: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  font-weight: 900;
+  border: 0;
+  border-radius: var(--border-radius-base);
+  padding:  calc(1 * var(--padding-base)) calc(2 * var(--padding-base));
+  margin-top: var(--margin-base);
+  color: var(--clr-secondary);
+  text-transform: uppercase;
+  font-size: var(--fs-300);
+}
+
+.btn-primary {
+  @extend %button;
+  background: var(--clr-warning);
+  box-shadow: var(--box-shadow-base);
+
+  &:hover {
+  background: var(--clr-secondary);
+  color: var(--clr-warning);
+  }
+
+}
+
+.btn-prev, .btn-next {
+  @extend %button;
+  margin: 0;
+  padding: 0;
+  background: var(--clr-primary);
+  color: var(--clr-white);
+}

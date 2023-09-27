@@ -1,0 +1,145 @@
+$bp-mobile: 20rem;
+$bp-tablet: 40rem;
+$bp-desktop: 60rem;
+
+@mixin min-mobile() {
+  @media (min-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin max-mobile() {
+  @media (max-width: $bp-mobile) {
+  @content;
+  }
+}
+
+
+@mixin min-tablet() {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin max-tablet() {
+  @media (max-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin min-desktop() {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin max-desktop() {
+  @media (max-width: $bp-desktop) {
+    @content;
+  }
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-inline: auto;
+  max-width: var(--max-container-width);
+}
+@include min-mobile() {
+  .columns {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@include min-tablet() {
+  .columns {
+    padding-inline: var(--fs-400);
+  }
+}
+
+section {
+  padding: var(--fs-400);
+  margin-top: var(--margin-base);
+}
+
+@include min-desktop() {
+  section {
+    padding-inline: var(--fs-600);
+    padding-block: var(--fs-700);
+  }
+}
+
+%grid-item {
+  flex-basis: 100%;
+}
+
+.equal-widths > *{
+  @extend %grid-item; 
+}
+
+@include min-tablet() {
+  .equal-widths > * {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+  }
+}
+
+.two-one-thirds > * {
+  @extend %grid-item;
+}
+
+.one-three-fourths > * {
+ @extend %grid-item; 
+}
+
+.one-two-thirds > * {
+ @extend %grid-item; 
+}
+
+@include min-tablet() {
+  .one-three-fourths > * {
+    flex-basis: calc(100% / 4);
+  }
+  .one-three-fourths > * + * {
+    flex-basis: calc(3 * 100% / 4);
+  }
+  .two-one-thirds > * {
+    flex-basis: calc(2 * 100% / 3);
+  }
+  .two-one-thirds > * + * {
+    flex-basis: calc(100% / 3);
+  }
+  .one-two-thirds > * {
+    flex-basis: calc(100% / 3);
+  }
+  .one-two-thirds > * + * {
+    flex-basis: calc(2 * 100% / 3);
+  }
+
+}
+
+.grid-span-col-2 {
+  grid-column: span 1;
+}
+
+@include min-tablet() {
+  .grid-span-col-2 {
+    grid-column: span 2;
+  }
+}
+
+// Full height section
+@include min-desktop() {
+  .fullheight-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+  }
+}

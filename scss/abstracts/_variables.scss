@@ -1,0 +1,42 @@
+:root {
+  // colors
+  --clr-primary: hsl(192, 70%, 43%);
+  --clr-secondary: hsl(200, 95%, 14%);
+  --clr-neutral: hsl(0, 0%, 80%);
+  --clr-white: hsl(0, 100%, 100%);
+  --clr-black: hsl(0, 100%, 0%);
+  --clr-text: var(--clr-secondary);
+  --clr-success: hsl(138, 76%, 30%);
+  --clr-warning: hsl(43, 100%, 51%);
+  --clr-whatsapp: hsl(122,100%,30%);
+
+  // shadow
+  --box-shadow-base: 0px 0px 13px -6px rgba(0,0,0,0.5);
+  --box-shadow-card: 0 4px 12px rgba(0,0,0,.08);
+
+  // font
+  --ff-base: 'Open Sans', sans-serif;
+  --ff-heading: var(--ff-base);
+
+  --fs-300: clamp(0.83rem, 0.80rem + 0.17vw, 1.00rem);
+  --fs-400: clamp(1.00rem, 0.95rem + 0.25vw, 1.25rem);
+  --fs-500: clamp(1.20rem, 1.13rem + 0.36vw, 1.56rem);
+  --fs-600: clamp(1.44rem, 1.34rem + 0.51vw, 1.95rem);
+  --fs-700: clamp(1.73rem, 1.59rem + 0.71vw, 2.44rem);
+  --fs-800: clamp(2.07rem, 1.88rem + 0.98vw, 3.05rem);
+  --fs-900: clamp(2.49rem, 2.22rem + 1.33vw, 3.82rem);
+
+   // sizes
+  --max-container-width: 80rem;
+  --max-paragraph-width: 70rem;
+  --max-form-width: 60rem;
+  --header-height: clamp(60px, 60px + 1vw, 90px);
+
+   // spacing
+  --spacing-base: var(--fs-300);
+  --padding-base: var(--spacing-base);
+  --margin-base: var(--spacing-base);
+
+  // radii
+  --border-radius-base: 5px;
+}
