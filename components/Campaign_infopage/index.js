@@ -225,7 +225,7 @@ const Campaign_infopage = () => {
       >
         <div className="relative w-screen max-w-2xl max-h-full  min-w-xl ">
 
-          <Image_content onPopupData={handlePopupData} />
+          <Image_content onPopupData={handlePopupData} onClose={() => setIsModalOpen(false)}/>
         </div>
       </Image_popup>
       <Ref_Imagepop
@@ -233,7 +233,7 @@ const Campaign_infopage = () => {
         onClose={() => setIsModalOpenRef(false)}
       >
         <div className="relative w-screen max-w-2xl max-h-full   min-w-xl">
-          <Ref_Image_content refpopupData={handleRefPopupData} />
+          <Ref_Image_content refpopupData={handleRefPopupData} onClose={() => setIsModalOpen(false)} />
         </div>
       </Ref_Imagepop>
       <div
