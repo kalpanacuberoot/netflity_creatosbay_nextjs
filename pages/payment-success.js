@@ -1,10 +1,14 @@
-import Payment_successpage from "@/components/Payment_Gatewaypage/Payment_successpage"
-
+import Payment_successpage from "@/components/Payment_Gatewaypage/Payment_successpage";
+import All_routing from "./all_routing";
 
 const Payment_payu_success = () => {
+
   return (
     <>
-       <Payment_successpage />
+    <All_routing>
+
+      <Payment_successpage />
+      </All_routing>
     </>
   )
 }

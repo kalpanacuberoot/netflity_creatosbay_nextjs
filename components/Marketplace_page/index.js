@@ -122,12 +122,12 @@ const Marketplace_page = () => {
                 style={{ backgroundColor: Colors.button_light_clr }}
                 ref={dropdownRef}
             >
-                <div
+                {/* <div
                     className="auto-cols-max  px-5 py-5 border w-1/5 h-screen"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
-                </div>
+                </div> */}
 
                 <div className="w-full auto-cols-max text-start m-0 h-screen px-3"
 

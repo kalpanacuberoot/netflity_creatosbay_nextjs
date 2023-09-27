@@ -1,9 +1,13 @@
 import Creator_Amountpage from "@/components/Creator_Amountpage"
+import All_routing from "./all_routing"
 
 const Creator_amount = () => {
     return (
         <>
-            <Creator_Amountpage />
+            <All_routing>
+                <Creator_Amountpage />
+            </All_routing>
+
         </>
     )
 }

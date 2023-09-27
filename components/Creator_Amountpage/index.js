@@ -195,12 +195,12 @@ const Creator_Amountpage = () => {
                 className="flex container_invoice container w-full"
                 style={{ backgroundColor: Colors.button_light_clr }}
             >
-                <div
+                {/* <div
                     className="auto-cols-max  px-5 py-5 border w-1/5"
                     style={{ backgroundColor: Colors.white_clr }}
                 >
                     <Left_Dashboard />
-                </div>
+                </div> */}
                 {/* top section */}
                 <div className="m-2 w-full auto-cols-max ">
 

@@ -30,7 +30,7 @@ import Campaign_infopage from '@/components/Campaign_infopage';
 
 const tabs = ['Home', 'Campaign', 'Marketplace', 'Chats', 'Invoice'];
 
-const Brand_home = () => {
+const Brand_home = ({children}) => {
 
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
@@ -467,7 +467,7 @@ const Brand_home = () => {
                     } flex items-center px-10 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out`}
                 >
 
-                  {/* Add the icon component here */}
+                 
                   {index === 0 &&
                     <Image
                       src={Images.home_icon}
@@ -475,7 +475,7 @@ const Brand_home = () => {
                       className='me-5 '
                       alt=""
                     />
-                  } {/* Example: Home icon */}
+                  } 
                   {index === 1 &&
                     <Image
                       src={Images.campaign_icon}
@@ -483,7 +483,7 @@ const Brand_home = () => {
                       className='me-5 '
                       alt=""
                     />
-                  } {/* Example: Activity icon */}
+                  } 
                   {index === 2 &&
                     <Image
                       src={Images.market_place_icon}
@@ -491,7 +491,7 @@ const Brand_home = () => {
                       className='me-5 '
                       alt=""
                     />
-                  } {/* Example: Settings icon */}
+                  } 
                   {index === 3 &&
                     <Image
                       src={Images.chats_icon}

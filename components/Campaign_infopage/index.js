@@ -68,80 +68,102 @@ const Campaign_infopage = () => {
 
     e.preventDefault();
 
-
-    const cookieValue = JSON.parse(Cookies.get('user_data'));
-    console.log('campaigns cookieValue------------1', cookieValue?.token);
-
-    const brand_detail = Cookies.get('brand_detail');
-    const brandIds = Cookies.get('brand_id');
-
-    let brandId = null;
-
-    if (brand_detail) {
-      try {
-        brandId = JSON.parse(brand_detail)?.brand?.id;
-      } catch (error) {
-        console.error('Error parsing brand_detail:', error);
-      }
-    }
-
-    if (!brandId && brandIds) {
-      try {
-        brandId = JSON.parse(brandIds);
-      } catch (error) {
-        console.error('Error parsing brand_ids:', error);
-      }
-    }
-    console.log('brandId:campaign_info', brandId);
-
     try {
+      let cookieValue = Cookies.get('user_data');
+      let userId = Cookies?.get('user_data');
+      console.log('categories cookieValue------------1', userId?.user?.id);
 
-      const postData = {
-        "name": campaign_name,
-        "description": campaign_desc,
-        "starting_date": startformattedDate,
-        "ending_date": endformattedDate,
-        "brand_id": brandId,
-        "status": "draft",
-        "products": popupData || product_link,
-        "references": refpopupData || ref_link,
-      };
-      const headers = {
-        'Authorization': `Bearer ${cookieValue?.token}`,
+      console.log('categories cookieValue------------1', cookieValue);
+      const checkBrand = JSON.parse(cookieValue)?.user?.type
+
+      if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
+        console.log('User not authenticated, navigating to login page...');
+        router.push('/login'); // Replace '/login' with the actual login page URL
+        console.log('categories cookieValue----brand--------userId', cookieValue?.token);
+
       }
-      const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
+      else {
+        // let cookieValue = JSON?.parse(Cookies?.get('user_data'));
+        // console.log('categories cookieValue------------1', cookieValue?.token);
 
-      console.log('POST response campaigns-------------:', postResponse);
-      if (postResponse?.status === "success") {
+
+        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        console.log('campaigns cookieValue------------1', cookieValue?.token);
+
+        const brand_detail = Cookies.get('brand_detail');
+        const brandIds = Cookies.get('brand_id');
+
+        let brandId = null;
+
+        if (brand_detail) {
+          try {
+            brandId = JSON.parse(brand_detail)?.brand?.id;
+          } catch (error) {
+            console.error('Error parsing brand_detail:', error);
+          }
+        }
+
+        if (!brandId && brandIds) {
+          try {
+            brandId = JSON.parse(brandIds);
+          } catch (error) {
+            console.error('Error parsing brand_ids:', error);
+          }
+        }
+        console.log('brandId:campaign_info', brandId);
+
+        try {
+
+          const postData = {
+            "name": campaign_name,
+            "description": campaign_desc,
+            "starting_date": startformattedDate,
+            "ending_date": endformattedDate,
+            "brand_id": brandId,
+            "status": "draft",
+            "products": popupData || product_link,
+            "references": refpopupData || ref_link,
+          };
+          const headers = {
+            'Authorization': `Bearer ${cookieValue?.token}`,
+          }
+          const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
+
+          console.log('POST response campaigns-------------:', postResponse);
+          if (postResponse?.status === "success") {
 
 
-        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
-        Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
+            Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
+            Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
 
-        toast.success('Campaign is created Successfully', {
-          position: 'top-center',
-          autoClose: 5000,
-        });
-        router.push('/marketplace')
-        // router.push({
-        //   pathname: '/marketplace',
-        //   query: { apiData: JSON.stringify(data) },
-        // });
-      } else {
-        // console.error('Error:', postResponse?.statusText);
-        // alert('logibn api response else', postResponse?.statusText)
-        toast.error("PLease enter the correct campaign details", {
-          position: 'top-center',
-          autoClose: 5000,
-        });
+            toast.success('Campaign is created Successfully', {
+              position: 'top-center',
+              autoClose: 5000,
+            });
+            router.push('/marketplace')
+            // router.push({
+            //   pathname: '/marketplace',
+            //   query: { apiData: JSON.stringify(data) },
+            // });
+          } else {
+            // console.error('Error:', postResponse?.statusText);
+            // alert('logibn api response else', postResponse?.statusText)
+            toast.error("PLease enter the correct campaign details", {
+              position: 'top-center',
+              autoClose: 5000,
+            });
+          }
+          
+        } catch (error) {
+          // console.error('POST response register catrch error-------------', error);
+          // toast.error('please enter the valid token campaigns', {
+          //   position: 'top-center',
+          //   autoClose: 5000,
+          // });
+        }
       }
-
     } catch (error) {
-      // console.error('POST response register catrch error-------------', error);
-      // toast.error('please enter the valid token campaigns', {
-      //   position: 'top-center',
-      //   autoClose: 5000,
-      // });
+      console.error('Error parsing user_data cookie:', error);
     }
   };
 
@@ -192,6 +214,8 @@ const Campaign_infopage = () => {
     }
   };
 
+  // console.log("onPopupData",onPopupData);
+
 
   return (
     <>
@@ -216,12 +240,12 @@ const Campaign_infopage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5 w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
 
 
         <div className="m-2 w-full auto-cols-max ">

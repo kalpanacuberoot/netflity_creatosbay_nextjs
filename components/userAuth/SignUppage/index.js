@@ -11,6 +11,11 @@ import Terms_of_service_content from '@/components/Homepage/Termsofservice/Terms
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Images from '@/images';
+import Modal_onboarding_screens from '../Modal_onboarding_screens';
+import Onbording_content from '../Modal_onboarding_screens/Onbording_content';
+import Tab1 from '../Modal_onboarding_screens/Tab1';
+import Tab2 from '../Modal_onboarding_screens/Tab2';
+import Tab3 from '../Modal_onboarding_screens/Tab3';
 
 const Signuppage = () => {
 
@@ -25,8 +30,53 @@ const Signuppage = () => {
     const [isModalOpen_terms_service, setIsModalOpen_terms_service] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showconfirmPassword, setShowconfirmPassword] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleSubmit = async (e) => {
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    // useEffect(() => {
+    //     const hasSeenModal = Cookies.get('hasSeenModal');
+
+    //     if (!hasSeenModal) {
+    //         setIsModalOpen(true);
+
+    //         // Set a cookie to indicate that the user has seen the modal
+    //         Cookies.set('hasSeenModal', true, { path: '/' });
+    //     }
+    //     // openModal();
+    //     // setIsModalOpen(true)
+    // }, [])
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        router.push('/brand')
+    };
+
+    const onRemoveCookies = () =>{
+        
+        router.push('/brand')
+    }   
+
+    const tabs = [
+        {
+            title: '',
+            content: <Tab1 onSkipClick={closeModal} />,
+        },
+        {
+            title: '',
+            content: <Tab2 onSkipClick={closeModal} />,
+        },  
+        {
+            title: '',
+            content: <Tab3 onRemoveCookies={onRemoveCookies}/>,
+        },
+    ];
+
+
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         const options = {
             "name": `${firstName} ${lastName}`,
@@ -43,19 +93,32 @@ const Signuppage = () => {
 
                 body: JSON.stringify(options),
             });
-                
+
             console.log('register response------', response)
 
             if (response.ok) {
                 const result = await response.json();
+                const hasSeenModal = Cookies.get('hasSeenModal');
 
+                if (!hasSeenModal) {
+                    setIsModalOpen(true);
 
+                    // Set a cookie to indicate that the user has seen the modal
+                    Cookies.set('hasSeenModal', true, { path: '/' });
+                }
                 Cookies.set('user_data', JSON.stringify(result), { expires: 106500 });
                 toast.success('Registration Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
                 });
-                router.push('/brand');
+                setTimeout(() => {
+                    // Your code to execute after 5 minutes
+                    setIsModalOpen(true);   
+                    router.push('/brand')
+                    console.log('Function executed after 5 minutes');
+                }, 300000); // 300,000 milliseconds = 5 minutes
+
+
                 console.log('register result------------', result);
                 // alert('', result.message); 
 
@@ -108,6 +171,12 @@ const Signuppage = () => {
 
     return (
         <>
+            <Modal_onboarding_screens isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-xl min-h-0">
+
+                    <Onbording_content tabs={tabs} isOpen={isModalOpen} onClose={closeModal} />
+                </div>
+            </Modal_onboarding_screens>
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={() => setIsModalOpen_terms_service(false)}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -131,7 +200,9 @@ const Signuppage = () => {
                         Create New Account.
                     </h1>
 
-                    <form onSubmit={handleSubmit}>
+                    <form 
+                    onSubmit={handleRegisterSubmit}
+                    >
                         <div className="flex">
                             <input
                                 type="text"
@@ -200,7 +271,7 @@ const Signuppage = () => {
 
                         <div className='flex items-center relative'>
                             <input
-                               type={showconfirmPassword ? 'text' : 'password'}
+                                type={showconfirmPassword ? 'text' : 'password'}
                                 id="confirm_password"
                                 className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Confirm Password"
@@ -269,6 +340,7 @@ const Signuppage = () => {
                             type="submit"
                             className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
                             style={{ background: Colors.logo_clr }}
+                            // onClick={handleRegisterSubmit}
                         >
                             Create Account
                         </button>

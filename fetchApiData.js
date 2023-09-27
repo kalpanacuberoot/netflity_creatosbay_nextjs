@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 export const fetchApiData = async (url, method, data = null, headers = {}, loaderElement, token = null,router) => {
 
-    const apiUrl = process.env.API_URL + url; // Use the environment variable
+    const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url; // Use the environment variable
 
     try {
         const requestOptions = {

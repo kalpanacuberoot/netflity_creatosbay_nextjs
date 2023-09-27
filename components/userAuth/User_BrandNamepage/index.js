@@ -19,49 +19,68 @@ const User_BrandNamepage = () => {
     const getUser_Brand = async () => {
 
 
-        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', cookieValue?.token);
-
-        const userId = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', userId?.user?.id);
-
         try {
+            let cookieValue = Cookies.get('user_data');
+            let userId = Cookies?.get('user_data');
+            console.log('categories cookieValue------------1', userId?.user?.id);
 
-            const headers = {
-                'Authorization': `Bearer ${cookieValue?.token}`,
-                'Content-Type': 'application/json',
-            };
+            console.log('categories cookieValue------------1', cookieValue);
+            const checkBrand = JSON.parse(cookieValue)?.user?.type
 
-            const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
-                method: 'Get',
-                headers: headers,
+            if (typeof cookieValue === 'undefined'  || checkBrand !== 'brand') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
-            });
+            }
+            else {
+                let cookieValue = JSON?.parse(Cookies?.get('user_data'));
+                console.log('categories cookieValue------------1', cookieValue?.token);
 
-            if (response?.ok) {
-                const responseData = await response.json();
-                console.log('brandusers response:', responseData?.data?.data);
+                let userId = JSON?.parse(Cookies?.get('user_data'));
+                console.log('categories cookieValue------------1', userId?.user?.id);
+
+                try {
+
+                    const headers = {
+                        'Authorization': `Bearer ${cookieValue?.token}`,
+                        'Content-Type': 'application/json',
+                    };
+
+                    const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
+                        method: 'Get',
+                        headers: headers,
+
+                    });
+
+                    if (response?.ok) {
+                        const responseData = await response.json();
+                        console.log('brandusers response:', responseData?.data?.data);
 
 
-                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+                        // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData.status) {
-                    // toast.success('brandusers Name', {
-                    //     position: 'top-center',
-                    //     autoClose: 5000,
-                    // });
-                    setBrand_user(responseData?.data?.data)
+                        if (responseData.status) {
+                            // toast.success('brandusers Name', {
+                            //     position: 'top-center',
+                            //     autoClose: 5000,
+                            // });
+                            setBrand_user(responseData?.data?.data)
 
-                } else {
-                    console.error('Error:', responseData.message);
-                    // alert('Brand creation failed');
+                        } else {
+                            console.error('Error:', responseData.message);
+                            // alert('Brand creation failed');
+                        }
+                    } else {
+                        console.error('Error:', response.statusText);
+                        // alert('Brand creation failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
                 }
-            } else {
-                console.error('Error:', response.statusText);
-                // alert('Brand creation failed');
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error parsing user_data cookie:', error);
         }
     };
 

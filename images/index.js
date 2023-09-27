@@ -57,6 +57,10 @@ import hide_eye from './hide_eye.png';
 import loader_gif from './loader.gif';
 import chat_box_placeholder from './chat_box_placeholder.jpg';
 import creator_profile_img from './creator_profile_img.jpg';
+import add_button_black_clr from './add_button_black_clr.png';
+import dropdown_grey_clr from './dropdown_grey_clr.png'; 
+import lock_black_clr from './lock_black_clr.png';
+import no_campaign_found from './no_campaign_found.jpg';
 
 export default {
     'company_logo': company_logo,
@@ -118,4 +122,8 @@ export default {
     'loader_gif': loader_gif,
     'chat_box_placeholder': chat_box_placeholder,
     'creator_profile_img': creator_profile_img,
+    'add_button_black_clr':add_button_black_clr,
+    'dropdown_grey_clr':dropdown_grey_clr.png,
+    'lock_black_clr':lock_black_clr,
+    'no_campaign_found':no_campaign_found,
 };

@@ -33,6 +33,12 @@ const Communication_page = () => {
 
         const userCookie = Cookies.get('user_data');
         const campaignId = Cookies.get('campaign_id');
+
+        if (typeof userCookie === 'undefined' && typeof campaignId === 'undefined') {
+            // Navigate to the login page
+            router.push('/login'); // Replace '/login' with the actual login page URL
+        }
+
         if (userCookie) {
             try {
                 const cookieValue = JSON.parse(userCookie);
@@ -181,11 +187,11 @@ const Communication_page = () => {
             <div className="flex container_invoice w-full "
                 style={{ background: Colors.logo_background_clr }}
             >
-                <div className="auto-cols-max  px-3 py-5 border w-1/7"
+                {/* <div className="auto-cols-max  px-3 py-5 border w-1/7"
                     style={{ background: Colors.white_clr }}
                 >
                     <CollapseLeftDashboard />
-                </div>
+                </div> */}
 
                 <div className="m-2  auto-cols-max text-start p-2  w-full"
 
@@ -205,7 +211,7 @@ const Communication_page = () => {
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full">
 
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-1/3 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
                             <Searchcomm />
                             {/* {filteredActiveCreators?.length > 0 ?
                                 filteredActiveCreators?.map((active, index) => ( */}
@@ -406,7 +412,7 @@ const Communication_page = () => {
 
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-1/3 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
                             <div className="font_size_21  p-4">
                                 Campaign info

@@ -12,15 +12,15 @@ const Payment_failurepage = () => {
 
   return (
     <>
-      <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
-        <div
+      <div className="flex h-full" style={{ backgroundColor: Colors.button_light_clr }}>
+        {/* <div
           className="auto-cols-max w-96 px-3 py-5 border"
           style={{ backgroundColor: Colors.white_clr }}
         >
 
           <Left_Dashboard />
 
-        </div>
+        </div> */}
         <div
           className="w-full flex justify-center align-middle items-center flex-col border"
           style={{ backgroundColor: Colors.white_clr }}

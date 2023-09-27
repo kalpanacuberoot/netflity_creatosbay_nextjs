@@ -157,12 +157,12 @@ const Creators_profilepage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5 border w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
         <div className="m-2 w-full auto-cols-max border">
           <div
             style={{ backgroundColor: Colors.white_clr }}

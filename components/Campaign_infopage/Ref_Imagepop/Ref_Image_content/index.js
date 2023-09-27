@@ -52,6 +52,7 @@ const Ref_Image_content = ({ refpopupData }) => {
 
 
     console.log("fileslected and ref", file2);
+
     const handleRefUploadClick = async () => {
         // handleFileChange();
         // { handleImageClick(refImage2) }
@@ -82,19 +83,48 @@ const Ref_Image_content = ({ refpopupData }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("image response ok ", data?.url);
+                const AWS_S3_BASE_URL = 'https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com';
+                const fileURL = `${AWS_S3_BASE_URL}/uploads/${file2.name}`;
                 toast.error('Image upload failed', {
                     position: 'top-center',
                     autoClose: 5000,
                 });
                 // alert('Image uploaded successfully.');
-                setFile2(data?.url);
+                setFile2(fileURL);
+
+                // Call sendRefDataToParent here after a successful upload
+                // sendRefDataToParent();
                 console.log("filedsgdsgdsg", file2);
+
+                console.log("filedsgdsgdsg", file2);
+
+                if (typeof file2 === 'object' && file2 instanceof File) {
+                    // Construct the AWS S3 URL based on your file structure
+                    const AWS_S3_BASE_URL = 'https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com';
+                    const filename = file2.name; // Assuming the name of the uploaded file is the same as the S3 filename
+                    const fileURL = `${AWS_S3_BASE_URL}/uploads/${filename}`;
+
+                    // Update the file2 state with the AWS S3 URL
+                    setFile2(fileURL);
+
+                    console.log("file2 converted to AWS S3 link:", fileURL);
+
+                    // Now you can call your function here if needed
+                    // sendRefDataToParent();
+                } else {
+                    console.log("file2 is not an object of type File:", file2);
+                    // Handle the case where file2 is not a File object
+                }
+
+
             } else {
+                // sendRefDataToParent();
                 // alert('Image upload failed.');
                 toast.success(' Image Uploaded Successfully', {
                     position: 'top-center', // Set the toast position
                     autoClose: 3000, // Close the toast after 3 seconds
                 });
+                sendRefDataToParent();
             }
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -103,77 +133,80 @@ const Ref_Image_content = ({ refpopupData }) => {
                 autoClose: 3000, // Close the toast after 3 seconds0
             });
         }
-       
+
+
     };
+
 
 
     console.log("dftyftyfrefernce", file2);
 
-    const sendRefDataToParent = () => {
+    // const sendRefDataToParent = () => {
 
-        // const link = `${IMAGE_URL}/uploads/${file2}`;
-        const link = file2;
-        console.log('imgrddsa refernce popup----1', file2, link)
+    //     // const link = `${IMAGE_URL}/uploads/${file2}`;
+    //     // const link = file2;
+    //     console.log('imgrddsa refernce popup----1', file2)
 
-        handleRefUploadClick();
-        console.log('imgrddsa reference popup-----2', file2)
+    //     handleRefUploadClick();
+    //     // handleRefUploadClick();
+    //     console.log('imgrddsa reference popup-----2', file2)
 
-        const data = [
-            {
-                link,
-                description,
-                name,
-            },
-        ]
+    //     const data = [
+    //         {
+    //             link:file2,
+    //             description,
+    //             name,
+    //         },
+    //     ]
 
-        console.log("popupdata---reference", data);
+    //     console.log("popupdata---reference", data);
 
-        refpopupData(data);
-        toast.success('Data is saved', {
-            position: 'top-center',
-            autoClose: 3000,
-        });
-       
-    };
-    // sendRefDataToParent();
+    //     refpopupData(data);
+    //     toast.success('Data is saved', {
+    //         position: 'top-center',
+    //         autoClose: 3000,
+    //     });
 
-   
-
-    // const sendRefDataToParent = async () => {
-    //     // Check if file2 is selected
-    //     if (!file2) {
-    //         alert('Please select an image to upload.');
-    //         return;
-    //     }
-
-    //     // Call handleRefUploadClick() and wait for it to complete
-    //     try {
-    //         console.log('file2 before calling handleRefUploadClick:', file2);
-    //        const fileData =  await handleRefUploadClick();
-    //         console.log('imgrddsa reference popup-----2', file2,fileData);
-
-    //         const data = [
-    //             {
-    //                 link: file2,
-    //                 description,
-    //                 name,
-    //             },
-    //         ];
-
-    //         console.log('popupdata---reference', data);
-    //         // Call the callback function with the data to send to the parent
-    //         // onPopupData(data);
-    //         refpopupData(data);
-    //         toast.success('Data is saved', {
-    //             position: 'top-center',
-    //             autoClose: 3000,
-    //         });
-    //     } catch (error) {
-    //         console.error('Error in sendRefDataToParent:', error);
-    //     }
     // };
 
 
+
+
+    const sendRefDataToParent = () => {
+        if (!file2) {
+            alert('Please select an image to upload.');
+            return;
+        }
+
+        try {
+
+            console.log('Before uploading image'); // Debugging line
+            // Call handleRefUploadClick to upload the image
+            // await handleRefUploadClick();
+                
+
+            // The image upload is now complete, and the file2 variable should be updated
+            console.log('Image upload completed:', file2);
+
+            const data = [
+                {
+                    link: file2,
+                    description,
+                    name,
+                },
+            ];
+
+            // Send the data to the parent or perform any necessary actions
+            refpopupData(data);
+
+            toast.success('Data is saved', {
+                position: 'top-center',
+                autoClose: 3000,
+            });
+        } catch (error) {
+            console.error('Error in sendRefDataToParent:', error);
+        }
+    };
 
 
     return (
@@ -266,7 +299,8 @@ const Ref_Image_content = ({ refpopupData }) => {
                         <Buttons
                             buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                             label={"Submit"}
-                            onClick={sendRefDataToParent}
+                            onClick={handleRefUploadClick}
+                        // onClick={sendRefDataToParent}
                         />
                     </div>
                 </div>

@@ -38,12 +38,26 @@ const Loginpage = () => {
       console.log('POST response register-------------:', postResponse);
       if (postResponse?.message) {
         console.log('POST response register-------------:', postResponse);
-        Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
-        toast.success(postResponse?.message, {
-          position: 'top-center',
-          autoClose: 5000,
-        });
-        getUser_Brand();
+
+        if(postResponse.user.type === 'creator'){
+          Cookies.set('creator_user_data', JSON.stringify(postResponse));
+          toast.success(postResponse?.message, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+          router.push('/creator_home');
+        }
+
+        if(postResponse.user.type === 'brand'){
+          router.push('/creator_home');
+          Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
+          toast.success(postResponse?.message, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+          getUser_Brand();
+        }
+       
         // router.push('/brand-selection');
       } else {
         // console.error('Error:', postResponse?.statusText);
@@ -113,6 +127,7 @@ const Loginpage = () => {
             setBrandData(responseData?.data?.data[0]);
             router.push('/home');
             // router.push('/brand_home');
+            // router.push('/all_routing');
           }
           else {
             router.push('/brand-selection'); // Redirect to the brand_user page

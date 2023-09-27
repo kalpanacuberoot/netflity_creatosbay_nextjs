@@ -191,37 +191,55 @@ const Brandscreens = () => {
 
     const getCompanyCategories = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('user_data'))
-        console.log('categories cookieValue------------1', cookieValue?.token);
-
         try {
-            const response = await fetch(`${url}/categories`, {
-                method: 'Get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookieValue?.token}`,
-                },
+            let cookieValue = Cookies.get('user_data');
 
-            });
+            console.log('categories cookieValue------------1', JSON.parse(cookieValue).user.type);
+            const checkBrand = JSON.parse(cookieValue)?.user?.type
 
-            console.log('categories response------', response)
+            if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
-            if (response.ok) {
-                const result = await response.json();
-                console.log("brand result------------", result?.data?.data);
+            }
+            else {
+                let cookieValue = JSON.parse(Cookies.get('user_data'))
+                console.log('categories cookieValue------------1', cookieValue?.token);
 
-                setDropdownvalues(result?.data?.data);
-                // setSelectedRoles(result?.data?.data);
+                try {
+                    const response = await fetch(`${url}/categories`, {
+                        method: 'Get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${cookieValue?.token}`,
+                        },
+
+                    });
+
+                    console.log('categories response------', response)
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log("brand result------------", result?.data?.data);
+
+                        setDropdownvalues(result?.data?.data);
+                        // setSelectedRoles(result?.data?.data);
 
 
 
-            } else {
-                console.error('Error:', response.statusText);
-                alert('categories api response else', response.statusText)
+                    } else {
+                        console.error('Error:', response.statusText);
+                        // alert('categories api response else', response.statusText)
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error parsing user_data cookie:', error);
         }
+
     };
 
     useEffect(() => {
@@ -310,16 +328,16 @@ const Brandscreens = () => {
                                 <div className="flex flex-row justify-between items-center">
                                     <div className="select">
 
-                                    <input
-                                        type="text"
-                                        className=" focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
-                                        // value={selectedValues.join(', ')}
-                                        value={selectedValues.map((item) => item.name).join(', ')}
-                                        readOnly
-                                        placeholder="Select the Industry Type"
-                                        onClick={() => setMultivalues(!multivalues)}
-                                        required
-                                    />
+                                        <input
+                                            type="text"
+                                            className=" focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                                            // value={selectedValues.join(', ')}
+                                            value={selectedValues.map((item) => item.name).join(', ')}
+                                            readOnly
+                                            placeholder="Select the Industry Type"
+                                            onClick={() => setMultivalues(!multivalues)}
+                                            required
+                                        />
                                     </div>
 
                                 </div>

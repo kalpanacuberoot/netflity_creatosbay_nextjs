@@ -20,10 +20,11 @@ import { useRouter } from "next/router";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
+import { parse } from 'cookie';
 
 
 const Left_Dashboard = () => {
+
     const router = useRouter();
 
     const [brand_user, setBrand_user] = useState([]);
@@ -38,6 +39,8 @@ const Left_Dashboard = () => {
     const dropdownRef = useRef(null);
     const [cookie_user_brand, setCookie_user_brand] = useState(null);
     const settingdropdownRef = useRef(null);
+    const [selectedTab, setSelectedTab] = useState('home');
+
 
     const onSwitchBrand = (item, index) => {
         console.log("onSwitchBrand", item, index);
@@ -49,6 +52,8 @@ const Left_Dashboard = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
+
+        // router.push('/home');
 
         const brand_details = Cookies.get('brand_detail');
         if (brand_details) {
@@ -81,7 +86,7 @@ const Left_Dashboard = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
 
-
+      
 
     }, []);
 
@@ -91,12 +96,23 @@ const Left_Dashboard = () => {
 
     const getUser_Brand = async () => {
 
-        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', cookieValue?.token);
+        // try {
+        //     const cookieValue = JSON.parse(Cookies.get('user_data'));
+        //     const userId = JSON?.parse(Cookies?.get('user_data'));
+        //     console.log('categories cookieValue------------1', userId?.user?.id);
 
+        //     if (typeof cookieValue === 'undefined' && typeof userId === 'undefined') {
+        //         console.log('User not authenticated, navigating to login page...');
+        //         router.push('/login'); // Replace '/login' with the actual login page URL
+        //         console.log('categories cookieValue------------userId', cookieValue?.token, userId);
+        //     }
+        // } catch (error) {
+        //     console.error('Error parsing user_data cookie:', error);
+        // }
+
+
+        const cookieValue = JSON.parse(Cookies.get('user_data'));
         const userId = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', userId?.user?.id);
-
         try {
 
             const headers = {
@@ -153,7 +169,7 @@ const Left_Dashboard = () => {
 
 
     return (
-        <div className="h-screen">
+        <div className="h-screen  w-1/5  px-10">
             <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
                 <div className="relative w-full max-w-4xl max-h-full min-w-3xl">
 
@@ -427,10 +443,12 @@ const Left_Dashboard = () => {
             </div>
 
             <div className='mt-10'>
+
+
                 <Link href={'/home'}>
 
                     <div className='my-5 items-center w-100 rounded-full py-1 flex flex-row justify-evenly'
-
+                    // onClick={() => handleTabClick('home')}
                     >
 
                         <Image
@@ -446,6 +464,7 @@ const Left_Dashboard = () => {
                         </button>
                     </div>
                 </Link>
+
                 <Link href={'/live_campaign'}>
                     <div className=' my-5 w-100 rounded-full py-1 flex flex-row justify-evenly'
 
@@ -520,3 +539,4 @@ const Left_Dashboard = () => {
     )
 }
 export default Left_Dashboard
+    
