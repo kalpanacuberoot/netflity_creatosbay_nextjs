@@ -2,6 +2,8 @@ import Images from "@/images"
 import Image from "next/image"
 
 const Avatar_red = ({item,onClick}) => {
+
+    console.log("item?.profile_pic",item?.profile_pic);
     return (
         <>
             {/* avatar */}

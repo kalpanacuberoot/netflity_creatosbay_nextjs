@@ -4,7 +4,7 @@ import Buttons from "@/components/Button";
 import Colors from "@/styles/Colors";
 import Social_media_icons from "@/components/four_social_media";
 import ModalHeader from "@/components/Homepage/ModalHeader";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
@@ -22,11 +22,12 @@ const Image_content = ({ onPopupData }) => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
-
+    const refImage1 = useRef(null);         
 
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
+        console.log("fileslected and product", file, selectedFile);
         if (selectedFile) {
             // Create a FileReader instance
             const reader = new FileReader();
@@ -86,9 +87,9 @@ const Image_content = ({ onPopupData }) => {
                 setFile(data?.url)
             } else {
                 // alert('Image upload failed.');
-                toast.error('Image upload failed', {
-                    position: 'top-center', // Set the toast posi0tion
-                    autoClose: 3000, // Close the toast after 3 seconds
+                toast.success('Image Uploaded Successfully', {  
+                    position: 'top-center',
+                    autoClose: 5000,
                 });
             }
         } catch (error) {
@@ -100,8 +101,11 @@ const Image_content = ({ onPopupData }) => {
         }
     };
 
+    console.log("dfdsafdsfds",file);
+
     const sendDataToParent = () => {
-        const link = `${IMAGE_URL}/uploads/${file?.name}`;
+        // const link = `${IMAGE_URL}/uploads/${file?.name}`;
+        const link = file;
         console.log('imgrddsa product popup----1', file, link)
 
         handleUploadClick();
@@ -109,15 +113,13 @@ const Image_content = ({ onPopupData }) => {
 
         const data = [
             {
-                link,
+                link:file,
                 description,
                 name,
             },
         ]
 
-        console.log("popupdata---", file,
-            description,
-            name,);
+        console.log("popupdata---", data);
         // Call the callback function with the data to send to the parent
         // onPopupData(data);
         onPopupData(data);
@@ -167,6 +169,7 @@ const Image_content = ({ onPopupData }) => {
                                             type="file"
                                             accept="image/*"
                                             className="hidden absolute w-full"
+                                            ref={refImage1}
                                             onChange={handleFileChange} // Triggered when a file is selected
                                         />
                                         {!file && (
@@ -175,14 +178,14 @@ const Image_content = ({ onPopupData }) => {
                                                 width={15}
                                                 height={15}
                                                 alt=""
-                                                className=" cursor-default m-5 mb-0 mx-auto"
+                                                className=" cursor-default m-5  mx-auto"
                                             />
                                         )}
                                     </div>
                                     {previewImage && (
                                         <Image
                                             src={previewImage}
-                                            alt="Selected"
+                                            alt="Selected product preview" 
                                             style={{ maxWidth: '100%', maxHeight: '300px' }}
                                             width={50}
                                             height={50}

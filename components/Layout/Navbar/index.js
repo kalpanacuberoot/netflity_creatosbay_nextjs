@@ -7,32 +7,6 @@ import React, { useEffect } from "react";
 
 const Navbar = () => {
 
-  // useEffect(() => {
-  //   const brand_detail = Cookies.get('brand_detail');
-  //   const brandIds = Cookies.get('brand_id');
-  
-  //   let brandId = null;
-  
-  //   if (brand_detail) {
-  //     try {
-  //       brandId = JSON.parse(brand_detail)?.brand?.id;
-  //     } catch (error) {
-  //       console.error('Error parsing brand_detail:', error);
-  //     }
-  //   }
-  
-  //   if (!brandId && brandIds) {
-  //     try {
-  //       brandId = JSON.parse(brandIds);
-  //     } catch (error) {
-  //       console.error('Error parsing brand_ids:', error);
-  //     }
-  //   }
-  //   console.log('brandId: navbar', brandId);
-  // },[])
-
-  
-
   return (
 
     <>

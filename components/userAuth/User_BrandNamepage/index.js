@@ -19,49 +19,68 @@ const User_BrandNamepage = () => {
     const getUser_Brand = async () => {
 
 
-        const cookieValue = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', cookieValue?.token);
-
-        const userId = JSON?.parse(Cookies?.get('user_data'));
-        console.log('categories cookieValue------------1', userId?.user?.id);
-
         try {
+            let cookieValue = Cookies.get('user_data');
+            let userId = Cookies?.get('user_data');
+            console.log('categories cookieValue------------1', userId?.user?.id);
 
-            const headers = {
-                'Authorization': `Bearer ${cookieValue?.token}`,
-                'Content-Type': 'application/json',
-            };
+            console.log('categories cookieValue------------1', cookieValue);
+            const checkBrand = JSON.parse(cookieValue)?.user?.type
 
-            const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
-                method: 'Get',
-                headers: headers,
+            if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
-            });
+            }
+            else {
+                let cookieValue = JSON?.parse(Cookies?.get('user_data'));
+                console.log('categories cookieValue------------1', cookieValue?.token);
 
-            if (response?.ok) {
-                const responseData = await response.json();
-                console.log('brandusers response:', responseData?.data?.data);
+                let userId = JSON?.parse(Cookies?.get('user_data'));
+                console.log('categories cookieValue------------1', userId?.user?.id);
+
+                try {
+
+                    const headers = {
+                        'Authorization': `Bearer ${cookieValue?.token}`,
+                        'Content-Type': 'application/json',
+                    };
+
+                    const response = await fetch(`${url}/brandusers?user=${userId?.user?.id}`, {
+                        method: 'Get',
+                        headers: headers,
+
+                    });
+
+                    if (response?.ok) {
+                        const responseData = await response.json();
+                        console.log('brandusers response:', responseData?.data?.data);
 
 
-                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
+                        // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
 
-                if (responseData.status) {
-                    // toast.success('brandusers Name', {
-                    //     position: 'top-center',
-                    //     autoClose: 5000,
-                    // });
-                    setBrand_user(responseData?.data?.data)
+                        if (responseData.status) {
+                            // toast.success('brandusers Name', {
+                            //     position: 'top-center',
+                            //     autoClose: 5000,
+                            // });
+                            setBrand_user(responseData?.data?.data)
 
-                } else {
-                    console.error('Error:', responseData.message);
-                    // alert('Brand creation failed');
+                        } else {
+                            console.error('Error:', responseData.message);
+                            // alert('Brand creation failed');
+                        }
+                    } else {
+                        console.error('Error:', response.statusText);
+                        // alert('Brand creation failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
                 }
-            } else {
-                console.error('Error:', response.statusText);
-                // alert('Brand creation failed');
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error parsing user_data cookie:', error);
         }
     };
 
@@ -70,7 +89,7 @@ const User_BrandNamepage = () => {
     //     if (brand_user.length === 0) {
     //       router.push('/brand'); // Redirect to the brand page
     //     } else {
-    //       router.push('/user_brand_name'); // Redirect to the brand_user page
+    //       router.push('/brand-selection'); // Redirect to the brand_user page
     //     }
     //   }, [brand_user, router]);
 
@@ -83,11 +102,8 @@ const User_BrandNamepage = () => {
             console.log("active_account in user_brand_page", active_account, current_account);
             // const current_account = JSON?.parse(active_account)
             setUser_active_account(current_account?.brand?.id);
-
-
         }
-
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     console.log("brand_user", brand_user);
@@ -110,24 +126,30 @@ const User_BrandNamepage = () => {
                         <div className="p-10 bg-white w-full  h-screen ">
                             <h1 className="my-3">Choose Brand Account</h1>
                             <div className="flex flex-col items-center justify-center ">
-                                {brand_user.length > 0 && brand_user?.map((item, index) => {
+                                {brand_user?.length > 0 && brand_user?.map((item, index) => {
                                     const isCurrent = item?.brand?.id === user_active_account;
                                     console.log("isCurrent user brand name", isCurrent);
                                     return (
 
 
                                         <div
-                                            className={`border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-4 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
+                                            className={` justify-between border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-8 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
                                             onClick={() => onBrand_details(item, index)}
                                             key={index}
                                         >
-                                            <Image className="mr-2 rounded-full"
-                                                src={item?.brand?.logo}
-                                                alt="Jese image"
-                                                width={60}
-                                                height={60}
-                                            />
-                                            {item?.brand?.name}
+                                            <div className=" flex items-center">
+                                                <Image className="mr-2 rounded-full"
+                                                    src={item?.brand?.logo}
+                                                    alt="Jese image"
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                                {item?.brand?.name}
+                                            </div>
+                                            <svg className="w-6 h-6 text-green-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill="currentColor" d="m18.774 8.245-.892-.893a1.5 1.5 0 0 1-.437-1.052V5.036a2.484 2.484 0 0 0-2.48-2.48H13.7a1.5 1.5 0 0 1-1.052-.438l-.893-.892a2.484 2.484 0 0 0-3.51 0l-.893.892a1.5 1.5 0 0 1-1.052.437H5.036a2.484 2.484 0 0 0-2.48 2.481V6.3a1.5 1.5 0 0 1-.438 1.052l-.892.893a2.484 2.484 0 0 0 0 3.51l.892.893a1.5 1.5 0 0 1 .437 1.052v1.264a2.484 2.484 0 0 0 2.481 2.481H6.3a1.5 1.5 0 0 1 1.052.437l.893.892a2.484 2.484 0 0 0 3.51 0l.893-.892a1.5 1.5 0 0 1 1.052-.437h1.264a2.484 2.484 0 0 0 2.481-2.48V13.7a1.5 1.5 0 0 1 .437-1.052l.892-.893a2.484 2.484 0 0 0 0-3.51Z" />
+                                                <path fill="#fff" d="M8 13a1 1 0 0 1-.707-.293l-2-2a1 1 0 1 1 1.414-1.414l1.42 1.42 5.318-3.545a1 1 0 0 1 1.11 1.664l-6 4A1 1 0 0 1 8 13Z" />
+                                            </svg>
                                         </div>
 
                                     )

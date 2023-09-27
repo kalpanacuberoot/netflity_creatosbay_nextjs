@@ -34,6 +34,7 @@ const Creators_popup_content = () => {
         const creator_profile_id = JSON.parse(Cookies.get('creator_profile_id'));
         const creator_name = JSON.parse(Cookies.get('creator_name'));
         const campaign_name = JSON.parse(Cookies.get('campaign_name'));
+        
 
         // e.preventDefault();
         console.log("imageCount",imageCount,videoCount,campaign_id,creator_profile_id);
@@ -97,6 +98,8 @@ const Creators_popup_content = () => {
     //     });
     //     setIsopen(true);
     // }
+
+    
 
 
     return (

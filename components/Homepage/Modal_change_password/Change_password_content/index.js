@@ -42,8 +42,8 @@ const Change_password_content = () => {
 
         try {
             const postData = {
-                "old_password": "test1234",
-                "new_password": "test123456"
+                "old_password": currentpassword,
+                "new_password": password
             };
 
             const headers = {
@@ -138,6 +138,7 @@ const Change_password_content = () => {
                             <Buttons
                                 buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                                 label={"Change Password"}
+                                onClick={handleSubmit}
                             />
 
                         </form>

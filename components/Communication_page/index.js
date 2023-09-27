@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 import { fetchApiData } from "@/fetchApiData"
 import { useRouter } from "next/router"
 import { url } from "@/generalfunctions"
+import Link from "next/link"
 
 const Communication_page = () => {
 
@@ -24,7 +25,7 @@ const Communication_page = () => {
     const [activeData, setActiveData] = useState([]);
     const [inactiveData, setInactiveData] = useState([]);
     const creatorIds = campaign_data?.creators?.map((item) => item.id);
-    const [blankchat, setBlankchat] = useState(false);
+    const [blankchat, setBlankchat] = useState(true);
     const [campaign_creator_id, setCampaign_creator_id] = useState([]);
     const [creator_count, setCreator_count] = useState([]);
 
@@ -32,6 +33,12 @@ const Communication_page = () => {
 
         const userCookie = Cookies.get('user_data');
         const campaignId = Cookies.get('campaign_id');
+
+        if (typeof userCookie === 'undefined' && typeof campaignId === 'undefined') {
+            // Navigate to the login page
+            router.push('/login'); // Replace '/login' with the actual login page URL
+        }
+
         if (userCookie) {
             try {
                 const cookieValue = JSON.parse(userCookie);
@@ -68,7 +75,7 @@ const Communication_page = () => {
                         console.log("activeCreatorIds", inactiveCreatorIds);
                         // Fetch data for active creators
                         const activeCreatorPromises = activeCreatorIds.map(id => {
-                            return fetch(`${url}/creators/${id?.creator_id}`, {
+                            return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
                                 headers: headers,
                             })
@@ -82,7 +89,7 @@ const Communication_page = () => {
 
                         // Fetch data for inactive creators
                         const inactiveCreatorPromises = inactiveCreatorIds.map(id => {
-                            return fetch(`${url}/creators/${id?.creator_id}`, {
+                            return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
                                 headers: headers,
                             })
@@ -136,7 +143,7 @@ const Communication_page = () => {
     useEffect(() => {
 
         Creator_campaignData();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const uniqueData = [];
@@ -167,26 +174,26 @@ const Communication_page = () => {
         console.log("creator_count", creator_counts);
         setCreator_count(creator_counts);
         setCreators(inactive?.data);
-       
+
     }
 
 
     const chat_creator_id = creator_count.map((item) => item?.creator_id);
-    console.log("creator_count", creator_count);
+    console.log("creator_count", creator_count, creators.id);
 
     return (
 
         <>
-            <div className="flex container_invoice container w-full"
+            <div className="flex container_invoice w-full "
                 style={{ background: Colors.logo_background_clr }}
             >
-                <div className="auto-cols-max  px-3 py-5 border w-1/7"
+                {/* <div className="auto-cols-max  px-3 py-5 border w-1/7"
                     style={{ background: Colors.white_clr }}
                 >
                     <CollapseLeftDashboard />
-                </div>
+                </div> */}
 
-                <div className="m-2 w-screen auto-cols-max text-start p-2 "
+                <div className="m-2  auto-cols-max text-start p-2  w-full"
 
                 >
                     <div
@@ -204,7 +211,7 @@ const Communication_page = () => {
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full">
 
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/8 h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
                             <Searchcomm />
                             {/* {filteredActiveCreators?.length > 0 ?
                                 filteredActiveCreators?.map((active, index) => ( */}
@@ -268,11 +275,47 @@ const Communication_page = () => {
                                 <div className="">
 
                                     <div className="py-3">
-                                        {uniqueData?.length > 0 && uniqueData.map((inactive, index) => (
-                                            <>
-                                                <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
-                                            </>
-                                        ))}
+                                        {uniqueData?.length > 0 ?
+                                            <div>
+                                                {uniqueData.map((inactive, index) => (
+                                                    <>
+                                                        <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
+
+                                                    </>
+                                                ))}
+                                                <Link href={'/marketplace'}>
+                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                        <Image
+                                                            src={Images.add_button_black_clr}
+                                                            width={20}
+                                                            height={20}
+                                                            alt=""
+                                                            className="me-3 cursor-pointer"
+                                                        />
+                                                        <button> Create Creators</button>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                            :
+
+                                            <div>
+                                                No Creators yet
+                                                <Link href={'/marketplace'}>
+                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                        <Image
+                                                            src={Images.add_button_black_clr}
+                                                            width={20}
+                                                            height={20}
+                                                            alt=""
+                                                            className="me-3 cursor-pointer"
+                                                        />
+                                                        <button> Create Creators</button>
+                                                    </div>
+                                                </Link>
+                                            </div>
+
+                                        }
+
 
                                         {/* <Avatar_green width={44} height={44} />
                                         <Avatar_red />
@@ -288,9 +331,9 @@ const Communication_page = () => {
                         } */}
 
                         </div>
-                        <div className=" h-screen w-4/8 rounded-md my-3 overflow-y-auto me-3" style={{ background: Colors.white_clr }}>
+                        <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
 
-                            <div className=" bg-zinc-100">
+                            <div className=" bg-zinc-100 h-full">
                                 {blankchat &&
                                     <div className="flex flex-col items-center p-4 h-full justify-center max-w-lg mx-auto">
                                         <Image
@@ -298,6 +341,7 @@ const Communication_page = () => {
                                             width={150}
                                             height={150}
                                             className="rounded"
+                                            alt=""
                                         />
                                         <span className="text-center py-5">
                                             Make calls, share your screen and get a faster experience when you download the Windows app.
@@ -307,40 +351,61 @@ const Communication_page = () => {
 
                                 {!blankchat &&
                                     <>
-                                        {creators && <div className="flex flex-row items-center p-4 justify-between ">
-                                            <Avatar_without_badge item={creators} />
-                                            <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
-                                                {creator_count?.length >0 && creator_count?.slice(0,1).map((item, index) => {
-                                                    
-                                                    return (
-                                                        <>
-                                                            <button
-                                                                type="button"
-                                                                className={
-                                                                    `focus:outline-none text-white ${item?.approved === 0
-                                                                        ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
-                                                                        : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
-                                                                    } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
-                                                                }
+                                        {creators &&
+                                            <>
+                                                <div className="flex flex-row items-center p-4 justify-between ">
+                                                    <Avatar_without_badge item={creators} />
+                                                    <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
+                                                        {creator_count?.length > 0 && creator_count?.slice(0, 1).map((item, index) => {
 
-                                                            >
-                                                                {item?.approved === 0 ? "Inactive" : "active"}
-                                                            </button>
+                                                            return (
+                                                                <>
+                                                                    <button
+                                                                        type="button"
+                                                                        className={
+                                                                            `focus:outline-none text-white ${item?.approved === 0
+                                                                                ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
+                                                                                : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
+                                                                            } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
+                                                                        }
 
-                                                        </>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>}
+                                                                    >
+                                                                        {item?.approved === 0 ? "Inactive" : "active"}
+                                                                    </button>
+
+                                                                </>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+
+
+                                            </>
+                                        }
                                         <hr className="" />
+                                        {/* {creator_count?.length > 0 && creator_count.map((item, index) => (
+                                            <>
 
-                                        <div className="p-5 h-screen flex flex-col justify-evenly">
 
-                                            <Chat
-                                                creatorId={chat_creator_id}
-                                                chatcreator_data={creators}
-                                            />
-                                        </div>
+                                                <div className="p-5 h-screen flex flex-col justify-evenly">
+
+                                                    <Chat
+                                                    creatorId={chat_creator_id}
+                                                    chatcreator_data={creators}
+                                                />
+                                                    <Chat
+                                                        creatorId={creator_count.creator_id}
+                                                        chatcreator_data={chat_creator_id}
+                                                    />
+                                                </div>
+                                            </>
+                                        ))} */}
+
+                                        <Chat
+                                            creatorId={creator_count}
+                                            chatcreator_data={chat_creator_id}
+                                        />
+
                                     </>
                                 }
 
@@ -348,7 +413,7 @@ const Communication_page = () => {
 
                             </div>
                         </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/8  h-screen overflow-y-auto">
+                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
                             <div className="font_size_21  p-4">
                                 Campaign info
@@ -361,9 +426,28 @@ const Communication_page = () => {
                                     <h3>{campaign_data?.name}</h3>
                                 </div>
                                 <div className="px-4">
+
+                                    {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
+                                        <>
+                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>Products</h3>
+                                            <h3>{item.name}</h3>
+                                            <h4>{item.description}</h4>
+                                            <Image
+                                                src={item?.link}
+                                                height={200}
+                                                width={200}
+                                                className="mx-auto"
+                                                alt={item.name}
+                                                key={index}
+                                            />
+                                        </>
+                                    ))}
+
                                     {campaign_data?.products?.length > 0 && campaign_data?.products.map((item, index) => (
                                         <>
-                                            <div>{item?.name}</div>
+                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>References</h3>
+                                            <h3>{item.name}</h3>
+                                            <h4>{item.description}</h4>
                                             <Image
                                                 key={index}
                                                 src={item?.link}
@@ -374,18 +458,6 @@ const Communication_page = () => {
                                             />
                                         </>
                                     ))}
-                                    {/* {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
-                                        <>
-                                            
-                                            <Image
-                                                src={item?.link}
-                                                height={216}
-                                                width={278}
-                                                className="mx-auto"
-                                                alt=""
-                                            />
-                                        </>
-                                    ))} */}
                                     {/* <Image
                                         src={Images.communication_one}
                                         height={216}
@@ -420,14 +492,14 @@ const Communication_page = () => {
                                         />
                                     </div> */}
                                     {/* <div className="flex flex-row items-center flex-wrap border rounded-full px-3 py-2"></div> */}
-                                    <div className="border rounded-full px-3 py-2">
+                                    {/* <div className="border rounded-full px-3 py-2">
                                         <div className="font_size_10" style={{ color: Colors.orange_clr, lineHeight: '11.82px' }}>
                                             Useful Link :-
                                         </div>
                                         <div className="font_size_12" style={{ color: Colors.orange_clr, lineHeight: '14.18px' }}>
                                             https://www.LoremIpsum.com/LoremIpsum.php?gen+link
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <p className="font_size_16 communication_text py-2">
                                         {/* Qorem ipsum Lorem Ipsum is simply dummy text of
                                         the printing and typesetting industry. Lorem Ipsum

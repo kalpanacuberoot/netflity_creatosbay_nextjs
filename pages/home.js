@@ -6,50 +6,60 @@ import Tab3 from "@/components/userAuth/Modal_onboarding_screens/Tab3";
 import Modal_onboarding_screens from "@/components/userAuth/Modal_onboarding_screens";
 import Onbording_content from "@/components/userAuth/Modal_onboarding_screens/Onbording_content";
 import Cookies from "js-cookie";
+import All_component_layout from "@/components/All_component_layout";
+import All_routing from "./all_routing";
+import { useRouter } from "next/router";
 
 
 const Home = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-  
-    useEffect(() => {
-      const hasSeenModal = Cookies.get('hasSeenHomeModal');
-  
-      if (!hasSeenModal) {
-        setIsModalOpen(true);
+    const router = useRouter();
 
-        Cookies.set('hasSeenHomeModal', true, { path: '/' });
-      }
-    }, [])
-  
-    const closeModal = () => {
-      setIsModalOpen(false);
-    };
-  
-    const tabs = [
-      {
-        title: '',
-        content: <Tab1  onSkipClick={closeModal}/>,
-      },
-      {
-        title: '',
-        content: <Tab2  onSkipClick={closeModal}/>,
-      },
-      {
-        title: '',
-        content: <Tab3 />,
-      },
-    ];
+    if (typeof window !== 'undefined') {
+
+        const user_data = Cookies.get('user_data');
+        const brand_detail = Cookies.get('brand_detail');
+        const brand_id = Cookies.get('brand_id');
+        const brandtype = user_data?.user?.type
+
+
+        if (typeof user_data === 'undefined' || typeof brand_detail === 'undefined' || typeof brandtype !== 'brand') {
+            try {
+                const checkBrand = JSON?.parse(user_data)?.user?.type
+                if (checkBrand !== 'brand') {
+                    router.push('/login')
+                }
+            } catch (err) {
+                console.log("errdvvd");
+            }
+        }
+        // else {
+        //     router.push('/campaign_info')
+        // }
+        // Use the router here
+    }
+
+    // const router = useRouter();
+
+    // if (typeof window !== 'undefined') {
+    //     const router = useRouter();
+
+    //     const user_data = Cookies.get('user_data');
+    //     const brand_detail = Cookies.get('brand_detail');
+    //     const brand_id = Cookies.get('brand_id');
+
+    //     if (typeof user_data === 'undefined') {
+    //         router.push('/login')
+    //     }
+    // }
+
+
 
     return (
         <>
-            {/* <Modal_onboarding_screens isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <div className="relative w-full max-w-4xl max-h-full min-w-xl min-h-0">
-
-                    <Onbording_content tabs={tabs} isOpen={isModalOpen} onClose={closeModal} />
-                </div>
-            </Modal_onboarding_screens> */}
-            <Homepage />
+            <All_routing>
+                <Homepage />
+            </All_routing>
         </>
     )
 }

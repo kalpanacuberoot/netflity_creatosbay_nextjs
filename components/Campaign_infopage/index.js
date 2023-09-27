@@ -68,80 +68,102 @@ const Campaign_infopage = () => {
 
     e.preventDefault();
 
-
-    const cookieValue = JSON.parse(Cookies.get('user_data'));
-    console.log('campaigns cookieValue------------1', cookieValue?.token);
-
-    const brand_detail = Cookies.get('brand_detail');
-    const brandIds = Cookies.get('brand_id');
-
-    let brandId = null;
-
-    if (brand_detail) {
-      try {
-        brandId = JSON.parse(brand_detail)?.brand?.id;
-      } catch (error) {
-        console.error('Error parsing brand_detail:', error);
-      }
-    }
-
-    if (!brandId && brandIds) {
-      try {
-        brandId = JSON.parse(brandIds);
-      } catch (error) {
-        console.error('Error parsing brand_ids:', error);
-      }
-    }
-    console.log('brandId:', brandId);
-
     try {
+      let cookieValue = Cookies.get('user_data');
+      let userId = Cookies?.get('user_data');
+      console.log('categories cookieValue------------1', userId?.user?.id);
 
-      const postData = {
-        "name": campaign_name,
-        "description": campaign_desc,
-        "starting_date": startformattedDate,
-        "ending_date": endformattedDate,
-        "brand_id": brandId,
-        "status": "draft",
-        "products": popupData || product_link,
-        "references": refpopupData || ref_link,
-      };
-      const headers = {
-        'Authorization': `Bearer ${cookieValue?.token}`,
+      console.log('categories cookieValue------------1', cookieValue);
+      const checkBrand = JSON.parse(cookieValue)?.user?.type
+
+      if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
+        console.log('User not authenticated, navigating to login page...');
+        router.push('/login'); // Replace '/login' with the actual login page URL
+        console.log('categories cookieValue----brand--------userId', cookieValue?.token);
+
       }
-      const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
+      else {
+        // let cookieValue = JSON?.parse(Cookies?.get('user_data'));
+        // console.log('categories cookieValue------------1', cookieValue?.token);
 
-      console.log('POST response campaigns-------------:', postResponse);
-      if (postResponse?.status === "success") {
+
+        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        console.log('campaigns cookieValue------------1', cookieValue?.token);
+
+        const brand_detail = Cookies.get('brand_detail');
+        const brandIds = Cookies.get('brand_id');
+
+        let brandId = null;
+
+        if (brand_detail) {
+          try {
+            brandId = JSON.parse(brand_detail)?.brand?.id;
+          } catch (error) {
+            console.error('Error parsing brand_detail:', error);
+          }
+        }
+
+        if (!brandId && brandIds) {
+          try {
+            brandId = JSON.parse(brandIds);
+          } catch (error) {
+            console.error('Error parsing brand_ids:', error);
+          }
+        }
+        console.log('brandId:campaign_info', brandId);
+
+        try {
+
+          const postData = {
+            "name": campaign_name,
+            "description": campaign_desc,
+            "starting_date": startformattedDate,
+            "ending_date": endformattedDate,
+            "brand_id": brandId,
+            "status": "draft",
+            "products": popupData || product_link,
+            "references": refpopupData || ref_link,
+          };
+          const headers = {
+            'Authorization': `Bearer ${cookieValue?.token}`,
+          }
+          const postResponse = await apiCall(`${url}/campaigns`, 'post', postData, headers);
+
+          console.log('POST response campaigns-------------:', postResponse);
+          if (postResponse?.status === "success") {
 
 
-        Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
-        Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
+            Cookies.set('campaign_id', JSON.stringify(postResponse?.data?.id), { expires: 106500 });
+            Cookies.set('campaign_name', JSON.stringify(postResponse?.data?.name), { expires: 106500 });
 
-        toast.success(postResponse?.message, {
-          position: 'top-center',
-          autoClose: 5000,
-        });
-        router.push('/marketplace')
-        // router.push({
-        //   pathname: '/marketplace',
-        //   query: { apiData: JSON.stringify(data) },
-        // });
-      } else {
-        // console.error('Error:', postResponse?.statusText);
-        // alert('logibn api response else', postResponse?.statusText)
-        toast.error("PLease enter the correct campaign details", {
-          position: 'top-center',
-          autoClose: 5000,
-        });
+            toast.success('Campaign is created Successfully', {
+              position: 'top-center',
+              autoClose: 5000,
+            });
+            router.push('/marketplace')
+            // router.push({
+            //   pathname: '/marketplace',
+            //   query: { apiData: JSON.stringify(data) },
+            // });
+          } else {
+            // console.error('Error:', postResponse?.statusText);
+            // alert('logibn api response else', postResponse?.statusText)
+            toast.error("PLease enter the correct campaign details", {
+              position: 'top-center',
+              autoClose: 5000,
+            });
+          }
+          
+        } catch (error) {
+          // console.error('POST response register catrch error-------------', error);
+          // toast.error('please enter the valid token campaigns', {
+          //   position: 'top-center',
+          //   autoClose: 5000,
+          // });
+        }
       }
-
     } catch (error) {
-      // console.error('POST response register catrch error-------------', error);
-      // toast.error('please enter the valid token campaigns', {
-      //   position: 'top-center',
-      //   autoClose: 5000,
-      // });
+      console.error('Error parsing user_data cookie:', error);
     }
   };
 
@@ -161,7 +183,7 @@ const Campaign_infopage = () => {
 
   console.log('imagerefString', imagerefString);
 
-  console.log("popupData", popupData, refpopupData, imagerefString,imageproString);
+  console.log("popupData", popupData, refpopupData, imagerefString, imageproString);
 
   function formatDateToYYYYMMDD(date) {
     const year = date.getFullYear();
@@ -192,6 +214,8 @@ const Campaign_infopage = () => {
     }
   };
 
+  // console.log("onPopupData",onPopupData);
+
 
   return (
     <>
@@ -216,12 +240,12 @@ const Campaign_infopage = () => {
         className="flex container_capmapign_info w-full"
         style={{ backgroundColor: Colors.button_light_clr }}
       >
-        <div
+        {/* <div
           className="auto-cols-max  px-5 py-5 w-1/5"
           style={{ backgroundColor: Colors.white_clr }}
         >
           <Left_Dashboard />
-        </div>
+        </div> */}
 
 
         <div className="m-2 w-full auto-cols-max ">
@@ -229,26 +253,26 @@ const Campaign_infopage = () => {
             style={{ backgroundColor: Colors.white_clr }}
             className="auto-cols-max  p-3 rounded-md flex flex-row "
           >
-            <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3">
+            <div className="p-3 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
               {/* <form
                 onSubmit={handleSubmit}
               > */}
               <div className="">
-                <h2
+                <h1
                   style={{ color: Colors.pending_clr }}
                   className="font-bold campaign_info_title"
                 >
                   Campaign Info
-                </h2>
-                <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                </h1>
+                {/* <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5> */}
                 {/* <p className="divider_line">fuyfudydyd</p> */}
                 {/* <p className="border-imaged-element">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt dolor non ante feugiat gravida. Vivamus hendrerit metus sit amet ligula pretium, a dapibus ante semper.</p> */}
                 <hr className="divider_line my-5" />
                 <div className="my-3">
-                  <h4 className="">Campaign Name</h4>
-                  <h6 className="mb-3">
+                  <h4 className="mb-2">Campaign Name</h4>
+                  {/* <h6 className="mb-3">
                     Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                  </h6> */}
 
                   <input
                     type="text"
@@ -260,10 +284,10 @@ const Campaign_infopage = () => {
                   />
                 </div>
                 <div className="my-3">
-                  <h4>Campaign Description</h4>
-                  <h6 className="mb-3">
+                  <h4 className="mb-2">Campaign Description</h4>
+                  {/* <h6 className="mb-3">
                     Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                  </h6> */}
 
                   <textarea
                     id="message"
@@ -276,10 +300,10 @@ const Campaign_infopage = () => {
                 </div>
 
                 <div className="my-3">
-                  <h4>Product</h4>
-                  <h6 className="mb-3">
+                  <h4 className="mb-2">Product</h4>
+                  {/* <h6 className="mb-3">
                     Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                  </h6> */}
 
                   <div className="flex flex-row justify-between">
                     <div className="border h-48 rounded-md  w-full me-3 shadow-md"
@@ -310,11 +334,11 @@ const Campaign_infopage = () => {
                           <>
                             {/* <h3>{imagerefString}</h3> */}
                             <input
-                            type="url"
-                            value={imagerefString}
-                            className='w-full p-3'
-                            onChange={() => setIsModalOpen(false)}
-                            readOnly
+                              type="url"
+                              value={imagerefString}
+                              className='w-full p-3'
+                              onChange={() => setIsModalOpen(false)}
+                              readOnly
                             />
                           </>
                         }
@@ -365,7 +389,7 @@ const Campaign_infopage = () => {
 
                 {/* <h1>Received data from popup: {popupData?.file}</h1> */}
                 <div className="my-3">
-                  <h3>Timelines</h3>
+                  <h3 className="mb-2">Timelines</h3>
                   <h6>Set Creating Date</h6>
 
                   {/* <Calendar_component /> */}
@@ -427,15 +451,15 @@ const Campaign_infopage = () => {
                         Selected Date Range: {startRangeDate.toDateString()} - {endRangeDate.toDateString()}
                       </p>
                     )}
-                    <div className='text-center w-full' style={{color:Colors.logo_clr}}>We required min 15 days to complete the campaign</div>
+                    <div className='text-center w-full' style={{ color: Colors.logo_clr }}>We required min 15 days to complete the campaign</div>
                   </div>
-                  
+
                 </div>
                 <div className="my-3">
-                  <h4>Content Reference</h4>
-                  <h6 className="mb-3">
+                  <h4 className="mb-2">Content Reference</h4>
+                  {/* <h6 className="mb-3">
                     Qorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </h6>
+                  </h6> */}
 
                   <div className="flex flex-row justify-between">
                     <div className="border h-48 rounded-md  w-full me-3 shadow-md"
@@ -459,18 +483,18 @@ const Campaign_infopage = () => {
                           <>
                             {/* <h3>{imagerefString}</h3> */}
                             <input
-                            type="url"
-                            value={imageproString}
-                            className='w-full p-3'
-                            onChange={() => setIsModalOpenRef(false)}
-                            readOnly
+                              type="url"
+                              value={imageproString}
+                              className='w-full p-3'
+                              onChange={() => setIsModalOpenRef(false)}
+                              readOnly
                             />
                           </>
                         }
 
                       </button>
                     </div>
-                   
+
 
                     {/* <div className="border h-48 rounded-md  w-full ms-3 shadow-md"
                         onClick={() => setIsModalOpenRef(true)}
@@ -518,7 +542,7 @@ const Campaign_infopage = () => {
             {/* right */}
             <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4">
               <h3>Today Highlights</h3>
-              <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+              {/* <h5>Qorem ipsum dolor sit amet, consectetur adipiscing elit.</h5> */}
               {/* <div className="h-full "> */}
               <Image
                 src={Images.campaign_info_imgs}

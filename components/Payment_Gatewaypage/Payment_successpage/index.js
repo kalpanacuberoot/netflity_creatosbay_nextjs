@@ -7,20 +7,17 @@ import Link from "next/link";
 
 const Payment_successpage = () => {
 
-
-
-
   return (
     <>
-      <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
-        <div
+      <div className="flex h-full" style={{ backgroundColor: Colors.button_light_clr }}>
+        {/* <div
           className="auto-cols-max w-96 px-3 py-5 border"
           style={{ backgroundColor: Colors.white_clr }}
         >
 
           <Left_Dashboard />
 
-        </div>
+        </div> */}
         <div
           className="w-full flex justify-center align-middle items-center flex-col border"
           style={{ backgroundColor: Colors.white_clr }}
@@ -38,7 +35,7 @@ const Payment_successpage = () => {
                 <span class="font-medium">Success alert!</span> Change a few things up and try submitting again.
               </div>
             </div> */}
-            <Link href={"/"}>
+            <Link href={"/home"}>
               <button className="mt-5 px-12 py-2 rounded-md w-full bg-green-800 text-white"
                 // style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
                 >

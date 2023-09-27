@@ -3,22 +3,26 @@ import Colors from "@/styles/Colors";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Home_Card1 = ({ items }) => {
+
+    const router = useRouter();
     const [cardfirstshowmore, setCardfirstshowmore] = useState(false);
     const [start_date, setStart_date] = useState(null);
     const [end_date, setEnd_date] = useState(null);
 
+    console.log("Home_Card1", items);
+
     useEffect(() => {
 
-        Cookies.set('campaign_id', JSON.stringify(items?.id), { expires: 106500 });
-        Cookies.set('campaign_name', JSON.stringify(items?.name), { expires: 106500 });
+
 
         const staring_dateparts = items?.starting_date.split("-");
         // Check if the array has enough elements
         if (staring_dateparts?.length === 3) {
-    
+
             // Rearrange the parts in the desired order (dd-mm-yyyy)
             const startreversedDate = `${staring_dateparts[2]}-${staring_dateparts[1]}-${staring_dateparts[0]}`;
             console.log(startreversedDate); // Output: "01-01-1970"
@@ -26,46 +30,68 @@ const Home_Card1 = ({ items }) => {
         } else {
             console.log("Invalid date format");
         }
-    
-    
+
+
         const endparts = items?.ending_date.split("-");
         if (endparts?.length === 3) {
-    
+
             const endreversedDate = `${endparts[2]}-${endparts[1]}-${endparts[0]}`;
             console.log(endreversedDate); // Output: "01-01-1970"
             setEnd_date(endreversedDate)
         } else {
             console.log("Invalid date format");
         }
-    
+
         console.log("items", items);
 
 
-    },[items])
+    }, [items]);
+
+    const handleId = (items) => {
+        Cookies.set('campaign_id', JSON.stringify(items?.id), { expires: 106500 });
+        Cookies.set('campaign_name', JSON.stringify(items?.name), { expires: 106500 });
+        router.push('/communication')
+    }
 
 
     return (
         <>
-            <div className="my-2 mx-2 h-auto " key={items?.id}>
-                <div className="relative">
-                    <Image
-                        src={Images.card_img}
-                        width={500}
-                        height={100}
-                        alt=""
-                        className=" mx-auto"
-                    />
-                    {/* <Image
-                        src={Images.reel_creator_card}
-                        width={50}
-                        height={50}
-                        alt=""
-                        className="reel_creator_card mx-auto"
-                    /> */}
+            <div className="my-5 mx-2 " key={index}>
+                <div className="relative flex">
+
+                    {items?.references?.length > 0 && items?.references.map((item) =>
+                        <Image
+                            key={item?.id}
+                            src={item ? item.link : Images.card_img}
+                            width={350}
+                            height={100}
+                            alt=""
+                            className=" mx-auto border rounded-t-lg"
+                        />
+                    )}
+                    {items?.products?.length > 0 && items?.products.map((item) =>
+                        <Image
+                            key={item?.id}
+                            src={item ? item.link : Images.card_img}
+                            width={500}
+                            height={100}
+                            alt=""
+                            className=" mx-auto"
+                        />
+                    )}
+
+
+
                 </div>
                 <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                     <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                        <div className="font_size_17 ">Creators {items?.creators?.length}</div>
+                        <div className="font_size_17 flex items-center">Creators
+                            <span
+                                // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
+                                className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">
+                                {items?.creators?.length ? items?.creators?.length : 0}
+                            </span>
+                        </div>
                         <div
                             className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
                             style={{ backgroundColor: Colors.delay_clr }}
@@ -99,11 +125,11 @@ const Home_Card1 = ({ items }) => {
                     </div>
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
                         <h6>{start_date} - {end_date}</h6>
-                        <Link href={'/communication'}>
-                        <div className="w-100 rounded-full border edit_button_clr py-1">
+                        {/* <Link href={'/communication'}> */}
+                        <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(items)}>
                             <buttton> Check Details</buttton>
                         </div>
-                        </Link>
+                        {/* </Link> */}
                     </div>
                 </div>
             </div>

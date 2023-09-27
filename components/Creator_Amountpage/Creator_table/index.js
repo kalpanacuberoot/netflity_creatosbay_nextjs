@@ -1,14 +1,33 @@
+import PDFGenerator from "@/components/Invoicepage/PDFGenerator";
 import { url } from "@/generalfunctions";
 import Images from "@/images"
 import Colors from "@/styles/Colors"
 import Cookies from "js-cookie";
 import Image from "next/image"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+import Creator_invoice_pdf_page from "@/components/Invoicepage/Creator_invoice_pdf";
+import { Document, Page } from 'react-pdf';
+
+
+// export const PDFContent = () => {
+//     return (
+//         <div>
+//             <h1>This is the PDF Content</h1>
+//             <p>You can add your React components here.</p>
+//         </div>
+//     );
+// }
 
 const Creator_table = ({ creatorData }) => {
 
     const [creator_name, setCreator_name] = useState(null);
-    console.log("creatorData table", creatorData?.id);
+    const [showPDF, setShowPDF] = useState(false);
+    console.log("creatorData table", creatorData);
+    const pdfRef = useRef(null);
+        
 
     const handleSubmit = async () => {
 
@@ -46,7 +65,7 @@ const Creator_table = ({ creatorData }) => {
                 'Content-Type': 'application/json',
             };
 
-            const response = await fetch(`${url}/creators/${creator_profile_id}`, {
+            const response = await fetch(`${url}/creators/${creatorData?.creator_id}`, {
                 method: 'Get',
                 headers: headers,
 
@@ -80,14 +99,40 @@ const Creator_table = ({ creatorData }) => {
 
     useEffect(() => {
         handleSubmit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
 
     console.log("creator_name", creator_name?.user?.name);
 
-    const result = (creatorData?.image_count || 0) * 500 + (creatorData?.video_count || 0) * 500;
+    const result = (creatorData?.image_count || 0) * 500 + (creatorData?.video_count || 0) * 500 ;
 
     console.log(result);
-    Cookies.set('creator_amount', result)
+
+
+    // Cookies.remove('creator_amount', result);
+
+    // const generatePDF = async () => {
+    //     const pdf = new jsPDF();
+    //     const contentHtml = pdfRef.current;
+
+    //     const canvas = await html2canvas(contentHtml);
+    //     const imageData = canvas.toDataURL('image/png');
+
+    //     pdf.addImage(imageData, 'PNG', 10, 10, 190, 0); // You can adjust the dimensions
+
+    //     pdf.save('generated.pdf');
+    // };
+
+
+    // const handleDownload = () => {
+    //     generatePDF();
+    // };
+
+    console.log("amountpayout",result)
+
+
 
     return (
         <>
@@ -96,28 +141,40 @@ const Creator_table = ({ creatorData }) => {
                     <h4> {creator_name?.user?.name}</h4>
 
                 </th>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                     500
-                </td>
+                </td> */}
                 <td className="px-6 py-4">
                     {creatorData?.image_count}
-                </td>
-                <td className="px-6 py-4">
-                    500
-                </td>
-                <td className="px-6 py-4">
-                    {creatorData?.video_count}
                 </td>
                 {/* <td className="px-6 py-4">
-                    {creatorData?.image_count}
-                </td>
+                    500
+                </td> */}
                 <td className="px-6 py-4">
                     {creatorData?.video_count}
-                </td> */}
+                </td>
                 <td className="px-6 py-4">
                     {result}
 
                 </td>
+                <td className="px-6 py-4 border">
+                    <Image
+                        src={Images.download_icon}
+                        width={40}
+                        height={40}
+                        alt=""
+                        className="mx-auto cursor-pointer"
+                        // onClick={handleDownload}
+                    />
+
+                    {/* <div ref={pdfRef} className="hidden" id="invoice">
+                        <PDFContent />
+                        <Creator_invoice_pdf_page />
+                        hello
+                    </div> */}
+
+                </td>
+
 
             </tr>
         </>

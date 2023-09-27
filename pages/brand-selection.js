@@ -10,7 +10,7 @@ const User_Brandname = () => {
       <div className="container flex flex-row h-screen bg-zinc-100 ">
         <div className="auto-cols-max w-2/3 h-screen ">
           <Layout>
-           <User_BrandNamepage/>
+            <User_BrandNamepage />
           </Layout>
         </div>
         <div className="auto-cols-max h-screen">

@@ -191,43 +191,62 @@ const Brandscreens = () => {
 
     const getCompanyCategories = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('user_data'))
-        console.log('categories cookieValue------------1', cookieValue?.token);
-
         try {
-            const response = await fetch(`${url}/categories`, {
-                method: 'Get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookieValue?.token}`,
-                },
+            let cookieValue = Cookies.get('user_data');
 
-            });
+            console.log('categories cookieValue------------1', JSON.parse(cookieValue).user.type);
+            const checkBrand = JSON.parse(cookieValue)?.user?.type
 
-            console.log('categories response------', response)
+            if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
-            if (response.ok) {
-                const result = await response.json();
-                console.log("brand result------------", result?.data?.data);
+            }
+            else {
+                let cookieValue = JSON.parse(Cookies.get('user_data'))
+                console.log('categories cookieValue------------1', cookieValue?.token);
 
-                setDropdownvalues(result?.data?.data);
-                // setSelectedRoles(result?.data?.data);
+                try {
+                    const response = await fetch(`${url}/categories`, {
+                        method: 'Get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${cookieValue?.token}`,
+                        },
+
+                    });
+
+                    console.log('categories response------', response)
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log("brand result------------", result?.data?.data);
+
+                        setDropdownvalues(result?.data?.data);
+                        // setSelectedRoles(result?.data?.data);
 
 
 
-            } else {
-                console.error('Error:', response.statusText);
-                alert('categories api response else', response.statusText)
+                    } else {
+                        console.error('Error:', response.statusText);
+                        // alert('categories api response else', response.statusText)
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error parsing user_data cookie:', error);
         }
+
     };
 
     useEffect(() => {
         getCompanyCategories();
         // handleSubmit();
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) 
 
     const handleSelect = (event, selectedItem) => {
         const value = selectedItem; // Pass the entire item as the value
@@ -308,16 +327,19 @@ const Brandscreens = () => {
                                     </svg>
                                 </button>
                                 <div className="flex flex-row justify-between items-center">
-                                    <input
-                                        type="text"
-                                        className=" focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
-                                        // value={selectedValues.join(', ')}
-                                        value={selectedValues.map((item) => item.name).join(', ')}
-                                        readOnly
-                                        placeholder="Select the Industry Type"
-                                        onClick={() => setMultivalues(!multivalues)}
-                                        required
-                                    />
+                                    <div className="select">
+
+                                        <input
+                                            type="text"
+                                            className=" focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                                            // value={selectedValues.join(', ')}
+                                            value={selectedValues.map((item) => item.name).join(', ')}
+                                            readOnly
+                                            placeholder="Select the Industry Type"
+                                            onClick={() => setMultivalues(!multivalues)}
+                                            required
+                                        />
+                                    </div>
 
                                 </div>
 
@@ -329,18 +351,18 @@ const Brandscreens = () => {
                                                 <li key={index}
 
                                                 >
-                                                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600 text-base">
                                                         <input
                                                             id={`checkbox-item-${index}`}
                                                             type="checkbox"
                                                             value={JSON.stringify(item)} // Pass the entire item as a JSON string
                                                             onChange={(event) => handleSelect(event, item)}
                                                             checked={selectedValues.some(selectedItem => JSON.stringify(selectedItem) === JSON.stringify(item))}
-                                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                            className="w-4 h-4 me-5 text-base text-blue-600 bg-gray-300 border-slate-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                         />
                                                         <label
                                                             htmlFor={`checkbox-item-${index}`}
-                                                            className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                                            className="w-full ml-2  text-base text-gray-600 rounded dark:text-gray-300"
                                                         >
                                                             {item.name}
                                                         </label>

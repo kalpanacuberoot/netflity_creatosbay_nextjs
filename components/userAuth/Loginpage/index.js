@@ -23,6 +23,7 @@ const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [brandData,setBrandData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,13 +38,27 @@ const Loginpage = () => {
       console.log('POST response register-------------:', postResponse);
       if (postResponse?.message) {
         console.log('POST response register-------------:', postResponse);
-        Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
-        toast.success(postResponse?.message, {
-          position: 'top-center',
-          autoClose: 5000,
-        });
-        getUser_Brand();
-        // router.push('/user_brand_name');
+
+        if(postResponse.user.type === 'creator'){
+          Cookies.set('creator_user_data', JSON.stringify(postResponse));
+          toast.success(postResponse?.message, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+          router.push('/creator_home');
+        }
+
+        if(postResponse.user.type === 'brand'){
+          router.push('/creator_home');
+          Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
+          toast.success(postResponse?.message, {
+            position: 'top-center',
+            autoClose: 5000,
+          });
+          getUser_Brand();
+        }
+       
+        // router.push('/brand-selection');
       } else {
         // console.error('Error:', postResponse?.statusText);
         // alert('logibn api response else', postResponse?.statusText)
@@ -106,8 +121,16 @@ const Loginpage = () => {
           // });
           if (responseData?.data?.data.length === 0) {
             router.push('/brand'); // Redirect to the brand page
-          } else {
-            router.push('/user_brand_name'); // Redirect to the brand_user page
+          } 
+          else if (responseData?.data?.data?.length === 1) {
+            Cookies.set('brand_detail', JSON.stringify(responseData?.data?.data[0]));
+            setBrandData(responseData?.data?.data[0]);
+            router.push('/home');
+            // router.push('/brand_home');
+            // router.push('/all_routing');
+          }
+          else {
+            router.push('/brand-selection'); // Redirect to the brand_user page
           }
           // setBrand_user(responseData?.data?.data)
 
@@ -123,6 +146,8 @@ const Loginpage = () => {
       console.error('Error:', error);
     }
   };
+
+  console.log("brand_detailbrand_detail",brandData);
 
 
   return (
@@ -150,12 +175,14 @@ const Loginpage = () => {
                 Welcome back.
               </h1>
 
-              <form onSubmit={handleSubmit}>
+              <form 
+              onSubmit={handleSubmit}
+              >
 
                 <input
                   type="email"
                   id="email"
-                  className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" focus:border-gray-500 focus:ring-gray-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Email"
                   required
                   value={email}
@@ -167,7 +194,7 @@ const Loginpage = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
-                    className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className=" focus:border-gray-500 focus:ring-gray-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     // placeholder="Create Password"
                     placeholder="Password"
                     required
