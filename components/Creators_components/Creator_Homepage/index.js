@@ -36,11 +36,13 @@ const Creator_Home = () => {
 
             if (response?.ok) {
                 const responseData = await response.json();
-                console.log('creators response:', responseData?.data?.data);
+                console.log('creators response: homepage', responseData?.data?.data[0]);
+                Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data[0]))
 
                 if (responseData?.status === "success") {
+                    // Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
                     const creatorId = responseData?.data?.data[0]?.id;
-                    Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
+                    
                     setCreator_data(creatorId);
                     await allCampaignData(creatorId);
 
