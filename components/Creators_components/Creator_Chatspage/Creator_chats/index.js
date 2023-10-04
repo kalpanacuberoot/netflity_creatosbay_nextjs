@@ -285,7 +285,7 @@ const Creator_chats = (campaignBrandData) => {
 
         try {
             const response = await fetch(
-                `https://backend.creatorsbay.app/api/messages?brand=${brandId}&creator=${creatorId}&campaign=${campaignId}&per_page=${loadItems}`,
+                `${url}/messages?brand=${brandId}&creator=${creatorId}&campaign=${campaignId}&per_page=${loadItems}`,
                 requestOptions
             );
 
@@ -330,7 +330,7 @@ const Creator_chats = (campaignBrandData) => {
             const fetchMessages = async () => {
                 try {
                     const response = await fetch(
-                        `https://backend.creatorsbay.app/api/messages?brand=${brandId}&creator=${creatorId}&campaign=${campaignId}&current_page=${change_per_page}`,
+                        `${url}/messages?brand=${brandId}&creator=${creatorId}&campaign=${campaignId}&current_page=${change_per_page}`,
                         requestOptions
                     );
 
@@ -423,11 +423,11 @@ const Creator_chats = (campaignBrandData) => {
                         {allMessages.length < totalMessages &&
                             <>
                                 {/* <div className=" mx-auto border-5 border"> */}
-                                    <button onClick={loadMore}
-                                        className="w-full text-sm bg-green-600 text-white py-1 rounded text-center"
-                                    >
-                                        Click on Load More button to get older Messages
-                                    </button>
+                                <button onClick={loadMore}
+                                    className="w-full text-sm bg-green-600 text-white py-1 rounded text-center"
+                                >
+                                    Click on Load More button to get older Messages
+                                </button>
                                 {/* </div> */}
                             </>
                         }
@@ -440,35 +440,50 @@ const Creator_chats = (campaignBrandData) => {
                                 const messageClass = isLeftAlign ? 'left-message' : isRightAlign ? 'right-message' : '';
                                 const textMessageClass = isLeftAlign ? 'left-text-message' : isRightAlign ? 'right-text-message' : '';
 
-                                const isoDateString = item?.created_at;
-                                const date = new Date(isoDateString);
+                                const timestamp = item?.updated_at;
+                                const dateObj = new Date(timestamp);
 
-                                const year = date.getFullYear();
-                                const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because months are zero-based
-                                const day = date.getDate().toString().padStart(2, '0');
-                                const hours = date.getHours().toString().padStart(2, '0');
-                                const minutes = date.getMinutes().toString().padStart(2, '0');
-                                const seconds = date.getSeconds().toString().padStart(2, '0');
+                                // Get hours and minutes as strings
+                                const hours = dateObj.getHours().toString().padStart(2, '0'); // Ensure two digits
+                                const minutes = dateObj.getMinutes().toString().padStart(2, '0'); // Ensure two digits
 
-                                const formattedDate = `${year}-${month}-${day}`;
-                                const formattedTime = `${hours}:${minutes}:${seconds}`;
-                                const timeString = "14:17:02";
-                                const parts = timeString.split(':');
-                                const twelvehours = parseInt(parts[0], 10);
+                                // Create a time string in HH:MM format
+                                const time = `${hours}:${minutes}`;
 
-                                let ampm = "AM";
+                                console.log(time); // Output: 12:06
 
-                                if (twelvehours >= 12) {
-                                    ampm = "PM";
-                                }
+                                console.log();
 
-                                let twelveHourFormat = twelvehours;
 
-                                if (twelvehours > 12) {
-                                    twelveHourFormat = twelvehours - 12;
-                                }
+                                // const isoDateString = item?.updated_at;
+                                // const date = new Date(isoDateString);
 
-                                const formattedtweleveTime = `${twelveHourFormat}:${parts[1]}:${parts[2]} ${ampm}`;
+                                // const year = date.getFullYear();
+                                // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because months are zero-based
+                                // const day = date.getDate().toString().padStart(2, '0');
+                                // const hours = date.getHours().toString().padStart(2, '0');
+                                // const minutes = date.getMinutes().toString().padStart(2, '0');
+                                // const seconds = date.getSeconds().toString().padStart(2, '0');
+
+                                // const formattedDate = `${year}-${month}-${day}`;
+                                // const formattedTime = `${hours}:${minutes}:${seconds}`;
+                                // const timeString = "14:17:02";
+                                // const parts = timeString.split(':');
+                                // const twelvehours = parseInt(parts[0], 10);
+
+                                // let ampm = "AM";
+
+                                // if (twelvehours >= 12) {
+                                //     ampm = "PM";
+                                // }
+
+                                // let twelveHourFormat = twelvehours;
+
+                                // if (twelvehours > 12) {
+                                //     twelveHourFormat = twelvehours - 12;
+                                // }
+
+                                // const formattedtweleveTime = `${twelveHourFormat}:${parts[1]}:${parts[2]} ${ampm}`;
                                 const isImageLink = item.content === 0 && /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(item.data);
 
                                 console.log("isImageLink", isImageLink);
@@ -521,22 +536,75 @@ const Creator_chats = (campaignBrandData) => {
                                 if (isImageLink) {
                                     // If it's an image link, display it as a clickable link
                                     return (
-                                        <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
-                                                <a href={item?.data} target="_blank" rel="noopener noreferrer">
+                                                {/* <a href={item?.data} target="_blank" rel="noopener noreferrer">
                                                     <img
                                                         src={item?.data}
                                                         alt="Image"
-                                                        style={{ maxWidth: '100%', maxHeight: '150px' }} // You can adjust the max width and height
+                                                        style={{ maxWidth: '100%', maxHeight: '80px' }} // You can adjust the max width and height
                                                     />
+                                                </a> */}
+                                                <a href={item?.data} target="_blank" rel="noopener noreferrer">
+                                                    <div style={{ position: 'relative' }}>
+                                                        <img
+                                                            src={item?.data}
+                                                            alt="Image"
+                                                            style={{
+                                                                maxWidth: '100%',
+                                                                maxHeight: '80px',
+                                                                opacity: 1, // Set opacity to make the image partially transparent
+                                                            }}
+                                                        />
+                                                        <div
+                                                        className="flex items-center justify-center"
+                                                            style={{
+                                                                position: 'absolute',
+                                                                top: '50%',
+                                                                left: '50%',
+                                                                transform: 'translate(-50%, -50%)',
+                                                                cursor: 'pointer',
+                                                                backgroundColor: '#000000a1', // Background color for the download icon
+                                                                borderRadius: '50%',
+                                                                padding: '5px',
+                                                                width: '100%',
+                                                                height: '100%'
+                                                            }}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation(); // Prevent the link from opening
+                                                                // Add your download logic here
+                                                            }}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                                                                    <path d="M2175 5106 c-37 -17 -70 -52 -84 -89 -8 -19 -11 -360 -11 -1083 l0 -1054 -332 0 c-303 0 -337 -2 -374 -19 -61 -28 -89 -73 -89 -142 0 -50 5 -63 35 -101 19 -24 283 -327 587 -674 379 -434 563 -636 586 -648 44 -20 90 -20 134 0 23 12 207 214 586 648 304 347 568 650 587 674 31 39 35 50 35 102 0 50 -5 64 -31 96 -49 60 -62 62 -431 63 l-333 1 -2 1069 c-3 1063 -3 1070 -24 1097 -11 15 -33 37 -48 48 -26 20 -41 21 -394 23 -291 2 -373 0 -397 -11z" />
+                                                                    <path d="M162 923 l3 -678 26 -56 c33 -71 87 -125 158 -158 l56 -26 2155 0 2155 0 56 26 c71 33 125 87 158 158 l26 56 3 678 3 677 -321 0 -320 0 0 -480 0 -480 -1760 0 -1760 0 0 480 0 480 -320 0 -321 0 3 -677z" />
+                                                                </g>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 </a>
+
+                                                <div className="flex justify-end items-center mt-5">
+                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                    <svg className="bg-grey-500" xmlns="http://www.w3.org/2000/svg" version="1.0" width="15.000000pt" height="15.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                        </g>
+                                                    </svg>
+
+                                                </div>
                                             </div>
+
                                         </div>
                                     );
                                 } else if (item.content === 1 || item.type === 'video') {
                                     // Handle videos or other content types
                                     return (
-                                        <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
                                                 {item.type === 'video' ? (
                                                     <>
@@ -564,11 +632,23 @@ const Creator_chats = (campaignBrandData) => {
                                 } else {
                                     // Handle other content types or text messages
                                     return (
-                                        <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
-                                                {item.data}
+                                                <div className="pe-10 ps-1">{item.data}</div>
+                                                <div className="flex justify-end items-center">
+                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                    <svg className="bg-grey-500" xmlns="http://www.w3.org/2000/svg" version="1.0" width="15.000000pt" height="15.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                        </g>
+                                                    </svg>
+
+                                                </div>
+
                                             </div>
-                                            <p className={` ${textMessageClass}`}>{formattedtweleveTime}</p>
+                                            {/* <p className={` ${textMessageClass}`}>{time}</p> */}
                                         </div>
                                     );
                                 }
