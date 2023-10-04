@@ -12,6 +12,7 @@ const Invoicepage = () => {
 
     const [totalAmount, setTotalAmount] = useState(1000);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
+    const [loading, setLoading] = useState(false);
     const usageChargePercent = 15;
     const gstRate = 18;
 
@@ -31,75 +32,78 @@ const Invoicepage = () => {
     return (
 
         <>
+            {loading ? ( // Show loader if loading is true
+                <div className="w-full h-full flex items-center justify-center">
+                    <Image
+                        width={100}
+                        height={100}
+                        alt=""
+                        src={Images.Loader}
+                    />
+                </div>
+            ) : (
+                <>
 
-           
-            <div
-                className="flex container_invoice container w-full"
-                style={{ backgroundColor: Colors.button_light_clr }}
-            >
-                {/* <div
-                    className="auto-cols-max  px-5 py-5 border w-1/5"
-                    style={{ backgroundColor: Colors.white_clr }}
-                >
-                    <Left_Dashboard />
-                </div> */}
-                {/* top section */}
-                <div className="m-2 w-full auto-cols-max ">
                     <div
-                        style={{ background: Colors.invoice_gradient_clr }}
-                        // style={style}
-                        className="auto-cols-max  p-3 rounded-md flex flex-row grid grid-cols-3"
+                        className="flex container_invoice container w-full"
+                        style={{ backgroundColor: Colors.button_light_clr }}
                     >
 
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Completed
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>157</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
+                        <div className="m-2 w-full auto-cols-max ">
+                            <div
+                                style={{ background: Colors.invoice_gradient_clr }}
+                                className="auto-cols-max  p-3 rounded-md flex flex-row grid grid-cols-3"
+                            >
+
+                                <div className="text-white shadow-md rounded-md mx-3 p-4">
+                                    <div className="font_size_31">
+                                        Completed
+                                        <div className="flex flex-row justify-between items-center">
+                                            <h1>157</h1>
+                                            <Image
+                                                src={Images.overdue_icon}
+                                                width={50}
+                                                height={50}
+                                                alt="" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Paid
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>02</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
+                                <div className="text-white shadow-md rounded-md mx-3 p-4">
+                                    <div className="font_size_31">
+                                        Paid
+                                        <div className="flex flex-row justify-between items-center">
+                                            <h1>02</h1>
+                                            <Image
+                                                src={Images.overdue_icon}
+                                                width={50}
+                                                height={50}
+                                                alt="" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="text-white shadow-md rounded-md mx-3 p-4">
-                            <div className="font_size_31">
-                                Pending 
-                                <div className="flex flex-row justify-between items-center">
-                                    <h1>57</h1>
-                                    <Image
-                                        src={Images.overdue_icon}
-                                        width={50}
-                                        height={50}
-                                        alt="" />
+                                <div className="text-white shadow-md rounded-md mx-3 p-4">
+                                    <div className="font_size_31">
+                                        Pending
+                                        <div className="flex flex-row justify-between items-center">
+                                            <h1>57</h1>
+                                            <Image
+                                                src={Images.overdue_icon}
+                                                width={50}
+                                                height={50}
+                                                alt="" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
 
 
-                    </div>
-                    {/* invoices data */}
-                    <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 my-2">
-                        <div className="font_size_31 ">
-                            Recent invoices
-                        </div>
-                        {/* <div className="rounded-md flex flex-row justify-between border p-3">
+                            </div>
+                            {/* invoices data */}
+                            <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 my-2">
+                                <div className="font_size_31 ">
+                                    Recent invoices
+                                </div>
+                                {/* <div className="rounded-md flex flex-row justify-between border p-3">
                             <div>
                                 <label className="relative block">
                                     <span className="sr-only">Search</span>
@@ -118,11 +122,11 @@ const Invoicepage = () => {
                                 <Date_range_picker />
                             </div>
                         </div> */}
-                        <div className="py-5">
-                            <Invoice_Table />
-                        </div>
-                    </div>
-                    {/* <div>
+                                <div className="py-5">
+                                    <Invoice_Table />
+                                </div>
+                            </div>
+                            {/* <div>
                         <h1>Total Amount: {totalAmount}</h1>
                         <h2>First Amount:</h2>
                         <p>Base Amount: {firstAmount}</p>
@@ -137,8 +141,10 @@ const Invoicepage = () => {
                         <h2>Refund Amount:</h2>
                         <p>{refundAmount}</p>
                     </div> */}
-                </div>
-            </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     )
 }

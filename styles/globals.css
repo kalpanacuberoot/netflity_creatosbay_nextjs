@@ -250,6 +250,9 @@ button {
 .invoice-header {
   text-align: center;
 }
+.container_invoice{
+  /* height: 100vh; */
+}
 
 .invoice-header h1 {
   font-size: 24px;
@@ -298,6 +301,16 @@ button {
   background-size: cover;
   width: 150vw;
 }
+
+.chat-container {
+  max-height: 100vh; 
+  overflow-y: auto; 
+}
+
+/* .chat-container-chats{
+  max-height: 100vh; 
+  overflow-y: auto;
+} */
 
 .popup_logo {
   top: 0.1vh;

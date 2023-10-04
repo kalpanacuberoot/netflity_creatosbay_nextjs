@@ -61,6 +61,7 @@ import add_button_black_clr from './add_button_black_clr.png';
 import dropdown_grey_clr from './dropdown_grey_clr.png'; 
 import lock_black_clr from './lock_black_clr.png';
 import no_campaign_found from './no_campaign_found.jpg';
+import Loader from './loader.gif';
 
 export default {
     'company_logo': company_logo,
@@ -126,4 +127,5 @@ export default {
     'dropdown_grey_clr':dropdown_grey_clr.png,
     'lock_black_clr':lock_black_clr,
     'no_campaign_found':no_campaign_found,
+    'Loader':Loader,
 };

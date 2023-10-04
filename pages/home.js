@@ -33,26 +33,8 @@ const Home = () => {
                 console.log("errdvvd");
             }
         }
-        // else {
-        //     router.push('/campaign_info')
-        // }
-        // Use the router here
+
     }
-
-    // const router = useRouter();
-
-    // if (typeof window !== 'undefined') {
-    //     const router = useRouter();
-
-    //     const user_data = Cookies.get('user_data');
-    //     const brand_detail = Cookies.get('brand_detail');
-    //     const brand_id = Cookies.get('brand_id');
-
-    //     if (typeof user_data === 'undefined') {
-    //         router.push('/login')
-    //     }
-    // }
-
 
 
     return (

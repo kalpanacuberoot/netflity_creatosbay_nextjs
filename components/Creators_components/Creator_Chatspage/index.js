@@ -18,6 +18,7 @@ const Creator_Chatspage = () => {
     const [allInactiveBrands, setAllInactiveBrands] = useState(null);
     const [allActiveBrands, setAllActiveBrands] = useState(null);
     const [blankchat, setBlankchat] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const AllBrand_allcampaignData = async () => {
 
@@ -101,8 +102,30 @@ const Creator_Chatspage = () => {
     console.log("campaign_datacampaign_data", campaign_data);
     console.log("allInactiveBrands", allInactiveBrands);
 
+    const onRefresh = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            setBlankchat(true)
+        }, 1000);
+    }
+
+    console.log("campaigndata---",campaign_data);
+
 
     return (
+        // <>
+        //     {
+        //         loading ? ( // Show loader if loading is true
+        //             <div className="w-full h-full flex items-center justify-center" >
+        //                 <Image
+        //                     width={100}
+        //                     height={100}
+        //                     alt=""
+        //                     src={Images.Loader}
+        //                 />
+        //             </div >
+        //         ) : (
         <>
 
             <div className="flex container_invoice w-full"
@@ -161,7 +184,7 @@ const Creator_Chatspage = () => {
                                     <div className="py-3">
                                         {allInactiveBrands?.length > 0 && allInactiveBrands.map((item, index) => (
                                             <>
-                                                <div onClick={() => inActiveBrandClick(item)} T={console.log("allInactiveBrandsallInactiveBrands", item)}>
+                                                <div onClick={() => inActiveBrandClick(item)} >
                                                     <Creator_avatar_red key={index} item={item} />
                                                 </div>
                                             </>
@@ -171,22 +194,32 @@ const Creator_Chatspage = () => {
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-md my-3 overflow-y-auto me-3 w-full h-full" style={{ background: Colors.white_clr }}>
-                            <div className="flex flex-row items-center p-4 justify-between">
-                                <Brand_Avatar_withoutbadge />
-                                <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
+                            {!blankchat &&
+                                <div className="flex flex-row items-center p-4 justify-between">
+                                    {campaign_data && <Brand_Avatar_withoutbadge item={campaign_data}/>}
+                                    
+                                    <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
 
-                                    <button
-                                        type="button"
-                                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+                                        <button
+                                            type="button"
+                                            className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
 
-                                    >
-                                        {/* {item?.approved === 0 ? "Inactive" : "active"} */}
-                                        Inactive
-                                    </button>
+                                        >
+                                            {/* {item?.approved === 0 ? "Inactive" : "active"} */}
+                                            Inactive
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className='focus:outline-none text-white bg-yellow-600 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
+                                            // onClick={() => setBlankchat(false)}
+                                            onClick={onRefresh}
+                                        >
+                                            Refresh
+                                        </button>
 
-
+                                    </div>
                                 </div>
-                            </div>
+                            }
 
                             {blankchat &&
                                 <div className="h-full flex">
@@ -206,13 +239,28 @@ const Creator_Chatspage = () => {
                             }
 
                             <hr className="" />
-                            {!blankchat &&
-                                <>
-                                    <div className=" bg-zinc-100 flex flex-col border-4 justify-between" style={{ height: '100vh' }}>
-                                        <Creator_chats campaignBrandData={campaign_data} />
-                                    </div>
-                                </>
-                            }
+                            {
+                                loading ? ( // Show loader if loading is true
+                                    <div className="w-full h-full flex items-center justify-center" >
+                                        <Image
+                                            width={100}
+                                            height={100}
+                                            alt=""
+                                            src={Images.Loader}
+                                        />
+                                    </div >
+                                ) : (
+                                    <>
+                                        {!blankchat &&
+                                            <>
+                                                <div className=" bg-zinc-100 flex flex-col justify-end " style={{ height: '100vh' }}>
+                                                    <Creator_chats campaignBrandData={campaign_data} />
+                                                </div>
+                                            </>
+
+                                        }
+                                    </>
+                                )}
                         </div>
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
@@ -280,6 +328,8 @@ const Creator_Chatspage = () => {
 
             </div>
         </>
+        //         )}
+        // </>
     )
 }
 

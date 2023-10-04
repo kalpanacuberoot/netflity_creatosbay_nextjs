@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Colors from "@/styles/Colors";
 import { useRouter } from 'next/navigation';
@@ -26,8 +26,9 @@ const Loginpage = () => {
   const [brandData, setBrandData] = useState([]);
 
   const handleSubmit = async (e) => {
-    setLoading(true)
+
     e.preventDefault();
+    setLoading(true)
     try {
 
       const postData = {
@@ -175,87 +176,86 @@ const Loginpage = () => {
                     Welcome back.
                   </h1>
 
-                  <form
+                  {/* <form
                     onSubmit={handleSubmit}
-                  >
+                  > */}
 
+                  <input
+                    type="email"
+                    id="email"
+                    className=" focus:border-gray-100 focus:ring-gray-100 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+
+                  />
+
+                  <div className="flex items-center relative">
                     <input
-                      type="email"
-                      id="email"
+                      type={showPassword ? 'text' : 'password'}
+                      id="password"
                       className=" focus:border-gray-100 focus:ring-gray-100 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Email"
+                      placeholder="Password"
                       required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      pattern="^.{8,}$" title="Minimum 8 characters allowed"
                     />
+                    <button
+                      className="absolute text-black rounded-r-md p-5 pb-0 right-0"
+                      onClick={togglePasswordVisibility}
+                    >
 
-                    <div className="flex items-center relative">
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        id="password"
-                        className=" focus:border-gray-100 focus:ring-gray-100 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        // placeholder="Create Password"
-                        placeholder="Password"
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        pattern="^.{8,}$" title="Minimum 8 characters allowed"
+                      {showPassword ? <Image
+                        src={Images.show_eye}
+                        width={20}
+                        height={20}
+                        alt=""
                       />
-                      <button
-                        className="absolute text-black rounded-r-md p-5 pb-0 right-0"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {/* {showPassword ? 'Hide' : 'Show'} */}
-                        {showPassword ? <Image
-                          src={Images.show_eye}
+                        :
+                        <Image
+                          src={Images.hide_eye}
                           width={20}
                           height={20}
                           alt=""
                         />
-                          :
-                          <Image
-                            src={Images.hide_eye}
-                            width={20}
-                            height={20}
-                            alt=""
-                          />
-                        }
-                      </button>
+                      }
+                    </button>
+                  </div>
+
+                  <div className=" flex my-5 justify-between font_size_16">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="myCheckbox"
+                        className="form-checkbox h-5 w-5 "
+                        style={{ backgroundColor: Colors.logo_clr }}
+                      />
+                      <label htmlFor="myCheckbox" className=" ml-2 text-black">
+                        Remember Me
+                      </label>
                     </div>
 
-                    <div className=" flex my-5 justify-between font_size_16">
-                      <div className="flex items-center">
-                        <input
-                          type="checkbox"
-                          id="myCheckbox"
-                          className="form-checkbox h-5 w-5 "
-                          // required
-                          style={{ backgroundColor: Colors.logo_clr }}
-                        />
-                        <label htmlFor="myCheckbox" className=" ml-2 text-black">
-                          Remember Me
-                        </label>
-                      </div>
-                      {/* <Link href={"/forgot"}> */}
-                      {" "}
-                      <button
-                        className=" float-right "
-                        style={{ color: Colors.pink_clr }}
-                        onClick={() => router.push('/forgot')}
-                      >
-                        Forgot Password ?
-                      </button>
-                      {/* </Link> */}
-                    </div>
+                    {" "}
                     <button
-                      type="submit"
-                      className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
-                      style={{ background: Colors.logo_clr }}
+                      className=" float-right "
+                      style={{ color: Colors.pink_clr }}
+                      onClick={() => router.push('/forgot')}
                     >
-                      Login
+                      Forgot Password ?
                     </button>
-                  </form>
+
+                  </div>
+                  <button
+                    type="submit"
+                    className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
+                    style={{ background: Colors.logo_clr }}
+                    onClick={handleSubmit}
+                  >
+                    Login
+                  </button>
+                  {/* </form> */}
                   <ToastContainer />
                 </div>
               </div>

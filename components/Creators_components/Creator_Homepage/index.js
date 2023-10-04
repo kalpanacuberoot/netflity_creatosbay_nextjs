@@ -42,13 +42,23 @@ const Creator_Home = () => {
                 if (responseData?.status === "success") {
                     // Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
                     const creatorId = responseData?.data?.data[0]?.id;
-                    
+
                     setCreator_data(creatorId);
                     await allCampaignData(creatorId);
 
-                } else {
-                    console.error('Error:', responseData.message);
-
+                } else if (response.status === 429) {
+                    toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/login');
+                    // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+                } else if (response.status === 500) {
+                    toast.error("Server Error: Please wait while we fix this problem for you.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/login');
                 }
             } else {
                 console.error('Error:', response.statusText);
@@ -105,9 +115,19 @@ const Creator_Home = () => {
 
                             setAllCreatorCampaignData(responseData?.data?.data);
 
-                        } else {
-                            console.error('Error:', responseData.message);
-                            // alert('Brand creation failed');
+                        } else if (response.status === 429) {
+                            toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                                position: 'top-center',
+                                autoClose: 5000,
+                            });
+                            router.push('/login');
+                            // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+                        } else if (response.status === 500) {
+                            toast.error("Server Error: Please wait while we fix this problem for you.", {
+                                position: 'top-center',
+                                autoClose: 5000,
+                            });
+                            router.push('/login');
                         }
                     } else {
                         console.error('Error:', response.statusText);
@@ -168,7 +188,7 @@ const Creator_Home = () => {
                     >
                         {allCreatorCampaignData?.length > 0 ? allCreatorCampaignData.map((item, index) => {
                             return (
-                                <Creator_Card item={item} key={index}/>
+                                <Creator_Card item={item} key={index} />
                             )
                         })
 

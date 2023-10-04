@@ -4,7 +4,7 @@ import Creator_layout from "@/components/Creators_components/Creator_layout"
 const Creator_chat = () => {
     return (
         <>
-            <div className="flex">
+            <div className="flex ">
                 <Creator_layout />
                 <Creator_Chatspage/>
             </div>

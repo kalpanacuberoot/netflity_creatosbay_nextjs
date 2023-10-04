@@ -1,25 +1,27 @@
 import Images from "@/images"
 import Image from "next/image"
 
-const Brand_Avatar_withoutbadge = () => {
+const Brand_Avatar_withoutbadge = (item) => {
+
+    console.log("Brand_Avatar_withoutbadge",item?.item?.campaign?.brand);
     return (
         <>
             <div className="flex items-center space-x-4">
                 <Image
-                    // className="w-10 h-10 rounded-full"
+
                     className="rounded-full"
-                    // src={}
-                    src={Images.avatar1}
+                    src={item?.item?.campaign?.brand?.logo ? item?.item?.campaign?.brand?.logo : Images.avatar1} 
+                    // src={Images.avatar1}
                     alt=""
                     width={52}
                     height={52}
                 />
                 <div className="font-medium dark:text-white">
                     <div className="font_size_16">
-                        Brand One
+                        {item?.item?.campaign?.brand.name}
                     </div>
                     <div className="text-sm text-gray-500 font_size_14 dark:text-gray-400">
-                        Reply to message
+                       {item?.item?.campaign?.name}
                     </div>
                 </div>
             </div>

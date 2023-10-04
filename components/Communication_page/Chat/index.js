@@ -16,27 +16,11 @@ const Chat = ({ creatorId, chatcreator_data }) => {
     const [allMessages, setAllMessages] = useState([]);
     const [messageSent, setMessageSent] = useState();
     const [msgtext, setMsgtext] = useState([]);
-
-    // const uniqueData = [];
-
-    // // Use an object to keep track of unique IDs
-    // const idSet = new Set();
-
-    // for (const item of creatorId) {
-    //     const id = item.data;
-    //     if (!idSet.has(id)) {
-    //         idSet.add(id);
-    //         uniqueData.push(item);
-    //     }
-    // }
-
-    // console.log('uniqueDatastringWithoutBrackets', uniqueData);
-    // const stringWithoutBrackets = uniqueData.join(', ');
-    // console.log("chatcreator_data", stringWithoutBrackets, chatcreator_data);
-
+    const [loading, setLoading] = useState(false);
 
     const getAllMessages = async () => {
-
+        
+        setLoading(true)
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
@@ -121,6 +105,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
             const responseData = await response.json();
             console.log('all messages communication response:', responseData.data);
             setAllMessages(responseData?.data?.data)
+            setLoading(false)
 
         } catch (error) {
             console.error('Error:', error);
@@ -129,7 +114,9 @@ const Chat = ({ creatorId, chatcreator_data }) => {
 
     };
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        setLoading(true)
+        e.preventDefault();
 
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('campaigns cookieValue------------1', cookieValue?.token);
@@ -187,6 +174,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                     position: 'top-center',
                     autoClose: 5000,
                 });
+                setLoading(false)
 
             } else {
                 toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
