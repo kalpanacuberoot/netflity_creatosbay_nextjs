@@ -8,9 +8,9 @@ import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import CreatorVideoEmbed from "../CreatorVideoEmbed";
+import CreatorVideoEmbed from "../../Creator_Chatspage/CreatorVideoEmbed";
 
-const Creator_chats = (campaignBrandData) => {
+const Creator_single_chats = (campaignBrandData) => {
 
     const router = useRouter();
     const [allMessages, setAllMessages] = useState([]);
@@ -257,14 +257,6 @@ const Creator_chats = (campaignBrandData) => {
         }
     };
 
-    // const loadMore = () => {
-    //     const loadItems = totalMessages - 10;
-    //     console.log("loadItems", loadItems, totalMessages);
-    //     setTotalMessages(loadItems);
-
-
-    // }
-
     const loadMore = async () => {
         const loadItems = allMessages.length + 10;
         console.log("loadItems", loadItems, allMessages.length);
@@ -403,7 +395,7 @@ const Creator_chats = (campaignBrandData) => {
         }
     };
 
-    console.log("creator allMessages", allMessages);
+    console.log("creator single chat allMessages", allMessages);
 
     return (
         <>
@@ -422,13 +414,11 @@ const Creator_chats = (campaignBrandData) => {
                     <div className="chat-container px-5 pt-5 rounded overflow-y-auto" ref={chatContainerRef} style={{ scrollBehavior: 'smooth' }}>
                         {allMessages.length < totalMessages &&
                             <>
-
                                 <button onClick={loadMore}
                                     className="w-full text-sm bg-green-600 text-white py-1 rounded text-center"
                                 >
                                     Click on Load More button to get older Messages
                                 </button>
-
                             </>
                         }
                         {allMessages.length > 0 &&
@@ -443,61 +433,24 @@ const Creator_chats = (campaignBrandData) => {
                                 const timestamp = item?.updated_at;
                                 const dateObj = new Date(timestamp);
 
-                                const hours = dateObj.getHours().toString().padStart(2, '0'); 
+                                const hours = dateObj.getHours().toString().padStart(2, '0');
                                 const minutes = dateObj.getMinutes().toString().padStart(2, '0');
 
                                 const time = `${hours}:${minutes}`;
 
                                 console.log(time);
                                 const isImageLink = item.content === 0 && /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(item.data);
+                                // const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|youtube\.com\/shorts)/i.test(item.data) || /instagram\.com/i.test(item.data);;
+                                // const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) ||
+                                // /(youtube\.com|youtu\.be|youtube\.shorts)/i.test(item.data) ||
+                                // /youtu\.be\/([a-zA-Z0-9_-]+)/i.test(item.data) || /instagram\.com/i.test(item.data);
+
+                                // const isVideoLink = item.content === 0 &&  /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|instagram\.com)/i.test(item.data) || /youtube\.com\/shorts/i.test(item.data);
+
+                                const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|instagram\.com)/i.test(item.data) || /youtu\.be/i.test(item.data) || /youtube\.com\/shorts/i.test(item.data);
 
                                 console.log("isImageLink", isImageLink);
 
-                                // if (item?.content === 1 || (item.type === 'video')) {
-                                //     return (
-                                //         <>
-                                //             <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                //                 <div className={`chat-message shadow-lg ${messageClass}`}>
-                                //                     {item.type === 'video' ? (
-                                //                         <>
-                                //                             <CreatorVideoEmbed url={item?.data} />
-                                //                         </>
-                                //                     ) : (
-                                //                         <>
-                                //                             <a href={item?.data} target="_blank" rel="noopener noreferrer">
-                                //                                 {item?.type === 'text' ? (
-                                //                                     <a
-                                //                                         href={item?.data}
-                                //                                         target="_blank"
-                                //                                         rel="noopener noreferrer"
-                                //                                         className="bg-blue-800">
-                                //                                         {item?.data}
-                                //                                     </a>
-                                //                                 ) : (
-                                //                                     <span>
-                                //                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                //                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                //                                         </svg>
-                                //                                         Download File
-                                //                                     </span>
-                                //                                 )}
-                                //                             </a>
-                                //                         </>
-                                //                     )}
-                                //                 </div>
-                                //             </div>
-                                //         </>
-                                //     );
-                                // } else {
-                                //     return (
-                                //         <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                //             <div className={`chat-message shadow-lg ${messageClass}`}>
-                                //                 {item.data}
-                                //             </div>
-                                //             <p className={` ${textMessageClass}`}>{formattedtweleveTime}</p>
-                                //         </div>
-                                //     );
-                                // }
                                 if (isImageLink) {
 
                                     return (
@@ -510,8 +463,8 @@ const Creator_chats = (campaignBrandData) => {
                                                             alt="Image"
                                                             style={{
                                                                 maxWidth: '100%',
-                                                                maxHeight: '80px',
-                                                                opacity: 1, 
+                                                                maxHeight: '150px',
+                                                                opacity: 1,
                                                             }}
                                                         />
                                                         <div
@@ -522,8 +475,8 @@ const Creator_chats = (campaignBrandData) => {
                                                                 left: '50%',
                                                                 transform: 'translate(-50%, -50%)',
                                                                 cursor: 'pointer',
-                                                                backgroundColor: '#000000a1', 
-                                                                borderRadius: '50%',
+                                                                backgroundColor: '#000000a1',
+                                                                // borderRadius: '50%',
                                                                 padding: '5px',
                                                                 width: '100%',
                                                                 height: '100%'
@@ -558,7 +511,36 @@ const Creator_chats = (campaignBrandData) => {
 
                                         </div>
                                     );
-                                } else if (item.content === 1 || item.type === 'video') {
+                                }
+                                // else if (item.content === 1 || item.type === 'video') {
+                                //     return (
+                                //         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                //             <div className={`chat-message shadow-lg ${messageClass}`}>
+                                //                 {item.type === 'video' ? (
+                                //                     <>
+                                //                         <CreatorVideoEmbed url={item?.data} />
+                                //                     </>
+                                //                 ) : (
+                                //                     <>
+                                //                         <a href={item?.data} target="_blank" rel="noopener noreferrer">
+                                //                             {item?.type === 'text' ? (
+                                //                                 <span>{item?.data}</span>
+                                //                             ) : (
+                                //                                 <span>
+                                //                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                //                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                //                                     </svg>
+                                //                                     Download File
+                                //                                 </span>
+                                //                             )}
+                                //                         </a>
+                                //                     </>
+                                //                 )}
+                                //             </div>
+                                //         </div>
+                                //     );
+                                // } 
+                                else if (isVideoLink) {
                                     return (
                                         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
@@ -582,10 +564,20 @@ const Creator_chats = (campaignBrandData) => {
                                                         </a>
                                                     </>
                                                 )}
+
+
+                                                {/* <CreatorVideoEmbed url={item?.data} /> */}
+                                                {/* <iframe src='https://www.youtube.com/embed/E7wJTI-1dvQ'
+                                                    frameborder='0'
+                                                    allow='autoplay; encrypted-media'
+                                                    allowfullscreen
+                                                    title='video'
+                                                /> */}
                                             </div>
                                         </div>
                                     );
-                                } else {
+                                }
+                                else {
                                     // Handle other content types or text messages
                                     return (
                                         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
@@ -637,9 +629,18 @@ const Creator_chats = (campaignBrandData) => {
                                 <input type="text" id="voice-search"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Type something here......"
-                                    value={msgtext}
+                                    value={file ? file?.name : msgtext}
                                     onChange={(e) => setMsgtext(e.target.value)}
                                 />
+                                {file && (
+                                    <button
+                                        onClick={() => setFile(null)} // Clear the selected file
+                                        className="absolute inset-y-0 right-14 flex items-center pr-3 text-sm"
+                                    >
+                                        {/* Add an icon or text for clearing */}
+                                        Clear
+                                    </button>
+                                )}
                                 <button className="absolute inset-y-0 right-0 flex items-center pr-10">
 
                                     <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -663,10 +664,7 @@ const Creator_chats = (campaignBrandData) => {
                                         ref={fileInputRef} // Create a ref for the file input
                                     />
                                 </div>
-
-
                             </div>
-
 
                             <button
                                 type="submit"
@@ -688,4 +686,4 @@ const Creator_chats = (campaignBrandData) => {
     )
 }
 
-export default Creator_chats
+export default Creator_single_chats

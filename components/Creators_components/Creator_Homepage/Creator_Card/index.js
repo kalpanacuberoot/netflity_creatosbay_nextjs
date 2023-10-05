@@ -1,5 +1,6 @@
 import Images from "@/images"
 import Colors from "@/styles/Colors"
+import Cookies from "js-cookie"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -16,62 +17,55 @@ const Creator_Card = (item) => {
 
     console.log("Home_Card1", item);
 
-    // useEffect(() => {
+    useEffect(() => {
+        const staring_dateparts = item?.item?.campaign?.starting_date.split("-");
 
-    //     const staring_dateparts = item?.starting_date.split("-");
-    //     // Check if the array has enough elements
-    //     if (staring_dateparts?.length === 3) {
+        if (staring_dateparts?.length === 3) {
+            const startreversedDate = `${staring_dateparts[2]}-${staring_dateparts[1]}-${staring_dateparts[0]}`;
+            console.log(startreversedDate); // Output: "01-01-1970"
+            setStart_date(startreversedDate)
+        } else {
+            console.log("Invalid date format");
+        }
 
-    //         // Rearrange the parts in the desired order (dd-mm-yyyy)
-    //         const startreversedDate = `${staring_dateparts[2]}-${staring_dateparts[1]}-${staring_dateparts[0]}`;
-    //         console.log(startreversedDate); // Output: "01-01-1970"
-    //         setStart_date(startreversedDate)
-    //     } else {
-    //         console.log("Invalid date format");
-    //     }
+        const endparts = item?.item?.campaign?.ending_date.split("-");
+        if (endparts?.length === 3) {
+            const endreversedDate = `${endparts[2]}-${endparts[1]}-${endparts[0]}`;
+            console.log(endreversedDate); // Output: "01-01-1970"
+            setEnd_date(endreversedDate)
+        } else {
+            console.log("Invalid date format");
+        }
+    }, [item]);
 
-
-    //     const endparts = item?.ending_date.split("-");
-    //     if (endparts?.length === 3) {
-
-    //         const endreversedDate = `${endparts[2]}-${endparts[1]}-${endparts[0]}`;
-    //         console.log(endreversedDate); // Output: "01-01-1970"
-    //         setEnd_date(endreversedDate)
-    //     } else {
-    //         console.log("Invalid date format");
-    //     }
-
-    //     console.log("items", item);
-
-
-    // }, [item]);
-
-    // console.log("creatro start_date",start_date,end_date);
-
-    // there will be no starting and ending date in api
+    const handleId = (item) => {
+        Cookies.set('creator_campaign_id', JSON.stringify(item?.item?.campaign?.id));
+        Cookies.set('creator_brand_id', JSON.stringify(item?.item?.campaign?.brand?.id));
+        router.push('/creator_single_chat')
+    }
 
     return (
         <>
             <div className="my-5 mx-2">
                 <div className=" flex flex-col w-full">
-                    <div className="max-h-64 border rounded-t-lg max-w-96">
+                    <div className="max-h-60 border rounded-t-lg max-w-96">
                         <Image
                             src={item?.item?.campaign?.brand?.logo ? item?.item?.campaign?.brand?.logo : Images.card_img}
                             width={200}
-                            height={100}
+                            height={50}
                             alt=""
                             className="w-full mx-auto border rounded-t-lg "
                         />
                     </div>
                     <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                         <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                            <div className="font_size_17 flex items-center flex-column">
+                            <div className="font_size_17 flex items-center flex-column me-5">
                                 <span className="me-3">
                                     Image
                                     <span
 
                                         className="px-3 py-1 rounded-md border ms-2 text-white bg-slate-800">
-                                        {item?.item?.image_count}
+                                        {item?.item?.image_count ? item?.item?.image_count : 0}
                                     </span>
                                 </span>
                                 <span>
@@ -79,7 +73,7 @@ const Creator_Card = (item) => {
                                     <span
 
                                         className="px-3 py-1 rounded-md border ms-2 text-white bg-slate-800">
-                                        {item?.item?.video_count}
+                                        {item?.item?.video_count ? item?.item?.video_count : 0}
                                     </span>
                                 </span>
                             </div>
@@ -103,12 +97,12 @@ const Creator_Card = (item) => {
 
                         </div>
                         <div className="px-5 border py-3 rounded-md text-center  mt-2">
-                            {/* <h6>10-21-23</h6> */}
-                            <Link href={'/creator_chat'}>
-                                <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" >
-                                    <buttton> Check Details</buttton>
-                                </div>
-                            </Link>
+                            <h6>{start_date} - {end_date}</h6>
+                            {/* <Link href={'/creator_single_chat'}> */}
+                            <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(item)}>
+                                <buttton> Check Details</buttton>
+                            </div>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </div>

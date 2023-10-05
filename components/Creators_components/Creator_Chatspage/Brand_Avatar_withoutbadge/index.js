@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const Brand_Avatar_withoutbadge = (item) => {
 
-    console.log("Brand_Avatar_withoutbadge",item?.item?.campaign?.brand);
+    console.log("Brand_Avatar_withoutbadge",item);
     return (
         <>
             <div className="flex items-center space-x-4">

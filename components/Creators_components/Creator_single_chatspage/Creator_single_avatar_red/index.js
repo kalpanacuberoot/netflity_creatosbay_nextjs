@@ -1,9 +1,9 @@
 import Images from "@/images"
 import Image from "next/image"
 
-const Creator_avatar_red = ({ item }) => {
+const Creator_single_avatar_red = ({ item }) => {
 
-    console.log("Creator_avatar_red", item?.campaign?.brand?.name);
+    console.log("Creator_single_avatar_red", item?.campaign?.brand);
     return (
         <>
             <div className="flex items-center space-x-4 p-2  my-2 cursor-pointer border">
@@ -33,4 +33,4 @@ const Creator_avatar_red = ({ item }) => {
     )
 }
 
-export default Creator_avatar_red
+export default Creator_single_avatar_red
