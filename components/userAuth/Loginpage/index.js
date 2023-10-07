@@ -159,7 +159,7 @@ const Loginpage = () => {
             </div>
           </Terms_of_service>
 
-          <div className="container p-5 xl:p-10 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
+          <div className="container p-5 xl:p-10 lg:p-10 w-full h-full flex bg-zinc-100 items-center px-10">
             <div className=" auto-col-max w-full height-70">
               <div className="flex justify-center  items-center px-10 ">
                 <div className="p-5  xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">

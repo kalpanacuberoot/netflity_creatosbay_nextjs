@@ -42,6 +42,7 @@ const Campaign_infopage = () => {
   const [product_link, setProduct_link] = useState('');
   const [ref_link, setRef_link] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleRefPopupData = (data) => {
     setPopupData(data);
@@ -54,12 +55,21 @@ const Campaign_infopage = () => {
 
 
   useEffect(() => {
+
+    checkIsMobile();
+    
+    window.addEventListener('resize', checkIsMobile);
+
     const { start_date, end_date } = router.query;
 
     if (start_date && end_date) {
       setStartRangeDate(new Date(start_date));
       setEndRangeDate(new Date(end_date));
     }
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
   }, [router.query]);
 
   const handleSubmit = async (e) => {
@@ -199,6 +209,11 @@ const Campaign_infopage = () => {
     }
   };
 
+  const checkIsMobile = () => {
+    setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    // setIsMobile(window.innerWidth <= 800);
+  };
+
   return (
     <>
       {loading ? ( // Show loader if loading is true
@@ -238,7 +253,7 @@ const Campaign_infopage = () => {
                 style={{ backgroundColor: Colors.white_clr }}
                 className="auto-cols-max  p-3 rounded-md flex flex-row "
               >
-                <div className="p-5 border rounded-md shadow-md m-2 divider_line w-2/3 border  min-h-screen">
+                <div className={`${isMobile ? 'w-full' : ' w-2/3'} p-5 border rounded-md shadow-md m-2 divider_line border  min-h-screen`}>
 
                   <div className="">
                     <h1
@@ -445,7 +460,7 @@ const Campaign_infopage = () => {
                   <ToastContainer />
                 </div>
                 {/* right */}
-                <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4">
+                <div className={`${isMobile ? 'hidden' : 'auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4'}`}>
                   <h3>Today Highlights</h3>
 
                   <Image

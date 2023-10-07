@@ -55,10 +55,10 @@ const Signuppage = () => {
         router.push('/brand')
     };
 
-    const onRemoveCookies = () =>{
-        
+    const onRemoveCookies = () => {
+
         router.push('/brand')
-    }   
+    }
 
     const tabs = [
         {
@@ -68,10 +68,10 @@ const Signuppage = () => {
         {
             title: '',
             content: <Tab2 onSkipClick={closeModal} />,
-        },  
+        },
         {
             title: '',
-            content: <Tab3 onRemoveCookies={onRemoveCookies}/>,
+            content: <Tab3 onRemoveCookies={onRemoveCookies} />,
         },
     ];
 
@@ -113,7 +113,7 @@ const Signuppage = () => {
                 });
                 setTimeout(() => {
                     // Your code to execute after 5 minutes
-                    setIsModalOpen(true);   
+                    setIsModalOpen(true);
                     router.push('/brand')
                     console.log('Function executed after 5 minutes');
                 }, 300000); // 300,000 milliseconds = 5 minutes
@@ -183,7 +183,176 @@ const Signuppage = () => {
                     <Terms_of_service_content />
                 </div>
             </Terms_of_service>
-            <div className="container p-5 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
+
+            <div className="container p-5 xl:p-10 lg:p-10  h-full flex bg-zinc-100 items-center px-10">
+                <div className=" auto-col-max w-full">
+                    <div className="flex justify-center  items-center px-5 ">
+                        <div className="p-5 xl:p-10 lg:p-10 bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
+                            {/* <div className="bg-white p-5 rounded-md  xl:p-10 lg:p-10"> */}
+                            <h4 className=" text-base">
+                                {" "}
+                                Already a member ?{" "}
+                                <span
+                                    className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400"
+                                    style={{ color: Colors.logo_clr }}
+                                >
+                                    {" "}
+                                    <Link href={"/login"}>Login </Link>
+                                </span>
+                            </h4>
+                            <h1 className="mt-5 mb-5  font-bold text-left text-gray-900   ">
+                                Create New Account.
+                            </h1>
+
+                            <form
+                                onSubmit={handleRegisterSubmit}
+                            >
+                                <div className="flex">
+                                    <input
+                                        type="text"
+                                        id="first_name"
+                                        className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full py-5 bg-gray-100 px-3 mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="First Name"
+                                        required
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        pattern="[a-zA-Z ]{3,190}" title="Only Alphabets and Spaces are allowed. Minimum characters 3"
+                                    />
+                                    <input
+                                        type="text"
+                                        id="last_name"
+                                        className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full ml-2 py-5 bg-gray-100 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Last Name"
+                                        required
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        pattern="[a-zA-Z ]{3,190}" title="Only Alphabets and Spaces are allowed. Minimum characters 3"
+                                    />
+                                </div>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="Email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <div className='flex items-center relative'>
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        id="password"
+                                        className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Create Password"
+                                        required
+                                        value={password}
+
+                                        onChange={handlePasswordChange}
+                                        pattern="^.{8,}$" title="Minimum 8 characters allowed"
+                                    />
+                                    <button
+                                        className="absolute text-black rounded-r-md p-5 pb-0 right-0"
+                                        onClick={togglePasswordVisibility}
+                                    >
+
+                                        {showPassword ?
+                                            <Image
+                                                src={Images.show_eye}
+                                                width={20}
+                                                height={20}
+                                                alt=""
+                                            />
+                                            :
+                                            <Image
+                                                src={Images.hide_eye}
+                                                width={20}
+                                                height={20}
+                                                alt=""
+                                            />
+                                        }
+                                    </button>
+                                </div>
+
+                                <div className='flex items-center relative'>
+                                    <input
+                                        type={showconfirmPassword ? 'text' : 'password'}
+                                        id="confirm_password"
+                                        className=" focus:border-purple-500 focus:ring-purple-500 appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Confirm Password"
+                                        value={confirmPassword}
+                                        required
+                                        onChange={handleConfirmPasswordChange}
+                                    />
+                                    <button
+                                        className="absolute text-black rounded-r-md p-5 pb-0 right-0"
+                                        onClick={toggleConfirmPasswordVisibility}
+                                    >
+                                        {showconfirmPassword ?
+                                            <Image
+                                                src={Images.show_eye}
+                                                width={20}
+                                                height={20}
+                                                alt=""
+                                            />
+                                            :
+                                            <Image
+                                                src={Images.hide_eye}
+                                                width={20}
+                                                height={20}
+                                                alt=""
+                                            />
+                                        }
+                                    </button>
+                                </div>
+                                {!passwordsMatch && <p>Passwords do not match</p>}
+                                <div className=" flex my-5 justify-between">
+                                    <div className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            id="myCheckbox"
+                                            className="form-checkbox h-5 w-5 "
+                                            style={{ backgroundColor: Colors.logo_clr }}
+                                            required
+                                        />
+                                        <label htmlFor="myCheckbox" className="ml-2 text-black">
+                                            I accept Creatorsbay{" "}
+
+                                        </label>
+                                        <span style={{ color: Colors.pink_clr }}
+                                            onClick={() => setIsModalOpen_terms_service(true)}
+                                            className='ms-2 cursor-pointer'
+                                        >
+                                            {" "}
+                                            terms & conditions
+                                        </span>
+                                    </div>
+                                    <Link href={"/forgot"}>
+                                        <button
+                                            className="  float-right"
+                                            style={{ color: Colors.pink_clr }}
+                                        >
+                                            {" "}
+                                            Forgot Password ?
+                                        </button>
+                                    </Link>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
+                                    style={{ background: Colors.logo_clr }}
+                                >
+                                    Create Account
+                                </button>
+
+                            </form>
+                            <ToastContainer />
+                            {/* </div> */}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container p-5 xl:p-10 lg:p-10 border-gray-300 border-solid  bg-zinc-100  rounded-lg border-1">
                 <div className="bg-white p-5 rounded-md  xl:p-10 lg:p-10">
                     <h4 className=" text-base">
                         {" "}
@@ -242,7 +411,7 @@ const Signuppage = () => {
                                 placeholder="Create Password"
                                 required
                                 value={password}
-                                // onChange={(e) => setPassword(e.target.value)}
+
                                 onChange={handlePasswordChange}
                                 pattern="^.{8,}$" title="Minimum 8 characters allowed"
                             />
@@ -250,7 +419,7 @@ const Signuppage = () => {
                                 className="absolute text-black rounded-r-md p-5 pb-0 right-0"
                                 onClick={togglePasswordVisibility}
                             >
-                                {/* {showPassword ? 'Hide' : 'Show'} */}
+
                                 {showPassword ?
                                     <Image
                                         src={Images.show_eye}
@@ -277,14 +446,12 @@ const Signuppage = () => {
                                 placeholder="Confirm Password"
                                 value={confirmPassword}
                                 required
-                                // onChange={(e) => setPasswordsMatch(e.target.value)}
                                 onChange={handleConfirmPasswordChange}
                             />
                             <button
                                 className="absolute text-black rounded-r-md p-5 pb-0 right-0"
                                 onClick={toggleConfirmPasswordVisibility}
                             >
-                                {/* {showPassword ? 'Hide' : 'Show'} */}
                                 {showconfirmPassword ?
                                     <Image
                                         src={Images.show_eye}
@@ -334,21 +501,19 @@ const Signuppage = () => {
                                 </button>
                             </Link>
                         </div>
-                        {/* <Link href={'/brand'}> */}
+
                         <button
-                            // onClick={handleGetStarted}
                             type="submit"
                             className=" rounded-3xl  text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
                             style={{ background: Colors.logo_clr }}
-                            // onClick={handleRegisterSubmit}
                         >
                             Create Account
                         </button>
-                        {/* </Link> */}
+
                     </form>
                     <ToastContainer />
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

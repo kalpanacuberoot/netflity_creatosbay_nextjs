@@ -58,7 +58,7 @@ const Forgotpage = () => {
   };
   return (
     <>
-      <div className="container h-full flex bg-zinc-100 items-center height-70 px-10">
+      <div className="container h-screen flex bg-zinc-100 items-center px-10">
         <div className=" auto-col-max w-full">
           <div className="flex justify-center p-5 xl:p-10 lg:p-10">
             <div className="p-5   xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">

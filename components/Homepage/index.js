@@ -30,8 +30,13 @@ const Homepage = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [showChild, setShowChild] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); 
 
   useEffect(() => {
+    
+    checkIsMobile();
+
+    window.addEventListener('resize', checkIsMobile);
 
     const cookieValue = Cookies.get('user_data');
 
@@ -40,7 +45,7 @@ const Homepage = () => {
     }
 
 
-    const allCampaignData = async () => {
+    const allCampaignData = async () => { 
       setLoading(true)
       try {
         let cookieValue = Cookies.get('user_data');
@@ -50,7 +55,7 @@ const Homepage = () => {
 
         if (typeof cookieValue === 'undefined' || checkBrand !== 'brand') {
           console.log('User not authenticated, navigating to login page...');
-          router.push('/login'); 
+          router.push('/login');
           console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
         }
@@ -94,10 +99,10 @@ const Homepage = () => {
 
             });
             if (response.status === 429) {
-              const retryAfter = parseInt(response.headers.get('Retry-After')) || 60; 
+              const retryAfter = parseInt(response.headers.get('Retry-After')) || 60;
               console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
-              await new Promise(resolve => setTimeout(resolve, retryAfter * 1000)); 
-              return makeRequest(); 
+              await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+              return makeRequest();
             }
 
             console.log('GET campaigns?brand=1 response:', response);
@@ -127,6 +132,9 @@ const Homepage = () => {
     }
 
     allCampaignData();
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -149,6 +157,10 @@ const Homepage = () => {
   };
 
 
+  const checkIsMobile = () => {
+    setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    // setIsMobile(window.innerWidth <= 800);
+  };
 
 
   return (
@@ -165,10 +177,10 @@ const Homepage = () => {
       ) : (
         <>
 
-          <div className="flex" style={{ backgroundColor: Colors.button_light_clr }}>
+          <div className="flex flex-col md:flex-row" style={{ backgroundColor: Colors.button_light_clr }}>
 
             <div
-              className="w-full auto-cols-max me-3 ps-5 rounded-md pb-3 "
+              className={`w-full auto-cols-max me-3 ${isMobile ? '' : 'ps-5'} rounded-md `}
             >
               <div
                 className="my-4 ps-3 rounded-md"
@@ -202,7 +214,7 @@ const Homepage = () => {
                 </div>
               </div>
               <div
-                className="flex flex-row justify-evenly items-start p-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
+                className={`${isMobile ? '' : 'min-h-screen h-auto'} flex flex-row justify-evenly items-start p-5 pb-0 rounded-md flex-wrap overflow-y-auto `}
                 style={{ backgroundColor: Colors.white_clr }}
               >
 
@@ -253,7 +265,7 @@ const Homepage = () => {
 
             <div
 
-              className="w-96 auto-cols-max rounded-md grid grid-cols-1 divide-y mt-4"
+              className={`${isMobile ? 'w-full' : 'w-96'} auto-cols-max rounded-md grid grid-cols-1 divide-y mt-4`}
             >
 
               <Right_side_Dashboard />
