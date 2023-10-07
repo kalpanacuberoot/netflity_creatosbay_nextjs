@@ -19,6 +19,7 @@ const Creators_profilepage = () => {
   const [creator_details, setCreator_details] = useState(null);
   const [hasReloaded, setHasReloaded] = useState(false);
   const [loading, setLoading] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
   const convertHeight = (heightCms) => {
     const inchesPerFoot = 12;
@@ -67,7 +68,15 @@ const Creators_profilepage = () => {
 
 
   useEffect(() => {
+
+    checkIsMobile();
+
+    window.addEventListener('resize', checkIsMobile);
+
     handleSubmit();
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
 
   }, []);
 
@@ -108,6 +117,11 @@ const Creators_profilepage = () => {
     }
   }
 
+  const checkIsMobile = () => {
+    setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    // setIsMobile(window.innerWidth <= 800);
+  };
+
 
   console.log("filterURL(links[0])", links, creator_details);
 
@@ -140,11 +154,11 @@ const Creators_profilepage = () => {
             <div className="m-2 w-full auto-cols-max border">
               <div
                 style={{ backgroundColor: Colors.white_clr }}
-                className="auto-cols-max  p-3 rounded-md flex flex-row "
+                className={`${isMobile ? '' : 'p-3'} auto-cols-max rounded-md flex md:flex-row flex-col w-full`}
               >
 
 
-                <div className="p-10 rounded-md shadow-md m-2 divider_line w-2/3 relative h-auto">
+                <div className={` rounded-md shadow-md m-2 divider_line ${isMobile ? 'w-full p-5' : 'w-2/3 p-10'}  relative h-auto`}>
                   <div
                     className=" flex justify-between pb-4 "
                     style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
@@ -245,7 +259,7 @@ const Creators_profilepage = () => {
 
                   </div>
 
-                  <div className="flex gap-10 h-20 items-center align-middle absolute w-11/12  bottom-0 ">
+                  <div className={`flex ${isMobile ? 'h-56 gap-10' : 'h-96 gap-5'}  items-end align-middle w-11/12  bottom-0 justify-center`}>
 
                     <button
                       className=" w-full rounded-full h-10"
@@ -255,12 +269,12 @@ const Creators_profilepage = () => {
                       }}
                       onClick={() => router.push('/marketplace')}
                     >
-                      {" "}
+                      
                       Back
                     </button>
 
                     <button
-                      className=" w-full rounded-full h-10"
+                      className={`w-full rounded-full  md:text-base ${isMobile ? 'py-1 px-1 text-base' : 'h-10'}`} 
                       style={{
                         background: Colors.logo_clr,
                         color: Colors.white_clr,
@@ -268,13 +282,13 @@ const Creators_profilepage = () => {
                       // onClick={() => setIsModalOpen(true) && window.location.reload()}
                       onClick={handleReload}
                     >
-                      {" "}
+                     
                       Send Campaign
                     </button>
                   </div>
                 </div>
 
-                <div className="auto-cols-max p-5 border rounded-md shadow-md min-h-screen flex flex-col m-2 w-2/4 ">
+                <div className={`auto-cols-max border rounded-md shadow-md flex flex-col m-2 h-auto min-h-screen ${isMobile ? 'w-full h-auto  p-5' : 'w-2/4  p-5'} `}>
                   <div
                     className=" flex justify-between  pb-4"
                     style={{ borderBottom: "1px solid hsla(330, 93%, 66%, 0.5)" }}
@@ -308,7 +322,6 @@ const Creators_profilepage = () => {
                       </h3>
                     </div>
                   </div>
-
 
                   <div className="grid max-h-[700px] grid-cols-2 gap-5 overflow-y-auto mt-10 portfolio">
 

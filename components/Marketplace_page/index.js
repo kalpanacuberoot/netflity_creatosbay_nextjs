@@ -21,8 +21,13 @@ const Marketplace_page = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+
+        checkIsMobile();
+
+        window.addEventListener('resize', checkIsMobile);
 
         handleSubmit();
         const handleOutsideClick = (event) => {
@@ -34,6 +39,7 @@ const Marketplace_page = () => {
         document.addEventListener('mousedown', handleOutsideClick);
 
         return () => {
+            window.removeEventListener('resize', checkIsMobile);
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, [isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,16 +70,16 @@ const Marketplace_page = () => {
                 setLoading(false)
             } else {
                 console.error('Error:', response.statusText);
-                
+
             }
         } catch (error) {
             console.error('Error:', error);
-           
+
         }
     };
 
 
-    console.log("creatordata", creatordata);
+    console.log("marketplacecreatordata", creatordata);
 
     const onProfileDetail = (index) => {
         setLoading(true)
@@ -93,6 +99,11 @@ const Marketplace_page = () => {
 
     }
 
+    const checkIsMobile = () => {
+        setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+        // setIsMobile(window.innerWidth <= 800);
+    };
+
     return (
         <>
             {loading ? ( // Show loader if loading is true
@@ -106,7 +117,7 @@ const Marketplace_page = () => {
                 </div>
             ) : (
                 <div
-                    className="flex container_capmapign_info p-3 "
+                    className={`${isMobile ? ' py-3' : ' flex container_capmapign_info '} `}
                     style={{ backgroundColor: Colors.button_light_clr }}
                     ref={dropdownRef}
                 >
@@ -165,7 +176,7 @@ const Marketplace_page = () => {
 
                                 return (
                                     <>
-                                        <div className='bg-white p-3 rounded-lg m-2 w-96 ' key={index}>
+                                        <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'}  `} key={index}>
                                             <div className="grid grid-cols-3 rounded-md gap-1" >
                                                 <Image
                                                     width={500}
