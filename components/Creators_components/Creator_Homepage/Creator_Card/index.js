@@ -47,7 +47,7 @@ const Creator_Card = (item) => {
     return (
         <>
             <div className="my-5 mx-2">
-                <div className=" flex flex-col w-full">
+                <div className=" flex flex-col w-full rounded-lg shadow-md">
                     <div className="max-h-60 border rounded-t-lg max-w-96">
                         <Image
                             src={item?.item?.campaign?.brand?.logo ? item?.item?.campaign?.brand?.logo : Images.card_img}
@@ -96,7 +96,7 @@ const Creator_Card = (item) => {
                             {item?.item?.campaign?.description}
 
                         </div>
-                        <div className="px-5 border py-3 rounded-md text-center  mt-2">
+                        <div className="px-5  py-3 rounded-md text-center  mt-2">
                             <h6>{start_date} - {end_date}</h6>
                             {/* <Link href={'/creator_single_chat'}> */}
                             <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(item)}>
