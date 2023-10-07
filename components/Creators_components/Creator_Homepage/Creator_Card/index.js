@@ -48,7 +48,7 @@ const Creator_Card = (item) => {
         <>
             <div className="my-5 mx-2">
                 <div className=" flex flex-col w-full rounded-lg shadow-md">
-                    <div className="max-h-60 border rounded-t-lg max-w-96">
+                    <div className="max-h-60 border rounded-t-lg max-w-96 h-60 w-80">
                         <Image
                             src={item?.item?.campaign?.brand?.logo ? item?.item?.campaign?.brand?.logo : Images.card_img}
                             width={200}
@@ -60,7 +60,7 @@ const Creator_Card = (item) => {
                     <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                         <div className="flex flex-row justify-between items-end mt-4  mx-0">
                             <div className="font_size_17 flex items-center flex-column me-5">
-                                <span className="me-3">
+                                {/* <span className="me-3">
                                     Image
                                     <span
 
@@ -75,8 +75,9 @@ const Creator_Card = (item) => {
                                         className="px-3 py-1 rounded-md border ms-2 text-white bg-slate-800">
                                         {item?.item?.video_count ? item?.item?.video_count : 0}
                                     </span>
-                                </span>
+                                </span> */}
                             </div>
+                            
                             <div
                                 className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
                                 style={{ backgroundColor: Colors.delay_clr }}
@@ -91,7 +92,7 @@ const Creator_Card = (item) => {
                                 <h5 className="">draft</h5>
                             </div>
                         </div>
-                        <h2 className="font-bold ">{item?.item?.campaign?.name}</h2>
+                        <h2 className="font-bold text-center mt-3">{item?.item?.campaign?.name}</h2>
                         {/* <div className="font_size_12">
                             {item?.item?.campaign?.description}
 
