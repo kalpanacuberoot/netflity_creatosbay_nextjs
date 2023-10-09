@@ -31,10 +31,10 @@ const Communication_page = () => {
     const [loading, setLoading] = useState(false);
 
     const Creator_campaignData = async () => {
-        
+
         setLoading(true)
-        const userCookie = Cookies.get('user_data');
-        const campaignId = Cookies.get('campaign_id');
+        let userCookie = Cookies.get('user_data');
+        let campaignId = Cookies.get('campaign_id');
 
         if (typeof userCookie === 'undefined' && typeof campaignId === 'undefined') {
             router.push('/login');
@@ -195,7 +195,7 @@ const Communication_page = () => {
                     <div className="flex container_invoice w-full "
                         style={{ background: Colors.logo_background_clr }}
                     >
-                        <div className="m-2  auto-cols-max text-start p-2  w-full"
+                        <div className="m-2  auto-cols-max text-start p-2  w-full  "
                         >
                             <div
                                 style={{ background: Colors.invoice_gradient_clr }}
@@ -207,12 +207,11 @@ const Communication_page = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-row items-start  justify-between w-full">
+                            <div className="flex flex-row  items-start  justify-between w-full">
 
                                 <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
                                     <Searchcomm />
-                                    {/* {filteredActiveCreators?.length > 0 ?
-                                filteredActiveCreators?.map((active, index) => ( */}
+
                                     <div className=" p-4 border shadow rounded m-3 "
                                     //  key={index}
                                     >
@@ -246,18 +245,8 @@ const Communication_page = () => {
 
                                         </div>
                                     </div>
-                                    {/* 
-                                ))
-                                :
-                                <div> no data found</div>
 
-                            } */}
-
-
-                                    {/* {filteredInactiveCreators.length>0 ? 
-                            filteredInactiveCreators?.map((inactive, index) => ( */}
                                     <div className="  p-4 border shadow rounded m-3"
-                                    // key={index}
                                     >
                                         <div className="flex flex-row items-center justify-between ">
                                             <div className="font_size_21">
@@ -323,10 +312,7 @@ const Communication_page = () => {
 
                                         </div>
                                     </div>
-                                    {/* ))
-                        :
-                        <div> no data found</div>
-                        } */}
+                                  
 
                                 </div>
                                 <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
@@ -370,12 +356,12 @@ const Communication_page = () => {
                                                                             >
                                                                                 {item?.approved === 0 ? "Inactive" : "active"}
                                                                             </button>
-                                                                            
+
                                                                         </>
                                                                     )
                                                                 })}
                                                             </div>
-                                                           
+
 
                                                         </div>
                                                     </>

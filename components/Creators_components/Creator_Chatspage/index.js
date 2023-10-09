@@ -19,6 +19,7 @@ const Creator_Chatspage = () => {
     const [allActiveBrands, setAllActiveBrands] = useState(null);
     const [blankchat, setBlankchat] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [currentActiveItem, setCurrentActiveItem] = useState(null);
 
     const AllBrand_allcampaignData = async () => {
 
@@ -91,6 +92,7 @@ const Creator_Chatspage = () => {
         console.log("creator inactiveinActiveClick", item);
         setCampaign_data(item)
         setBlankchat(false);
+        setCurrentActiveItem(item);
         // const creator_counts = campaign_data?.creators?.filter((item) => item.creator_id === inactive?.data?.id);
         // console.log("creator_count", creator_counts);
         // setCreator_count(creator_counts);
@@ -110,7 +112,7 @@ const Creator_Chatspage = () => {
         }, 1000);
     }
 
-    console.log("campaigndata---",campaign_data);
+    console.log("campaigndata---", campaign_data);
 
 
     return (
@@ -146,58 +148,79 @@ const Creator_Chatspage = () => {
                     </div>
                     <div className="flex flex-row items-start  justify-between w-full">
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
-                            <div className=" p-4 border shadow rounded m-3 "
+                            <div className=" border  shadow-lg rounded m-5"
+                                style={{ borderColor: Colors.logo_background_clr }}
                             >
-                                <div className="flex flex-row items-center justify-between ">
-                                    <div className="font_size_21">
+                                <div className="p-5 flex flex-row items-center justify-between ">
+                                    <div className="font_size_20" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                         Active Conversations
                                     </div>
                                     <span
                                         style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
                                         className="px-2 rounded-md border">
+                                        {allActiveBrands?.length ? allActiveBrands?.length : 0}
                                     </span>
                                 </div>
 
 
                                 <hr className="" />
                                 <div className="">
-                                    <div className="py-3">
-                                    </div>
+                                    {/* <div className="py-3">
+                                    </div> */}
+                                    {allActiveBrands?.length > 0 ? allActiveBrands.map((item, index) => (
+                                        <>
+                                            <div
+                                                key={index}
+                                                onClick={() => inActiveBrandClick(item)}
+                                                className={`border-b-2 ${item === currentActiveItem ? 'bg-gray-200' : ''} px-3 py-2`}>
+                                                <Creator_avatar_red item={item} />
+                                            </div>
+                                        </>
+                                    ))
+                                        :
+                                        <h4 className="px-5 py-3">No Active Conversations</h4>
+                                    }
                                 </div>
                             </div>
 
-                            <div className="  p-4 border shadow rounded m-3"
+                            <div className=" border shadow-lg rounded m-5 "
                             >
-                                <div className="flex flex-row items-center justify-between ">
-                                    <div className="font_size_21">
-                                        InActive Conversations
+                                <div className="p-5 flex flex-row items-center justify-between ">
+                                    <div className="font_size_20" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
+                                        Inactive Conversations
                                     </div>
                                     <span
                                         style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
-                                        className="px-2 rounded-md border">
+                                        className="px-2 rounded-md border ps-3">
                                         {allInactiveBrands?.length ? allInactiveBrands?.length : 0}
                                     </span>
                                 </div>
                                 <hr className="" />
-                                <div className="">
+                                {/* <div className=""> */}
 
-                                    <div className="py-3">
-                                        {allInactiveBrands?.length > 0 && allInactiveBrands.map((item, index) => (
-                                            <>
-                                                <div onClick={() => inActiveBrandClick(item)} >
-                                                    <Creator_avatar_red key={index} item={item} />
-                                                </div>
-                                            </>
-                                        ))}
-                                    </div>
-                                </div>
+
+                                {allInactiveBrands?.length > 0 ? allInactiveBrands.map((item, index) => (
+                                    <>
+                                        <div
+                                            key={index}
+                                            onClick={() => inActiveBrandClick(item)}
+                                            className={`border-b-2 ${item === currentActiveItem ? 'bg-gray-100 shadow-md' : ''} px-3 py-2`}>
+                                            <Creator_avatar_red item={item} />
+                                        </div>
+                                    </>
+                                ))
+                                    :
+                                    <h4 className="px-5 py-3">No Inactive Conversations</h4>
+                                }
+
+                                {/* </div> */}
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-md my-3 overflow-y-auto me-3 w-full h-full" style={{ background: Colors.white_clr }}>
                             {!blankchat &&
                                 <div className="flex flex-row items-center p-4 justify-between">
-                                    {campaign_data && <Brand_Avatar_withoutbadge item={campaign_data}/>}
-                                    
+                                    {campaign_data && <Brand_Avatar_withoutbadge item={campaign_data} />}
+
                                     <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
 
                                         <button
@@ -264,62 +287,87 @@ const Creator_Chatspage = () => {
                         </div>
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
-                            <div className="font_size_21  p-4">
+                            <div className="font_size_21  p-4" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                 Campaign info
                             </div>
 
                             <hr className="" />
-                            <div className=" border shadow rounded m-3">
-                                <div className="p-4">
-                                    {campaign_data?.campaign?.name}
-                                    <h3></h3>
-                                </div>
-                                <div className="py-3">
-                                    <Image
-                                        src={campaign_data?.campaign?.brand?.logo ? campaign_data?.campaign?.brand?.logo : Images.card_img}
-                                        height={200}
-                                        width={200}
-                                        className="mx-auto"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="px-4">
-                                    <p className="font_size_16 communication_text py-2">
-                                        {campaign_data?.campaign?.description}
-                                    </p>
-                                </div>
-                                <div className="px-4">
-                                    <p className="font_size_16 communication_text py-2">
-                                        {campaign_data?.campaign?.starting_date} - {campaign_data?.campaign?.ending_date}
-                                    </p>
-                                </div>
-                                <div className=" border shadow rounded mx-3 my-4">
-                                    <div className="flex px-4 items-center">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                            Image Count
-                                        </label>
+                            {campaign_data ?
+                                <div className=" border shadow-lg rounded m-3">
+                                    <div className="p-4 " >
 
-                                        <div className="px-3">{campaign_data?.image_count}/2</div>
+                                        <h3>{campaign_data?.campaign?.name}</h3>
                                     </div>
-                                    <div className="flex px-4 items-center">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                            Video Count
-                                        </label>
-
-                                        <div className="px-3">{campaign_data?.video_count}/2</div>
+                                    <div className="py-3">
+                                        <Image
+                                            src={campaign_data?.campaign?.brand?.logo}
+                                            height={200}
+                                            width={200}
+                                            className="mx-auto  shadow-md"
+                                            alt=""
+                                        />
                                     </div>
-                                    <div className="flex px-4 items-center">
-                                        <div>Revision Submitted</div>
-                                        <div className="px-5">0/2</div>
+                                    <div className="px-4">
+                                        <p className="font_size_16 communication_text py-2 text-gra     y-800">
+                                            {campaign_data?.campaign?.description}
+                                        </p>
+                                    </div>
+                                    <div className="px-4">
+                                        <p className="font_size_16 communication_text py-2">
+                                            <span style={{color:Colors.orange_clr}} className="px-3 py-1 rounded-full">
+                                                {campaign_data?.campaign?.starting_date}
+                                            </span>  -    
+                                            <span style={{color:Colors.orange_clr}} className="px-3 py-1 rounded-full">
+                                                 {campaign_data?.campaign?.ending_date}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div className=" border shadow rounded mx-3 my-4 py-4 px-3">
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                <i>Image Count : </i>
+                                            </label>
+
+                                            <div className="px-3">{campaign_data?.image_count}/2</div>
+                                        </div>
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                               <i> Video Count : </i>
+                                            </label>
+
+                                            <div className="px-3">{campaign_data?.video_count}/2</div>
+                                        </div>
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                               <i> Revision Submitted :</i>
+                                            </label>
+
+                                            <div className="px-3">{campaign_data?.video_count}/2</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                :
+                                <div className=" border shadow-lg rounded m-3 mt-10">
+
+                                    <div className="">
+                                        <Image
+                                            src={Images.card_img}
+                                            height={1000}
+                                            width={500}
+                                            className="w-full "
+                                            alt=""
+                                        />
                                     </div>
                                 </div>
-
-
-                            </div>
+                            }
 
                         </div>
                     </div>

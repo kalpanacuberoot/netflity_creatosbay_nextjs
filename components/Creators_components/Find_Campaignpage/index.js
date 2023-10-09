@@ -149,7 +149,7 @@ const Find_Campaignpage = () => {
         <>
 
             <div className="flex container_invoice container w-full"
-                style={{ background: Colors.logo_background_clr }}
+                style={{ background: Colors.light_grey_clr }}
             >
                 <div className="m-2 w-full auto-cols-max text-start p-2"
                 >
@@ -158,10 +158,10 @@ const Find_Campaignpage = () => {
                         className="auto-cols-max p-3 rounded-md flex flex-row"
                     >
                         <div className="flex flex-row justify-between items-center  w-full">
-                            <div className="font_size_40" style={{ color: Colors.white_clr }}>
+                            <div className="font_size_40 text-center w-full" style={{ color: Colors.white_clr }}>
                                 Live Campaign
                             </div>
-                            <div
+                            {/* <div
                                 style={{ background: Colors.white_clr }}
                                 className="rounded-md flex flex-row justify-between items-center px-3 py-2">
                                 <button className="font_size_21 mx-4" onClick={() => router.push('/campaign_info')}>
@@ -173,7 +173,7 @@ const Find_Campaignpage = () => {
                                     height={24}
                                     alt=""
                                 />
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   font-family: Arial, Poppins, Segoe Print;
 }
@@ -100,6 +101,43 @@ p {
   font-size: 42px;
 }
 
+.custom-select{
+  background-color: #fff;
+}
+
+.custom-select .css-1uccc91-singleValue {
+  background-color: blue;
+  padding: 8px;
+}
+
+.custom-select .css-26l3qy-menu {
+  background-color: white;
+}
+
+.custom-select .css-1wa3eu0-placeholder {
+  color: gray;
+}
+
+.custom-select .css-1okebmr-indicatorSeparator {
+  display: none;
+}
+
+/* .custom-select {
+  .css-1uccc91-singleValue {
+    background-color: blue;
+    padding: 8px;
+  }
+  .css-26l3qy-menu {
+    background-color: white;
+  }
+  .css-1wa3eu0-placeholder {
+    color: gray;
+  }
+  .css-1okebmr-indicatorSeparator {
+    display: none;
+  }
+} */
+
 .communication_text {
   line-height: 20.69px;
   max-width: 278px;
@@ -108,6 +146,19 @@ p {
 }
 
 .edit_profile_ht {}
+
+.platform_image_container {
+  margin: 10px;
+}
+
+.platform_image {
+  width: 100px;
+  /* Set the desired width */
+  height: 80px;
+  /* Set the desired height */
+  object-fit: cover;
+  /* You can choose the appropriate value for object-fit */
+}
 
 
 button {

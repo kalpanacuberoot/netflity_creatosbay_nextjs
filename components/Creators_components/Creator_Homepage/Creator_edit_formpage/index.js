@@ -8,10 +8,10 @@ import { toast } from 'react-toastify';
 import { url } from "@/generalfunctions";
 import Creator_MultiSelectDropdown from "./Creator_MultiSelectDropdown";
 import Colors from "@/styles/Colors";
+import Select from 'react-select';
+
 
 const Creator_edit_formpage = () => {
-
-
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -48,15 +48,14 @@ const Creator_edit_formpage = () => {
     const [allApiResponse, setAllApiResponse] = useState([]);
     const [file, setFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
+    const [selectedStateOption, setSelectedStateOption] = useState(null);
 
     console.log("Createcreatoralldata", name, email, city, age, gender, heightFeet, heightInches, weight, bio, pets, kids, statesData, skinType,
         bodyType, hairType, eyeType, platform, selectedState, categoriesData)
 
-
-
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [selectedMultipleOptionsIds, setSelectedMultipleOptionsIds] = useState([]);
-    const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+    // const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedItemsIds, setSelectedItemsIds] = useState([]);
@@ -481,11 +480,11 @@ const Creator_edit_formpage = () => {
     }, []);
 
 
-    const handleStateChange = (event) => {
-        // Update the selectedState state variable with the selected option's value
-        setSelectedState(event.target.value);
-        setSelectedshowvalue(true)
-    };
+    // const handleStateChange = (event) => {
+    //     // Update the selectedState state variable with the selected option's value
+    //     setSelectedState(event.target.value);
+    //     setSelectedshowvalue(true)
+    // };
 
 
     console.log("categoriesDataskinType", pets);
@@ -677,6 +676,34 @@ const Creator_edit_formpage = () => {
         }
 
     }
+
+    const stateoptions = statesData?.map((state_name, index) => ({
+        value: state_name?.id,
+        label: state_name?.name,
+    }));
+
+    const handleStateChange = (selectedOption) => {
+        setSelectedStateOption(selectedOption);
+    };
+
+    const customStateStyles = {
+        menu: (provided) => ({
+            ...provided,
+            backgroundColor: 'white', // Background color for the entire dropdown menu
+            zIndex: 1
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected ? 'blue' : 'white', // Change the background color as desired
+            padding: '8px', // Add padding as desired
+            zIndex: 1
+        }),
+    };
+
+    console.log("statesData", statesData);
+
+
+
     return (
         <>
             <div className="min-h-screen bg-gray-100 p-0 sm:p-12 w-full">
@@ -684,68 +711,146 @@ const Creator_edit_formpage = () => {
 
                     <h1 className="text-4xl font-bold mb-8 text-center">Edit Profile</h1>
                     <form id="form" noValidate>
-                        <div className=" z-0 w-full mb-5">
-                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder=" "
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                                className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                            />
-
-                            <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
-                        </div>
-
-                        <div className=" z-0 w-full mb-5">
-                            <label htmlFor="email" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter email address</label>
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder=" "
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                            />
-                            <span className="text-sm text-red-600 hidden" id="error">Email address is required</span>
-                        </div>
-                        <div className="flex">
-
-                            <div className=" z-0 w-full me-5">
-                                <label
-                                    htmlFor="stateSelect" // Use the id attribute of the select element here
-                                    className=" duration-300 top-3 -z-1 origin-0 text-gray-500"
+                        <div className="flex justify-between">
+                            <div className=" w-full" 
+                            style={{textAlign:'-webkit-center'}}
+                            >
+                                <div className=" w-full my-4 font-bold text-lg text-center"> Upload Profile Image </div>
+                                <div
+                                    className=" focus:border-purple-500 focus:ring-purple-500 border-dotted h-96 w-96 align-middle border-4 rounded-full bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                    onChange={handleFileChange}
                                 >
-                                    Select Your State
-                                </label>
-                                <div className="dropdown_select pt-4">
-                                    <select
-                                        name="select"
-                                        id="stateSelect" // Add an id attribute
-                                        value={selectedState} // Set the value of the select element to the selectedState
-                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                        onChange={handleStateChange} // Add onChange event handler
+                                    <label
+                                        htmlFor="fileInput"
+                                        style={{ borderColor: Colors.logo_clr }}
+                                        className="w-auto py-5"
                                     >
-                                        <option value="" selected disabled hidden></option>
-                                        {statesData &&
-                                            statesData.map((state_name, index) => (
-                                                <option key={index} value={state_name?.id} >
-                                                    {state_name?.name}
-                                                </option>
-                                            ))}
-                                    </select>
+                                        <div className="">
+                                            <input
+                                                id="fileInput"
+                                                type="file"
+                                                accept="image/*"
+                                                className="hidden absolute w-screen  "
+                                            />
+                                            {!file && (
+                                                <Image
+                                                    src={Images.plus_icon}
+                                                    width={15}
+                                                    height={15}
+                                                    alt=""
+                                                    className="mx-auto cursor-default m-5 mb-0"
 
+                                                />
+                                            )}
+                                        </div>
+                                        {previewImage && (
+                                            <Image
+                                                src={previewImage}
+                                                alt="Selected"
+                                                style={{ maxWidth: '100%', maxHeight: '300px' }}
+                                                width={50}
+                                                height={50}
+                                                className="mx-auto"
+                                            />
+                                        )}
+                                        {file && (
+                                            <p className="text-base text-center">{file?.name}</p>
+                                        )}
+                                        {!file && (
+                                            <>
+                                                <div
+                                                    className=" text-base text-gray-300 "
+                                                >
+                                                    Upload Your Profile Image
+                                                </div>
+                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
+                                            </>
+                                        )}
+                                    </label>
+
+                                </div>
+                                {/* <button onClick={handleSubmit}>save image</button> */}
+
+                            </div>
+                            <div className="w-full">
+                                <div className=" z-0 w-full mb-5">
+                                    <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder=" "
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required
+                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                    />
+
+                                    <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
+                                </div>
+
+                                <div className=" z-0 w-full mb-5">
+                                    <label htmlFor="email" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter email address</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder=" "
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                    />
+                                    <span className="text-sm text-red-600 hidden" id="error">Email address is required</span>
+                                </div>
+                                <div className="flex">
+
+                                    <div className=" z-0 w-full me-5">
+                                        <label
+                                            htmlFor="stateSelect" // Use the id attribute of the select element here
+                                            className=" duration-300 top-3 -z-1 origin-0 text-gray-500"
+                                        >
+                                            Select Your State
+                                        </label>
+                                        <div className="dropdown_select pt-4">
+                                            <select
+                                                name="select"
+                                                id="stateSelect" // Add an id attribute
+                                                value={selectedState} // Set the value of the select element to the selectedState
+                                                className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                                onChange={handleStateChange} // Add onChange event handler
+                                            >
+                                                <option value="" selected disabled hidden className=""></option>
+                                                {statesData &&
+                                                    statesData.map((state_name, index) => (
+                                                        <option key={index} value={state_name?.id} className=" ">
+                                                            {state_name?.name}
+                                                        </option>
+                                                    ))}
+                                            </select>
+
+
+                                            <span className="text-sm text-red-600 hidden" id="error">
+                                                Option has to be selected
+                                            </span>
+                                        </div>
+                                        {/* <div className=" pt-4"  
+                                >
+                                    <Select
+                                        value={selectedStateOption}
+                                        onChange={handleStateChange}
+                                        options={stateoptions}
+                                        placeholder="Select an option"
+                                        styles={customStateStyles}
+                                        // className="custom-select" // Add a custom class to the Select component
+                                        // classNamePrefix="custom-select" // Add a custom class prefix
+                                    />
 
                                     <span className="text-sm text-red-600 hidden" id="error">
                                         Option has to be selected
                                     </span>
-                                </div>
+                                </div> */}
 
 
-                            </div>
-                            <div className=" z-0 w-full mb-5">
+                                    </div>
+                                    {/* <div className=" z-0 w-full mb-5">
                                 <label htmlFor="password" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">City</label>
                                 <input
                                     type="text"
@@ -757,145 +862,147 @@ const Creator_edit_formpage = () => {
                                 />
 
                                 <span className="text-sm text-red-600 hidden" id="error">Password is required</span>
-                            </div>
-                        </div>
-
-                        <div className="flex">
-                            <fieldset className="relative z-0 w-full p-px mt-4 mb-5 me-5">
-                                <legend className="text-xl absolute text-gray-500 transform scale-75 -top-3 origin-0 ">Gender</legend>
-                                <div className="block pt-5 pb-2 space-x-4 " >
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="radio"
-                                            // value="1"
-                                            value="male"
-                                            className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                                            onChange={(e) => setGender(e.target.value)}
-                                        />
-                                        Male
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="radio"
-                                            // value="2"
-                                            value="female"
-                                            className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                                            onChange={(e) => setGender(e.target.value)}
-                                        />
-                                        Female
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="radio"
-                                            // value="2"
-                                            value="other"
-                                            className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                                            onChange={(e) => setGender(e.target.value)}
-                                        />
-                                        Other
-                                    </label>
+                            </div> */}
                                 </div>
-                                <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
-                            </fieldset>
 
-                            <div className=" z-0 w-full mb-5">
-                                <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Age</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder=" "
-                                    required
-                                    value={age}
-                                    onChange={(e) => setAge(e.target.value)}
-                                    className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                />
+                                <div className="flex mt-3">
+                                    <fieldset className="relative z-0 w-full p-px mt-4 mb-5 me-5">
+                                        <legend className="text-xl absolute text-gray-500 transform scale-75 -top-3 origin-0 ">Gender</legend>
+                                        <div className="block pt-5 pb-2 space-x-4 " >
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="radio"
+                                                    // value="1"
+                                                    value="male"
+                                                    className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                                    onChange={(e) => setGender(e.target.value)}
+                                                />
+                                                Male
+                                            </label>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="radio"
+                                                    // value="2"
+                                                    value="female"
+                                                    className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                                    onChange={(e) => setGender(e.target.value)}
+                                                />
+                                                Female
+                                            </label>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="radio"
+                                                    // value="2"
+                                                    value="other"
+                                                    className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                                    onChange={(e) => setGender(e.target.value)}
+                                                />
+                                                Other
+                                            </label>
+                                        </div>
+                                        <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
+                                    </fieldset>
 
-                                <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
-                            </div>
-                        </div>
+                                    <div className=" z-0 w-full mb-5">
+                                        <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Age</label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder=" "
+                                            required
+                                            value={age}
+                                            onChange={(e) => setAge(e.target.value)}
+                                            className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                        />
 
-                        <div className="flex ">
-
-                            <div className=" z-0 w-full mb-5 me-5 flex">
-                                <div className="w-full">
-                                    <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                        Height (feet)
-
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder=" "
-                                        required
-                                        value={heightFeet}
-                                        onChange={(e) => setHeightFeet(e.target.value)}
-                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                    />
-
-                                    <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
-                                </div>
-                                &apos;&apos;
-                            </div>
-
-
-                            <div className=" z-0 w-full mb-5 flex">
-                                <div className="w-full">
-                                    <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                        Height (inches)
-
-
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder=" "
-                                        required
-                                        value={heightInches}
-                                        onChange={(e) => setHeightInches(e.target.value)}
-                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                    />
-
-                                    <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
-                                </div>
-                                &apos;
-                            </div>
-                            <div className="flex items-center">
-                                <button
-                                    onClick={convertToCm}
-                                    type="submit"
-                                    className="w-48 edit_clr">Convert to cm = </button>
-                                {heightCm && (
-                                    <div className="w-48">
-                                        <div> {heightCm} cm</div>
+                                        <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
                                     </div>
-                                )}
+                                </div>
+
+                                <div className="flex ">
+
+                                    <div className=" z-0 w-full mb-5 me-5 flex">
+                                        <div className="w-full">
+                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
+                                                Height (feet)
+
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                placeholder=" "
+                                                required
+                                                value={heightFeet}
+                                                onChange={(e) => setHeightFeet(e.target.value)}
+                                                className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                            />
+
+                                            <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
+                                        </div>
+                                        &apos;&apos;
+                                    </div>
+
+
+                                    <div className=" z-0 w-full mb-5 flex">
+                                        <div className="w-full">
+                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
+                                                Height (inches)
+
+
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                placeholder=" "
+                                                required
+                                                value={heightInches}
+                                                onChange={(e) => setHeightInches(e.target.value)}
+                                                className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                            />
+
+                                            <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
+                                        </div>
+                                        &apos;
+                                    </div>
+                                    <div className="flex items-center">
+                                        <button
+                                            onClick={convertToCm}
+                                            type="submit"
+                                            className="w-48 edit_clr">Convert to cm = </button>
+                                        {heightCm && (
+                                            <div className="w-48">
+                                                <div> {heightCm} cm</div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* <div className="w-full vertical-middle px-5">or x cms</div> */}
+                                </div>
+
+                                <div className="flex">
+                                    <div className=" z-0 w-full mb-5 me-5">
+                                        <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
+                                            Weight
+
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder=" "
+                                            required
+                                            value={weight}
+                                            onChange={(e) => setWeight(e.target.value)}
+                                            className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                        />
+
+                                        <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
+                                    </div>
+
+                                </div>
                             </div>
-
-                            {/* <div className="w-full vertical-middle px-5">or x cms</div> */}
-                        </div>
-
-                        <div className="flex">
-                            <div className=" z-0 w-full mb-5 me-5">
-                                <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                    Weight
-
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder=" "
-                                    required
-                                    value={weight}
-                                    onChange={(e) => setWeight(e.target.value)}
-                                    className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                />
-
-                                <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
-                            </div>
-
                         </div>
 
                         <div className="flex">
@@ -1095,21 +1202,22 @@ const Creator_edit_formpage = () => {
                                 <div className="">
 
                                     {platform?.map((item, index) => (
-                                        <label key={index} className="flex items-center py-1">
+                                        <label key={index} className="flex items-center py-1 platform_image_container">
                                             <input
                                                 type="checkbox"
                                                 className="h-5 w-5 text-blue-600"
                                                 checked={selectedItems.includes(item?.name)}
                                                 onChange={() => toggleCheckbox(item)}
                                             />
-                                            <Image
+                                            {/* <Image
                                                 src={item?.logo}
                                                 alt=""
-                                                width={40}
-                                                height={30}
-                                                className="ms-3 max-w-full w-10"
-                                            />
+                                                width={100} 
+                                                height={80}
+                                                className="platform_image"
+                                            /> */}
 
+                                            <span className="ml-2">{item?.name}</span>
                                         </label>
                                     ))}
                                 </div>
@@ -1197,68 +1305,7 @@ const Creator_edit_formpage = () => {
                             <span className="text-sm text-red-600 hidden" id="error">Portfolio Link 6 is required</span>
                         </div>
                         {/* end portfolio links */}
-                        <div className=" ">
-                            <div className=" w-full my-4 font-bold text-lg"> Upload Image </div>
-                            <div
-                                className=" focus:border-purple-500 focus:ring-purple-500 border-dotted h-48 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
-                                onChange={handleFileChange}
-                            >
-                                <label
-                                    htmlFor="fileInput"
-                                    style={{ borderColor: Colors.logo_clr }}
-                                    className="w-auto py-5"
-                                >
-                                    <div className="">
-                                        <input
-                                            id="fileInput"
-                                            type="file"
-                                            accept="image/*"
-                                            className="hidden absolute w-screen  "
-                                        // onChange={handleFileChange}
-                                        // Triggered when a file is selected
-                                        />
-                                        {!file && (
-                                            <Image
-                                                src={Images.plus_icon}
-                                                width={15}
-                                                height={15}
-                                                alt=""
-                                                className="mx-auto cursor-default m-5 mb-0"
 
-                                            />
-                                        )}
-                                    </div>
-                                    {previewImage && (
-                                        <Image
-                                            src={previewImage}
-                                            alt="Selected"
-                                            style={{ maxWidth: '100%', maxHeight: '300px' }}
-                                            width={50}
-                                            height={50}
-                                            className="mx-auto"
-                                        />
-                                    )}
-                                    {file && (
-                                        <p className="text-base text-center">{file?.name}</p>
-                                    )}
-                                    {!file && (
-                                        <>
-                                            <div
-                                                className=" text-base text-gray-300 "
-                                            // onClick={handleUploadClick} // Triggered when "Company Logo" text is clicked
-                                            // style={{ cursor: 'grabbing' }}
-                                            >
-                                                Company Logo(Upload Image)
-                                            </div>
-                                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300  text-center" id="file_input_help">SVG, PNG, JPG or GIF</p>
-                                        </>
-                                    )}
-                                </label>
-
-                            </div>
-                            {/* <button onClick={handleSubmit}>save image</button> */}
-
-                        </div>
 
                         {/* <input type="file" onChange={handleFileChange} /> */}
                         {/* <button onClick={handleSubmit}>Upload Image</button> */}

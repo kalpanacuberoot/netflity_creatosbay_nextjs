@@ -98,7 +98,7 @@ const Creator_Card = (item) => {
 
                         </div> */}
                         <div className="px-5  py-3 rounded-md text-center  mt-2">
-                            <h6>{start_date} - {end_date}</h6>
+                            <h6 className="mb-2">{start_date} - {end_date}</h6>
                             {/* <Link href={'/creator_single_chat'}> */}
                             <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(item)}>
                                 <buttton> Check Details</buttton>
