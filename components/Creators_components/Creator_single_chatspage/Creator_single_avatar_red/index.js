@@ -1,19 +1,19 @@
 import Images from "@/images"
 import Image from "next/image"
 
-const Creator_avatar_red = ({ item }) => {
+const Creator_single_avatar_red = ({ item }) => {
 
-    console.log("Creator_avatar_red", item?.campaign?.brand?.name);
+    console.log("Creator_single_avatar_red", item?.campaign?.brand);
     return (
         <>
-            <div className="flex items-center space-x-4 p-2 cursor-pointer">
+            <div className="flex items-center space-x-4 p-2  my-2 cursor-pointer border">
                 <div className="relative">
 
                     <Image
                         // className="w-10 h-10 rounded-full"
                         width={44}
                         height={44}
-                        className="rounded-full shadow-lg"
+                        className="rounded-full"
                         alt=""
                         src={item?.campaign?.brand?.logo ? item?.campaign?.brand?.logo : Images.avatar2}
                     />
@@ -33,4 +33,4 @@ const Creator_avatar_red = ({ item }) => {
     )
 }
 
-export default Creator_avatar_red
+export default Creator_single_avatar_red

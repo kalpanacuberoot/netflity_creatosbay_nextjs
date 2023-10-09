@@ -12,7 +12,7 @@ import Cookies from 'js-cookie';
 import { url } from "@/generalfunctions";
 import { useRouter } from "next/router";
 
-const Image_content = ({ onPopupData }) => {
+const Image_content = ({ onPopupData,onClose }) => {
 
     const router = useRouter();
 
@@ -22,37 +22,33 @@ const Image_content = ({ onPopupData }) => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
-    const refImage1 = useRef(null);         
+    const refImage1 = useRef(null);
 
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-        console.log("fileslected and product", file, selectedFile);
+
+        console.log("product handleFileChange",selectedFile);
         if (selectedFile) {
-            // Create a FileReader instance
             const reader = new FileReader();
 
-            // Set up a callback function for when the FileReader has loaded the image
             reader.onloadend = () => {
-                setFile(selectedFile); // Save the selected image file
-                setPreviewImage(reader.result); // Set the image preview
+                setFile(selectedFile); 
+                setPreviewImage(reader.result); 
             };
-
-            // Read the image file as a data URL
             reader.readAsDataURL(selectedFile);
         } else {
-            setFile(null); // Reset the selected image
-            setPreviewImage(null); // Reset the image preview
+            setFile(null); 
+            setPreviewImage(null); 
         }
-        // setFile(selectedFile);
-
     };
+
 
 
     console.log("fileslected product image", file);
 
-    const handleUploadClick = async () => {
-        // handleFileChange();
+    const handleSubmit = async () => {
+
         if (!file) {
             alert('Please select an image to upload.');
             return;
@@ -69,67 +65,66 @@ const Image_content = ({ onPopupData }) => {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${cookieValue?.token}`,
-                    'Accept': '/application/json',
                 },
                 body: formData,
             });
 
-            console.log("response image data popup", response);
+            console.log("response image data", response);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("image response ok produvt image", data?.url);
+                setFile(data?.url)
+                console.log("image response ok", data?.url);
                 toast.success('Image Uploaded Successfully', {
                     position: 'top-center',
-                    autoClose: 5000,
+                    autoClose: 2000,
                 });
-                // alert('Image uploaded successfully.');
-                setFile(data?.url)
-            } else {
-                // alert('Image upload failed.');
-                toast.success('Image Uploaded Successfully', {  
+
+                await sendDataToParent(data?.url);
+            } 
+            else if(response.status===413 ){
+                toast.success('Image size is too large', {
                     position: 'top-center',
-                    autoClose: 5000,
+                    autoClose: 2000,
+                });
+            }
+            else {
+
+                toast.error('Image upload failed', {
+                    position: 'top-center', 
+                    autoClose: 3000, 
                 });
             }
         } catch (error) {
             console.error('Error uploading image:', error);
             toast.error('Please uplaod the image again', {
-                position: 'top-center', // Set the toast position
-                autoClose: 3000, // Close the toast after 3 seconds0
+                position: 'top-center', 
+                autoClose: 3000, 
             });
         }
     };
 
-    console.log("dfdsafdsfds",file);
+    console.log("dfdsafdsfds", file);
 
-    const sendDataToParent = () => {
-        // const link = `${IMAGE_URL}/uploads/${file?.name}`;
+    const sendDataToParent = async (imageUrl) => {
+
         const link = file;
         console.log('imgrddsa product popup----1', file, link)
-
-        handleUploadClick();
-        console.log('imgrddsa product popup-----2', file)
-
         const data = [
             {
-                link:file,
+                link: imageUrl,
                 description,
                 name,
             },
         ]
 
         console.log("popupdata---", data);
-        // Call the callback function with the data to send to the parent
-        // onPopupData(data);
         onPopupData(data);
         toast.success('Data is saved', {
-            position: 'top-center', // Set the toast position
-            autoClose: 3000, // Close the toast after 3 seconds0
+            position: 'top-center', 
+            autoClose: 3000, 
         });
-        // router.push('/campaign_info')
-
-
+        onClose();
     };
 
 
@@ -137,7 +132,7 @@ const Image_content = ({ onPopupData }) => {
     return (
         <>
 
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 min-w-sm">
 
                 <ModalHeader />
                 <div className="space-y-6 container-fluid p-14 pb-5">
@@ -154,23 +149,23 @@ const Image_content = ({ onPopupData }) => {
 
                             />
                         </div>
+
                         <div className=" ">
                             <div
-                                className=" border-dotted h-34 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                className=" focus:border-purple-500 focus:ring-purple-500 border-dotted h-48 align-middle border-4 rounded-lg bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                onChange={handleFileChange}
                             >
                                 <label
-                                    htmlFor="fileInput"
+                                    htmlFor="productfileInput"
                                     style={{ borderColor: Colors.logo_clr }}
-                                    className=" w-auto"
+                                    className="w-auto py-5"
                                 >
-                                    <div className=" w-full text-center">
+                                    <div className="">
                                         <input
-                                            id="fileInput"
+                                            id="productfileInput"
                                             type="file"
                                             accept="image/*"
-                                            className="hidden absolute w-full"
-                                            ref={refImage1}
-                                            onChange={handleFileChange} // Triggered when a file is selected
+                                            className="absolute w-screen hidden "
                                         />
                                         {!file && (
                                             <Image
@@ -178,14 +173,14 @@ const Image_content = ({ onPopupData }) => {
                                                 width={15}
                                                 height={15}
                                                 alt=""
-                                                className=" cursor-default m-5  mx-auto"
+                                                className="mx-auto cursor-default m-5 mb-0"
                                             />
                                         )}
                                     </div>
                                     {previewImage && (
                                         <Image
                                             src={previewImage}
-                                            alt="Selected product preview" 
+                                            alt="Selected"
                                             style={{ maxWidth: '100%', maxHeight: '300px' }}
                                             width={50}
                                             height={50}
@@ -193,20 +188,9 @@ const Image_content = ({ onPopupData }) => {
                                         />
                                     )}
                                     {file && (
-                                        <h6 className="text-base text-center">{file?.name}</h6>
+                                        <p className="text-base text-center">{file?.name}</p>
                                     )}
-
-                                    {/* <h6>{file ? file?.name : " Image not found"}</h6> */}
-                                    {!file && (
-
-                                        <div className="p-10 text-base   text-gray-300 p-5 rounded"
-
-                                        >
-                                            Upload Media
-
-                                        </div>
-                                    )}
-
+                                   
                                 </label>
 
                             </div>
@@ -225,7 +209,8 @@ const Image_content = ({ onPopupData }) => {
                         <Buttons
                             buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                             label={"Submit"}
-                            onClick={sendDataToParent}
+                            // onClick={sendDataToParent}
+                            onClick={handleSubmit}
                         />
                     </div>
                 </div>

@@ -7,7 +7,7 @@ const All_routing = ({ children }) => {
 
   return (
     <>
-      <div className="w-full flex justify-between ">
+      <div className="w-full flex flex-col md:flex-row justify-between">
 
         <Left_Dashboard/>
           <div className="content w-full">{children}</div>

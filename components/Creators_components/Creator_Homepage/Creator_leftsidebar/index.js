@@ -16,6 +16,8 @@ import Creator_logout from "../ModalBox/Creator_logout"
 import Creator_logout_content from "../ModalBox/Creator_logout/Creator_logout_content"
 import Creator_change_password from "../ModalBox/Creator_change_password"
 import Creator_changepass_content from "../ModalBox/Creator_change_password/Creator_changepass_content"
+import Creator_notification from "../ModalBox/Creator_notification"
+import Creator_notification_content from "../ModalBox/Creator_notification/Creator_notification_content"
 
 const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
@@ -25,6 +27,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
     const [isModalOpen_invite_mem, setIsModalOpen_invite_mem] = useState(false);
     const [isModalOpenlogout, setIsModalOpenlogout] = useState(false);
     const [isModalOpen_change_password, setIsModalOpen_change_password] = useState(false);
+    const [isModalOpen_notification, setIsModalOpen_notification] = useState(false);
     const settingdropdownRef = useRef(null);
 
     const creatorImage = async () => {
@@ -54,8 +57,8 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
                 if (responseData?.status === "success") {
 
-                    setCreator_img(responseData?.data?.data);
                     Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
+                    setCreator_img(responseData?.data?.data);
 
                 } else {
                     console.error('Error:', responseData.message);
@@ -71,24 +74,6 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
     };
 
-    // useEffect(() => {
-
-    //     creatorImage();
-
-    //     function handleClickOutside(event) {
-           
-    //         if (settingdropdownRef.current && settingdropdownRef.current.contains(event.target)) {
-    //             setDropdown_menu(false);
-    //         }
-    //     }
-
-    //     document.addEventListener('mousedown', handleClickOutside);
-
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-
-    // }, []);
 
     useEffect(() => {
         creatorImage();
@@ -97,7 +82,11 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
     console.log("creator_img", creator_img);
     return (
         <>
-
+            <Creator_notification isOpen={isModalOpen_notification} onClose={() => setIsModalOpen_notification(false)}>
+                <div className="relative w-full max-w-4xl max-h-full min-w-3xl ">
+                    <Creator_notification_content />
+                </div>
+            </Creator_notification>
             <Creator_Invite_Members isOpen={isModalOpen_invite_mem} onClose={() => setIsModalOpen_invite_mem(false)}>
                 <div className="relative w-full max-w-2xl max-h-full">
                     <Creator_InviteMem_Content />
@@ -124,7 +113,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                 </div>
             </Creator_logout>
 
-            <div className="h-screen  w-1/5  px-10"  ref={settingdropdownRef}>
+            <div className="h-screen  w-1/5  px-10" ref={settingdropdownRef}>
 
                 <div className='my-10'>
                     <Image
@@ -155,8 +144,8 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
                     <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight'
                     >
-                        <div>
-                            <Image
+                        <div onClick={() => setIsModalOpen_notification(true)}>
+                            <Image  
                                 src={Images.notification}
                                 width={20}
                                 height={20}

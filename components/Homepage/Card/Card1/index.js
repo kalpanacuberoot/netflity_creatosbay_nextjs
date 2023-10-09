@@ -56,30 +56,32 @@ const Home_Card1 = ({ items }) => {
 
     return (
         <>
-            <div className="my-5 mx-2 " key={index}>
-                <div className="relative flex">
-
-                    {items?.references?.length > 0 && items?.references.map((item) =>
-                        <Image
-                            key={item?.id}
-                            src={item ? item.link : Images.card_img}
-                            width={350}
-                            height={100}
-                            alt=""
-                            className=" mx-auto border rounded-t-lg"
-                        />
-                    )}
-                    {items?.products?.length > 0 && items?.products.map((item) =>
-                        <Image
-                            key={item?.id}
-                            src={item ? item.link : Images.card_img}
-                            width={500}
-                            height={100}
-                            alt=""
-                            className=" mx-auto"
-                        />
-                    )}
-
+            <div className="my-5 mx-2 " key={items?.id}>
+                <div className="relative flex ">
+                    <div className="max-h-64 border rounded-t-lg">
+                        {items?.references?.length > 0 && items?.references.map((item) =>
+                            <Image
+                                key={item?.id}
+                                src={item ? item.link : Images.card_img}
+                                width={350}
+                                height={50}
+                                alt=""
+                                className="h-full mx-auto"
+                            />
+                        )}
+                    </div>
+                    <div className="max-h-64 border rounded-t-lg ">
+                        {items?.products?.length > 0 && items?.products.map((item) =>
+                            <Image
+                                key={item?.id}
+                                src={item ? item.link : Images.card_img}
+                                width={500}
+                                height={100}
+                                alt=""
+                                className="h-full mx-auto"
+                            />
+                        )}
+                    </div>
 
 
                 </div>

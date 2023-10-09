@@ -16,27 +16,11 @@ const Chat = ({ creatorId, chatcreator_data }) => {
     const [allMessages, setAllMessages] = useState([]);
     const [messageSent, setMessageSent] = useState();
     const [msgtext, setMsgtext] = useState([]);
-
-    // const uniqueData = [];
-
-    // // Use an object to keep track of unique IDs
-    // const idSet = new Set();
-
-    // for (const item of creatorId) {
-    //     const id = item.data;
-    //     if (!idSet.has(id)) {
-    //         idSet.add(id);
-    //         uniqueData.push(item);
-    //     }
-    // }
-
-    // console.log('uniqueDatastringWithoutBrackets', uniqueData);
-    // const stringWithoutBrackets = uniqueData.join(', ');
-    // console.log("chatcreator_data", stringWithoutBrackets, chatcreator_data);
-
+    const [loading, setLoading] = useState(false);
 
     const getAllMessages = async () => {
 
+        setLoading(true)
         const cookieValue = JSON.parse(Cookies.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
@@ -85,9 +69,9 @@ const Chat = ({ creatorId, chatcreator_data }) => {
             }
 
             const params = new URLSearchParams({
-                brand: brandId,
-                // creator: stringWithoutBrackets,
-                creator: cretaors_unique_id[0],
+                "brand": brandId,
+                "creator": cretaors_unique_id[0],
+                "campaign": campaign_id
             });
 
 
@@ -121,6 +105,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
             const responseData = await response.json();
             console.log('all messages communication response:', responseData.data);
             setAllMessages(responseData?.data?.data)
+            setLoading(false)
 
         } catch (error) {
             console.error('Error:', error);
@@ -129,73 +114,88 @@ const Chat = ({ creatorId, chatcreator_data }) => {
 
     };
 
-    const handleClick = async () => {
-
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
-        console.log('campaigns cookieValue------------1', cookieValue?.token);
-
-        const campaign_id = JSON.parse(Cookies.get('campaign_id'));
-
-        const cretaors_unique_id = creatorId.map((item) => item.creator_id)
-        console.log("cretaors_unique_id", cretaors_unique_id[0]);
-
-        const brand_detail = Cookies.get('brand_detail');
-        const brandIds = Cookies.get('brand_id');
-
-        let brandId = null;
-
-        if (brand_detail) {
-            try {
-                brandId = JSON.parse(brand_detail)?.brand?.id;
-            } catch (error) {
-                console.error('Error parsing brand_detail:', error);
-            }
-        }
-
-        if (!brandId && brandIds) {
-            try {
-                brandId = JSON.parse(brandIds);
-            } catch (error) {
-                console.error('Error parsing brand_ids:', error);
-            }
-        }
-        console.log('brandId:', brandId);
-
+    const handleClick = async (e) => {
+        setLoading(true)
+        e.preventDefault();
         try {
 
-            const postData = {
-                "brand_id": brandId,
-                "campaign_id": campaign_id,
-                // "creator_id": stringWithoutBrackets,
-                "creator_id": cretaors_unique_id[0],
-                "sender_type": "brand",
-                "type": "text",
-                "data": msgtext
-            };
-            const headers = {
-                'Authorization': `Bearer ${cookieValue?.token}`,
-            }
-            const postResponse = await apiCall(`${url}/messages`, 'Post', postData, headers);
+            let userData = Cookies.get('user_data');
+            console.log('campaigns cookieValue------------1', userData);
 
-            console.log("handleClick", postResponse);
+            let campaignId = Cookies.get('campaign_id');
 
-            if (postResponse.status === 'success') {
-                console.log('POST response campaigns-------------:', postResponse?.data);
-                console.log('post messages communication response:', responseData);
-
-                toast.success("Message is Sent", {
-                    position: 'top-center',
-                    autoClose: 5000,
-                });
-
-            } else {
-                toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
-                    position: 'top-center',
-                    autoClose: 5000,
-                });
+            if (typeof userData === 'undefined' || campaignId === 'undefined') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login');
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
 
             }
+            else {
 
+                const cookieValue = JSON.parse(userData);
+                const campaign_id = JSON.parse(campaignId);
+                const cretaors_unique_id = creatorId.map((item) => item.creator_id)
+                console.log("cretaors_unique_id", cretaors_unique_id[0]);
+
+                const brand_detail = Cookies.get('brand_detail');
+                const brandIds = Cookies.get('brand_id');
+
+                let brandId = null;
+
+                if (brand_detail) {
+                    try {
+                        brandId = JSON.parse(brand_detail)?.brand?.id;
+                    } catch (error) {
+                        console.error('Error parsing brand_detail:', error);
+                    }
+                }
+
+                if (!brandId && brandIds) {
+                    try {
+                        brandId = JSON.parse(brandIds);
+                    } catch (error) {
+                        console.error('Error parsing brand_ids:', error);
+                    }
+                }
+                console.log('brandId:', brandId);
+
+
+                const postData = {
+                    "brand_id": brandId,
+                    "campaign_id": campaign_id,
+                    "creator_id": cretaors_unique_id[0],
+                    "sender_type": "brand",
+                    "type": "text",
+                    "data": msgtext
+                };
+                const headers = {
+                    'Authorization': `Bearer ${cookieValue?.token}`,
+                }
+                const postResponse = await apiCall(`${url}/messages`, 'Post', postData, headers);
+
+                console.log("handleClick", postResponse);
+
+                if (postResponse.status === 'success') {
+                    console.log('POST response campaigns-------------:', postResponse?.data);
+                    console.log('post messages communication response:', responseData);
+
+                    toast.success("Message is Sent", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    setMsgtext("");
+                    await getAllMessages();
+                    setLoading(false)
+
+                } else {
+                    toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+
+                }
+
+            }
 
         } catch (error) {
             console.log("handleClickerror", error);

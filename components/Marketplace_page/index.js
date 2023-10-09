@@ -20,12 +20,14 @@ const Marketplace_page = () => {
     const [creatordata, setCreatordata] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
+    const [loading, setLoading] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+
+        checkIsMobile();
+
+        window.addEventListener('resize', checkIsMobile);
 
         handleSubmit();
         const handleOutsideClick = (event) => {
@@ -37,13 +39,14 @@ const Marketplace_page = () => {
         document.addEventListener('mousedown', handleOutsideClick);
 
         return () => {
+            window.removeEventListener('resize', checkIsMobile);
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, [isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
-
+        setLoading(true)
         const cookieValue = JSON?.parse(Cookies?.get('user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
@@ -57,7 +60,6 @@ const Marketplace_page = () => {
             const response = await fetch(`${url}/creators`, {
                 method: 'Get',
                 headers: headers,
-
             });
 
             if (response?.ok === true) {
@@ -65,339 +67,193 @@ const Marketplace_page = () => {
                 console.log('creators response:', responseData?.data?.data);
                 setCreatordata(responseData?.data?.data)
 
-                // Cookies.set('brand_id', JSON.stringify(responseData?.data?.id), { expires: 106500 });
-
-                if (responseData.status) {
-                    // toast.success('Brand Successfully Created', {
-                    //     position: 'top-center',
-                    //     autoClose: 5000,
-                    // });
-
-                } else {
-                    console.error('Error:', responseData.message);
-                    // alert('Brand creation failed');
-                }
+                setLoading(false)
             } else {
                 console.error('Error:', response.statusText);
-                // alert('Brand creation failed');
+
             }
         } catch (error) {
             console.error('Error:', error);
+
         }
     };
 
 
-    console.log("creatordata", creatordata);
+    console.log("marketplacecreatordata", creatordata);
 
     const onProfileDetail = (index) => {
-
+        setLoading(true)
         console.log("onProfileDetail", index);
         router.push('/creator_profile');
+        setLoading(false)
 
         Cookies.set('creator_profile_id', JSON.stringify(index?.id));
         const existingCookieData = Cookies.get('selected_creator_id');
-
-        // Parse the existing data from JSON or initialize it as an empty array if the cookie is not set yet
         const existingDataArray = existingCookieData ? JSON.parse(existingCookieData) : [];
-
-        // Check if the ID is already in the array before adding it
         if (existingDataArray && index && !existingDataArray.includes(index?.id)) {
-            // Add the new indexId to the existing data array
             existingDataArray.push(index?.id);
             console.log("existingDataArray", existingDataArray);
-
-            // Set the updated data in the cookie
             Cookies.set('selected_creator_id', JSON.stringify(existingDataArray));
         }
 
 
     }
 
+    const checkIsMobile = () => {
+        setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+        // setIsMobile(window.innerWidth <= 800);
+    };
 
-    const imageUrl = "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg";
     return (
         <>
-            <div
-                className="flex container_capmapign_info p-3 "
-                style={{ backgroundColor: Colors.button_light_clr }}
-                ref={dropdownRef}
-            >
-                {/* <div
-                    className="auto-cols-max  px-5 py-5 border w-1/5 h-screen"
-                    style={{ backgroundColor: Colors.white_clr }}
+            {loading ? ( // Show loader if loading is true
+                <div className="w-full h-full flex items-center justify-center">
+                    <Image
+                        width={100}
+                        height={100}
+                        alt=""
+                        src={Images.Loader}
+                    />
+                </div>
+            ) : (
+                <div
+                    className={`${isMobile ? ' py-3' : ' flex container_capmapign_info '} `}
+                    style={{ backgroundColor: Colors.button_light_clr }}
+                    ref={dropdownRef}
                 >
-                    <Left_Dashboard />
-                </div> */}
 
-                <div className="w-full auto-cols-max text-start m-0 h-screen px-3"
+                    <div className="w-full auto-cols-max text-start m-0 h-screen px-3 overflow-y-auto"
 
-                >
-                    <div
-                        style={{ background: Colors.invoice_gradient_clr }}
-                        // style={style}
-                        className="auto-cols-max p-3 rounded-md flex flex-row "
                     >
-                        <div className="flex flex-row justify-between items-center  w-full">
-                            <div style={{ color: Colors.white_clr }}>
-                                <div className="font_size_40">
-                                    Find Top Creators
+                        <div
+                            style={{ background: Colors.invoice_gradient_clr }}
+                            className="auto-cols-max p-3 rounded-md flex flex-row "
+                        >
+                            <div className="flex flex-row justify-between items-center  w-full">
+                                <div style={{ color: Colors.white_clr }}>
+                                    <div className="font_size_40">
+                                        Find Top Creators
+                                    </div>
+                                    <div className="font_size_21">Showing 12 of 100 Influencers</div>
                                 </div>
-                                <div className="font_size_21">Showing 12 of 100 Influencers</div>
-                            </div>
 
-                            <div
-                                style={{ background: Colors.white_clr }}
-                                className="rounded-md flex flex-row justify-between items-center px-3 py-2"
-                            // onClick={toggleDropdown}
+                                <div
+                                    style={{ background: Colors.white_clr }}
+                                    className="rounded-md flex flex-row justify-between items-center px-3 py-2"
+                                >
 
-                            >
-
-                                <button className="font_size_21 mx-4">
-                                    Filters
-                                </button>
-                                <Image
-                                    src={Images.pink_plus_icon}
-                                    width={24}
-                                    height={24}
-                                    alt=""
-                                />
-                            </div>
-                            {isOpen &&
-                                <div className='z-10 w-96 mt-10 top-14 right-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 divide-gray-100 shadow dark:bg-gray-700 border rounded-md'>
-                                    <Filters_popup_page />
+                                    <button className="font_size_21 mx-4">
+                                        Filters
+                                    </button>
+                                    <Image
+                                        src={Images.pink_plus_icon}
+                                        width={24}
+                                        height={24}
+                                        alt=""
+                                    />
                                 </div>
+                                {isOpen &&
+                                    <div className='z-10 w-96 mt-10 top-14 right-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 divide-gray-100 shadow dark:bg-gray-700 border rounded-md'>
+                                        <Filters_popup_page />
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+
+                        <div className=" w-full flex m-0  pt-4 flex flex-wrap justify-around h-full">
+                            {creatordata?.length > 0 ? creatordata.map((item, index) => {
+
+                                const existingCookieData = Cookies.get('selected_creator_id');
+
+                                console.log("existingDataArray--------", existingCookieData, item?.id);
+
+                                console.log("creatordatacreatordata", item?.id);
+                                const existingDataArray = existingCookieData;
+                                const valueToMatch = item?.id;
+
+
+                                return (
+                                    <>
+                                        <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'}  `} key={index}>
+                                            <div className="grid grid-cols-3 rounded-md gap-1" >
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={item?.profile_pic}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={item?.profile_pic}
+                                                    alt=""
+                                                />
+                                                <Image
+                                                    width={500}
+                                                    height={100}
+                                                    className="w-full h-64 object-cover"
+                                                    src={item?.profile_pic}
+                                                    alt=""
+                                                />
+
+
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                                            </div>
+                                            <div className="flex justify-between mb-2 mt-2">
+                                                <div> <h4>{item?.user?.name}</h4></div>
+                                                <div className="flex" key={index}>
+                                                    {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
+                                                        return (
+
+                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                                {categories_item?.name}
+                                                            </h6>
+                                                        )
+                                                    })
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                className="w-full rounded-full p-2 mt-3"
+                                                style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                                onClick={() => onProfileDetail(item, index)}
+                                            >
+                                                View profile
+                                            </button>
+                                        </div>
+                                    </>
+                                )
                             }
 
 
+                            )
+                                :
+
+                                <>
+                                    <div className="flex flex-col">
+                                        <h1>
+                                            {"No Campaigns Found"}
+                                        </h1>
+                                        <Link href={'/campaign_info'}>
+                                            <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
+                                                Start Campaign
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </>
+                            }
+
                         </div>
                     </div>
-
-                    <div className=" w-full flex m-0  pt-4 ">
-                        {creatordata?.length > 0 ? creatordata.map((item, index) => {
-
-                            const existingCookieData = Cookies.get('selected_creator_id');
-
-                            console.log("existingDataArray--------", existingCookieData, item?.id);
-
-                            console.log("creatordatacreatordata", item?.id);
-                            const existingDataArray = existingCookieData;
-                            const valueToMatch = item?.id;
-
-                            // if (existingDataArray && existingDataArray?.includes(valueToMatch)) {
-                            //     console.log(`${valueToMatch} is found in the array.`);
-
-
-                            //     console.log("existingDataArray-----3---", existingDataArray, valueToMatch);
-                            //     if (valueToMatch) {
-                            //         return (
-
-                            //             <>
-
-                            //                 <div className='border-4 border-purple-500 bg-white p-3 rounded-lg' key={index}>
-                            //                     <div className="grid grid-cols-3 rounded-md gap-1" >
-                            //                         <Image
-                            //                             width={500}
-                            //                             height={100}
-                            //                             className="w-full h-64 object-cover"
-                            //                             src={imageUrl}
-                            //                             alt=""
-                            //                         />
-                            //                         <Image
-                            //                             width={500}
-                            //                             height={100}
-                            //                             className="w-full h-64 object-cover"
-                            //                             src={imageUrl}
-                            //                             alt=""
-                            //                         />
-                            //                         <Image
-                            //                             width={500}
-                            //                             height={100}
-                            //                             className="w-full h-64 object-cover"
-                            //                             src={imageUrl}
-                            //                             alt=""
-                            //                         />
-
-
-                            //                     </div>
-                            //                     <div className="flex justify-between mb-2 mt-2">
-                            //                         <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-
-                            //                     </div>
-                            //                     <div className="flex justify-between mb-2 mt-2">
-                            //                         <div> <h4>{item?.user?.name}</h4></div>
-                            //                         <div className="flex" key={index}>
-                            //                             {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                            //                                 return (
-
-                            //                                     <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                            //                                         {categories_item?.name}
-                            //                                     </h6>
-                            //                                 )
-                            //                             })
-                            //                             }
-                            //                         </div>
-                            //                     </div>
-
-                            //                     <button
-                            //                         className="w-full rounded-full p-2 mt-3"
-                            //                         style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                            //                         onClick={() => onProfileDetail(item, index)}
-                            //                     >
-                            //                         View profile
-                            //                     </button>
-                            //                     {/* </Link> */}
-                            //                 </div>
-
-                            //             </>
-                            //         )
-                            //     }
-
-
-                            // } else {
-                            //     console.log(`${valueToMatch} is not found in the array.`);
-                            //     return (
-
-                            //         <>
-
-                            //             <div className='bg-white p-3 rounded-lg m-2' key={index}>
-                            //                 <div className="grid grid-cols-3 rounded-md gap-1" >
-                            //                     <Image
-                            //                         width={500}
-                            //                         height={100}
-                            //                         className="w-full h-64 object-cover"
-                            //                         // src={imageUrl}
-                            //                         src={item?.profile_pic}
-                            //                         alt=""
-                            //                     />
-                            //                     <Image
-                            //                         width={500}
-                            //                         height={100}
-                            //                         className="w-full h-64 object-cover"
-                            //                         // src={imageUrl}
-                            //                         src={item?.profile_pic}
-                            //                         alt=""
-                            //                     />
-                            //                     <Image
-                            //                         width={500}
-                            //                         height={100}
-                            //                         className="w-full h-64 object-cover"
-                            //                         // src={imageUrl}
-                            //                         src={item?.profile_pic}
-                            //                         alt=""
-                            //                     />
-
-
-                            //                 </div>
-                            //                 <div className="flex justify-between mb-2 mt-2">
-                            //                     <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                            //                     {/* <div className="flex gap-4"><h3>x</h3>
-                            //                 <h3>|</h3></div> */}
-                            //                 </div>
-                            //                 <div className="flex justify-between mb-2 mt-2">
-                            //                     <div> <h4>{item?.user?.name}</h4></div>
-                            //                     <div className="flex" key={index}>
-                            //                         {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                            //                             return (
-
-                            //                                 <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                            //                                     {categories_item?.name}
-                            //                                 </h6>
-                            //                             )
-                            //                         })
-                            //                         }
-                            //                     </div>
-                            //                 </div>
-
-                            //                 <button
-                            //                     className="w-full rounded-full p-2 mt-3"
-                            //                     style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                            //                     onClick={() => onProfileDetail(item, index)}
-                            //                 >
-                            //                     View profile
-                            //                 </button>
-                            //                 {/* </Link> */}
-                            //             </div>
-
-                            //         </>
-                            //     )
-                            // }
-                            return (
-                                <div className='bg-white p-3 rounded-lg m-2' key={index}>
-                                    <div className="grid grid-cols-3 rounded-md gap-1" >
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={item?.profile_pic}
-                                            alt=""
-                                        />
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={item?.profile_pic}
-                                            alt=""
-                                        />
-                                        <Image
-                                            width={500}
-                                            height={100}
-                                            className="w-full h-64 object-cover"
-                                            src={item?.profile_pic}
-                                            alt=""
-                                        />
-
-
-                                    </div>
-                                    <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
-                                    </div>
-                                    <div className="flex justify-between mb-2 mt-2">
-                                        <div> <h4>{item?.user?.name}</h4></div>
-                                        <div className="flex" key={index}>
-                                            {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
-                                                return (
-
-                                                    <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
-                                                        {categories_item?.name}
-                                                    </h6>
-                                                )
-                                            })
-                                            }
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        className="w-full rounded-full p-2 mt-3"
-                                        style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
-                                        onClick={() => onProfileDetail(item, index)}
-                                    >
-                                        View profile
-                                    </button>
-                                </div>
-                            )
-                        }
-
-
-                        )
-                            :
-
-                            <>
-                                <div className="flex flex-col">
-                                    <h1>
-                                        {"No Campaigns Found"}
-                                    </h1>
-                                    <Link href={'/campaign_info'}>
-                                        <button className="start_campaign_btn px-5 py-1 rounded-full w-48 my-5">
-                                            Start Campaign
-                                        </button>
-                                    </Link>
-                                </div>
-                            </>
-                        }
-
-                    </div>
                 </div>
-            </div>
+            )}
         </>
     )
 }

@@ -28,29 +28,28 @@ const Communication_page = () => {
     const [blankchat, setBlankchat] = useState(true);
     const [campaign_creator_id, setCampaign_creator_id] = useState([]);
     const [creator_count, setCreator_count] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const Creator_campaignData = async () => {
 
-        const userCookie = Cookies.get('user_data');
-        const campaignId = Cookies.get('campaign_id');
+        setLoading(true)
+        let userCookie = Cookies.get('user_data');
+        let campaignId = Cookies.get('campaign_id');
 
         if (typeof userCookie === 'undefined' && typeof campaignId === 'undefined') {
-            // Navigate to the login page
-            router.push('/login'); // Replace '/login' with the actual login page URL
+            router.push('/login');
         }
 
         if (userCookie) {
             try {
                 const cookieValue = JSON.parse(userCookie);
                 const campaign_id = JSON.parse(campaignId);
-                // Include the token in the Authorization header
                 const headers = {
                     'Accept': 'application/json',
                     'Authorization': `Bearer ${cookieValue.token}`,
                     'Content-Type': 'application/json',
                 };
 
-                // Make a GET request to the campaign API
                 fetch(`${url}/campaigns/${campaign_id}`, {
                     method: 'GET',
                     headers: headers,
@@ -64,16 +63,15 @@ const Communication_page = () => {
                         return response.json();
                     })
                     .then(campaignData => {
-                        // Extract the creator IDs from the campaign data
+
                         setCampaign_data(campaignData?.data)
                         const creatorIds = campaignData?.data?.creators?.map(creator => creator);
                         console.log("campaignData", campaignData.data);
 
-                        // Filter creator IDs for active (approved = 1) and inactive (approved = 0) creators
                         const activeCreatorIds = creatorIds.filter(id => id.approved === 1);
                         const inactiveCreatorIds = creatorIds.filter(id => id.approved === 0);
                         console.log("activeCreatorIds", inactiveCreatorIds);
-                        // Fetch data for active creators
+
                         const activeCreatorPromises = activeCreatorIds.map(id => {
                             return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
@@ -83,11 +81,11 @@ const Communication_page = () => {
                                     if (!response.ok) {
                                         throw new Error('Network response was not ok');
                                     }
+                                    setLoading(false)
                                     return response.json();
                                 });
                         });
 
-                        // Fetch data for inactive creators
                         const inactiveCreatorPromises = inactiveCreatorIds.map(id => {
                             return fetch(`${url}/creators/${id?.creator_id}&order=desc`, {
                                 method: 'GET',
@@ -97,45 +95,45 @@ const Communication_page = () => {
                                     if (!response.ok) {
                                         throw new Error('Network response was not ok');
                                     }
+                                    setLoading(false)
                                     return response.json();
                                 });
                         });
 
                         console.log("inactiveCreatorPromises", inactiveCreatorPromises, activeCreatorPromises);
 
-                        // Use Promise.all to wait for all fetch requests to complete
                         Promise.all([...inactiveCreatorPromises])
                             .then(creatorInactiveDataArray => {
-                                // Handle the fetched creator data here
+
                                 setInactiveData(creatorInactiveDataArray)
                                 console.log('creatorInactiveDataArray ', creatorInactiveDataArray);
                             })
                             .catch(error => {
-                                // Handle fetch errors here
+
                                 console.error('Fetch error:', error);
                             });
                         Promise.all([...activeCreatorPromises])
                             .then(creatorActiveDataArray => {
-                                // Handle the fetched creator data here
+
                                 setActiveData(creatorActiveDataArray);
                                 console.log('creatorActiveDataArray ', creatorActiveDataArray);
                             })
                             .catch(error => {
-                                // Handle fetch errors here
+
                                 console.error('Fetch error:', error);
                             });
                     })
                     .catch(error => {
-                        // Handle fetch errors here
+
                         console.error('Fetch error:', error);
                     });
 
             } catch (error) {
-                // Handle JSON parsing errors
+
                 console.error('Error parsing JSON:', error);
             }
         } else {
-            // Handle the case where 'user_data' cookie doesn't exist
+
             console.error('The "user_data" cookie is not found.');
         }
     }
@@ -148,7 +146,7 @@ const Communication_page = () => {
 
     const uniqueData = [];
 
-    // Use an object to keep track of unique IDs
+
     const idSet = new Set();
 
     for (const item of inactiveData) {
@@ -160,20 +158,19 @@ const Communication_page = () => {
     }
 
     console.log('uniqueData', uniqueData);
-    // console.log('uniqueDataArray', uniqueDataArray);
+
 
     console.log("commmmmmmm", campaign_data, activeData, inactiveData);
 
-
-    // const matchingCreator = creators.find(creator => creator.creator_id === storedCreatorId);
     const inActiveClick = (inactive) => {
+        setLoading(true)
         console.log("inactiveinActiveClick", inactive?.data);
         setBlankchat(false);
         const creator_counts = campaign_data?.creators?.filter((item) => item.creator_id === inactive?.data?.id);
-        // const creator_deatil = inactive?.data?.map((item) => item.id);
         console.log("creator_count", creator_counts);
         setCreator_count(creator_counts);
         setCreators(inactive?.data);
+        setLoading(false)
 
     }
 
@@ -184,383 +181,291 @@ const Communication_page = () => {
     return (
 
         <>
-            <div className="flex container_invoice w-full "
-                style={{ background: Colors.logo_background_clr }}
-            >
-                {/* <div className="auto-cols-max  px-3 py-5 border w-1/7"
-                    style={{ background: Colors.white_clr }}
-                >
-                    <CollapseLeftDashboard />
-                </div> */}
-
-                <div className="m-2  auto-cols-max text-start p-2  w-full"
-
-                >
-                    <div
-                        style={{ background: Colors.invoice_gradient_clr }}
-                        // style={style}
-                        className="auto-cols-max p-3 rounded-md flex flex-row"
+            {loading ? ( // Show loader if loading is true
+                <div className="w-full h-full flex items-center justify-center">
+                    <Image
+                        width={100}
+                        height={100}
+                        alt=""
+                        src={Images.Loader}
+                    />
+                </div>
+            ) : (
+                <>
+                    <div className="flex container_invoice w-full "
+                        style={{ background: Colors.logo_background_clr }}
                     >
-                        <div className="flex flex-row justify-between items-center  w-full">
-                            <div className="font_size_40" style={{ color: Colors.white_clr }}>
-                                Communication
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div className="flex flex-row items-start  justify-between w-full">
-
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
-                            <Searchcomm />
-                            {/* {filteredActiveCreators?.length > 0 ?
-                                filteredActiveCreators?.map((active, index) => ( */}
-                            <div className=" p-4 border shadow rounded m-3 "
-                            //  key={index}
+                        <div className="m-2  auto-cols-max text-start p-2  w-full  "
+                        >
+                            <div
+                                style={{ background: Colors.invoice_gradient_clr }}
+                                className="auto-cols-max p-3 rounded-md flex flex-row"
                             >
-
-                                <div className="flex flex-row items-center justify-between ">
-                                    <div className="font_size_21">
-                                        Active Conversations
+                                <div className="flex flex-row justify-between items-center  w-full">
+                                    <div className="font_size_40" style={{ color: Colors.white_clr }}>
+                                        Communication
                                     </div>
-                                    <span
-                                        style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
-                                        className="px-2 rounded-md border">
-                                        {activeData?.length ? activeData?.length : 0}
-                                    </span>
-                                </div>
-
-
-                                <hr className="" />
-                                <div className="">
-                                    <div className="py-3">
-                                        {activeData?.length > 0 && activeData.map((inactive, index) => (
-                                            <>
-                                                <Avatar_green_bg item={inactive?.data} key={index} />
-                                            </>
-                                        ))}
-                                        {/* <Avatar_green_bg />
-                                        <Avatar_green width={44} height={44} />
-                                        <Avatar_red />
-                                        <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
-                                    </div>
-
                                 </div>
                             </div>
-                            {/* 
-                                ))
-                                :
-                                <div> no data found</div>
+                            <div className="flex flex-row  items-start  justify-between w-full">
 
-                            } */}
+                                <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
+                                    <Searchcomm />
+
+                                    <div className=" p-4 border shadow rounded m-3 "
+                                    //  key={index}
+                                    >
+
+                                        <div className="flex flex-row items-center justify-between ">
+                                            <div className="font_size_21">
+                                                Active Conversations
+                                            </div>
+                                            <span
+                                                style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
+                                                className="px-2 rounded-md border">
+                                                {activeData?.length ? activeData?.length : 0}
+                                            </span>
+                                        </div>
 
 
-                            {/* {filteredInactiveCreators.length>0 ? 
-                            filteredInactiveCreators?.map((inactive, index) => ( */}
-                            <div className="  p-4 border shadow rounded m-3"
-                            // key={index}
-                            >
-                                <div className="flex flex-row items-center justify-between ">
-                                    <div className="font_size_21">
-                                        InActive Conversations
-                                    </div>
-                                    <span
-                                        style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
-                                        className="px-2 rounded-md border">
-                                        {uniqueData?.length ? uniqueData?.length : 0}
-                                    </span>
-                                </div>
-                                <hr className="" />
-                                <div className="">
-
-                                    <div className="py-3">
-                                        {uniqueData?.length > 0 ?
-                                            <div>
-                                                {uniqueData.map((inactive, index) => (
+                                        <hr className="" />
+                                        <div className="">
+                                            <div className="py-3">
+                                                {activeData?.length > 0 && activeData.map((inactive, index) => (
                                                     <>
-                                                        <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
-
+                                                        <Avatar_green_bg item={inactive?.data} key={index} />
                                                     </>
                                                 ))}
-                                                <Link href={'/marketplace'}>
-                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
-                                                        <Image
-                                                            src={Images.add_button_black_clr}
-                                                            width={20}
-                                                            height={20}
-                                                            alt=""
-                                                            className="me-3 cursor-pointer"
-                                                        />
-                                                        <button> Create Creators</button>
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                            :
-
-                                            <div>
-                                                No Creators yet
-                                                <Link href={'/marketplace'}>
-                                                    <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
-                                                        <Image
-                                                            src={Images.add_button_black_clr}
-                                                            width={20}
-                                                            height={20}
-                                                            alt=""
-                                                            className="me-3 cursor-pointer"
-                                                        />
-                                                        <button> Create Creators</button>
-                                                    </div>
-                                                </Link>
-                                            </div>
-
-                                        }
-
-
-                                        {/* <Avatar_green width={44} height={44} />
+                                                {/* <Avatar_green_bg />
+                                        <Avatar_green width={44} height={44} />
                                         <Avatar_red />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red /> */}
+                                            </div>
+
+                                        </div>
                                     </div>
+
+                                    <div className="  p-4 border shadow rounded m-3"
+                                    >
+                                        <div className="flex flex-row items-center justify-between ">
+                                            <div className="font_size_21">
+                                                InActive Conversations
+                                            </div>
+                                            <span
+                                                style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
+                                                className="px-2 rounded-md border">
+                                                {uniqueData?.length ? uniqueData?.length : 0}
+                                            </span>
+                                        </div>
+                                        <hr className="" />
+                                        <div className="">
+
+                                            <div className="py-3">
+                                                {uniqueData?.length > 0 ?
+                                                    <div>
+                                                        {uniqueData.map((inactive, index) => (
+                                                            <>
+                                                                <Avatar_red item={inactive?.data} key={index} onClick={() => inActiveClick(inactive)} />
+
+                                                            </>
+                                                        ))}
+                                                        <Link href={'/marketplace'}>
+                                                            <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                                <Image
+                                                                    src={Images.add_button_black_clr}
+                                                                    width={20}
+                                                                    height={20}
+                                                                    alt=""
+                                                                    className="me-3 cursor-pointer"
+                                                                />
+                                                                <button> Create Creators</button>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                    :
+
+                                                    <div>
+                                                        No Creators yet
+                                                        <Link href={'/marketplace'}>
+                                                            <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
+                                                                <Image
+                                                                    src={Images.add_button_black_clr}
+                                                                    width={20}
+                                                                    height={20}
+                                                                    alt=""
+                                                                    className="me-3 cursor-pointer"
+                                                                />
+                                                                <button> Create Creators</button>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+
+                                                }
+
+
+                                                {/* <Avatar_green width={44} height={44} />
+                                        <Avatar_red />
+                                        <Avatar_green width={44} height={44} />
+                                        <Avatar_red /> */}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                  
 
                                 </div>
-                            </div>
-                            {/* ))
-                        :
-                        <div> no data found</div>
-                        } */}
+                                <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
 
-                        </div>
-                        <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
+                                    <div className=" bg-zinc-100 h-full">
+                                        {blankchat &&
+                                            <div className="flex flex-col items-center p-4 h-full justify-center max-w-lg mx-auto">
+                                                <Image
+                                                    src={Images.chat_box_placeholder}
+                                                    width={150}
+                                                    height={150}
+                                                    className="rounded"
+                                                    alt=""
+                                                />
+                                                <span className="text-center py-5">
+                                                    Make calls, share your screen and get a faster experience when you download the Windows app.
+                                                </span>
+                                            </div>
+                                        }
 
-                            <div className=" bg-zinc-100 h-full">
-                                {blankchat &&
-                                    <div className="flex flex-col items-center p-4 h-full justify-center max-w-lg mx-auto">
-                                        <Image
-                                            src={Images.chat_box_placeholder}
-                                            width={150}
-                                            height={150}
-                                            className="rounded"
-                                            alt=""
-                                        />
-                                        <span className="text-center py-5">
-                                            Make calls, share your screen and get a faster experience when you download the Windows app.
-                                        </span>
-                                    </div>
-                                }
-
-                                {!blankchat &&
-                                    <>
-                                        {creators &&
+                                        {!blankchat &&
                                             <>
-                                                <div className="flex flex-row items-center p-4 justify-between ">
-                                                    <Avatar_without_badge item={creators} />
-                                                    <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
-                                                        {creator_count?.length > 0 && creator_count?.slice(0, 1).map((item, index) => {
+                                                {creators &&
+                                                    <>
+                                                        <div className="flex flex-row items-center p-4 justify-between ">
+                                                            <Avatar_without_badge item={creators} />
+                                                            <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
+                                                                {creator_count?.length > 0 && creator_count?.slice(0, 1).map((item, index) => {
 
-                                                            return (
-                                                                <>
-                                                                    <button
-                                                                        type="button"
-                                                                        className={
-                                                                            `focus:outline-none text-white ${item?.approved === 0
-                                                                                ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
-                                                                                : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
-                                                                            } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
-                                                                        }
+                                                                    return (
+                                                                        <>
+                                                                            <button
+                                                                                type="button"
+                                                                                className={
+                                                                                    `focus:outline-none text-white ${item?.approved === 0
+                                                                                        ? `bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`
+                                                                                        : `bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-green-300`
+                                                                                    } focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
+                                                                                }
 
-                                                                    >
-                                                                        {item?.approved === 0 ? "Inactive" : "active"}
-                                                                    </button>
+                                                                            >
+                                                                                {item?.approved === 0 ? "Inactive" : "active"}
+                                                                            </button>
 
-                                                                </>
-                                                            )
-                                                        })}
-                                                    </div>
-                                                </div>
+                                                                        </>
+                                                                    )
+                                                                })}
+                                                            </div>
 
 
+                                                        </div>
+                                                    </>
+                                                }
+                                                <hr className="" />
+                                                <Chat
+                                                    creatorId={creator_count}
+                                                    chatcreator_data={chat_creator_id}
+                                                />
                                             </>
                                         }
-                                        <hr className="" />
-                                        {/* {creator_count?.length > 0 && creator_count.map((item, index) => (
-                                            <>
+                                    </div>
+                                </div>
+                                <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
+                                    <div className="font_size_21  p-4">
+                                        Campaign info
+                                    </div>
 
-                                                <div className="p-5 h-screen flex flex-col justify-evenly">
+                                    <hr className="" />
+                                    <div className=" border shadow rounded m-3">
+                                        <div className="p-4">
 
-                                                    <Chat
-                                                    creatorId={chat_creator_id}
-                                                    chatcreator_data={creators}
-                                                />
-                                                    <Chat
-                                                        creatorId={creator_count.creator_id}
-                                                        chatcreator_data={chat_creator_id}
+                                            <h3>{campaign_data?.name}</h3>
+                                        </div>
+                                        <div className="px-4">
+
+                                            {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
+                                                <>
+                                                    <h3 className="font-bold underline">Products</h3>
+                                                    <h3>{item.name}</h3>
+                                                    <h4>{item.description}</h4>
+                                                    <Image
+                                                        src={item?.link}
+                                                        height={200}
+                                                        width={200}
+                                                        className="mx-auto"
+                                                        alt={item.name}
+                                                        key={index}
                                                     />
-                                                </div>
-                                            </>
-                                        ))} */}
+                                                </>
+                                            ))}
 
-                                        <Chat
-                                            creatorId={creator_count}
-                                            chatcreator_data={chat_creator_id}
-                                        />
+                                            {campaign_data?.products?.length > 0 && campaign_data?.products.map((item, index) => (
+                                                <>
+                                                    <h3 className="font-bold underline">References</h3>
+                                                    <h3>{item.name}</h3>
+                                                    <h4>{item.description}</h4>
+                                                    <Image
+                                                        key={index}
+                                                        src={item?.link}
+                                                        height={216}
+                                                        width={278}
+                                                        className="mx-auto"
+                                                        alt=""
+                                                    />
+                                                </>
+                                            ))}
 
-                                    </>
-                                }
+                                            <p className="font_size_16 communication_text py-2">
+
+                                                {campaign_data?.description}
+
+                                            </p>
+
+                                        </div>
 
 
+                                    </div>
+                                    {creator_count?.length > 0 && creator_count.map((item, index) => (
+                                        <div className=" border shadow rounded mx-3 my-4" key={index}>
+                                            <div className="flex px-4 items-center">
+                                                <label
+                                                    htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                    Image Count
+                                                </label>
 
-                            </div>
-                        </div>
-                        <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
+                                                <div className="px-3">{item?.image_count}/2</div>
+                                            </div>
+                                            <div className="flex px-4 items-center">
+                                                <label
+                                                    htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                    Video Count
+                                                </label>
 
-                            <div className="font_size_21  p-4">
-                                Campaign info
-                            </div>
-
-                            <hr className="" />
-                            <div className=" border shadow rounded m-3">
-                                <div className="p-4">
-                                    {/* <Avatar_green width={38} height={38} /> */}
-                                    <h3>{campaign_data?.name}</h3>
-                                </div>
-                                <div className="px-4">
-
-                                    {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
-                                        <>
-                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>Products</h3>
-                                            <h3>{item.name}</h3>
-                                            <h4>{item.description}</h4>
-                                            <Image
-                                                src={item?.link}
-                                                height={200}
-                                                width={200}
-                                                className="mx-auto"
-                                                alt={item.name}
-                                                key={index}
-                                            />
-                                        </>
+                                                <div className="px-3">{item?.video_count}/2</div>
+                                            </div>
+                                            <div className="flex px-4 items-center">
+                                                <div>Revision Submitted</div>
+                                                <div className="px-5">0/2</div>
+                                            </div>
+                                        </div>
                                     ))}
 
-                                    {campaign_data?.products?.length > 0 && campaign_data?.products.map((item, index) => (
-                                        <>
-                                            <h3 className="font-bold underline" T={console.log("item?.link", item?.link)}>References</h3>
-                                            <h3>{item.name}</h3>
-                                            <h4>{item.description}</h4>
-                                            <Image
-                                                key={index}
-                                                src={item?.link}
-                                                height={216}
-                                                width={278}
-                                                className="mx-auto"
-                                                alt=""
-                                            />
-                                        </>
-                                    ))}
-                                    {/* <Image
-                                        src={Images.communication_one}
-                                        height={216}
-                                        width={278}
-                                        className="mx-auto"
-                                        alt=""
-                                    /> */}
-                                    {/* <div className="flex flex-row items-center justify-evenly py-2 flex-wrap ">
-                                        <Image
-                                            src={Images.communication_two}
-                                            width={61}
-                                            height={61}
-                                            alt=""
-                                        />
-                                        <Image
-                                            src={Images.communication_three}
-                                            width={61}
-                                            height={61}
-                                            alt=""
-                                        />
-                                        <Image
-                                            src={Images.communication_four}
-                                            width={61}
-                                            height={61}
-                                            alt=""
-                                        />
-                                        <Image
-                                            src={Images.communication_five}
-                                            width={61}
-                                            height={61}
-                                            alt=""
-                                        />
-                                    </div> */}
-                                    {/* <div className="flex flex-row items-center flex-wrap border rounded-full px-3 py-2"></div> */}
-                                    {/* <div className="border rounded-full px-3 py-2">
-                                        <div className="font_size_10" style={{ color: Colors.orange_clr, lineHeight: '11.82px' }}>
-                                            Useful Link :-
-                                        </div>
-                                        <div className="font_size_12" style={{ color: Colors.orange_clr, lineHeight: '14.18px' }}>
-                                            https://www.LoremIpsum.com/LoremIpsum.php?gen+link
-                                        </div>
-                                    </div> */}
-                                    <p className="font_size_16 communication_text py-2">
-                                        {/* Qorem ipsum Lorem Ipsum is simply dummy text of
-                                        the printing and typesetting industry. Lorem Ipsum
-                                        has been the industry&apos;s standard dummy text ever
-                                        since the 1500s, when an unknown printer took a
-                                        galley of type and scrambled it to make a type
-                                        specimen book. It has survived not only five
-                                        centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged. It
-                                        was popularised in the 1960s with the release of */}
-                                        {campaign_data?.description}
-
-                                    </p>
-
                                 </div>
-
-
                             </div>
-                            {creator_count?.length > 0 && creator_count.map((item, index) => (
-                                <div className=" border shadow rounded mx-3 my-4" key={index}>
-                                    <div className="flex px-4 items-center">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                            Image Count
-                                        </label>
-                                        {/* <input
-                                        type="number"
-                                        id="first_name"
-                                        className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
-                                        placeholder="Image Count"
-                                        required /> */}
-                                        <div className="px-3">{item?.image_count}/2</div>
-                                    </div>
-                                    <div className="flex px-4 items-center">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                            Video Count
-                                        </label>
-                                        {/* <input
-                                        type="number"
-                                        id="first_name"
-                                        className="bg-gray-50 my-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full px-2.5 py-2 dark:bg-purple-700 dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
-                                        placeholder="Video Count"
-                                        required /> */}
-                                        <div className="px-3">{item?.video_count}/2</div>
-                                    </div>
-                                    <div className="flex px-4 items-center">
-                                        <div>Revision Submitted</div>
-                                        <div className="px-5">0/2</div>
-                                    </div>
-                                </div>
-                            ))}
 
                         </div>
+
                     </div>
-
-                </div>
-
-            </div>
+                </>
+            )}
         </>
     )
 }

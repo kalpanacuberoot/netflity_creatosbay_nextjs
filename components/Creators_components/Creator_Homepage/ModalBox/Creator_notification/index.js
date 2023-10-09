@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const Modal_Edit_Profile = ({ isOpen, onClose, children }) => {
-
+const Creator_notification = ( { isOpen, onClose, children }) => {
+  
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (!event.target.closest('.modal-content')) {
@@ -19,22 +19,19 @@ const Modal_Edit_Profile = ({ isOpen, onClose, children }) => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, [isOpen, onClose]);
-    
     return (
         <>
-
-            <div
+          <div
                 className={`fixed inset-0 flex  z-50 justify-center items-center bg-black bg-opacity-50 ${isOpen ? 'visible' : 'hidden'
                     }`}
             >
-                <div className="modal-content bg-white rounded shadow-md overflow-y-auto" style={{maxHeight:'95vh'}}>
-
+                <div className="modal-content bg-white rounded shadow-md overflow-y-auto" style={{ maxHeight:'95vh'}}>
+                    
                     {children}
                 </div>
             </div>
-
         </>
     )
 }
 
-export default Modal_Edit_Profile
+export default Creator_notification

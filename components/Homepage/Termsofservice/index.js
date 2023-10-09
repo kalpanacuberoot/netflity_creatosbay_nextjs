@@ -25,7 +25,7 @@ const Terms_of_service = ({ isOpen, onClose, children }) => {
                 className={`fixed inset-0 flex  z-50 justify-center items-center bg-black bg-opacity-50 ${isOpen ? 'visible' : 'hidden'
                     }`}
             >
-                <div className="modal-content bg-white rounded shadow-md ">
+                <div className="modal-content bg-white rounded shadow-md mobile-responsive">
                     
                     {children}
                 </div>

@@ -16,7 +16,7 @@ const index = () => {
   return (
     <>
 
-      <div className=' container flex flex-row justify-between items-center'>
+      <div className=' flex flex-row justify-between items-center'>
         <div className='auto-cols-max h-screen border children_layout'>
           <Layout>
             <Home />

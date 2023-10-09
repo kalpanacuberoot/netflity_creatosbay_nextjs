@@ -16,7 +16,7 @@ const Creator_logout_content = () => {
     const [logout, setLogout] = useState(null);
 
     const onLogout = async () => {
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
         try {
             const response = await fetch(`${url}/logout`, {

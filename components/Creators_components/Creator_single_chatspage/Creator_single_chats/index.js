@@ -8,9 +8,9 @@ import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import CreatorVideoEmbed from "../CreatorVideoEmbed";
+import CreatorVideoEmbed from "../../Creator_Chatspage/CreatorVideoEmbed";
 
-const Creator_chats = (campaignBrandData) => {
+const Creator_single_chats = (campaignBrandData) => {
 
     const router = useRouter();
     const [allMessages, setAllMessages] = useState([]);
@@ -257,14 +257,6 @@ const Creator_chats = (campaignBrandData) => {
         }
     };
 
-    // const loadMore = () => {
-    //     const loadItems = totalMessages - 10;
-    //     console.log("loadItems", loadItems, totalMessages);
-    //     setTotalMessages(loadItems);
-
-
-    // }
-
     const loadMore = async () => {
         const loadItems = allMessages.length + 10;
         console.log("loadItems", loadItems, allMessages.length);
@@ -403,7 +395,7 @@ const Creator_chats = (campaignBrandData) => {
         }
     };
 
-    console.log("creator allMessages", allMessages, campaignBrandData.campaignBrandData?.campaign?.brand?.logo);
+    console.log("creator single chat allMessages", allMessages);
 
     return (
         <>
@@ -422,13 +414,11 @@ const Creator_chats = (campaignBrandData) => {
                     <div className="chat-container px-5 pt-5 rounded overflow-y-auto" ref={chatContainerRef} style={{ scrollBehavior: 'smooth' }}>
                         {allMessages.length < totalMessages &&
                             <>
-
                                 <button onClick={loadMore}
                                     className="w-full text-sm bg-green-600 text-white py-1 rounded text-center"
                                 >
                                     Click on Load More button to get older Messages
                                 </button>
-
                             </>
                         }
                         {allMessages.length > 0 &&
@@ -443,13 +433,6 @@ const Creator_chats = (campaignBrandData) => {
                                 const timestamp = item?.updated_at;
                                 const dateObj = new Date(timestamp);
 
-                                const day = dateObj.getUTCDate().toString().padStart(2, '0');
-                                const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0');
-                                const year = dateObj.getUTCFullYear();
-                                const formattedDate = `${day}-${month}-${year}`;
-                                console.log('formattedDate', formattedDate); // Output: "07-10-2023"
-
-
                                 const hours = dateObj.getHours().toString().padStart(2, '0');
                                 const minutes = dateObj.getMinutes().toString().padStart(2, '0');
 
@@ -457,59 +440,22 @@ const Creator_chats = (campaignBrandData) => {
 
                                 console.log(time);
                                 const isImageLink = item.content === 0 && /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(item.data);
+                                // const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|youtube\.com\/shorts)/i.test(item.data) || /instagram\.com/i.test(item.data);;
+                                // const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) ||
+                                // /(youtube\.com|youtu\.be|youtube\.shorts)/i.test(item.data) ||
+                                // /youtu\.be\/([a-zA-Z0-9_-]+)/i.test(item.data) || /instagram\.com/i.test(item.data);
+
+                                // const isVideoLink = item.content === 0 &&  /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|instagram\.com)/i.test(item.data) || /youtube\.com\/shorts/i.test(item.data);
+
+                                const isVideoLink = item.content === 0 && /\.(mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv)$/i.test(item.data) || /(youtube\.com|instagram\.com)/i.test(item.data) || /youtu\.be/i.test(item.data) || /youtube\.com\/shorts/i.test(item.data);
 
                                 console.log("isImageLink", isImageLink);
 
-                                // if (item?.content === 1 || (item.type === 'video')) {
-                                //     return (
-                                //         <>
-                                //             <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                //                 <div className={`chat-message shadow-lg ${messageClass}`}>
-                                //                     {item.type === 'video' ? (
-                                //                         <>
-                                //                             <CreatorVideoEmbed url={item?.data} />
-                                //                         </>
-                                //                     ) : (
-                                //                         <>
-                                //                             <a href={item?.data} target="_blank" rel="noopener noreferrer">
-                                //                                 {item?.type === 'text' ? (
-                                //                                     <a
-                                //                                         href={item?.data}
-                                //                                         target="_blank"
-                                //                                         rel="noopener noreferrer"
-                                //                                         className="bg-blue-800">
-                                //                                         {item?.data}
-                                //                                     </a>
-                                //                                 ) : (
-                                //                                     <span>
-                                //                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                //                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                //                                         </svg>
-                                //                                         Download File
-                                //                                     </span>
-                                //                                 )}
-                                //                             </a>
-                                //                         </>
-                                //                     )}
-                                //                 </div>
-                                //             </div>
-                                //         </>
-                                //     );
-                                // } else {
-                                //     return (
-                                //         <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                //             <div className={`chat-message shadow-lg ${messageClass}`}>
-                                //                 {item.data}
-                                //             </div>
-                                //             <p className={` ${textMessageClass}`}>{formattedtweleveTime}</p>
-                                //         </div>
-                                //     );
-                                // }
                                 if (isImageLink) {
 
                                     return (
                                         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                            <div className={`chat-message shadow-lg ${messageClass}`} style={{ padding: 0 }}>
+                                            <div className={`chat-message shadow-lg ${messageClass}`}>
                                                 <a href={item?.data} target="_blank" rel="noopener noreferrer">
                                                     <div style={{ position: 'relative' }}>
                                                         <img
@@ -517,24 +463,23 @@ const Creator_chats = (campaignBrandData) => {
                                                             alt="Image"
                                                             style={{
                                                                 maxWidth: '100%',
-                                                                maxHeight: '120px',
+                                                                maxHeight: '150px',
                                                                 opacity: 1,
-
                                                             }}
                                                         />
                                                         <div
-                                                            className="flex items-center justify-center absolute"
+                                                            className="flex items-center justify-center"
                                                             style={{
-                                                                position: '',
+                                                                position: 'absolute',
                                                                 top: '50%',
                                                                 left: '50%',
                                                                 transform: 'translate(-50%, -50%)',
                                                                 cursor: 'pointer',
-                                                                backgroundColor: 'rgb(0 0 0 / 52%)',
-                                                                borderRadius: '50%',
+                                                                backgroundColor: '#000000a1',
+                                                                // borderRadius: '50%',
                                                                 padding: '5px',
-                                                                width: '50%',
-                                                                height: '50%'
+                                                                width: '100%',
+                                                                height: '100%'
                                                             }}
                                                             onClick={(e) => {
                                                                 e.stopPropagation(); // Prevent the link from opening
@@ -551,33 +496,7 @@ const Creator_chats = (campaignBrandData) => {
                                                     </div>
                                                 </a>
 
-                                                {/* <div className="flex justify-end items-center mt-5">
-                                                    <div
-                                                        className=""
-                                                        style={{
-                                                            position: '',
-                                                            // top: '50%',
-                                                            // left: '50%',
-                                                            // transform: 'translate(-50%, -50%)',
-                                                            cursor: 'pointer',
-                                                            // backgroundColor: 'rgb(0 0 0 / 52%)',
-                                                            // borderRadius: '50%',
-                                                            padding: '5px',
-                                                            width: '100%',
-                                                            height: '100%'
-                                                        }}
-                                                        onClick={(e) => {
-                                                            e.stopPropagation(); // Prevent the link from opening
-                                                        }}
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-
-                                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000" stroke="none">
-                                                                <path d="M2175 5106 c-37 -17 -70 -52 -84 -89 -8 -19 -11 -360 -11 -1083 l0 -1054 -332 0 c-303 0 -337 -2 -374 -19 -61 -28 -89 -73 -89 -142 0 -50 5 -63 35 -101 19 -24 283 -327 587 -674 379 -434 563 -636 586 -648 44 -20 90 -20 134 0 23 12 207 214 586 648 304 347 568 650 587 674 31 39 35 50 35 102 0 50 -5 64 -31 96 -49 60 -62 62 -431 63 l-333 1 -2 1069 c-3 1063 -3 1070 -24 1097 -11 15 -33 37 -48 48 -26 20 -41 21 -394 23 -291 2 -373 0 -397 -11z" />
-                                                                <path d="M162 923 l3 -678 26 -56 c33 -71 87 -125 158 -158 l56 -26 2155 0 2155 0 56 26 c71 33 125 87 158 158 l26 56 3 678 3 677 -321 0 -320 0 0 -480 0 -480 -1760 0 -1760 0 0 480 0 480 -320 0 -321 0 3 -677z" />
-                                                            </g>
-                                                        </svg>
-                                                    </div>
+                                                <div className="flex justify-end items-center mt-5">
                                                     <p className="pt-1 text-gray-500 me-2">{time}</p>
                                                     <svg className="bg-grey-500" xmlns="http://www.w3.org/2000/svg" version="1.0" width="15.000000pt" height="15.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
@@ -587,12 +506,41 @@ const Creator_chats = (campaignBrandData) => {
                                                         </g>
                                                     </svg>
 
-                                                </div> */}
+                                                </div>
                                             </div>
 
                                         </div>
                                     );
-                                } else if (item.content === 1 || item.type === 'video') {
+                                }
+                                // else if (item.content === 1 || item.type === 'video') {
+                                //     return (
+                                //         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                //             <div className={`chat-message shadow-lg ${messageClass}`}>
+                                //                 {item.type === 'video' ? (
+                                //                     <>
+                                //                         <CreatorVideoEmbed url={item?.data} />
+                                //                     </>
+                                //                 ) : (
+                                //                     <>
+                                //                         <a href={item?.data} target="_blank" rel="noopener noreferrer">
+                                //                             {item?.type === 'text' ? (
+                                //                                 <span>{item?.data}</span>
+                                //                             ) : (
+                                //                                 <span>
+                                //                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                //                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                //                                     </svg>
+                                //                                     Download File
+                                //                                 </span>
+                                //                             )}
+                                //                         </a>
+                                //                     </>
+                                //                 )}
+                                //             </div>
+                                //         </div>
+                                //     );
+                                // } 
+                                else if (isVideoLink) {
                                     return (
                                         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
@@ -616,45 +564,37 @@ const Creator_chats = (campaignBrandData) => {
                                                         </a>
                                                     </>
                                                 )}
+
+
+                                                {/* <CreatorVideoEmbed url={item?.data} /> */}
+                                                {/* <iframe src='https://www.youtube.com/embed/E7wJTI-1dvQ'
+                                                    frameborder='0'
+                                                    allow='autoplay; encrypted-media'
+                                                    allowfullscreen
+                                                    title='video'
+                                                /> */}
                                             </div>
                                         </div>
                                     );
-                                } else {
+                                }
+                                else {
                                     // Handle other content types or text messages
                                     return (
-                                        <div className="px-5 py-5 overflow-y-auto"
-                                            style={{ backgroundColor: Colors.light_bg_clr }}
-                                            key={index}>
-                                            <div className={` ${messageClass} flex items-center`}>
-                                                <div className="">
-                                                    <div className="flex items-center justify-between">
-                                                        <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4>
-                                                        <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
-                                                        <p className="pt-1 text-gray-500 me-2">{time}</p>
-                                                    </div>
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                            <div className={`chat-message shadow-lg ${messageClass}`}>
+                                                <div className="pe-10 ps-1">{item.data}</div>
+                                                <div className="flex justify-end items-center">
+                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                    <svg className="bg-grey-500" xmlns="http://www.w3.org/2000/svg" version="1.0" width="15.000000pt" height="15.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
-                                                    <div className={`flex items-end  bg-green-200 chat-message shadow-lg p-2 ${messageClass}`}>
-                                                        <div className="pe-10 ps-1">{item?.data}</div>
-                                                        {/* <div className="flex justify-end items-center"> */}
+                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                        </g>
+                                                    </svg>
 
-                                                        <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-
-                                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
-                                                                <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
-                                                                <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
-                                                            </g>
-                                                        </svg>
-
-                                                        {/* </div> */}
-                                                    </div>
                                                 </div>
-                                                <Image
-                                                    src={campaignBrandData.campaignBrandData?.campaign?.brand?.logo}
-                                                    width={44}
-                                                    height={44}
-                                                    className="rounded-full shadow-lg"
-                                                    alt=""
-                                                />
+
                                             </div>
                                             {/* <p className={` ${textMessageClass}`}>{time}</p> */}
                                         </div>
@@ -689,9 +629,18 @@ const Creator_chats = (campaignBrandData) => {
                                 <input type="text" id="voice-search"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Type something here......"
-                                    value={msgtext}
+                                    value={file ? file?.name : msgtext}
                                     onChange={(e) => setMsgtext(e.target.value)}
                                 />
+                                {file && (
+                                    <button
+                                        onClick={() => setFile(null)} // Clear the selected file
+                                        className="absolute inset-y-0 right-14 flex items-center pr-3 text-sm"
+                                    >
+                                        {/* Add an icon or text for clearing */}
+                                        Clear
+                                    </button>
+                                )}
                                 <button className="absolute inset-y-0 right-0 flex items-center pr-10">
 
                                     <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -715,10 +664,7 @@ const Creator_chats = (campaignBrandData) => {
                                         ref={fileInputRef} // Create a ref for the file input
                                     />
                                 </div>
-
-
                             </div>
-
 
                             <button
                                 type="submit"
@@ -740,4 +686,4 @@ const Creator_chats = (campaignBrandData) => {
     )
 }
 
-export default Creator_chats
+export default Creator_single_chats

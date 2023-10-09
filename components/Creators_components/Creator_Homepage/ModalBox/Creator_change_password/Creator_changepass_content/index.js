@@ -36,7 +36,7 @@ const Creator_changepass_content = () => {
 
         e.preventDefault();
 
-        const cookieValue = JSON.parse(Cookies.get('user_data'));
+        const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {

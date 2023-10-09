@@ -3,8 +3,151 @@ import Colors from "@/styles/Colors"
 import Image from "next/image"
 import Link from "next/link"
 import Creator_Card from "./Creator_Card"
+import { useEffect, useState } from "react"
+import Cookies from "js-cookie"
+import { url } from "@/generalfunctions"
 
 const Creator_Home = () => {
+
+
+    const [creator_data, setCreator_data] = useState(null);
+    const [allCreatorCampaignData, setAllCreatorCampaignData] = useState(null);
+
+    const creatorIdData = async () => {
+
+        const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
+        const userId = JSON?.parse(Cookies?.get('creator_user_data'));
+
+        console.log("cookieValue creator", cookieValue?.token, userId?.user?.id);
+        try {
+
+            const headers = {
+                'Authorization': `Bearer ${cookieValue?.token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const response = await fetch(`${url}/creators/?user=${userId?.user?.id}`, {
+                method: 'Get',
+                headers: headers,
+
+            });
+
+            console.log("response get creators", response);
+
+            if (response?.ok) {
+                const responseData = await response.json();
+                console.log('creators response: homepage', responseData?.data?.data[0]);
+                Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data[0]))
+
+                if (responseData?.status === "success") {
+                    // Cookies.set('creator_profile_id', JSON.stringify(responseData?.data?.data))
+                    const creatorId = responseData?.data?.data[0]?.id;
+
+                    setCreator_data(creatorId);
+                    await allCampaignData(creatorId);
+
+                } else if (response.status === 429) {
+                    toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/login');
+                    // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+                } else if (response.status === 500) {
+                    toast.error("Server Error: Please wait while we fix this problem for you.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/login');
+                }
+            } else {
+                console.error('Error:', response.statusText);
+
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+    };
+
+
+    const allCampaignData = async (creatorId) => {
+
+        try {
+            let cookieValue = Cookies.get('creator_user_data');
+
+            console.log('categories cookieValue------------1', JSON.parse(cookieValue).user.type);
+            const checkBrand = JSON.parse(cookieValue)?.user?.type
+
+            if (typeof cookieValue === 'undefined' || checkBrand !== 'creator') {
+                console.log('User not authenticated, navigating to login page...');
+                router.push('/login'); // Replace '/login' with the actual login page URL
+                console.log('categories cookieValue----brand--------userId', cookieValue?.token);
+
+            }
+            else {
+                let cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+
+                try {
+
+                    const headers = {
+                        'Authorization': `Bearer ${cookieValue?.token}`,
+                    };
+                    const response = await fetch(`${url}/campaigncreators?creator=${creatorId}`, {
+                        method: 'Get',
+                        headers: headers,
+
+                    });
+                    if (response.status === 429) {
+                        const retryAfter = parseInt(response.headers.get('Retry-After')) || 60; // Default to 60 seconds
+                        console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
+                        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000)); // Convert seconds to milliseconds
+                        return makeRequest(); // Retry the request
+                    }
+
+                    console.log('GET campaigns?brand=1 response:', response);
+                    if (response?.ok) {
+                        const responseData = await response.json();
+                        console.log('campaigns response:', responseData?.data?.data);
+                        const campaignData = responseData?.data?.data;
+
+                        if (responseData.status) {
+
+                            setAllCreatorCampaignData(responseData?.data?.data);
+
+                        } else if (response.status === 429) {
+                            toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                                position: 'top-center',
+                                autoClose: 5000,
+                            });
+                            router.push('/login');
+                            // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+                        } else if (response.status === 500) {
+                            toast.error("Server Error: Please wait while we fix this problem for you.", {
+                                position: 'top-center',
+                                autoClose: 5000,
+                            });
+                            router.push('/login');
+                        }
+                    } else {
+                        console.error('Error:', response.statusText);
+                        // alert('Brand creation failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        } catch (error) {
+            console.error('Error parsing user_data cookie:', error);
+        }
+
+    }
+
+    useEffect(() => {
+        creatorIdData();
+    }, []);
+
+    console.log("allCreatorCampaignData", creator_data, allCreatorCampaignData);
     return (
         <>
             <div className="flex w-full" style={{ backgroundColor: Colors.button_light_clr }}>
@@ -43,86 +186,15 @@ const Creator_Home = () => {
                         className="flex flex-row justify-evenly items-start p-5 rounded-md flex-wrap overflow-y-auto min-h-screen h-auto"
                         style={{ backgroundColor: Colors.white_clr }}
                     >
-                        <Creator_Card />
-                        <Creator_Card />
-                        <Creator_Card />    
+                        {allCreatorCampaignData?.length > 0 ? allCreatorCampaignData.map((item, index) => {
+                            return (
+                                <Creator_Card item={item} key={index} />
+                            )
+                        })
 
-                        {/* <div className="relative p-10 w-full">
-                            <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">
-                                <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3 font-bold">
-                                            S.No.
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 font-bold">
-                                            Campaign name
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 font-bold">
-                                            Date
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 font-bold">
-                                            No. of Creators
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 font-bold">
-                                            Status
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            1
-                                        </th>
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            test
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            12-08-23 - 15-08-23
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            4
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Draft
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            2
-                                        </th>
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            test
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            12-08-23 - 15-08-23
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            4
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Draft
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            3
-                                        </th>
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            test
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            12-08-23 - 15-08-23
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            4
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Draft
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> */}
+                            :
+                            <div>No Campaign Data</div>
+                        }
 
 
                     </div>

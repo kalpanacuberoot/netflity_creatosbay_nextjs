@@ -26,70 +26,67 @@ const Edit_profile_content = () => {
     const onEditProfile = async () => {
 
         try {
-            const cookieValue = JSON.parse(Cookies.get('user_data'));
+            let userCookie = Cookies.get('user_data');
 
-            if (typeof cookieValue === 'undefined') {
+            if (typeof userCookie === 'undefined') {
                 console.log('User not authenticated, navigating to login page...');
                 router.push('/login'); // Replace '/login' with the actual login page URL
-                console.log('categories cookieValue------------1', cookieValue?.token);
             }
-        } catch (error) {
-            console.error('Error parsing user_data cookie:', error);
-        }
+            else {
+                const cookieValue = JSON.parse(userCookie);
+                const brand_detail = Cookies.get('brand_detail');
+                const brandIds = Cookies.get('brand_id');
 
-        const brand_detail = Cookies.get('brand_detail');
-        const brandIds = Cookies.get('brand_id');
+                let brandId = null;
 
-        let brandId = null;
+                if (brand_detail) {
+                    try {
+                        brandId = JSON.parse(brand_detail)?.brand?.id;
+                    } catch (error) {
+                        console.error('Error parsing brand_detail:', error);
+                    }
+                }
 
-        if (brand_detail) {
-            try {
-                brandId = JSON.parse(brand_detail)?.brand?.id;
-            } catch (error) {
-                console.error('Error parsing brand_detail:', error);
-            }
-        }
+                if (!brandId && brandIds) {
+                    try {
+                        brandId = JSON.parse(brandIds);
+                    } catch (error) {
+                        console.error('Error parsing brand_ids:', error);
+                    }
+                }
+                console.log('brandId:', brandId);
 
-        if (!brandId && brandIds) {
-            try {
-                brandId = JSON.parse(brandIds);
-            } catch (error) {
-                console.error('Error parsing brand_ids:', error);
-            }
-        }
-        console.log('brandId:', brandId);
+                const response = await fetch(`${url}/brands/${brandId}`, {
+                    method: 'Get',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${cookieValue?.token}`,
+                    },
+                });
 
-        try {
-            const response = await fetch(`${url}/brands/${brandId}`, {
-                method: 'Get',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookieValue?.token}`,
-                },
-            });
+                console.log("response edit profile brand", response);
 
-            console.log("response edit profile brand", response);
+                if (response) {
+                    const data = await response.json();
 
-            if (response) {
-                const data = await response.json();
+                    console.log("edit brand", data);
+                    setEdit_profile(data?.data)
+                    // toast.success('onLogout Successfully', {
+                    //     position: 'top-center',
+                    //     autoClose: 2000,
+                    // });
+                    // router.push('/login');
+                    // Cookies.remove('brand_id');
+                    // Cookies.remove('user_data');
 
-                console.log("edit brand", data);
-                setEdit_profile(data?.data)
-                // toast.success('onLogout Successfully', {
-                //     position: 'top-center',
-                //     autoClose: 2000,
-                // });
-                // router.push('/login');
-                // Cookies.remove('brand_id');
-                // Cookies.remove('user_data');
+                } else {
 
-            } else {
-
-                // toast.error('Logout cancelled', {
-                //     position: 'top-center', // Set the toast position
-                //     autoClose: 3000, // Close the toast after 3 seconds
-                // });
+                    // toast.error('Logout cancelled', {
+                    //     position: 'top-center', // Set the toast position
+                    //     autoClose: 3000, // Close the toast after 3 seconds
+                    // });
+                }
             }
         } catch (error) {
             console.error('Error edit profile:', error);
@@ -164,7 +161,7 @@ const Edit_profile_content = () => {
     return (
         <>
 
-            <div className="overflow-x-hidden w-full overflow-y-auto h-full relative bg-white rounded-lg shadow dark:bg-gray-700 edit_profile_ht">
+            <div className="overflow-x-hidden w-full relative bg-white rounded-lg shadow dark:bg-gray-700 edit_profile_ht">
 
                 <div className="flex items-start justify-between border-b rounded-t dark:border-gray-600">
 
@@ -198,9 +195,9 @@ const Edit_profile_content = () => {
                             id="profile_name"
                             className="appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Brand Name"
-                            // value={edit_profile ? edit_profile?.name : edit_name}
+                            value={edit_profile ? edit_profile?.name : edit_name}
                             onChange={(e) => setEdit_name(e.target.value)}
-                            defaultValue={edit_profile ? edit_profile?.name : edit_name}
+                        // defaultValue={edit_profile ? edit_profile?.name : edit_name}
                         />
                         <input
                             type="text"
