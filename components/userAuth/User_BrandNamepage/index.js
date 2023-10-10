@@ -121,24 +121,22 @@ const User_BrandNamepage = () => {
     return (
         <>
             <div className="container p-4 lg:p-10 flex bg-zinc-100 items-center px-10">
-                <div className=" auto-col-max w-full">
+                <div className="p-10 auto-col-max w-full">
                     <div className="  border-gray-300 border-solid rounded-lg border-1">
-                        <div className="p-10 bg-white w-full  h-screen ">
-                            <h1 className="my-3">Choose Brand Account</h1>
+                        <div className="p-10 bg-white w-full  h-auto ">
+                            <h1 className="my-3 font-bold">Choose Brand Account</h1>
                             <div className="flex flex-col items-center justify-center ">
                                 {brand_user?.length > 0 && brand_user?.map((item, index) => {
                                     const isCurrent = item?.brand?.id === user_active_account;
                                     console.log("isCurrent user brand name", isCurrent);
                                     return (
-
-
                                         <div
                                             className={` justify-between border-purple-500 border my-3 flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded cursor-pointer  ${isCurrent ? ' border-s-8 border-amber-400 text-black hover:bg-white hover:text-amber-800 ' : ''}`}
                                             onClick={() => onBrand_details(item, index)}
                                             key={index}
                                         >
-                                            <div className=" flex items-center">
-                                                <Image className="mr-2 rounded-full"
+                                            <div className=" flex items-center capitalize">
+                                                <Image className="mr-5 rounded-full"
                                                     src={item?.brand?.logo}
                                                     alt="Jese image"
                                                     width={60}
@@ -160,7 +158,7 @@ const User_BrandNamepage = () => {
 
                             <Buttons
                                 label={"Add New Brand"}
-                                buttoncss={"py-3 button_clr px-5 my-5"}
+                                buttoncss={"py-3 button_clr px-5 my-5 text-md"}
                                 onClick={() => router.push('/brand')}
                             />
                         </div>

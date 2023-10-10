@@ -241,7 +241,7 @@ const Creator_single_chatspage = () => {
                             {!blankchat &&
                                 <div className="flex flex-row items-center p-4 justify-between">
                                     {/* {allInactiveBrands.length>0 && allInactiveBrands.map((item, index) => { */}
-                                        <Brand_Avatar_single_withoutbadge item={allInactiveBrands}/>
+                                    <Brand_Avatar_single_withoutbadge item={allInactiveBrands} />
                                     {/* })} */}
 
                                     <div style={{ background: Colors.gray2 }} className="py-3 px-3 rounded-md">
@@ -300,14 +300,14 @@ const Creator_single_chatspage = () => {
 
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4 h-screen overflow-y-auto">
 
-                            <div className="font_size_21  p-4">
-                                Campaign info
+                            <div className="font_size_21  p-4 capitalize">
+                                Campaign Info
                             </div>
                             <hr className="" />
                             {allInactiveBrands?.length > 0 && allInactiveBrands?.map((item, index) => (
 
                                 <div className=" border shadow rounded m-3" key={index}>
-                                    <div className="p-4">
+                                    <div className="p-4 capitalize">
                                         {item?.campaign?.name}
                                         <h3></h3>
                                     </div>
@@ -331,12 +331,12 @@ const Creator_single_chatspage = () => {
                                             {item?.campaign?.starting_date} - {item?.campaign?.ending_date}
                                         </p>
                                     </div>
-                                    <div className=" border shadow rounded mx-3 my-4">
+                                    <div className=" border shadow rounded mx-3 my-4 py-4 px-3">
                                         <div className="flex px-4 items-center">
                                             <label
                                                 htmlFor="first_name"
                                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                                Image Count
+                                                <i>Image Count : </i>
                                             </label>
 
                                             <div className="px-3">{item?.image_count}/2</div>
@@ -345,14 +345,19 @@ const Creator_single_chatspage = () => {
                                             <label
                                                 htmlFor="first_name"
                                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                                Video Count
+                                                <i> Video Count : </i>
                                             </label>
 
                                             <div className="px-3">{item?.video_count}/2</div>
                                         </div>
                                         <div className="flex px-4 items-center">
-                                            <div>Revision Submitted</div>
-                                            <div className="px-5">0/2</div>
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                <i> Revision Submitted :</i>
+                                            </label>
+
+                                            <div className="px-3">{item?.video_count}/2</div>
                                         </div>
                                     </div>
 

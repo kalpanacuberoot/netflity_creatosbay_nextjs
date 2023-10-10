@@ -207,9 +207,9 @@ const Communication_page = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-row  items-start  justify-between w-full">
+                            <div className="flex flex-row md:flex-wrap lg:flex-nowrap items-start justify-between w-full">
 
-                                <div style={{ background: Colors.white_clr }} className="rounded-md my-3 me-3 w-2/4 h-screen overflow-y-auto">
+                                <div style={{ background: Colors.white_clr }} className="w-full h-auto rounded-md my-3 me-3 lg:w-2/4 md:w-full md:h-auto lg:h-screen overflow-y-auto">
                                     <Searchcomm />
 
                                     <div className=" p-4 border shadow rounded m-3 "
@@ -217,7 +217,7 @@ const Communication_page = () => {
                                     >
 
                                         <div className="flex flex-row items-center justify-between ">
-                                            <div className="font_size_21">
+                                            <div className="font_size_21" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                                 Active Conversations
                                             </div>
                                             <span
@@ -231,11 +231,14 @@ const Communication_page = () => {
                                         <hr className="" />
                                         <div className="">
                                             <div className="py-3">
-                                                {activeData?.length > 0 && activeData.map((inactive, index) => (
+                                                {activeData?.length > 0 ? activeData.map((inactive, index) => (
                                                     <>
                                                         <Avatar_green_bg item={inactive?.data} key={index} />
                                                     </>
-                                                ))}
+                                                ))
+                                            : 
+                                            <h4 className="px-5 py-3">No Active Conversations</h4>
+                                            }
                                                 {/* <Avatar_green_bg />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
@@ -249,7 +252,7 @@ const Communication_page = () => {
                                     <div className="  p-4 border shadow rounded m-3"
                                     >
                                         <div className="flex flex-row items-center justify-between ">
-                                            <div className="font_size_21">
+                                            <div className="font_size_21" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                                 InActive Conversations
                                             </div>
                                             <span
@@ -286,7 +289,7 @@ const Communication_page = () => {
                                                     :
 
                                                     <div>
-                                                        No Creators yet
+                                                        No Creators Yet
                                                         <Link href={'/marketplace'}>
                                                             <div className="flex items-center justify-center mt-5 bg-yellow-400 py-2 rounded-lg">
                                                                 <Image
@@ -312,10 +315,10 @@ const Communication_page = () => {
 
                                         </div>
                                     </div>
-                                  
+
 
                                 </div>
-                                <div className=" h-screen  rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
+                                <div className=" lg:h-screen h-auto rounded-md my-3 overflow-y-auto me-3 w-full" style={{ background: Colors.white_clr }}>
 
                                     <div className=" bg-zinc-100 h-full">
                                         {blankchat &&
@@ -375,15 +378,15 @@ const Communication_page = () => {
                                         }
                                     </div>
                                 </div>
-                                <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
+                                <div style={{ background: Colors.white_clr }} className="w-full h-auto rounded-md my-3 lg:w-2/4 lg:h-screen overflow-y-auto">
 
-                                    <div className="font_size_21  p-4">
+                                    <div className="font_size_21  p-4 capitalize" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                         Campaign info
                                     </div>
 
                                     <hr className="" />
                                     <div className=" border shadow rounded m-3">
-                                        <div className="p-4">
+                                        <div className="p-4 capitalize">
 
                                             <h3>{campaign_data?.name}</h3>
                                         </div>
@@ -392,8 +395,8 @@ const Communication_page = () => {
                                             {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
                                                 <>
                                                     <h3 className="font-bold underline">Products</h3>
-                                                    <h3>{item.name}</h3>
-                                                    <h4>{item.description}</h4>
+                                                    <h3 className="capitalize my-1">{item.name}</h3>
+                                                    <h4 className="mb-5 normal-case">{item.description}</h4>
                                                     <Image
                                                         src={item?.link}
                                                         height={200}
@@ -421,23 +424,24 @@ const Communication_page = () => {
                                                 </>
                                             ))}
 
-                                            <p className="font_size_16 communication_text py-2">
+                                            <div className="font_size_16 communication_text py-2 normal-case my-5">
 
                                                 {campaign_data?.description}
 
-                                            </p>
+                                            </div>
 
                                         </div>
 
 
                                     </div>
                                     {creator_count?.length > 0 && creator_count.map((item, index) => (
-                                        <div className=" border shadow rounded mx-3 my-4" key={index}>
+                                        <div className=" border shadow rounded mx-3 my-4 py-4 px-3" key={index}>
+
                                             <div className="flex px-4 items-center">
                                                 <label
                                                     htmlFor="first_name"
                                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                                    Image Count
+                                                    <i>Image Count : </i>
                                                 </label>
 
                                                 <div className="px-3">{item?.image_count}/2</div>
@@ -446,14 +450,19 @@ const Communication_page = () => {
                                                 <label
                                                     htmlFor="first_name"
                                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
-                                                    Video Count
+                                                    <i> Video Count : </i>
                                                 </label>
 
                                                 <div className="px-3">{item?.video_count}/2</div>
                                             </div>
                                             <div className="flex px-4 items-center">
-                                                <div>Revision Submitted</div>
-                                                <div className="px-5">0/2</div>
+                                                <label
+                                                    htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                    <i> Revision Submitted :</i>
+                                                </label>
+
+                                                <div className="px-3">{item?.video_count}/2</div>
                                             </div>
                                         </div>
                                     ))}

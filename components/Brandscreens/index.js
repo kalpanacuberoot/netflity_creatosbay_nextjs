@@ -267,12 +267,12 @@ const Brandscreens = () => {
 
     return (
         <>
-            <div className="p-4 lg:p-10 bg-zinc-100 border-gray-300 border-solid w-full w-90 rounded-lg border-1"
+            <div className="p-10 lg:p-10 bg-zinc-100 border-gray-300 border-solid w-full rounded-lg border-1"
             //  onClick={() => setMultivalues(false)}
             >
 
                 {!open &&
-                    <div className="bg-white p-5  rounded-md">
+                    <div className="bg-white p-10 m-10 rounded-md">
 
                         <>
                             <h4 className="font-bold" style={{ color: Colors.logo_clr }}>
@@ -331,11 +331,11 @@ const Brandscreens = () => {
 
                                         <input
                                             type="text"
-                                            className=" focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                                            className="cursor-pointer focus:border-purple-500 focus:ring-purple-500 text-left block appearance-none border rounded-md w-full mt-5 bg-gray-100 outline-none py-5 px-3 text-gray-700 focus:shadow-outline border-gray-300 pr-8 leading-tight focus:outline-none focus:border-gray-500"
                                             // value={selectedValues.join(', ')}
                                             value={selectedValues.map((item) => item.name).join(', ')}
                                             readOnly
-                                            placeholder="Select the Industry Type"
+                                            placeholder="Select Your Industry Type"
                                             onClick={() => setMultivalues(!multivalues)}
                                             required
                                         />
@@ -362,7 +362,7 @@ const Brandscreens = () => {
                                                         />
                                                         <label
                                                             htmlFor={`checkbox-item-${index}`}
-                                                            className="w-full ml-2  text-base text-gray-600 rounded dark:text-gray-300"
+                                                            className="cursor-pointer w-full ml-2 capitalize text-base text-gray-600 rounded dark:text-gray-300"
                                                         >
                                                             {item.name}
                                                         </label>

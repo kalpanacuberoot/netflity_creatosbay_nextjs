@@ -21,6 +21,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'tailwindcss/tailwind.css';
 
+
 const Campaign_infopage = () => {
 
   const router = useRouter();
@@ -43,6 +44,7 @@ const Campaign_infopage = () => {
   const [ref_link, setRef_link] = useState('');
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
 
   const handleRefPopupData = (data) => {
     setPopupData(data);
@@ -57,7 +59,7 @@ const Campaign_infopage = () => {
   useEffect(() => {
 
     checkIsMobile();
-    
+
     window.addEventListener('resize', checkIsMobile);
 
     const { start_date, end_date } = router.query;
@@ -71,6 +73,41 @@ const Campaign_infopage = () => {
       window.removeEventListener('resize', checkIsMobile);
     };
   }, [router.query]);
+
+  const handleGrammarCheck = async () => {
+    try {
+      const response = await fetch('https://api.grammarly.com/v1/check', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer 212|uidNhXXZLJ56a0K4HF1kuKUa1AbSu3G8p3cvapNl', // Replace with your Grammarly API key
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "text":campaign_desc,
+          "language": 'en-US',
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      console.log("handlegrammarcheckresponse",response);
+      const data = await response.json();
+
+      console.log("handlegrammarcheck",data);
+  
+      // Extract suggestions from the API response
+      const grammarSuggestions = data.suggestions || [];
+  
+      // Update the state with suggestions
+      setSuggestions(grammarSuggestions);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+
+  console.log("suggestionssuggestions", suggestions);
 
   const handleSubmit = async (e) => {
     setLoading(true)
@@ -285,7 +322,18 @@ const Campaign_infopage = () => {
                         placeholder="Start Typing..."
                         value={campaign_desc}
                         onChange={(e) => setCampaign_desc(e.target.value)}
+                        spellCheck="true"
                       ></textarea>
+                      <button onClick={handleGrammarCheck}>Check Grammar</button>
+                      <div>
+                        <h2>Suggestions:</h2>
+                        <ul>
+                          {suggestions.map((suggestion, index) => (
+                            <li key={index}>{suggestion.text}</li>
+                          ))}
+                        </ul>
+                      </div>
+
                     </div>
 
                     <div className="my-3">

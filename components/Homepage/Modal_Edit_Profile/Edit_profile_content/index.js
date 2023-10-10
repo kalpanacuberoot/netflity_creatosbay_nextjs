@@ -156,14 +156,14 @@ const Edit_profile_content = () => {
     // console.log("brand_details edit profile",brand_details);
 
     // const edit_profile_category = edit_profile?.categories.map((item) => item.name);
-    // console.log("edit_profile_category",edit_profile_category)
+    // console.log("edit_profile_category",edit_profile_category)   // edit_profile_ht
 
     return (
         <>
 
-            <div className="overflow-x-hidden w-full relative bg-white rounded-lg shadow dark:bg-gray-700 edit_profile_ht">
+            <div className="overflow-x-hidden w-full relative bg-white rounded-lg shadow dark:bg-gray-700 h-full">
 
-                <div className="flex items-start justify-between border-b rounded-t dark:border-gray-600">
+                {/* <div className="flex items-start justify-between border-b rounded-t dark:border-gray-600 ">
 
                     <div className="w-full px-5 py-3 flex items-center">
                         <button
@@ -177,54 +177,65 @@ const Edit_profile_content = () => {
                             <span className="sr-only">Close modal</span>
 
                         </button>
-                        <div className="font_size_21  line-height-[26.52px] text-center w-full">Edit Profile</div>
+                        <div className="font_size_21  line-height-[26.52px] text-center w-full ">Edit Profile</div>
+                    </div>
 
+                </div>
+                <hr /> */}
 
+                <div
+                    style={{ background: Colors.invoice_gradient_clr }}
+                    className="auto-cols-max p-3 rounded-md flex flex-row my-5 mx-8"
+                >
+                    <div className="flex flex-row justify-between items-center w-full">
+                        <div className="text-2xl font-bold ps-5" style={{ color: Colors.white_clr }}>
+                            Edit Profile
+                        </div>
                     </div>
 
                 </div>
                 <hr />
-
-                <div className="space-y-6 h-screen p-5">
-                    <div className="font_size_21  line-height-[26.52px]">
-                        Brand Details.
-                    </div>
-                    <form>
-                        <input
-                            type="compant"
-                            id="profile_name"
-                            className="appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Brand Name"
-                            value={edit_profile ? edit_profile?.name : edit_name}
-                            onChange={(e) => setEdit_name(e.target.value)}
-                        // defaultValue={edit_profile ? edit_profile?.name : edit_name}
-                        />
-                        <input
-                            type="text"
-                            id="website"
-                            className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="Brand Website"
-
-                            onChange={(e) => setEdit_website(e.target.value)}
-                            defaultValue={edit_profile ? edit_profile?.website : edit_website}
-                        />
-                        {edit_profile?.categories && edit_profile?.categories.map((item, index) => (
-
-
+                <div className="space-y-6 p-10 ">
+                    {/* <div className="border p-10"> */}
+                        <div className="font_size_21  line-height-[26.52px]" style={{fontWeight:'bold'}}>
+                            Brand Details.
+                        </div>
+                        <form className="">
                             <input
-                                key={index}
-                                type="text"
-                                id="category"
-                                className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Brand Type"
-                                // value={item?.name}
-                                defaultValue={item?.name}
+                                type="compant"
+                                id="profile_name"
+                                className="appearance-none border rounded-md w-full bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Brand Name"
+                                // value={edit_profile ? edit_profile?.name : edit_name}
+                                onChange={(e) => setEdit_name(e.target.value)}
+                                defaultValue={edit_profile ? edit_profile?.name : edit_name}
                             />
+                            <input
+                                type="text"
+                                id="website"
+                                className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Brand Website"
 
-                        ))
+                                onChange={(e) => setEdit_website(e.target.value)}
+                                defaultValue={edit_profile ? edit_profile?.website : edit_website}
+                            />
+                            {edit_profile?.categories && edit_profile?.categories.map((item, index) => (
 
-                        }
-                        <div>
+
+                                <input
+                                    key={index}
+                                    type="text"
+                                    id="category"
+                                    className="appearance-none border rounded-md w-full mt-5 bg-gray-100  py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="Brand Type"
+                                    // value={item?.name}
+                                    defaultValue={item?.name}
+                                />
+
+                            ))
+
+                            }
+                            {/* <div>
                             <button
                                 onClick={() => setMultivalues(!multivalues)}
                                 id="dropdownBgHoverButton"
@@ -295,9 +306,9 @@ const Edit_profile_content = () => {
                                     </ul>
                                 </div>
                             }
-                        </div>
+                        </div> */}
 
-                        {/* <div className="relative">
+                            {/* <div className="relative">
                             <select
                                 value={selectedOption}
                                 onChange={handleChange}
@@ -324,47 +335,47 @@ const Edit_profile_content = () => {
                             </div>
                         </div> */}
 
-                        <div className="relative w-full mt-5">
-                            <label
-                                htmlFor="fileInput"
-                                className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
-                                style={{ borderColor: Colors.logo_clr }}
-                            >
-                                <div className="mb-2">
-                                    {/* <h4 className=" text-gray-300">+</h4> */}
-                                    <Image
-                                        // src={Images.plus_icon}
-                                        // src={ brand_details?.brand?.logo}
-                                        src={edit_profile?.logo}
-                                        width={50}
-                                        height={50}
-                                        alt=""
-                                        className="p-1"
-                                    />
-                                </div>
-                                <span className="text-base  text-gray-700">
-                                    Brand Logo
-                                </span>
-                            </label>
-                            <input
-                                id="fileInput"
-                                className="absolute inset-0 opacity-0 w-full"
-                                type="file"
-                            />
-                        </div>
-                        <textarea
-                            id="descriptionInput"
-                            type="text"
-                            placeholder="Brand Description"
-                            className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            rows={4}
-                            // value={brand_details?.brand?.description}
-                            // value={edit_profile?.description}
-                            defaultValue={edit_profile?.description}
-                        ></textarea>
+                            <div className="relative w-full mt-5">
+                                <label
+                                    htmlFor="fileInput"
+                                    className="w-full border-dotted h-44  align-middle border-4 rounded-lg bg-white   py-4 px-6 flex flex-col items-center justify-center cursor-pointer"
+                                    style={{ borderColor: Colors.logo_clr }}
+                                >
+                                    <div className="mb-2">
+                                        {/* <h4 className=" text-gray-300">+</h4> */}
+                                        <Image
+                                            // src={Images.plus_icon}
+                                            // src={ brand_details?.brand?.logo}
+                                            src={edit_profile?.logo}
+                                            width={50}
+                                            height={50}
+                                            alt=""
+                                            className="p-1"
+                                        />
+                                    </div>
+                                    <span className="text-base  text-gray-700">
+                                        Brand Logo
+                                    </span>
+                                </label>
+                                <input
+                                    id="fileInput"
+                                    className="absolute inset-0 opacity-0 w-full"
+                                    type="file"
+                                />
+                            </div>
+                            <textarea
+                                id="descriptionInput"
+                                type="text"
+                                placeholder="Brand Description"
+                                className="appearance-none border rounded-md w-full align-top mt-5 bg-gray-100 h-40 py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                rows={4}
+                                // value={brand_details?.brand?.description}
+                                // value={edit_profile?.description}
+                                defaultValue={edit_profile?.description}
+                            ></textarea>
 
-                    </form>
-
+                        </form>
+                    {/* </div> */}
                 </div>
 
 

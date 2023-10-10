@@ -13,18 +13,32 @@ import Select from 'react-select';
 
 const Creator_edit_formpage = () => {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const Creator_data = Cookies.get('creator_profile_id'); // Get the cookie value
+
+    let creator_profile_data = null; // Default value for creator_profile_data
+
+    if (Creator_data) {
+        try {
+            creator_profile_data = JSON.parse(Creator_data); // Attempt to parse the JSON
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+        }
+    }
+
+    console.log("creator_profile_datacreator_profile_data",creator_profile_data);
+
+    const [name, setName] = useState(creator_profile_data?.user?.name || '');
+    const [email, setEmail] = useState(creator_profile_data?.user?.email || '');
     const [city, setCity] = useState('');
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    const [age, setAge] = useState(creator_profile_data?.age || '');
+    const [gender, setGender] = useState( creator_profile_data?.gender || '');
     const [heightFeet, setHeightFeet] = useState('');
     const [heightInches, setHeightInches] = useState('');
     const [heightCm, setHeightCm] = useState('');
-    const [weight, setWeight] = useState('');
-    const [bio, setBio] = useState('');
-    const [pets, setPets] = useState('');
-    const [kids, setKids] = useState('');
+    const [weight, setWeight] = useState(creator_profile_data?.weight || '');
+    const [bio, setBio] = useState(creator_profile_data?.bio || '');
+    const [pets, setPets] = useState(creator_profile_data?.pets || '');
+    const [kids, setKids] = useState(creator_profile_data?.kids || '');
     const [skinType, setSkinType] = useState('');
     const [bodyType, setBodyType] = useState('');
     const [hairType, setHairType] = useState('');
@@ -46,20 +60,20 @@ const Creator_edit_formpage = () => {
     const [linkfive, setLinkfive] = useState('');
     const [linksix, setLinksix] = useState('');
     const [allApiResponse, setAllApiResponse] = useState([]);
-    const [file, setFile] = useState(null);
-    const [previewImage, setPreviewImage] = useState(null);
-    const [selectedStateOption, setSelectedStateOption] = useState(null);
+    const [file, setFile] = useState(creator_profile_data?.profile_pic || null);
+    const [previewImage, setPreviewImage] = useState(creator_profile_data?.profile_pic || null);
+    const [selectedStateOption, setSelectedStateOption] = useState( null);
 
-    console.log("Createcreatoralldata", name, email, city, age, gender, heightFeet, heightInches, weight, bio, pets, kids, statesData, skinType,
-        bodyType, hairType, eyeType, platform, selectedState, categoriesData)
-
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [selectedSkinOption, setSelectedSkinOption] = useState( null);
+    const [selectedBodyOption, setSelectedBodyOption] = useState(null);
+    const [selectedHairOption, setSelectedHairOption] = useState(null);
+    const [selectedEyeOption, setSelectedEyeOption] = useState(null);
     const [selectedMultipleOptionsIds, setSelectedMultipleOptionsIds] = useState([]);
     // const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedItemsIds, setSelectedItemsIds] = useState([]);
-    const [selectedlanguageItems, setSelectedlanguageItems] = useState([]);
+    const [selectedlanguageItems, setSelectedlanguageItems] = useState( creator_profile_data?.languages || []);
     const [selectedLanguageIds, setSelectedLanguageIds] = useState([]);
     const items = ['Youtube', 'Instagram'];
     const [selectedDataArray, setSelectedDataArray] = useState([]);
@@ -195,7 +209,7 @@ const Creator_edit_formpage = () => {
 
             // return await response.json();
             const responseData = await response.json();
-            console.log('skintypes response:', responseData?.data?.data);
+            console.log('skintypes skintypes response:', responseData?.data?.data);
             setSkinTypeData(responseData?.data?.data);
         } catch (error) {
             console.error('Error:', error);
@@ -470,6 +484,7 @@ const Creator_edit_formpage = () => {
     };
 
     useEffect(() => {
+
         getAllStates();
         getAllSkinTypes();
         getAllBodyTypes();
@@ -596,45 +611,34 @@ const Creator_edit_formpage = () => {
     const onHandleSubmit = async (event) => {
 
         event.preventDefault();
-        // if (!file) {
-        //     // Display an error message or take appropriate action for incomplete fields
-        //     console.error('All fields are mandatory. Please fill out all required fields.');
-        //     return;
-        // }
-
-        // Validate that all required fields are filled out
-        // if (!file || !selectedState || !city || !gender || !age || !heightCm || !weight || !skinType || !bodyType || !hairType || !eyeType || !pets || !kids || !bio || selectedItemsIds.length === 0 || selectedLanguageIds.length === 0 || selectedDataArray.length === 0) {
-        //     // Display an error message or take appropriate action for incomplete fields
-        //     console.error('All fields are mandatory. Please fill out all required fields.');
-        //     return;
-        // }
 
         try {
-            const uploadedImageData = await handleSubmit();
+            let uploadedImageData = await handleSubmit();
+            uploadedImageData = creator_profile_data?.profile_pic;
 
             console.log("uploadedImageData", uploadedImageData);
 
-            if (uploadedImageData !== null) {
+            if (uploadedImageData !== null || creator_profile_data?.profile_pic) {
 
                 const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
                 console.log('categories cookieValue------------2', cookieValue?.token);
 
                 const requestData = {
-                    "user_id": cookieValue?.user?.id,
-                    "state_id": parseInt(selectedState, 10),
-                    "city": city,
-                    "gender": gender,
-                    "age": parseInt(age, 10),
-                    "height": parseInt(heightCm, 10),
-                    "weight": parseInt(weight, 10),
-                    "skin_id": parseInt(skinType, 10),
-                    "body_id": parseInt(bodyType, 10),
-                    "hair_id": parseInt(hairType, 10),
-                    "eye_id": parseInt(eyeType, 10),
-                    "pets": parseInt(pets, 10),
-                    "kids": parseInt(kids, 10),
-                    "bio": bio,
-                    "profile_pic": uploadedImageData,
+                    "user_id": cookieValue?.user?.id ,
+                    "state_id": parseInt(selectedState, 10) || creator_profile_data?.state_id,
+                    "city": city || creator_profile_data?.city,
+                    "gender": gender || creator_profile_data?.gender,
+                    "age": parseInt(age, 10) || creator_profile_data?.age,
+                    "height": parseInt(heightCm, 10) || creator_profile_data?.height,
+                    "weight": parseInt(weight, 10) || creator_profile_data?.weight,
+                    "skin_id": parseInt(skinType, 10) || creator_profile_data?.skin_id,
+                    "body_id": parseInt(bodyType, 10) || creator_profile_data?.body_id ,
+                    "hair_id": parseInt(hairType, 10) || creator_profile_data?.hair_id,
+                    "eye_id": parseInt(eyeType, 10) || creator_profile_data?.eye_id,
+                    "pets": parseInt(pets, 10) || creator_profile_data?.pets,
+                    "kids": parseInt(kids, 10) || creator_profile_data?.kids,
+                    "bio": bio || creator_profile_data?.bio,
+                    "profile_pic": uploadedImageData || creator_profile_data?.profile_pic,
                     "platforms": selectedItemsIds,
                     "languages": selectedLanguageIds,
                     "categories": selectedDataArray.map((item) => item?.value)
@@ -655,12 +659,13 @@ const Creator_edit_formpage = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('creator API Response:', data);
+                    console.log('creator edit API Response:', data);
                     setAllApiResponse(data?.data);
                     toast.success('Edit Profile Successfully', {
                         position: 'top-center',
                         autoClose: 2000,
                     });
+                    Cookies.set('creator_profile_id',JSON.stringify(data?.data));
                 } else {
                     throw new Error('API Request Failed');
                 }
@@ -682,25 +687,75 @@ const Creator_edit_formpage = () => {
         label: state_name?.name,
     }));
 
+    const cookiesStateValue = stateoptions?.find(option => option?.value === creator_profile_data?.state_id);
+
+    console.log("cookiesStateValuecookiesStateValue",cookiesStateValue);
+
+    const skinoptions = skinTypeData ?.map((state_name, index) => ({
+        value: state_name?.id,
+        label: state_name?.name,
+    }));
+
+    const cookiesSkinValue = skinoptions?.find(option => option?.value === creator_profile_data?.skin_id);
+
+    console.log("skinoptionsskinoptions",skinoptions,cookiesSkinValue);
+
+    const bodyoptions = bodyTypeData?.map((state_name, index) => ({
+        value: state_name?.id,
+        label: state_name?.name,
+    }));
+
+    const hairoptions = hairTypeData?.map((state_name, index) => ({
+        value: state_name?.id,
+        label: state_name?.name,
+    }));
+
+    const eyeoptions = eyeTypeData?.map((state_name, index) => ({
+        value: state_name?.id,
+        label: state_name?.name,
+    }));
+
     const handleStateChange = (selectedOption) => {
         setSelectedStateOption(selectedOption);
     };
 
+    const handleSkinChange = (selectedOption) => {
+        setSelectedSkinOption(selectedOption);
+    };
+
+    const handleBodyChange = (selectedOption) => {
+        setSelectedBodyOption(selectedOption);
+    };
+
+    const handleHairChange = (selectedOption) => {
+        setSelectedHairOption(selectedOption);
+    };
+
+    const handleEyeChange = (selectedOption) => {
+        setSelectedEyeOption(selectedOption);
+    };
+
     const customStateStyles = {
+        control: (provided) => ({
+            ...provided,
+            // borderColor: '#ca8a04',
+            cursor:'pointer',
+        }),
         menu: (provided) => ({
             ...provided,
             backgroundColor: 'white', // Background color for the entire dropdown menu
-            zIndex: 1
+            cursor:'pointer',
         }),
         option: (provided, state) => ({
             ...provided,
             backgroundColor: state.isSelected ? 'blue' : 'white', // Change the background color as desired
             padding: '8px', // Add padding as desired
-            zIndex: 1
+            cursor:'pointer',
         }),
     };
 
-    console.log("statesData", statesData);
+
+    console.log("statesData", creator_profile_data);
 
 
 
@@ -709,15 +764,26 @@ const Creator_edit_formpage = () => {
             <div className="min-h-screen bg-gray-100 p-0 sm:p-12 w-full">
                 <div className="mx-auto w-full px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl   xl:p-10 lg:p-10">
 
-                    <h1 className="text-4xl font-bold mb-8 text-center">Edit Profile</h1>
-                    <form id="form" noValidate>
+                    {/* <h1 className="text-4xl font-bold mb-8 text-center text-violet-600">Edit Profile</h1> */}
+                    <div
+                        style={{ background: Colors.invoice_gradient_clr }}
+                        className="auto-cols-max p-3 rounded-md flex flex-row mb-5"
+                    >
+                        <div className="flex flex-row justify-between items-center  w-full">
+                            <div className="text-2xl font-bold ps-5" style={{ color: Colors.white_clr }}>
+                                Edit Profile
+                            </div>
+                        </div>
+
+                    </div>
+                    {/* <form id="form" noValidate> */}
                         <div className="flex justify-between">
-                            <div className=" w-full" 
-                            style={{textAlign:'-webkit-center'}}
+                            <div className=" w-full"
+                                style={{ textAlign: '-webkit-center' }}
                             >
-                                <div className=" w-full my-4 font-bold text-lg text-center"> Upload Profile Image </div>
+                                <div className=" w-full my-4 font-bold text-lg text-center "> Upload Profile Image </div>
                                 <div
-                                    className=" focus:border-purple-500 focus:ring-purple-500 border-dotted h-96 w-96 align-middle border-4 rounded-full bg-white py-4 px-6 flex flex-col items-center justify-center"
+                                    className="shadow-md border-dotted h-96 w-96 align-middle border-4 rounded-full bg-white py-4 px-6 flex flex-col items-center justify-center"
                                     onChange={handleFileChange}
                                 >
                                     <label
@@ -747,9 +813,9 @@ const Creator_edit_formpage = () => {
                                             <Image
                                                 src={previewImage}
                                                 alt="Selected"
-                                                style={{ maxWidth: '100%', maxHeight: '300px' }}
-                                                width={50}
-                                                height={50}
+                                                style={{ maxWidth: '100%', maxHeight: '500px' }}
+                                                width={100}
+                                                height={200}
                                                 className="mx-auto"
                                             />
                                         )}
@@ -773,8 +839,8 @@ const Creator_edit_formpage = () => {
 
                             </div>
                             <div className="w-full">
-                                <div className=" z-0 w-full mb-5">
-                                    <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter name</label>
+                                <div className=" w-full mb-5">
+                                    <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0  font-bold">Full Name</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -782,34 +848,45 @@ const Creator_edit_formpage = () => {
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         required
-                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                     />
 
                                     <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
                                 </div>
 
-                                <div className=" z-0 w-full mb-5">
-                                    <label htmlFor="email" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Enter email address</label>
+                                <div className=" w-full mb-5">
+                                    <label htmlFor="email" className=" duration-300 top-3 -z-1 origin-0   font-bold">Email Address</label>
                                     <input
                                         type="email"
                                         name="email"
                                         placeholder=" "
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                        className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                     />
                                     <span className="text-sm text-red-600 hidden" id="error">Email address is required</span>
                                 </div>
                                 <div className="flex">
 
-                                    <div className=" z-0 w-full me-5">
+                                    <div className=" w-full me-5">
+                                        {/* <div>
+                                            <legend className=" text-gray-500 text-base mb-2">Select Your State</legend>
+                                            <Select
+                                                options={stateoptions}
+                                                value={selectedOptions}
+                                                onChange={selectedStateOption}
+                                                placeholder="Select an option"
+                                                styles={customStateStyles}
+                                            />
+
+                                        </div> */}
                                         <label
                                             htmlFor="stateSelect" // Use the id attribute of the select element here
-                                            className=" duration-300 top-3 -z-1 origin-0 text-gray-500"
+                                            className=" font-bold duration-300 top-3 -z-1 origin-0"
                                         >
                                             Select Your State
                                         </label>
-                                        <div className="dropdown_select pt-4">
+                                        {/* <div className="dropdown_select pt-4">
                                             <select
                                                 name="select"
                                                 id="stateSelect" // Add an id attribute
@@ -830,23 +907,23 @@ const Creator_edit_formpage = () => {
                                             <span className="text-sm text-red-600 hidden" id="error">
                                                 Option has to be selected
                                             </span>
-                                        </div>
-                                        {/* <div className=" pt-4"  
-                                >
-                                    <Select
-                                        value={selectedStateOption}
-                                        onChange={handleStateChange}
-                                        options={stateoptions}
-                                        placeholder="Select an option"
-                                        styles={customStateStyles}
-                                        // className="custom-select" // Add a custom class to the Select component
-                                        // classNamePrefix="custom-select" // Add a custom class prefix
-                                    />
+                                        </div> */}
+                                        <div className=" pt-4"
+                                        >
+                                            <Select
+                                                value={selectedStateOption}
+                                                onChange={handleStateChange}
+                                                options={stateoptions || cookiesStateValue}
+                                                placeholder="Select an option"
+                                                styles={customStateStyles}
+                                            // className="custom-select" // Add a custom class to the Select component
+                                            // classNamePrefix="custom-select" // Add a custom class prefix
+                                            />
 
-                                    <span className="text-sm text-red-600 hidden" id="error">
-                                        Option has to be selected
-                                    </span>
-                                </div> */}
+                                            <span className="text-sm text-red-600 hidden" id="error">
+                                                Option has to be selected
+                                            </span>
+                                        </div>
 
 
                                     </div>
@@ -866,39 +943,42 @@ const Creator_edit_formpage = () => {
                                 </div>
 
                                 <div className="flex mt-3">
-                                    <fieldset className="relative z-0 w-full p-px mt-4 mb-5 me-5">
-                                        <legend className="text-xl absolute text-gray-500 transform scale-75 -top-3 origin-0 ">Gender</legend>
-                                        <div className="block pt-5 pb-2 space-x-4 " >
+                                    <fieldset className=" w-full p-px mb-5 me-5">
+                                        <legend className="text-base   font-bold ">Gender</legend>
+                                        <div className="block pt-4 pb-2 space-x-4 " >
                                             <label>
                                                 <input
                                                     type="radio"
-                                                    name="radio"
+                                                    name="genderRadio"
                                                     // value="1"
                                                     value="male"
                                                     className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                                                     onChange={(e) => setGender(e.target.value)}
+                                                    checked={creator_profile_data?.gender === 'male'}
                                                 />
                                                 Male
                                             </label>
                                             <label>
                                                 <input
                                                     type="radio"
-                                                    name="radio"
+                                                    name="genderRadio"
                                                     // value="2"
                                                     value="female"
                                                     className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                                                     onChange={(e) => setGender(e.target.value)}
+                                                    checked={creator_profile_data?.gender === 'female'}
                                                 />
                                                 Female
                                             </label>
                                             <label>
                                                 <input
                                                     type="radio"
-                                                    name="radio"
+                                                    name="genderRadio"
                                                     // value="2"
                                                     value="other"
                                                     className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                                                     onChange={(e) => setGender(e.target.value)}
+                                                    checked={creator_profile_data?.gender === 'other'}
                                                 />
                                                 Other
                                             </label>
@@ -906,8 +986,8 @@ const Creator_edit_formpage = () => {
                                         <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                                     </fieldset>
 
-                                    <div className=" z-0 w-full mb-5">
-                                        <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Age</label>
+                                    <div className=" w-full mb-5">
+                                        <label htmlFor="name" className=" font-bold duration-300 top-3 -z-1 origin-0">Age</label>
                                         <input
                                             type="text"
                                             name="name"
@@ -915,7 +995,7 @@ const Creator_edit_formpage = () => {
                                             required
                                             value={age}
                                             onChange={(e) => setAge(e.target.value)}
-                                            className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                            className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0   border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                         />
 
                                         <span className="text-sm text-red-600 hidden" id="error">Name is required</span>
@@ -924,10 +1004,10 @@ const Creator_edit_formpage = () => {
 
                                 <div className="flex ">
 
-                                    <div className=" z-0 w-full mb-5 me-5 flex">
+                                    <div className=" w-full mb-5 me-5 flex">
                                         <div className="w-full">
-                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                                Height (feet)
+                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0  font-bold">
+                                                Height (Feet)
 
                                             </label>
                                             <input
@@ -946,12 +1026,10 @@ const Creator_edit_formpage = () => {
                                     </div>
 
 
-                                    <div className=" z-0 w-full mb-5 flex">
+                                    <div className=" w-full mb-5 flex">
                                         <div className="w-full">
-                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                                Height (inches)
-
-
+                                            <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0  font-bold">
+                                                Height (Inches)
                                             </label>
                                             <input
                                                 type="text"
@@ -983,8 +1061,8 @@ const Creator_edit_formpage = () => {
                                 </div>
 
                                 <div className="flex">
-                                    <div className=" z-0 w-full mb-5 me-5">
-                                        <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">
+                                    <div className=" w-full mb-5 me-5">
+                                        <label htmlFor="name" className=" duration-300 top-3 -z-1 origin-0  font-bold">
                                             Weight
 
                                         </label>
@@ -1007,9 +1085,18 @@ const Creator_edit_formpage = () => {
 
                         <div className="flex">
 
-                            <div className=" z-0 w-full mb-5 me-5">
-                                <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Select Your Skin Type</label>
-                                <select
+                            <div className=" w-full mb-5 me-5">
+                                {/* <label htmlFor="select" className=" pb-5 font-bold">Select Your Skin Type</label> */}
+                                <legend className="  font-bold text-base mb-2">Select Your Skin Type</legend>
+                                <Select
+                                    value={selectedSkinOption}
+                                    onChange={handleSkinChange}
+                                    options={skinoptions}
+                                    placeholder="Select an option"
+                                    styles={customStateStyles}
+                                />
+
+                                {/* <select
                                     name="select"
                                     value={skinType}
                                     onChange={(e) => setSkinType(e.target.value)}
@@ -1023,18 +1110,28 @@ const Creator_edit_formpage = () => {
                                         >
                                             {skin_name?.name}</option>
                                     ))}
-                                </select>
+                                </select> */}
 
                                 <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                             </div>
 
-                            <div className=" z-0 w-full mb-5 me-5">
-                                <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Select Your Body Type</label>
-                                <select
+                            <div className=" w-full mb-5 me-5">
+                                {/* <label htmlFor="select" className="  font-bold">Select Your Body Type</label> */}
+                                <legend className="  font-bold text-base mb-2">Select Your Body Type</legend>
+                                <Select
+                                    value={selectedBodyOption}
+                                    onChange={handleBodyChange}
+                                    options={bodyoptions}
+                                    placeholder="Select an option"
+                                    styles={customStateStyles}
+                                // className="custom-select" // Add a custom class to the Select component
+                                // classNamePrefix="custom-select" // Add a custom class prefix
+                                />
+                                {/* <select
                                     name="select"
                                     value={bodyType}
                                     onChange={(e) => setBodyType(e.target.value)}
-                                    className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                                    className=" pb-2 block w-full px-0 mt-0 border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                 >
                                     <option value="" selected disabled hidden></option>
 
@@ -1043,7 +1140,7 @@ const Creator_edit_formpage = () => {
                                             value={body_name?.id}
                                         >{body_name?.name}</option>
                                     ))}
-                                </select>
+                                </select> */}
 
                                 <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                             </div>
@@ -1051,80 +1148,72 @@ const Creator_edit_formpage = () => {
 
                         <div className="flex">
 
-                            <div className=" z-0 w-full mb-5 me-5">
-                                <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Select Your Hair Type</label>
-                                <select
-                                    name="select"
-                                    value={hairType}
-                                    onChange={(e) => setHairType(e.target.value)}
-                                    className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                >
-                                    <option value="" selected disabled hidden></option>
+                            <div className=" w-full mb-5 me-5">
+                                {/* <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0  font-bold ">Select Your Hair Type</label> */}
+                                <legend className="  font-bold text-base mb-2">Select Your Hair Type</legend>
+                                <Select
+                                    value={selectedHairOption}
+                                    onChange={handleHairChange}
+                                    options={hairoptions}
+                                    placeholder="Select an option"
+                                    styles={customStateStyles}
+                                />
 
-                                    {hairTypeData && hairTypeData.map((hair_name, index) => (
-                                        <option key={index} className="p-10"
-                                            value={hair_name?.id}
-                                        >{hair_name?.name}</option>
-                                    ))}
-                                </select>
+                        
 
                                 <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                             </div>
 
-                            <div className=" z-0 w-full mb-5 me-5">
-                                <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0 text-gray-500">Select Your Eye Type</label>
-                                <select
-                                    name="select"
-                                    value={eyeType}
-                                    onChange={(e) => setEyeType(e.target.value)}
-                                    className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                                >
-                                    <option value="" defaultValue disabled hidden></option>
-
-                                    {eyeTypeData && eyeTypeData.map((eye_name, index) => (
-                                        <option key={index} className="p-10"
-                                            value={eye_name?.id}
-                                        >{eye_name?.name}</option>
-                                    ))}
-                                </select>
-
+                            <div className=" w-full mb-5 me-5 ">
+                                {/* <label htmlFor="select" className=" duration-300 top-3 -z-1 origin-0  font-bold">Select Your Eye Type</label> */}
+                                <legend className="  font-bold text-base mb-2">Select Your Eye Type</legend>
+                                <Select
+                                    value={selectedEyeOption}
+                                    onChange={handleEyeChange}
+                                    options={eyeoptions}
+                                    placeholder="Select an option"
+                                    styles={customStateStyles}
+                                />
                                 <span className="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                             </div>
                         </div>
 
 
-                        <div className="relative z-0 w-full mb-5 me-5">
-                            <label htmlFor="message" className="text-base block mb-2 text-sm font-medium text-gray-500 dark:text-white">Bio</label>
+                        <div className="relative w-full mb-5 me-5">
+                            <label htmlFor="message" className="text-base block mb-2  font-bold">Bio</label>
                             <textarea
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
-                                id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your answer here..."></textarea>
+                                id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your answer here..."></textarea>
                         </div>
 
 
                         <div className="flex">
                             <fieldset className=" z-0 w-full p-px mb-5 me-5">
-                                <legend className=" text-gray-500 transform scale-75 -top-3 origin-0 text-xl">Pets</legend>
+                                <legend className=" font-bold transform scale-75 -top-3 origin-0 text-xl">Pets</legend>
                                 <div className="block pt-3 pb-2 space-x-4">
                                     <label>
                                         <input
                                             type="radio"
-                                            name="radio"
+                                            name="petsRadio"
                                             value="1"
                                             // value={pets}
                                             onChange={(e) => setPets(e.target.value)}
                                             className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                            checked={creator_profile_data?.pets === 1}
+
                                         />
                                         Yes
                                     </label>
                                     <label>
                                         <input
                                             type="radio"
-                                            name="radio"
+                                            name="petsRadio"
                                             value="0"
                                             // value={pets}
                                             onChange={(e) => setPets(e.target.value)}
                                             className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                            checked={creator_profile_data?.pets === 0}
                                         />
                                         No
                                     </label>
@@ -1134,27 +1223,29 @@ const Creator_edit_formpage = () => {
                             </fieldset>
 
                             <fieldset className=" z-0 w-full p-px mb-5 me-5">
-                                <legend className=" text-gray-500 transform scale-75 -top-3 origin-0 text-xl">Kids</legend>
+                                <legend className="  font-bold transform scale-75 -top-3 origin-0 text-xl">Kids</legend>
                                 <div className="block pt-3 pb-2 space-x-4">
                                     <label>
                                         <input
                                             type="radio"
-                                            name="radio"
+                                            name="kidsRadio"
                                             value="1"
                                             // value={kids}
                                             onChange={(e) => setKids(e.target.value)}
                                             className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                                        />
+                                            checked={creator_profile_data?.kids === 1}
+                                       />
                                         Yes
                                     </label>
                                     <label>
                                         <input
                                             type="radio"
-                                            name="radio"
+                                            name="kidsRadio"
                                             value="0"
                                             // value={kids}
                                             onChange={(e) => setKids(e.target.value)}
                                             className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                            checked={creator_profile_data?.kids === 0}
                                         />
                                         No
                                     </label>
@@ -1181,28 +1272,28 @@ const Creator_edit_formpage = () => {
                         <div className="flex">
 
                             <div className=" w-full mb-5 me-5">
-                                <legend className=" text-gray-500 text-base mb-2">Languages</legend>
+                                <legend className=" font-bold text-base mb-2">Languages</legend>
                                 <div className="">
                                     {languages.map((item, index) => (
-                                        <label key={index} className="flex items-center">
+                                        <label key={index} className="flex items-center py-1 platform_image_container cursor-pointer">
                                             <input
                                                 type="checkbox"
-                                                className="h-4 w-4 text-blue-600"
+                                                className="h-5 w-5 text-blue-600"
                                                 checked={selectedlanguageItems.includes(item?.name)}
                                                 onChange={() => toggleLanguageCheckbox(item)}
                                             />
-                                            <span className="ml-2">{item?.name}</span>
+                                            <span className="ml-2 capitalize">{item?.name}</span>
                                         </label>
                                     ))}
                                 </div>
                             </div>
 
                             <div className=" z-0 w-full mb-5">
-                                <legend className=" text-gray-500 text-base mb-2">Platforms</legend>
+                                <legend className="  font-bold text-base mb-2">Platforms</legend>
                                 <div className="">
 
                                     {platform?.map((item, index) => (
-                                        <label key={index} className="flex items-center py-1 platform_image_container">
+                                        <label key={index} className="flex items-center py-1 platform_image_container cursor-pointer">
                                             <input
                                                 type="checkbox"
                                                 className="h-5 w-5 text-blue-600"
@@ -1217,7 +1308,7 @@ const Creator_edit_formpage = () => {
                                                 className="platform_image"
                                             /> */}
 
-                                            <span className="ml-2">{item?.name}</span>
+                                            <span className="ml-2 capitalize">{item?.name}</span>
                                         </label>
                                     ))}
                                 </div>
@@ -1227,7 +1318,7 @@ const Creator_edit_formpage = () => {
 
 
                         {/* start portfolio links */}
-                        <div className=" w-full my-4 font-bold text-lg"> Portfolio Links </div>
+                        <div className=" w-full mb-4 font-bold  text-lg"> Portfolio Links </div>
                         <div className="text-sm  mb-5">
                             Paste link of your post or reel from instagram or post links from your youtube links or shorts
                         </div>
@@ -1318,7 +1409,7 @@ const Creator_edit_formpage = () => {
                         >
                             Submit
                         </button>
-                    </form>
+                    {/* </form> */}
                 </div>
             </div>
             <ToastContainer />

@@ -10,7 +10,7 @@ const Home = () => {
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             <div className=" p-10 bg-white screen1 border-gray-300 border-solid w-full max-h-screen min-h-800 rounded-lg border-1">
-              <h1 className="text-base sm:text-2xl md:text-2xl lg:text-3xl xl:text-5xl mt-0 mb-5 text-left font-bold  mobile_title">
+              <h1 className="text-base sm:text-2xl md:text-2xl lg:text-3xl xl:text-5xl mt-0 mb-5 text-left font-bold  mobile_title capitalize">
                 Make Your Brand a next <br /> social media star &#x2B50;
               </h1>
               <h4 className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl pt-5 mobile_para">

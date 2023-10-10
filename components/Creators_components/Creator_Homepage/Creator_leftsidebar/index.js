@@ -115,7 +115,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
             <div className="h-screen  w-1/5  px-10" ref={settingdropdownRef}>
 
-                <div className='my-10'>
+                <div className='my-10  cursor-pointer'>
                     <Image
                         src={Images.company_logo}
                         width={100} height={100}
@@ -144,7 +144,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
 
                     <div className='flex  flex-row items-center justify-end text-right block rounded-md w-full outline-none text-gray-700 leading-tight'
                     >
-                        <div onClick={() => setIsModalOpen_notification(true)}>
+                        <div onClick={() => setIsModalOpen_notification(true)} className=" cursor-pointer">
                             <Image  
                                 src={Images.notification}
                                 width={20}
@@ -158,7 +158,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                             src={Images.dropdown_icon}
                             width={15}
                             height={30}
-                            className='my-1 mx-1'
+                            className='my-1 mx-1 cursor-pointer'
                             alt=""
                             // onClick={() => setDropdown_menu(!dropdown_menu)}
                             onClick={toggleDropdown}
@@ -180,7 +180,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                                         alt=""
                                     />
                                     <button
-                                        className=' w-48 dropdown_text text-center'
+                                        className=' w-48 dropdown_text text-center capitalize'
 
                                     >
                                         Invite Members
@@ -196,7 +196,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                                             alt=""
                                         />
                                         <button
-                                            className=' w-48 dropdown_text text-center'
+                                            className=' w-48 dropdown_text text-center capitalize'
 
                                         >
                                             Support
@@ -213,7 +213,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                                         alt=""
                                     />
                                     <button
-                                        className="w-48 dropdown_text rounded-lg"
+                                        className="w-48 dropdown_text rounded-lg capitalize"
 
                                     >
                                         Terms of services
@@ -231,7 +231,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                                         alt=""
                                     />
                                     <button
-                                        className=' w-48 dropdown_text text-center'
+                                        className=' w-48 dropdown_text text-center capitalize'
 
                                     >
                                         Change Password
@@ -249,7 +249,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                                         alt=""
                                     />
                                     <button
-                                        className="w-48 dropdown_text rounded-lg"
+                                        className="w-48 dropdown_text rounded-lg capitalize"
 
                                     >
                                         Sign Out
@@ -265,7 +265,7 @@ const Creator_leftsidebar = ({ toggleDropdown, dropdown_menu }) => {
                     {creator_img?.length > 0 && creator_img.slice(0, 1).map((item, index) => (
 
                         <div
-                            className=' my-2 ms-3 w-100 rounded-full flex flex-row justify-evenly cursor-pointer'
+                            className=' my-2 ms-3 w-100 rounded-full flex flex-row justify-evenly cursor-pointer capitalize'
                             key={index}
                         >
                             {item?.user?.name}

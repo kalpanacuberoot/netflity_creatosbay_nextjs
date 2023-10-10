@@ -56,84 +56,87 @@ const Home_Card1 = ({ items }) => {
 
     return (
         <>
-            <div className="my-5 mx-2 " key={items?.id}>
-                <div className="relative flex ">
-                    <div className="max-h-64 border rounded-t-lg">
-                        {items?.references?.length > 0 && items?.references.map((item) =>
-                            <Image
-                                key={item?.id}
-                                src={item ? item.link : Images.card_img}
-                                width={350}
-                                height={50}
-                                alt=""
-                                className="h-full mx-auto"
-                            />
-                        )}
-                    </div>
-                    <div className="max-h-64 border rounded-t-lg ">
-                        {items?.products?.length > 0 && items?.products.map((item) =>
-                            <Image
-                                key={item?.id}
-                                src={item ? item.link : Images.card_img}
-                                width={500}
-                                height={100}
-                                alt=""
-                                className="h-full mx-auto"
-                            />
-                        )}
-                    </div>
-
-
-                </div>
-                <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
-                    <div className="flex flex-row justify-between items-end mt-4  mx-0">
-                        <div className="font_size_17 flex items-center">Creators
-                            <span
-                                // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
-                                className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">
-                                {items?.creators?.length ? items?.creators?.length : 0}
-                            </span>
+            <div className="my-5 mx-2 h-5/6 overflow-y-auto scroll" key={items?.id}>
+                {/* <div className=" max-h-96 h-96 max-w-96 w-96"> */}
+                    <div className="relative flex ">
+                        <div className="max-h-64 h-64 max-w-96 w-96 border rounded-t-lg">
+                            {items?.references?.length > 0 && items?.references.map((item) =>
+                                <Image
+                                    key={item?.id}
+                                    src={item ? item.link : Images.card_img}
+                                    width={350}
+                                    height={50}
+                                    alt=""
+                                    className="w-96 h-64 mx-auto"
+                                />
+                            )}
                         </div>
-                        <div
-                            className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
-                            style={{ backgroundColor: Colors.delay_clr }}
+                        {/* <div className="max-h-64 border rounded-t-lg ">
+                            {items?.products?.length > 0 && items?.products.map((item) =>
+                                <Image
+                                    key={item?.id}
+                                    src={item ? item.link : Images.card_img}
+                                    width={500}
+                                    height={100}
+                                    alt=""
+                                    className=" mx-auto"
+                                />
+                            )}
+                        </div> */}
+                    </div>
+                    <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
+                        <div className="flex flex-row justify-between items-end mt-4  mx-0">
+                            <div className="font_size_17 flex items-center">Creators
+                                <span
+                                    // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
+                                    className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">
+                                    {items?.creators?.length ? items?.creators?.length : 0}
+                                </span>
+                            </div>
+                            <div
+                                className="flex flex-row px-3 py-1 items-center rounded-md mx-0"
+                                style={{ backgroundColor: Colors.delay_clr }}
+                            >
+                                <Image
+                                    src={Images.clock}
+                                    width={12}
+                                    height={10}
+                                    alt=""
+                                    className="me-2"
+                                />
+                                <h5 className="capitalize">{items?.status}</h5>
+                            </div>
+                        </div>
+                        <h2 className="font-bold capitalize">{items?.name}</h2>
+                        <div 
+                        // className="font_size_12"
+                        className="font_size_14 normal-case"
                         >
-                            <Image
-                                src={Images.clock}
-                                width={12}
-                                height={10}
-                                alt=""
-                                className="me-2"
-                            />
-                            <h5 className="">{items?.status}</h5>
-                        </div>
-                    </div>
-                    <h2 className="font-bold ">{items?.name}</h2>
-                    <div className="font_size_12">
-                        {items?.description}
-                        {cardfirstshowmore && (
-                            <>
-                                {" "}
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry......
-                            </>
-                        )}
-                        {/* <div
+                            {items?.description}
+                            {/* {cardfirstshowmore && (
+                                <>
+                                    {" "}
+                                    Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry......
+                                </>
+                            )} */}
+                            {/* <div
                             className="text-red-600 font_size_12"
                             onClick={() => setCardfirstshowmore(!cardfirstshowmore)}
                         >
                             {cardfirstshowmore ? "Less More" : "Read More"}
                         </div> */}
-                    </div>
-                    <div className="px-5 border py-3 rounded-md text-center  mt-2">
-                        <h6>{start_date} - {end_date}</h6>
-                        {/* <Link href={'/communication'}> */}
-                        <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(items)}>
-                            <buttton> Check Details</buttton>
                         </div>
-                        {/* </Link> */}
+                        <div className="px-5 border py-3 rounded-md text-center  mt-2">
+                            <h6>{start_date} - {end_date}</h6>
+                            {/* <Link href={'/communication'}> */}
+                            <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(items)}>
+                                <buttton> Check Details</buttton>
+                            </div>
+                            {/* </Link> */}
+                        </div>
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         </>
     )

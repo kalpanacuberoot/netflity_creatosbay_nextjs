@@ -25,7 +25,7 @@ const Avatar_green_bg = ({item}) => {
                     <span className="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                 </div>
                 <div className="font-medium dark:text-white font_size_14 ">
-                    <div className="font-medium">
+                    <div className="font-medium capitalize">
                        {item?.user?.name}
                     </div>
                     {/* <div className="text-sm text-gray-500 dark:text-gray-400">

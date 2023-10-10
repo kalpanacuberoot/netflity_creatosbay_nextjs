@@ -4,7 +4,7 @@ import Images from "@/images";
 import Image from "next/image";
 import Date_range_picker from "./daterangepicker";
 import Invoice_Table from "./Invoicetable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import User_Modal from "./User_Modal";
 import User_Modal_form from "./User_Modal/User_Modal_form";
 
@@ -27,7 +27,14 @@ const Invoicepage = () => {
     const secondAmountWithGST = calculateAmountWithGST(secondAmount);
 
     const refundAmount = usageChargePercent * totalAmount / 100;
-
+    
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+          setLoading(false); // Set loading to false after a delay (simulating loading completion)
+        }, 2000); // Adjust the delay time as needed
+    
+        return () => clearTimeout(timeout); // Clear the timeout if the component unmounts
+      }, []);
 
     return (
 
@@ -52,7 +59,7 @@ const Invoicepage = () => {
                         <div className="m-2 w-full auto-cols-max ">
                             <div
                                 style={{ background: Colors.invoice_gradient_clr }}
-                                className="auto-cols-max  p-3 rounded-md flex flex-row grid grid-cols-3"
+                                className="auto-cols-max mx-4 mt-4 p-3 rounded-md flex flex-row grid grid-cols-3"
                             >
 
                                 <div className="text-white shadow-md rounded-md mx-3 p-4">
@@ -99,8 +106,8 @@ const Invoicepage = () => {
 
                             </div>
                             {/* invoices data */}
-                            <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 my-2">
-                                <div className="font_size_31 ">
+                            <div style={{ backgroundColor: Colors.white_clr }} className="rounded-md container-fluid h-screen p-5 mt-5 mb-4 mx-4">
+                                <div className="font_size_31 capitalize font-bold">
                                     Recent invoices
                                 </div>
                                 {/* <div className="rounded-md flex flex-row justify-between border p-3">

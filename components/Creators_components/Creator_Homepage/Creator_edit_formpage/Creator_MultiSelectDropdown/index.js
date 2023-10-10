@@ -33,15 +33,32 @@ const Creator_MultiSelectDropdown = ({ options, selectedDataArray, onSelectedDat
     }
   };
 
+  const customStateStyles = {
+    control: (provided) => ({
+        ...provided,
+        // borderColor: '#ca8a04',
+        cursor:'pointer',
+    }),
+    menu: (provided) => ({
+        ...provided,
+        cursor:'pointer',
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        cursor:'pointer',
+    }),
+};
+
   return (
     <>
       <div>
-        <legend className=" text-gray-500 text-base mb-2">Select Your Industry Type</legend>
+        <legend className=" font-bold text-base mb-2">Select Your Industry Type</legend>
         <Select
           isMulti
           options={optionsdata}
           value={selectedOptions}
           onChange={handleChange}
+          styles={customStateStyles}
         />
 
       </div>

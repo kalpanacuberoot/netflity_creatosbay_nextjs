@@ -40,7 +40,7 @@ const Loginpage = () => {
       console.log('POST response register-------------:', postResponse);
 
       if (postResponse?.message) {
-        console.log('POST response register-------------:', postResponse);
+        console.log('POST response register-------------:', postResponse.user.type);
 
         if (postResponse.user.type === 'creator') {
           Cookies.set('creator_user_data', JSON.stringify(postResponse));
@@ -164,7 +164,7 @@ const Loginpage = () => {
               <div className="flex justify-center  items-center px-10 ">
                 <div className="p-5  xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
                   <h4>
-                    Don&apos;t have an account ?
+                    Don&apos;t have an Account ?
                     <span
                       className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-4"
                       style={{ color: Colors.logo_clr }}

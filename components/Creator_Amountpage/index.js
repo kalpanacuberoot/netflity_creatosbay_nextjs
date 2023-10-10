@@ -178,7 +178,7 @@ const Creator_Amountpage = () => {
                                 className="rounded-md container-fluid h-screen p-5 my-2 mx-2 flex flex-col justify-between min-h-screen overflow-y-auto "
                             >
                                 <div className="font_size_31 p-10  rounded-lg">
-                                    <div className="font_size_31 font-bold py-5 px-5 text-white rounded-md" style={{ background: Colors.invoice_gradient_clr }}>
+                                    <div className="font_size_31 font-bold py-5 px-5 text-white rounded-md capitalize" style={{ background: Colors.invoice_gradient_clr }}>
                                         {campaigndata?.name}
                                     </div>
                                     {/* <hr className="my-4 border-3 border"/> */}
@@ -222,7 +222,7 @@ const Creator_Amountpage = () => {
                                                     )
                                                 })
                                                     :
-                                                    "No Creator is found"
+                                                    "No Creator Is Found"
                                                 }
 
 
@@ -240,7 +240,7 @@ const Creator_Amountpage = () => {
                                                 <td>{totalAmount}.00</td>
                                             </tr>
                                             <tr>
-                                                <th>50% Amount :</th>
+                                                <th>50% Advance :</th>
                                                 <td>{firstAmount}.00</td>
                                             </tr>
                                             <tr>

@@ -15,7 +15,7 @@ const Invite_members_content = () => {
 
                 <div className="space-y-6 container-fluid p-14">
                     <div className="border rounded-lg p-10  text-center shadow-lg">
-                        <div className="font_size_40 line-height-[53.32px]"
+                        <div className="font_size_40 line-height-[53.32px] capitalize"
                             style={{ color: Colors.pink_clr }}
                         >
                             Invite a team member
@@ -32,7 +32,7 @@ const Invite_members_content = () => {
                         </div>
                         <Buttons
                                 buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
-                                label={"Copy link"}
+                                label={"Copy Link"}
                             />
                     </div>
                 </div>

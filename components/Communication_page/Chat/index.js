@@ -272,7 +272,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                         return (
                             <>
                                 <div className="px-10 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }}>
-                                    <div className={`chat-message shadow-lg ${messageClass}`}>
+                                    <div className={`chat-message shadow-lg capitalize ${messageClass}`}>
                                         {message?.data}
                                     </div>
                                     <p className={` ${textMessageClass}`}>{formattedtweleveTime}</p>
