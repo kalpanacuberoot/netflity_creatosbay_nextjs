@@ -47,7 +47,7 @@ const Invoice_Table = () => {
                             </th>
                             <Link href={'/creator_invoice_pdf'}>
                                 <button>
-                                    <th scope="col" className="px-6 py-5">
+                                    <th scope="col" className="px-6 py-5 uppercase">
                                         Download
                                     </th>
                                 </button>
@@ -69,19 +69,19 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
                             </td> */}
 
                             <td className="px-6 py-4">
-                                6000.00
+                                ₹ 6000.00
                             </td>
 
                             <td className="px-8 py-4 text-red-600 " style={{}}>
                                 <div style={{ background: Colors.credited_date }}
-                                    className="rounded-full p-1   flex flex-row items-center justify-center">
+                                    className="rounded-full p-2  text-sm flex flex-row items-center justify-center">
                                     <Image
                                         src={Images.circle_icon}
                                         alt=""
@@ -93,7 +93,7 @@ const Invoice_Table = () => {
                                 </div>
                             </td>
                             <Link href={'/creator_invoice_pdf'}>
-                                <td className="px-6 py-4 border">
+                                <td className="px-6 py-4 ">
                                     <Image
                                         src={Images.download_icon}
                                         width={40}
@@ -116,14 +116,14 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
                             </td> */}
 
                             <td className="px-6 py-4">
-                                6000.00
+                                ₹ 6000.00
                             </td>
                             <td className="px-8 py-4 text-red-600 " style={{}}>
                                 <div style={{ background: Colors.credited_date }}
@@ -159,14 +159,14 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
                             </td> */}
 
                             <td className="px-6 py-4">
-                                6000.00
+                                ₹ 6000.00
                             </td>
                             <td className="px-8 py-4 text-red-600 " style={{}}>
                                 <div style={{ background: Colors.credited_date }}
@@ -202,14 +202,14 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
                             </td> */}
 
                             <td className="px-6 py-4">
-                                6000.00
+                                ₹ 6000.00
                             </td>
                             <td className="px-8 py-4 text-red-600 " style={{}}>
                                 <div style={{ background: Colors.credited_date }}

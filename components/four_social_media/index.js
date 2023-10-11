@@ -39,7 +39,7 @@ const Social_media_icons = () => {
                             className="mx-auto p-1"
                             alt=""
                         />
-                        <div className="font_size_21 line-height-[26.52px]">Whatsapp</div>
+                        <div className="font_size_21 line-height-[26.52px]">WhatsApp</div>
                     </div>
                 </div>
                 <div className="mx-2 border flex flex-col rounded-lg  w-screen ">

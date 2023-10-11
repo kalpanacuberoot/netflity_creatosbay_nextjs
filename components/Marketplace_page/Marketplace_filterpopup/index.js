@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const Terms_of_service = ({ isOpen, onClose, children }) => {
+const Marketplace_filterpopup = ({ isOpen, onClose, children }) => {
     // if (!isOpen) return null;
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -25,7 +25,7 @@ const Terms_of_service = ({ isOpen, onClose, children }) => {
                 className={`fixed inset-0 flex  z-50 justify-center items-center bg-black bg-opacity-50 ${isOpen ? 'visible' : 'hidden'
                     }`}
             >
-                <div className="modal-content bg-white rounded shadow-md">
+                <div className="modal-content bg-white rounded shadow-md ">
                     
                     {children}
                 </div>
@@ -34,4 +34,4 @@ const Terms_of_service = ({ isOpen, onClose, children }) => {
     )
 }
 
-export default Terms_of_service
+export default Marketplace_filterpopup

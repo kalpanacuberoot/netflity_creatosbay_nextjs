@@ -25,55 +25,103 @@ const Loginpage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [brandData, setBrandData] = useState([]);
 
+  // const handleSubmit = async (e) => {
+
+  //   e.preventDefault();
+  //   setLoading(true)
+  //   try {
+
+  //     const postData = {
+  //       "email": email,
+  //       "password": password,
+  //     };
+  //     const postResponse = await apiCall(`${url}/login`, 'post', postData);
+
+  //     console.log('POST response register-------------:', postResponse);
+
+  //     if (postResponse?.message) {
+  //       console.log('POST response register-------------:', postResponse.user.type);
+
+  //       if (postResponse.user.type === 'creator') {
+  //         Cookies.set('creator_user_data', JSON.stringify(postResponse));
+  //         toast.success(postResponse?.message, {
+  //           position: 'top-center',
+  //           autoClose: 5000,
+  //         });
+  //         router.push('/creator_home');
+  //       }
+
+  //       if (postResponse.user.type === 'brand') {
+
+  //         router.push('/home');
+  //         Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
+  //         toast.success(postResponse?.message, {
+  //           position: 'top-center',
+  //           autoClose: 5000,
+  //         });
+  //         getUser_Brand();
+  //         setLoading(false)
+  //       }
+
+  //     } else {
+  //       toast.error("Have you register yourself with emailId", {
+  //         position: 'top-center',
+  //         autoClose: 5000,
+  //       });
+  //     }
+
+  //   } catch (error) {
+  //     toast.error('please register yourself or login again after sometime', {
+  //       position: 'top-center',
+  //       autoClose: 5000,
+  //     });
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    setLoading(true)
+    const options = {
+      "email": email,
+      "password": password,
+    }
     try {
+      const response = await fetch('https://backend.creatorsbay.app/api/login', {
+        method: 'Post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
 
-      const postData = {
-        "email": email,
-        "password": password,
-      };
-      const postResponse = await apiCall(`${url}/login`, 'post', postData);
-
-      console.log('POST response register-------------:', postResponse);
-
-      if (postResponse?.message) {
-        console.log('POST response register-------------:', postResponse);
-
-        if (postResponse.user.type === 'creator') {
-          Cookies.set('creator_user_data', JSON.stringify(postResponse));
-          toast.success(postResponse?.message, {
+        body: JSON.stringify(options),
+      });
+      console.log("login response --------------------", response);
+      if (response.ok) {
+        const result = await response.json();
+        if (result?.user?.type === 'creator') {
+          Cookies.set('creator_user_data', JSON.stringify(result));
+          toast.success(result?.message, {
             position: 'top-center',
             autoClose: 5000,
           });
           router.push('/creator_home');
         }
 
-        if (postResponse.user.type === 'brand') {
+        if (result?.user?.type === 'brand') {
 
           router.push('/home');
-          Cookies.set('user_data', JSON.stringify(postResponse), { expires: 106500 });
-          toast.success(postResponse?.message, {
+          Cookies.set('user_data', JSON.stringify(result), { expires: 106500 });
+          toast.success(result?.message, {
             position: 'top-center',
             autoClose: 5000,
           });
           getUser_Brand();
           setLoading(false)
         }
-
-      } else {
-        toast.error("Have you register yourself with emailId", {
-          position: 'top-center',
-          autoClose: 5000,
-        });
       }
-
     } catch (error) {
-      toast.error('please register yourself or login again after sometime', {
-        position: 'top-center',
-        autoClose: 5000,
+      console.error('login Error:', error);
+      toast.error('Please try again after sometime', {
+        position: 'top-center', // Set the toast position
+        autoClose: 3000, // Close the toast after 3 seconds
       });
     }
   };
@@ -164,7 +212,7 @@ const Loginpage = () => {
               <div className="flex justify-center  items-center px-10 ">
                 <div className="p-5  xl:p-10 lg:p-10  bg-white border-gray-300 border-solid w-full  rounded-lg border-1">
                   <h4>
-                    Don&apos;t have an account ?
+                    Don&apos;t have an Account ?
                     <span
                       className="shadow-lg  bg-purple-100 text-purple-800 font-bold mr-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 mx-4"
                       style={{ color: Colors.logo_clr }}
@@ -251,7 +299,8 @@ const Loginpage = () => {
                     type="submit"
                     className=" rounded-3xl  text-white w-full py-3 px-4 focus:outline-none focus:shadow-outline"
                     style={{ background: Colors.logo_clr }}
-                    onClick={handleSubmit}
+                    // onClick={handleSubmit}
+                    onClick={() => router.push('/brand-selection')}
                   >
                     Login
                   </button>

@@ -22,27 +22,28 @@ const Marketplace_page = () => {
     const dropdownRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        checkIsMobile();
+    //     checkIsMobile();
 
-        window.addEventListener('resize', checkIsMobile);
+    //     window.addEventListener('resize', checkIsMobile);
 
-        handleSubmit();
-        const handleOutsideClick = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+    //     handleSubmit();
+    //     const handleOutsideClick = (event) => {
+    //         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('mousedown', handleOutsideClick);
+    //     document.addEventListener('mousedown', handleOutsideClick);
 
-        return () => {
-            window.removeEventListener('resize', checkIsMobile);
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, [isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    //     return () => {
+    //         window.removeEventListener('resize', checkIsMobile);
+    //         document.removeEventListener('mousedown', handleOutsideClick);
+    //     };
+    // }, [isOpen]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     const handleSubmit = async () => {
@@ -70,11 +71,11 @@ const Marketplace_page = () => {
                 setLoading(false)
             } else {
                 console.error('Error:', response.statusText);
-
+                setLoading(false)
             }
         } catch (error) {
             console.error('Error:', error);
-
+            setLoading(false)
         }
     };
 
@@ -104,6 +105,15 @@ const Marketplace_page = () => {
         // setIsMobile(window.innerWidth <= 800);
     };
 
+    // const filteredData = creatordata.filter((item) => {
+    //     const name = item?.user?.name.toLowerCase();
+    //     const categories = item?.categories.map((category) => category?.name.toLowerCase());
+
+    //     return name.includes(searchQuery.toLowerCase()) || categories.includes(searchQuery.toLowerCase());
+    //   });
+
+    const imageUrl = "https://imgs.search.brave.com/NgHQTuyleY9W2nUR9RbSI6kFqixjPx0UkxP_2qthm7w/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvOTU3/MTI2OC9wZXhlbHMt/cGhvdG8tOTU3MTI2/OC5qcGVnP2F1dG89/Y29tcHJlc3MmY3M9/dGlueXNyZ2ImZHBy/PTEmdz01MDA";
+
     return (
         <>
             {loading ? ( // Show loader if loading is true
@@ -127,7 +137,7 @@ const Marketplace_page = () => {
                     >
                         <div
                             style={{ background: Colors.invoice_gradient_clr }}
-                            className="auto-cols-max p-3 rounded-md flex flex-row "
+                            className="auto-cols-max p-3 rounded-md flex flex-row mx-3 mt-4"
                         >
                             <div className="flex flex-row justify-between items-center  w-full">
                                 <div style={{ color: Colors.white_clr }}>
@@ -162,8 +172,8 @@ const Marketplace_page = () => {
                             </div>
                         </div>
 
-                        <div className=" w-full flex m-0  pt-4 flex flex-wrap justify-around h-full">
-                            {creatordata?.length > 0 ? creatordata.map((item, index) => {
+                        <div className=" w-full flex m-0  pt-4 flex flex-wrap justify-around">
+                            {/* {creatordata?.length > 0 ? creatordata.map((item, index) => {
 
                                 const existingCookieData = Cookies.get('selected_creator_id');
 
@@ -176,7 +186,7 @@ const Marketplace_page = () => {
 
                                 return (
                                     <>
-                                        <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'}  `} key={index}>
+                                        <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full `} key={index}>
                                             <div className="grid grid-cols-3 rounded-md gap-1" >
                                                 <Image
                                                     width={500}
@@ -203,7 +213,7 @@ const Marketplace_page = () => {
 
                                             </div>
                                             <div className="flex justify-between mb-2 mt-2">
-                                                <div> <h2 className="font-bold">{item?.user?.name}</h2></div>
+                                                <div> <h2 className="font-bold capitalize">{item?.user?.name}</h2></div>
                                             </div>
                                             <div className="flex justify-between mb-2 mt-2">
                                                 <div> <h4>{item?.user?.name}</h4></div>
@@ -211,7 +221,7 @@ const Marketplace_page = () => {
                                                     {item?.categories.length > 0 && item?.categories.map((categories_item, index) => {
                                                         return (
 
-                                                            <h6 key={index} className="px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                                            <h6 key={index} className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2" style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
                                                                 {categories_item?.name}
                                                             </h6>
                                                         )
@@ -221,7 +231,7 @@ const Marketplace_page = () => {
                                             </div>
 
                                             <button
-                                                className="w-full rounded-full p-2 mt-3"
+                                                className="w-full rounded-full p-2 mt-3 capitalize"
                                                 style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
                                                 onClick={() => onProfileDetail(item, index)}
                                             >
@@ -248,8 +258,504 @@ const Marketplace_page = () => {
                                         </Link>
                                     </div>
                                 </>
-                            }
+                            } */}
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
 
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Creator One</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Creator One</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                            <div className={`bg-white p-3 rounded-lg m-2 ${isMobile ? 'w-full' : 'w-96'} md:full lg:w-96 w-full `}>
+                                <div className="grid grid-cols-3 rounded-md gap-1" >
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+                                    <Image
+                                        width={500}
+                                        height={100}
+                                        className="w-full h-64 object-cover"
+                                        src={imageUrl}
+                                        alt=""
+                                    />
+
+
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h2 className="font-bold capitalize">Lily_youg</h2></div>
+                                </div>
+                                <div className="flex justify-between mb-2 mt-2">
+                                    <div> <h4>Lily_youg</h4></div>
+                                    <div className="flex">
+
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #fashion
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #lifestyle
+                                        </h6>
+                                        <h6
+                                            className="capitalize px-2 py-1 m-0 p-0 rounded-full mx-2"
+                                            style={{ borderWidth: 1, borderColor: Colors.logo_clr }}>
+                                            #coffe
+                                        </h6>
+                                        
+
+                                    </div>
+                                </div>
+
+                                <button
+                                    className="w-full rounded-full p-2 mt-3 capitalize"
+                                    style={{ backgroundColor: Colors.logo_clr, color: Colors.white_clr }}
+                                // onClick={() => onProfileDetail(item, index)}
+                                onClick={() => router.push('/creator_profile')}
+                                >
+                                    View profile
+                                </button>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>

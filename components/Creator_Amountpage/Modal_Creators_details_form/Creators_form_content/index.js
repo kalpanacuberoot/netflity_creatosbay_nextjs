@@ -359,7 +359,8 @@ const Creators_form_content = ({ totalAmount }) => {
                                     <input type="hidden" name="udf5" id="udf5" value={udf5} required />
                                     <input type="button" value="Pay"
                                         className="font_size_24 leading-6 py-3 bg-purple-600 rounded-lg text-white my-3 w-full cursor-pointer"
-                                        onClick={paybuttonClick}
+                                        // onClick={paybuttonClick}
+                                        onClick={() => router.push('/payment_success')}
                                     />
 
                                 </form>

@@ -89,11 +89,14 @@ const Terms_of_service_content = () => {
                 </>
             )} */}
 
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 min-w-xs  ">
+            <div 
+            // className="relative bg-white rounded-lg shadow dark:bg-gray-700 "
+            className="relative bg-white rounded-lg shadow dark:bg-gray-700"
+            >
 
                 <ModalHeader />
 
-                <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8">
+                <div className="p-10 space-y-6 p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8">
                     <h2 className="font-bold text-lg sm:text-xl lg:text-2xl">Terms of Service</h2>
                     <div className="popup_para_container">
                         <div className="popup_para font-size-0 sm:font-size-20 lg:font-size-24 leading-relaxed text-gray-500 dark:text-gray-400">

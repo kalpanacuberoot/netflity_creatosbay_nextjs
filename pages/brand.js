@@ -16,7 +16,7 @@ const Brand = () => {
   return (
     <>
     
-      <div className="container flex flex-row h-screen bg-zinc-100 ">
+      <div className=" flex flex-row h-screen bg-zinc-100 ">
         <div className="auto-cols-max w-2/3 h-screen ">
           <Layout>
            <Brandscreens/>

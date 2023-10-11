@@ -86,9 +86,9 @@ const Live_Campaignpage = () => {
 
 
 
-    useEffect(() => {
-        allCampaignData();
-    }, [])
+    // useEffect(() => {
+    //     allCampaignData();
+    // }, [])
 
     return (
         <>
@@ -134,8 +134,8 @@ const Live_Campaignpage = () => {
 
 
                     </div>
-                    <div className="flex flex-row flex-wrap items-start  justify-evenly">
-                        {campaign_data.length > 0 ? campaign_data?.slice(0,6).map((item, index) => (
+                    <div className="flex flex-row flex-wrap items-start mt-5 justify-evenly">
+                        {/* {campaign_data.length > 0 ? campaign_data?.slice(0,6).map((item, index) => (
                             <>
                                 <Home_Card1 key={index} items={item} />
                             </>
@@ -149,7 +149,11 @@ const Live_Campaignpage = () => {
                                 </h1>
 
                             </div>
-                         } 
+                         }  */}
+                          <Home_Card3/>
+                          <Home_Card3/>
+                          <Home_Card3/>
+                          <Home_Card3/>
                     </div>
 
                 </div>

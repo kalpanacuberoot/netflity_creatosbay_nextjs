@@ -62,6 +62,7 @@ import dropdown_grey_clr from './dropdown_grey_clr.png';
 import lock_black_clr from './lock_black_clr.png';
 import no_campaign_found from './no_campaign_found.jpg';
 import Loader from './loader.gif';
+import white_house from './white_house.png';
 
 export default {
     'company_logo': company_logo,
@@ -128,4 +129,5 @@ export default {
     'lock_black_clr':lock_black_clr,
     'no_campaign_found':no_campaign_found,
     'Loader':Loader,
+    'white_house':white_house,
 };

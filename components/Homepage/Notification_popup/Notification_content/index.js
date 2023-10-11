@@ -6,7 +6,7 @@ const Notification_content = () => {
     return (
         <>
             {/* dropdown notifiaction *************************************** */}
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 text-left h-screen">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 text-left min-h-4xl overflow-y-auto">
 
                 <div
                     className="h-full origin-top-right w-96  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"

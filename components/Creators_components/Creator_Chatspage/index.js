@@ -287,7 +287,7 @@ const Creator_Chatspage = () => {
                         </div>
                         <div style={{ background: Colors.white_clr }} className="rounded-md my-3 w-2/4   h-screen overflow-y-auto">
 
-                            <div className="font_size_21  p-4" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
+                            <div className="font_size_21 capitalize p-4" style={{ color: Colors.pink_clr, fontWeight: 'bold' }}>
                                 Campaign info
                             </div>
 
@@ -296,7 +296,7 @@ const Creator_Chatspage = () => {
                                 <div className=" border shadow-lg rounded m-3">
                                     <div className="p-4 " >
 
-                                        <h3>{campaign_data?.campaign?.name}</h3>
+                                        <h3 className="capitalize">{campaign_data?.campaign?.name}</h3>
                                     </div>
                                     <div className="py-3">
                                         <Image
@@ -308,7 +308,7 @@ const Creator_Chatspage = () => {
                                         />
                                     </div>
                                     <div className="px-4">
-                                        <p className="font_size_16 communication_text py-2 text-gra     y-800">
+                                        <p className="font_size_16 communication_text py-2 text-gray-800">
                                             {campaign_data?.campaign?.description}
                                         </p>
                                     </div>

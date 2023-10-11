@@ -89,16 +89,16 @@ const Creator_Card = (item) => {
                                     alt=""
                                     className="me-2"
                                 />
-                                <h5 className="">draft</h5>
+                                <h5 className="capitalize">Draft</h5>
                             </div>
                         </div>
-                        <h2 className="font-bold text-center mt-3">{item?.item?.campaign?.name}</h2>
+                        <h2 className="font-bold text-center mt-3 capitalize">{item?.item?.campaign?.name}</h2>
                         {/* <div className="font_size_12">
                             {item?.item?.campaign?.description}
 
                         </div> */}
                         <div className="px-5  py-3 rounded-md text-center  mt-2">
-                            <h6 className="mb-2">{start_date} - {end_date}</h6>
+                            <h5 className="mb-2">{start_date} <span className="font-bold mx-1">-</span> {end_date}</h5>
                             {/* <Link href={'/creator_single_chat'}> */}
                             <div className="w-100 rounded-full border edit_button_clr py-1 cursor-pointer" onClick={() => handleId(item)}>
                                 <buttton> Check Details</buttton>

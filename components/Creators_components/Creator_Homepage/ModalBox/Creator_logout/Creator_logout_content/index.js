@@ -72,7 +72,7 @@ const Creator_logout_content = () => {
                             style={{ color: Colors.blue_clr }}
                         >
                             Oh no! You,re leaving...<br></br>
-                            Are you sure ?
+                            Are You Sure ?
                         </div>
                         <div className="font_size_18  line-height-[27px] my-3">
                             Sign up for our newletter to stay always up to date.

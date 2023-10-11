@@ -16,7 +16,7 @@ const Top_creator = () => {
     }, []);
 
     const checkIsMobile = () => {
-        setIsMobile(window.innerWidth <= 768); 
+        setIsMobile(window.innerWidth <= 768);
         // setIsMobile(window.innerWidth <= 800);
     };
 
@@ -27,7 +27,7 @@ const Top_creator = () => {
                 <div className={` overflow-y-auto ${isMobile ? ' md:flex flex-row flex-wrap' : 'child_creator'}`}>
                     <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ' '}`}>
                         <div className='flex flex-row justify-between items-center mb-2'>
-                            <h6 className='font-bold'>Amrish patel</h6>
+                            <h6 className='font-bold capitalize'>Amrish patel</h6>
                             <div className=''>
                                 <div className='flex flex-row justify-evenly items-center w-24'>
                                     <Image
@@ -93,24 +93,24 @@ const Top_creator = () => {
                             <div className='flex flex-row flex-wrap'>
 
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#go</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#go</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#livemusic</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#livemusic</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ''}`}>
+                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ' '}`}>
                         <div className='flex flex-row justify-between items-center mb-2'>
-                            <h6 className='font-bold'>Amrish patel</h6>
+                            <h6 className='font-bold capitalize'>Amrish patel</h6>
                             <div className=''>
                                 <div className='flex flex-row justify-evenly items-center w-24'>
                                     <Image
@@ -176,24 +176,24 @@ const Top_creator = () => {
                             <div className='flex flex-row flex-wrap'>
 
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#go</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#go</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#livemusic</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#livemusic</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ''}`}>
+                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ' '}`}>
                         <div className='flex flex-row justify-between items-center mb-2'>
-                            <h6 className='font-bold'>Amrish patel</h6>
+                            <h6 className='font-bold capitalize'>Amrish patel</h6>
                             <div className=''>
                                 <div className='flex flex-row justify-evenly items-center w-24'>
                                     <Image
@@ -259,24 +259,24 @@ const Top_creator = () => {
                             <div className='flex flex-row flex-wrap'>
 
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#go</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#go</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#livemusic</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#livemusic</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ''}`}>
+                    <div className={`px-2 border rounded-md p-3 my-2 ${isMobile ? 'px-5 w-full' : ' '}`}>
                         <div className='flex flex-row justify-between items-center mb-2'>
-                            <h6 className='font-bold'>Amrish patel</h6>
+                            <h6 className='font-bold capitalize'>Amrish patel</h6>
                             <div className=''>
                                 <div className='flex flex-row justify-evenly items-center w-24'>
                                     <Image
@@ -342,22 +342,22 @@ const Top_creator = () => {
                             <div className='flex flex-row flex-wrap'>
 
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#unplugged</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#unplugged</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#go</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#go</p>
                                 </div>
                                 <div>
-                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} creator_top  rounded-full my-1 `}>#livemusic</p>
+                                    <p className={`${isMobile ? 'text-sm px-5 py-1 mx-2' : 'px-3 mx-1'} capitalize creator_top  rounded-full my-1 `}>#livemusic</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                   
+
                 </div>
                 <div className='w-full text-center'>
                     <button className='start_campaign_btn px-5 py-1 w-48 rounded-full bg-white my-3'>

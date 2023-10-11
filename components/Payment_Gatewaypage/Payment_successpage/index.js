@@ -23,7 +23,7 @@ const Payment_successpage = () => {
           style={{ backgroundColor: Colors.white_clr }}
         >
           <div className="border p-10 shadow-lg  text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800">
-            <h1 className="text-center font-bold" 
+            <h1 className="text-center font-bold text-3xl" 
             // style={{ color: Colors.logo_clr }}
             >Your Transaction is <br /> Successfully done</h1>
              {/* <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">

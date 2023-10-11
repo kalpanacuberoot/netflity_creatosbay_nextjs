@@ -10,7 +10,7 @@ const Home = () => {
         <div className="auto-cols-max w-full">
           <div className="flex justify-center items-center p-10 w-full ">
             <div className=" p-10 bg-white screen1 border-gray-300 border-solid w-full max-h-screen min-h-800 rounded-lg border-1">
-              <h1 className="text-base sm:text-2xl md:text-2xl lg:text-3xl xl:text-5xl mt-0 mb-5 text-left font-bold  mobile_title">
+              <h1 className="text-base sm:text-2xl md:text-2xl lg:text-3xl xl:text-5xl mt-0 mb-5 text-left font-bold  mobile_title capitalize">
                 Make Your Brand a next <br /> social media star &#x2B50;
               </h1>
               <h4 className="text-base sm:text-sm md:text-lg lg:text-xl xl:text-2xl pt-5 mobile_para">
@@ -39,7 +39,7 @@ const Home = () => {
                       data-te-animation="[slide-right_1s_ease-in-out]"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      fill="currentColor"
+                      // fill="currentColor"
                       className="h-7 w-8 pl-3 mobile_arrow_icon"
                     >
                       <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />

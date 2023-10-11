@@ -12,7 +12,7 @@ const Creator_TermsService_Content = () => {
                 <Creator_Modal_Header/>
 
                 <div className="p-10 space-y-6">
-                    <h2 className="font-bold">Terms of services</h2>
+                    <h2 className="font-bold capitalize">Terms of services</h2>
                     <div className="popup_para_container">
                         <div className="popup_para font_size_20 text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             👋 Hi I’m Ben Low, Lead Experience Designer based in Perth, Western Australia. Firstly, thanks for looking at this file! I’m stoked you’ve taken the time to explore it further. I hope you learn something new from it 🙌.
@@ -49,7 +49,7 @@ const Creator_TermsService_Content = () => {
                 <div className="flex flex-col p-10 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"
                 style={{background:Colors.light_bg_clr}}
                 >
-                    <h2 className="font-bold mb-3">Ways to support</h2>
+                    <h2 className="font-bold mb-3 capitalize">Ways to support</h2>
                     <div className="flex">
                         <div className="flex flex-col me-3">
                             <Image

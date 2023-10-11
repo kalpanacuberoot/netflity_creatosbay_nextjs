@@ -100,7 +100,7 @@ const Creator_Amountpage = () => {
             }
         }
 
-        getCompanyCraetors();
+        // getCompanyCraetors();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -178,7 +178,7 @@ const Creator_Amountpage = () => {
                                 className="rounded-md container-fluid h-screen p-5 my-2 mx-2 flex flex-col justify-between min-h-screen overflow-y-auto "
                             >
                                 <div className="font_size_31 p-10  rounded-lg">
-                                    <div className="font_size_31 font-bold py-5 px-5 text-white rounded-md" style={{ background: Colors.invoice_gradient_clr }}>
+                                    <div className="font_size_31 font-bold py-5 px-5 text-white rounded-md capitalize" style={{ background: Colors.invoice_gradient_clr }}>
                                         {campaigndata?.name}
                                     </div>
                                     {/* <hr className="my-4 border-3 border"/> */}
@@ -211,7 +211,7 @@ const Creator_Amountpage = () => {
                                                 </thead>
 
 
-                                                {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
+                                                {/* {campaigndata?.creators?.length > 0 ? campaigndata?.creators.map((creator_item, index) => {
 
                                                     return (
                                                         <>
@@ -222,10 +222,10 @@ const Creator_Amountpage = () => {
                                                     )
                                                 })
                                                     :
-                                                    "No Creator is found"
-                                                }
+                                                    "No Creator Is Found"
+                                                } */}
 
-
+                                                <Creator_table />
 
                                             </table>
                                         </div>
@@ -237,19 +237,23 @@ const Creator_Amountpage = () => {
                                         <table className="ms-auto ">
                                             <tr>
                                                 <th>Sub Total :</th>
-                                                <td>{totalAmount}.00</td>
+                                                {/* <td>{totalAmount}.00</td> */}
+                                                <td>{" ₹ 500"}.00</td>
                                             </tr>
                                             <tr>
-                                                <th>50% Amount :</th>
-                                                <td>{firstAmount}.00</td>
+                                                <th>50% Advance :</th>
+                                                {/* <td>{firstAmount}.00</td> */}
+                                                <td>{" ₹ 250"}.00</td>
                                             </tr>
                                             <tr>
                                                 <th>GST (18%) :</th>
-                                                <td> {calculateAmountWithGST(firstAmount) - firstAmount}.00</td>
+                                                {/* <td> {calculateAmountWithGST(firstAmount) - firstAmount}.00</td> */}
+                                                <td>{" ₹ 45"}.00</td>
                                             </tr>
                                             <tr className="font-bold" style={{ color: Colors.pink_clr }}>
                                                 <th>Total Amount :</th>
-                                                <td>{firstAmountWithGST}.00</td>
+                                                {/* <td>{firstAmountWithGST}.00</td> */}
+                                                <td>{" ₹ 205"}.00</td>
                                             </tr>
 
 
@@ -283,7 +287,9 @@ const Creator_Amountpage = () => {
                                         label={"Continue"}
                                         buttoncss={"bottom-0 py-3 px-5 "}
                                         // onClick={() => router.push('/payment_gateway')}
-                                        onClick={() => handleSubmit()}
+                                        // onClick={() => handleSubmit()}
+                                        // onClick={() => router.push('/payment_success')}
+                                        onClick={() => setIsModalOpenlogout(true)}
                                     />
                                 </div>
 

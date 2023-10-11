@@ -12,6 +12,8 @@ import CreatorVideoEmbed from "../CreatorVideoEmbed";
 
 const Creator_chats = (campaignBrandData) => {
 
+    console.log("campaignBrandData.campaignBrandData?.campaign?.brand?.name", campaignBrandData.campaignBrandData?.campaign);
+
     const router = useRouter();
     const [allMessages, setAllMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -25,23 +27,51 @@ const Creator_chats = (campaignBrandData) => {
     const chatContainerRef = useRef(null);
 
     const handleButtonClick = () => {
-        // Trigger a click event on the file input when the button is clicked
         fileInputRef.current.click();
     };
 
+    console.log("fileInputRef", file?.name);
+
     const handleFileChange = (e) => {
         // setSelectedFile(e.target.files[0]);
-        setFile(e.target.files[0]);
+        // setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            // Check if the selected file is a video
+            if (selectedFile.type.startsWith('image/') ||selectedFile.type.startsWith('video/')) {
+                // Set both file state and msgtext state
+                setFile(selectedFile);
+                setMsgtext(selectedFile?.name);
+            } else {
+                alert('Please select a valid video file.');
+                // Clear the file input
+                fileInputRef.current.value = '';
+            }
+        }
     };
 
-    const handleUpload = async () => {
+    const handleUpload = async (e) => {
 
-        // e.preventDefault();
+        e.preventDefault();
 
         if (!file) {
             alert('No file selected.');
             return;
         }
+        // if (file) {
+        //     const fileType = file.type;
+        //     if (fileType.startsWith('image/') || fileType.startsWith('video/')) {
+        //         const uploadResponse = await handleUpload();
+        //         if (uploadResponse) {
+        //             messageType = "file";
+        //             formData.append("data", uploadResponse?.url);
+        //         }
+        //     }
+        // } else {
+        //     messageType = "text";
+        //     formData.append("data", msgtext);
+        // }
+
 
         const formData = new FormData();
         formData.append('file', file);
@@ -180,20 +210,34 @@ const Creator_chats = (campaignBrandData) => {
 
     };
 
-    const handleClick = async (e) => {
+    const handleClick = async () => {
 
+        
         if (!file && !msgtext) {
             alert('Please select a file or enter text.');
             return;
         }
+        // if (file) {
+        //     const fileType = file.type;
+        //     if (fileType.startsWith('image/') || fileType.startsWith('video/')) {
+        //         const uploadResponse = await handleUpload();
+        //         if (uploadResponse) {
+        //             messageType = "file";
+        //             formData.append("data", uploadResponse?.url);
+        //         }
+        //     }
+        // } else {
+        //     messageType = "text";
+        //     formData.append("data", msgtext);
+        // }
+        // e.preventDefault();
 
-        e.preventDefault();
 
         const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
         console.log('campaigns cookieValue------------1', cookieValue?.token);
 
         try {
-            let messageType = "text"; // Default to "text"
+            const messageType = "text"; // Default to "text"
 
             const formData = new FormData();
             formData.append("brand_id", campaignBrandData?.campaignBrandData?.campaign?.brand?.id);
@@ -206,16 +250,17 @@ const Creator_chats = (campaignBrandData) => {
                 const fileType = file.type;
                 if (fileType.startsWith('image/') || fileType.startsWith('video/')) {
                     const uploadResponse = await handleUpload();
+                    console.log("uploadResponseuploadResponse",uploadResponse);
                     if (uploadResponse) {
-                        messageType = "file";
+                        // messageType = "text";
                         // formData.append("type", messageType);
                         // formData.append("file", file); // Append the file
-                        formData.append("data", uploadResponse.url);
+                        formData.append("data", uploadResponse?.url);
                     }
                 }
             }
             else {
-                messageType = "text";
+                // messageType = "text";
                 // formData.append("type", messageType);
                 formData.append("data", msgtext);
             }
@@ -232,7 +277,7 @@ const Creator_chats = (campaignBrandData) => {
             const responseData = await postResponse.json();
 
             console.log("handleClick creator1", postResponse, responseData);
-            console.log("handleClick creator", responseData);
+            console.log("handleClick responseData", responseData);
 
             if (responseData.status === 'success') {
                 console.log('POST response creator chats type-------------:', responseData?.data);
@@ -403,7 +448,28 @@ const Creator_chats = (campaignBrandData) => {
         }
     };
 
-    console.log("creator allMessages", allMessages, campaignBrandData.campaignBrandData?.campaign?.brand?.logo);
+    let userProfileData = Cookies.get('creator_profile_id');
+
+    if (userProfileData === null || undefined) {
+
+        router.push('/login')
+    } else {
+
+        try {
+            userProfileData = JSON.parse(userProfileData);
+
+        } catch (error) {
+            console.error('Error parsing userProfileData:', error);
+        }
+    }
+
+
+
+    console.log("userProfileDatauserProfileData", userProfileData);
+
+
+
+    console.log("creator allMessages", allMessages);
 
     return (
         <>
@@ -440,6 +506,8 @@ const Creator_chats = (campaignBrandData) => {
                                 const messageClass = isLeftAlign ? 'left-message' : isRightAlign ? 'right-message' : '';
                                 const textMessageClass = isLeftAlign ? 'left-text-message' : isRightAlign ? 'right-text-message' : '';
 
+                                console.log("messageClass", isLeftAlign, isRightAlign);
+
                                 const timestamp = item?.updated_at;
                                 const dateObj = new Date(timestamp);
 
@@ -457,6 +525,9 @@ const Creator_chats = (campaignBrandData) => {
 
                                 console.log(time);
                                 const isImageLink = item.content === 0 && /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(item.data);
+                                const isVideoLink = item.content === 0 && /\.(mp4|avi|mkv|mov|flv|webm|wmv)$/i.test(item.data);
+                                const isYouTubeVideoLink = /youtube\.com\/(watch\?v=|shorts\/)/i.test(item.data);
+                                const isInstagramVideoLink = item.data.startsWith('https://www.instagram.com/reel');
 
                                 console.log("isImageLink", isImageLink);
 
@@ -508,50 +579,83 @@ const Creator_chats = (campaignBrandData) => {
                                 if (isImageLink) {
 
                                     return (
-                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
-                                            <div className={`chat-message shadow-lg ${messageClass}`} style={{ padding: 0 }}>
-                                                <a href={item?.data} target="_blank" rel="noopener noreferrer">
-                                                    <div style={{ position: 'relative' }}>
-                                                        <img
-                                                            src={item?.data}
-                                                            alt="Image"
-                                                            style={{
-                                                                maxWidth: '100%',
-                                                                maxHeight: '120px',
-                                                                opacity: 1,
+                                        <>
+                                            <div className="w-full">
+                                                {item?.sender_type === 'brand' &&
+                                                    <div className="px-5 py-5 overflow-y-auto w-full" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                                        <div className={`chat-message shadow-lg ${!messageClass}`} style={{ padding: 0 }}>
+                                                            <Image
+                                                                src={userProfileData?.profile_pic}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg me-2"
+                                                                alt=""
+                                                            />
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{userProfileData?.user?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
 
-                                                            }}
-                                                        />
-                                                        <div
-                                                            className="flex items-center justify-center absolute"
-                                                            style={{
-                                                                position: '',
-                                                                top: '50%',
-                                                                left: '50%',
-                                                                transform: 'translate(-50%, -50%)',
-                                                                cursor: 'pointer',
-                                                                backgroundColor: 'rgb(0 0 0 / 52%)',
-                                                                borderRadius: '50%',
-                                                                padding: '5px',
-                                                                width: '50%',
-                                                                height: '50%'
-                                                            }}
-                                                            onClick={(e) => {
-                                                                e.stopPropagation(); // Prevent the link from opening
-                                                            }}
-                                                        >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                                                <div className={` flex items-end border-4 border-blue-300 chat-message shadow-lg p-2 ${messageClass}`}>
+                                                                    <a href={item?.data} target="_blank" rel="noopener noreferrer" style={{ width: '100%' }}>
+                                                                        <div style={{ position: 'relative' }}>
+                                                                            <img
+                                                                                src={item?.data}
+                                                                                alt="Image"
+                                                                                style={{
+                                                                                    maxWidth: '100%',
+                                                                                    maxHeight: '150px',
+                                                                                    opacity: 1,
+                                                                                    width: '100%'
 
-                                                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
-                                                                    <path d="M2175 5106 c-37 -17 -70 -52 -84 -89 -8 -19 -11 -360 -11 -1083 l0 -1054 -332 0 c-303 0 -337 -2 -374 -19 -61 -28 -89 -73 -89 -142 0 -50 5 -63 35 -101 19 -24 283 -327 587 -674 379 -434 563 -636 586 -648 44 -20 90 -20 134 0 23 12 207 214 586 648 304 347 568 650 587 674 31 39 35 50 35 102 0 50 -5 64 -31 96 -49 60 -62 62 -431 63 l-333 1 -2 1069 c-3 1063 -3 1070 -24 1097 -11 15 -33 37 -48 48 -26 20 -41 21 -394 23 -291 2 -373 0 -397 -11z" />
-                                                                    <path d="M162 923 l3 -678 26 -56 c33 -71 87 -125 158 -158 l56 -26 2155 0 2155 0 56 26 c71 33 125 87 158 158 l26 56 3 678 3 677 -321 0 -320 0 0 -480 0 -480 -1760 0 -1760 0 0 480 0 480 -320 0 -321 0 3 -677z" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </a>
+                                                                                }}
+                                                                            />
+                                                                            <div
+                                                                                className="flex items-center justify-center absolute"
+                                                                                style={{
+                                                                                    position: '',
+                                                                                    top: '50%',
+                                                                                    left: '50%',
+                                                                                    transform: 'translate(-50%, -50%)',
+                                                                                    cursor: 'pointer',
+                                                                                    backgroundColor: 'rgb(0 0 0 / 52%)',
+                                                                                    borderRadius: '50%',
+                                                                                    padding: '5px',
+                                                                                    width: '50%',
+                                                                                    height: '50%'
+                                                                                }}
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation(); // Prevent the link from opening
+                                                                                }}
+                                                                            >
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
-                                                {/* <div className="flex justify-end items-center mt-5">
+                                                                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                                                                                        <path d="M2175 5106 c-37 -17 -70 -52 -84 -89 -8 -19 -11 -360 -11 -1083 l0 -1054 -332 0 c-303 0 -337 -2 -374 -19 -61 -28 -89 -73 -89 -142 0 -50 5 -63 35 -101 19 -24 283 -327 587 -674 379 -434 563 -636 586 -648 44 -20 90 -20 134 0 23 12 207 214 586 648 304 347 568 650 587 674 31 39 35 50 35 102 0 50 -5 64 -31 96 -49 60 -62 62 -431 63 l-333 1 -2 1069 c-3 1063 -3 1070 -24 1097 -11 15 -33 37 -48 48 -26 20 -41 21 -394 23 -291 2 -373 0 -397 -11z" />
+                                                                                        <path d="M162 923 l3 -678 26 -56 c33 -71 87 -125 158 -158 l56 -26 2155 0 2155 0 56 26 c71 33 125 87 158 158 l26 56 3 678 3 677 -321 0 -320 0 0 -480 0 -480 -1760 0 -1760 0 0 480 0 480 -320 0 -321 0 3 -677z" />
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+                                                                    <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                                        </g>
+                                                                    </svg>
+
+                                                                    {/* </div> */}
+                                                                </div>
+                                                            </div>
+
+
+                                                            {/* <div className="flex justify-end items-center mt-5">
                                                     <div
                                                         className=""
                                                         style={{
@@ -588,11 +692,217 @@ const Creator_chats = (campaignBrandData) => {
                                                     </svg>
 
                                                 </div> */}
-                                            </div>
+                                                        </div>
 
+                                                    </div>
+                                                }
+                                                {item?.sender_type === 'creator' &&
+                                                    <div className="px-5 py-5 overflow-y-auto w-full bg-b"
+                                                        style={{ backgroundColor: Colors.light_bg_clr }}
+                                                        key={index}>
+
+                                                        <div className={` ${messageClass} flex items-center w-full justify-end`}>
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{userProfileData?.user?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
+
+                                                                <div className={` flex items-end border-4 border-blue-300 chat-message shadow-lg p-2 ${messageClass}`}>
+                                                                    <a href={item?.data} target="_blank" rel="noopener noreferrer" style={{ width: '100%' }}>
+                                                                        <div style={{ position: 'relative' }}>
+                                                                            <img
+                                                                                src={item?.data}
+                                                                                alt="Image"
+                                                                                style={{
+                                                                                    maxWidth: '100%',
+                                                                                    maxHeight: '150px',
+                                                                                    opacity: 1,
+                                                                                    width: '100%'
+
+                                                                                }}
+                                                                            />
+                                                                            <div
+                                                                                className="flex items-center justify-center absolute"
+                                                                                style={{
+                                                                                    position: '',
+                                                                                    top: '50%',
+                                                                                    left: '50%',
+                                                                                    transform: 'translate(-50%, -50%)',
+                                                                                    cursor: 'pointer',
+                                                                                    backgroundColor: 'rgb(0 0 0 / 52%)',
+                                                                                    borderRadius: '50%',
+                                                                                    padding: '5px',
+                                                                                    width: '50%',
+                                                                                    height: '50%'
+                                                                                }}
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation(); // Prevent the link from opening
+                                                                                }}
+                                                                            >
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                                                                                        <path d="M2175 5106 c-37 -17 -70 -52 -84 -89 -8 -19 -11 -360 -11 -1083 l0 -1054 -332 0 c-303 0 -337 -2 -374 -19 -61 -28 -89 -73 -89 -142 0 -50 5 -63 35 -101 19 -24 283 -327 587 -674 379 -434 563 -636 586 -648 44 -20 90 -20 134 0 23 12 207 214 586 648 304 347 568 650 587 674 31 39 35 50 35 102 0 50 -5 64 -31 96 -49 60 -62 62 -431 63 l-333 1 -2 1069 c-3 1063 -3 1070 -24 1097 -11 15 -33 37 -48 48 -26 20 -41 21 -394 23 -291 2 -373 0 -397 -11z" />
+                                                                                        <path d="M162 923 l3 -678 26 -56 c33 -71 87 -125 158 -158 l56 -26 2155 0 2155 0 56 26 c71 33 125 87 158 158 l26 56 3 678 3 677 -321 0 -320 0 0 -480 0 -480 -1760 0 -1760 0 0 480 0 480 -320 0 -321 0 3 -677z" />
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+                                                                    <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                                        </g>
+                                                                    </svg>
+
+                                                                    {/* </div> */}
+                                                                </div>
+                                                            </div>
+                                                            <Image
+                                                                src={userProfileData?.profile_pic}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg ms-2"
+                                                                alt=""
+                                                            />
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </>
+                                    );
+                                }
+                                else if (isVideoLink) {
+                                    return (
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                            <div className={`chat-message shadow-lg ${messageClass}`}>
+
+                                                <>
+                                                    <CreatorVideoEmbed url={item?.data} />
+                                                </>
+
+                                            </div>
                                         </div>
                                     );
-                                } else if (item.content === 1 || item.type === 'video') {
+                                }
+                                else if (isYouTubeVideoLink) {
+                                    return (
+                                        <>
+                                            <div className="w-full">
+                                                {item?.sender_type === 'brand' &&
+                                                    <div className="px-5 py-5 overflow-y-auto w-full" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                                        <div className={`chat-message shadow-lg ${!messageClass}`} style={{ padding: 0 }}>
+                                                            <Image
+                                                                src={userProfileData?.profile_pic}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg me-2"
+                                                                alt=""
+                                                            />
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{userProfileData?.user?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
+                                                                <div className={`chat-message shadow-lg ${!messageClass}`}>
+
+                                                                    <>
+                                                                        <CreatorVideoEmbed url={item?.data} />
+                                                                    </>
+
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                                {item?.sender_type === 'creator' &&
+                                                    <div className=" overflow-y-auto w-full "
+                                                        style={{ backgroundColor: Colors.light_bg_clr }}
+                                                        key={index}>
+
+                                                        <div className={` ${messageClass} flex items-center w-full justify-end`}>
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{userProfileData?.user?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
+
+                                                                <div className={` flex items-end border-4 border-yellow-300 chat-message shadow-lg ${messageClass}`}>
+
+                                                                    <div className=" overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                                                        <div className={`chat-message shadow-lg ${messageClass}`} style={{ padding: 0 }}>
+
+                                                                            <>
+                                                                                <CreatorVideoEmbed url={item?.data} />
+                                                                            </>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    {/* <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                                        </g>
+                                                                    </svg> */}
+
+                                                                    {/* </div> */}
+                                                                </div>
+                                                            </div>
+                                                            <Image
+                                                                src={userProfileData?.profile_pic}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg ms-2"
+                                                                alt=""
+                                                            />
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                                {/* <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                                <div className={`chat-message shadow-lg ${messageClass}`}>
+
+                                                    <>
+                                                        <CreatorVideoEmbed url={item?.data} />
+                                                    </>
+
+                                                </div>
+                                            </div> */}
+                                            </div>
+                                        </>
+                                    );
+                                }
+                                else if (isInstagramVideoLink) {
+                                    return (
+                                        <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
+                                            <div className={`chat-message shadow-lg ${messageClass}`}>
+
+                                                <>
+                                                    <CreatorVideoEmbed url={item?.data} />
+                                                </>
+
+                                            </div>
+                                        </div>
+                                    );
+                                }
+                                else if (item.content === 1 || item.type === 'video') {
                                     return (
                                         <div className="px-5 py-5 overflow-y-auto" style={{ backgroundColor: Colors.light_bg_clr }} key={index}>
                                             <div className={`chat-message shadow-lg ${messageClass}`}>
@@ -619,45 +929,94 @@ const Creator_chats = (campaignBrandData) => {
                                             </div>
                                         </div>
                                     );
-                                } else {
+                                }
+
+                                else {
                                     // Handle other content types or text messages
                                     return (
-                                        <div className="px-5 py-5 overflow-y-auto"
-                                            style={{ backgroundColor: Colors.light_bg_clr }}
-                                            key={index}>
-                                            <div className={` ${messageClass} flex items-center`}>
-                                                <div className="">
-                                                    <div className="flex items-center justify-between">
-                                                        <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4>
-                                                        <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
-                                                        <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                        <>
+                                            <div className="w-full">
+                                                {item?.sender_type === 'brand' &&
+                                                    <div className="px-5 py-5 overflow-y-auto w-full"
+                                                        style={{ backgroundColor: Colors.light_bg_clr }}
+                                                        key={index}>
+                                                        <div className={` ${!messageClass} flex items-center`}>
+                                                            <Image
+                                                                src={campaignBrandData.campaignBrandData?.campaign?.brand?.logo}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg me-2"
+                                                                alt=""
+                                                            />
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
+
+                                                                <div className={`flex items-end  justify-between bg-green-200 chat-message shadow-lg p-2 ${!messageClass}`}>
+                                                                    <div className="pe-10 ps-1">{item?.data}</div>
+                                                                    {/* <div className="flex justify-end items-center"> */}
+
+                                                                    <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                                        </g>
+                                                                    </svg>
+
+                                                                    {/* </div> */}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        {/* <p className={` ${textMessageClass}`}>{time}</p> */}
                                                     </div>
+                                                }
+                                                {item?.sender_type === 'creator' &&
+                                                    <div className="px-5 py-5 overflow-y-auto w-full text-end"
+                                                        style={{ backgroundColor: Colors.light_bg_clr }}
+                                                        key={index}>
+                                                        <div className={` ${messageClass} flex items-center w-full justify-end`}>
+                                                            <div className="">
+                                                                <div className="flex items-center justify-between">
+                                                                    {/* <h4 className="font-bold">{campaignBrandData.campaignBrandData?.campaign?.brand?.name}</h4> */}
+                                                                    <h4 className="font-bold">{userProfileData?.user?.name}</h4>
+                                                                    <p className="pt-1 text-gray-500 mx-2">{formattedDate}</p>
+                                                                    <p className="pt-1 text-gray-500 me-2">{time}</p>
+                                                                </div>
 
-                                                    <div className={`flex items-end  bg-green-200 chat-message shadow-lg p-2 ${messageClass}`}>
-                                                        <div className="pe-10 ps-1">{item?.data}</div>
-                                                        {/* <div className="flex justify-end items-center"> */}
+                                                                <div className={`flex items-end justify-between bg-green-200 chat-message shadow-lg p-2 ${messageClass}`}>
+                                                                    <div className="pe-10 ps-1">{item?.data}</div>
+                                                                    {/* <div className="flex justify-end items-center"> */}
 
-                                                        <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                                                    <svg className="bg-grey-900" xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
-                                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
-                                                                <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
-                                                                <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
-                                                            </g>
-                                                        </svg>
+                                                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#A0A0A0" stroke="none">
+                                                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z" />
+                                                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z" />
+                                                                        </g>
+                                                                    </svg>
 
-                                                        {/* </div> */}
+                                                                    {/* </div> */}
+                                                                </div>
+                                                            </div>
+                                                            <Image
+                                                                src={userProfileData?.profile_pic}
+                                                                width={44}
+                                                                height={44}
+                                                                className="rounded-full shadow-lg ms-2"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        {/* <p className={` ${textMessageClass}`}>{time}</p> */}
                                                     </div>
-                                                </div>
-                                                <Image
-                                                    src={campaignBrandData.campaignBrandData?.campaign?.brand?.logo}
-                                                    width={44}
-                                                    height={44}
-                                                    className="rounded-full shadow-lg"
-                                                    alt=""
-                                                />
+                                                }
                                             </div>
-                                            {/* <p className={` ${textMessageClass}`}>{time}</p> */}
-                                        </div>
+                                        </>
                                     );
                                 }
 
@@ -676,9 +1035,6 @@ const Creator_chats = (campaignBrandData) => {
                                 </div>
                             </div>
                         )}
-
-
-
                     </div>
                     <div className=" flex flex-col h-auto px-5 pb-5 ">
                         <hr className="my-5" />
@@ -686,10 +1042,13 @@ const Creator_chats = (campaignBrandData) => {
                             <label htmlFor="voice-search" className="sr-only">Search</label>
                             <div className="relative w-full overflow-y-auto">
 
-                                <input type="text" id="voice-search"
+                                <input
+                                    type="text"
+                                    id="voice-search"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Type something here......"
+                                    placeholder="Type Something Here......"
                                     value={msgtext}
+                                    // value={msgtext || selectedFile}
                                     onChange={(e) => setMsgtext(e.target.value)}
                                 />
                                 <button className="absolute inset-y-0 right-0 flex items-center pr-10">
@@ -710,6 +1069,9 @@ const Creator_chats = (campaignBrandData) => {
                                     </button>
                                     <input
                                         type="file"
+                                        // id="file_text_name"
+                                        // accept="video/*"
+                                        accept="image/*,video/*"
                                         onChange={handleFileChange}
                                         style={{ display: 'none' }}
                                         ref={fileInputRef} // Create a ref for the file input

@@ -17,10 +17,10 @@ const Brand_Avatar_withoutbadge = (item) => {
                     height={52}
                 />
                 <div className="font-medium dark:text-white">
-                    <div className="font_size_16">
+                    <div className="font_size_16 capitalize">
                         {item?.item?.campaign?.brand.name}
                     </div>
-                    <div className="text-sm text-gray-500 font_size_14 dark:text-gray-400">
+                    <div className="text-sm text-gray-500 font_size_14 dark:text-gray-400 capitalize">
                        {item?.item?.campaign?.name}
                     </div>
                 </div>
