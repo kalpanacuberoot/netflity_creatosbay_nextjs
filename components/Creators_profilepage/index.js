@@ -215,7 +215,7 @@ const Creators_profilepage = () => {
                     <div>
                       <h4 className="text-gray-400">Height</h4>
                       {/* <h3>{heightInFeetAndInches}</h3> */}
-                      <h3>5'' 5'</h3>
+                      <h3>5&apos;&apos; 5&apos;</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400">Weight</h4>
