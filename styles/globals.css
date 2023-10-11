@@ -138,6 +138,16 @@ p {
   }
 } */
 
+.selected_filter{
+  background-color: #9357FF;
+  color: #fff;
+}
+
+.unselected_filter{
+  border: 2px solid #9357FF;
+  color: #000000;
+}
+
 svg {
   fill: #000000; /* Default fill color (black) */
 }
@@ -312,6 +322,10 @@ button {
 
 .invoice-header {
   text-align: center;
+}
+
+.mobile_arrow_icon{
+  fill: #fff !important;
 }
 
 .container_invoice {

@@ -29,7 +29,7 @@ export const apiCall = async (url, method, data = null, headers = {}) => {
       options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(url, options); // Use axios instead if you prefer
+    const response = await fetch(url, options);
 
     if (!response.ok) {
       throw new Error(`Request failed with status: ${response.status}`);
@@ -40,10 +40,6 @@ export const apiCall = async (url, method, data = null, headers = {}) => {
     return responseData;
   } catch (error) {
 
-    // if (error.message) {
-    //   alert('go to login page')
-
-    // }
     throw new Error(`API call error: ${error.message}`);
 
   }
@@ -57,10 +53,9 @@ export const getApiCall = async (url, method, headers = {}) => {
 
     const options = {
       method,
-      // headers,
       headers: {
-        ...headers, // Keep any additional headers you may have passed
-        'Accept': 'application/json', // Add the Accept header
+        ...headers, 
+        'Accept': 'application/json', 
       },
     };
 
@@ -78,17 +73,8 @@ export const getApiCall = async (url, method, headers = {}) => {
       throw new Error(`Request failed with status: ${response.status}`);
     }
 
-
-
-
-
   } catch (error) {
     console.error('Error:', error);
-    // if (error.message) {
-    //   alert('go to login page')
-
-
-    // }
   }
 };
 

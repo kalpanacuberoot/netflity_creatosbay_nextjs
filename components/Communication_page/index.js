@@ -140,7 +140,7 @@ const Communication_page = () => {
 
     useEffect(() => {
 
-        Creator_campaignData();
+        // Creator_campaignData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -236,9 +236,9 @@ const Communication_page = () => {
                                                         <Avatar_green_bg item={inactive?.data} key={index} />
                                                     </>
                                                 ))
-                                            : 
-                                            <h4 className="px-5 py-3">No Active Conversations</h4>
-                                            }
+                                                    :
+                                                    <h4 className="px-5 py-3">No Active Conversations</h4>
+                                                }
                                                 {/* <Avatar_green_bg />
                                         <Avatar_green width={44} height={44} />
                                         <Avatar_red />
@@ -258,14 +258,15 @@ const Communication_page = () => {
                                             <span
                                                 style={{ background: Colors.gray2, borderColor: Colors.light_grey_clr }}
                                                 className="px-2 rounded-md border">
-                                                {uniqueData?.length ? uniqueData?.length : 0}
+                                                {/* {uniqueData?.length ? uniqueData?.length : 0} */}
+                                                1
                                             </span>
                                         </div>
                                         <hr className="" />
                                         <div className="">
 
                                             <div className="py-3">
-                                                {uniqueData?.length > 0 ?
+                                                {/* {uniqueData?.length > 0 ?
                                                     <div>
                                                         {uniqueData.map((inactive, index) => (
                                                             <>
@@ -304,13 +305,11 @@ const Communication_page = () => {
                                                         </Link>
                                                     </div>
 
-                                                }
+                                                } */}
 
 
-                                                {/* <Avatar_green width={44} height={44} />
-                                        <Avatar_red />
-                                        <Avatar_green width={44} height={44} />
-                                        <Avatar_red /> */}
+                                                {/* <Avatar_green width={44} height={44} /> */}
+                                                <Avatar_red onClick={() => setBlankchat(false)} />
                                             </div>
 
                                         </div>
@@ -370,10 +369,12 @@ const Communication_page = () => {
                                                     </>
                                                 }
                                                 <hr className="" />
-                                                <Chat
-                                                    creatorId={creator_count}
-                                                    chatcreator_data={chat_creator_id}
-                                                />
+                                                <div className=" bg-zinc-100 flex flex-col justify-end " style={{ height: '100vh' }}>
+                                                    <Chat
+                                                        creatorId={creator_count}
+                                                        chatcreator_data={chat_creator_id}
+                                                    />
+                                                </div>
                                             </>
                                         }
                                     </div>
@@ -388,10 +389,18 @@ const Communication_page = () => {
                                     <div className=" border shadow rounded m-3">
                                         <div className="p-4 capitalize">
 
-                                            <h3>{campaign_data?.name}</h3>
+                                            {/* <h3>{campaign_data?.name}</h3> */}
+                                            <h3>Ant Studio llp</h3>
                                         </div>
                                         <div className="px-4">
+                                            <Image
+                                                src={Images.card_img}
+                                                height={200}
+                                                width={450}
+                                                className="mx-auto"
+                                                alt={""}
 
+                                            />
                                             {campaign_data?.references?.length > 0 && campaign_data?.references.map((item, index) => (
                                                 <>
                                                     <h3 className="font-bold underline">Products</h3>
@@ -426,7 +435,8 @@ const Communication_page = () => {
 
                                             <div className="font_size_16 communication_text py-2 normal-case my-5">
 
-                                                {campaign_data?.description}
+                                                {/* {campaign_data?.description} */}
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 
                                             </div>
 
@@ -434,7 +444,39 @@ const Communication_page = () => {
 
 
                                     </div>
-                                    {creator_count?.length > 0 && creator_count.map((item, index) => (
+
+                                    <div className=" border shadow rounded mx-3 my-4 py-4 px-3" >
+
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                <i>Image Count : </i>
+                                            </label>
+
+                                            <div className="px-3">1/2</div>
+                                        </div>
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                <i> Video Count : </i>
+                                            </label>
+
+                                            <div className="px-3">0/2</div>
+                                        </div>
+                                        <div className="flex px-4 items-center">
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-full">
+                                                <i> Revision Submitted :</i>
+                                            </label>
+
+                                            <div className="px-3">0/2</div>
+                                        </div>
+                                    </div>
+
+                                    {/* {creator_count?.length > 0 && creator_count.map((item, index) => (
                                         <div className=" border shadow rounded mx-3 my-4 py-4 px-3" key={index}>
 
                                             <div className="flex px-4 items-center">
@@ -465,7 +507,7 @@ const Communication_page = () => {
                                                 <div className="px-3">{item?.video_count}/2</div>
                                             </div>
                                         </div>
-                                    ))}
+                                    ))} */}
 
                                 </div>
                             </div>

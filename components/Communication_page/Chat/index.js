@@ -203,23 +203,23 @@ const Chat = ({ creatorId, chatcreator_data }) => {
     };
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        getAllMessages();
+    //     getAllMessages();
 
-        // Fetch again whenever the creatorId changes
-        if (creatorId) {
-            getAllMessages();
-        }
+    //     // Fetch again whenever the creatorId changes
+    //     if (creatorId) {
+    //         getAllMessages();
+    //     }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [creatorId]);
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [creatorId]);
     console.log("messages----", allMessages, msgtext);
 
 
     return (
         <>
-            <div className="flex flex-col justify-end h-full">
+            {/* <div className="flex flex-col justify-end h-full"> */}
                 <div className="px-5 py-5 rounded overflow-y-auto">
                     {allMessages.length > 0 ? allMessages.map((message, index) => {
                         const brand_type = JSON.parse(Cookies.get('user_data'));
@@ -281,7 +281,7 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                         )
                     })
                         :
-                        <div className="mx-10 px-5 flex items-start bg-yellow-500 rounded p-3">
+                        <div className="mx-5 px-5 flex items-start bg-yellow-500 rounded p-3">
                             <Image
                                 src={Images.lock_black_clr}
                                 width={15}
@@ -312,13 +312,13 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                             />
                             <button className="absolute inset-y-0 right-0 flex items-center pr-10">
 
-                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <svg className="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 20 20">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z" />
                                 </svg>
                             </button>
                             <button type="button" className="absolute inset-y-0 right-0 flex items-center pr-3">
 
-                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 20">
+                                <svg className="w-6 h-6  hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 12 20">
                                     <path stroke="currentColor" strokeLinejoin="round" strokeWidth="2" d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
                                 </svg>
                             </button>
@@ -330,13 +330,13 @@ const Chat = ({ creatorId, chatcreator_data }) => {
                             className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             onClick={handleClick}
                         >
-                            <svg className="w-4 h-4 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                            <svg className="w-6 h-6 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                                 <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
                             </svg>
                         </button>
                     </form>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }

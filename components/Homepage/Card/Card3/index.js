@@ -7,7 +7,7 @@ const Home_Card3 = () => {
     const [cardthirdshowmore, setCardthirdshowmore] = useState(false);
     return (
         <>
-            <div className=" my-2 mx-2">
+            <div className=" my-5 mx-2">
                 <div className="relative">
                     <Image
                         src={Images.card_img}
@@ -16,19 +16,26 @@ const Home_Card3 = () => {
                         alt=""
                         className=" mx-auto"
                     />
-                    <Image
+                    {/* <Image
                         src={Images.reel_creator_card}
                         width={50}
                         height={50}
                         alt=""
                         className="reel_creator_card mx-auto"
-                    />
+                    /> */}
                 </div>
-                <div className="px-5 py-5 border rounded-b-lg" style={{background:Colors.white_clr}}>
+                <div className="px-5 py-5 border rounded-b-lg" style={{ background: Colors.white_clr }}>
                     <div className="flex flex-row justify-between items-end mt-4">
-                        <div className="font_size_17 ">Reels creators</div>
+                        {/* <div className="font_size_17 ">Reels creators</div> */}
+                        <div className="font_size_17 flex items-center">Creators
+                            <span
+                                // style={{ background: Colors.pink_clr, borderColor: Colors.light_grey_clr }}
+                                className="px-3 py-1 rounded-md border ms-3 text-white bg-slate-800">
+                                0
+                            </span>
+                        </div>
                         <div
-                            className="flex flex-row items-center px-3 rounded-md"
+                            className="flex flex-row items-center px-3 py-1 rounded-md"
                             style={{ backgroundColor: Colors.pending_clr }}
                         >
                             <Image
@@ -41,25 +48,12 @@ const Home_Card3 = () => {
                             <h6>Pending</h6>
                         </div>
                     </div>
-                    <h2 className="font-bold">Ant Studio llp</h2>
-                    <h6>
+                    <h2 className="font-bold capitalize mt-2">Ant Studio llp</h2>
+                    <div className="max-h-64" style={{ wordWrap: 'break-word' }}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting
-                        {cardthirdshowmore && (
-                            <>
-                                {" "}
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry......
-                            </>
-                        )}
-                        <h6
-                            className="text-red-600"
-                            onClick={() => setCardthirdshowmore(!cardthirdshowmore)}
-                        >
-                            {cardthirdshowmore ? "Less More" : "Read More"}
-                        </h6>
-                    </h6>
+                    </div>
                     <div className="px-5 border py-3 rounded-md text-center  mt-2">
-                        <h6>04/06/2023</h6>
+                        <h6>04/10/2023 - 25/10/2023</h6>
                         <div className="w-100 rounded-full border edit_button_clr py-1">
                             <buttton> Check Details</buttton>
                         </div>

@@ -146,7 +146,8 @@ const Creators_popup_content = () => {
                                         <Buttons
                                             buttoncss="font_size_24 leading-6 py-3 button_clr my-5"
                                             label={"Confirm Button"}
-                                            onClick={() => handleSubmit()}
+                                            // onClick={() => handleSubmit()}
+                                            onClick={() => setIsopen(true)}
                                         />
                                     </>
                                 }

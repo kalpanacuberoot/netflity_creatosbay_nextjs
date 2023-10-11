@@ -376,7 +376,8 @@ const Brandscreens = () => {
 
                             <button
                                 type="submit"
-                                onClick={() => onNextpage()}
+                                // onClick={() => onNextpage()}
+                                onClick={() => setOpen(true)}
                                 className=" rounded-3xl mt-5 text-white w-full  font-bold py-3 px-4  focus:outline-none focus:shadow-outline"
                                 style={{ backgroundColor: Colors.logo_clr }}
                             >
@@ -484,10 +485,11 @@ const Brandscreens = () => {
                                 ></textarea>
 
                                 <button
-                                    onClick={handleSubmit}
+                                    // onClick={handleSubmit}
                                     type="submit"
                                     className="rounded-3xl mt-5 text-white w-full py-3 px-4  focus:outline-none focus:shadow-outline"
                                     style={{ backgroundColor: Colors.logo_clr }}
+                                    onClick={() => router.push('/home')}
                                 >
                                     Save
                                 </button>

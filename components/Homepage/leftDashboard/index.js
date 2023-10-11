@@ -230,7 +230,7 @@ const Left_Dashboard = () => {
             ) : (
                 <>
                     <Terms_of_service isOpen={isModalOpen_terms_service} onClose={closeModal}>
-                        <div className="relative max-w-4xl max-h-full min-w-3xl">
+                        <div className="relative max-w-3xl max-h-full min-w-3xl">
 
                             <Terms_of_service_content />
                         </div>
@@ -610,19 +610,17 @@ const Left_Dashboard = () => {
 
 
                             <div className='border px-3 py- 4 relative flex flex-row my-5 justify-between rounded-full ' ref={dropdownRef && settingdropdownRef}>
-                                {brand_user?.length > 0 && brand_user.map((item, index) => {
-                                    // const isCurrent = item.isCurrent;
+                                {/* {brand_user?.length > 0 && brand_user.map((item, index) => {
                                     const isCurrent = item?.brand?.id === cookie_user_brand?.brand?.id;
                                     console.log("isCurrent left dashboard", isCurrent);
                                     return (
 
                                         <div
                                             className=' my-2 ms-3 w-100 rounded-full flex flex-row justify-evenly cursor-pointer'
-                                            // className='py-1 my-2 ps-3 w-100 rounded-full border button_clr flex flex-row justify-evenly'
                                             key={index}
                                         >
                                             <Image
-                                                src={item?.brand?.logo}
+                                                src={item?.brand?.logo ? item?.brand?.logo : Images.avatar1}
                                                 width={35}
                                                 height={30}
                                                 alt=""
@@ -633,7 +631,21 @@ const Left_Dashboard = () => {
 
                                     )
                                 })
-                                }
+                                } */}
+
+                                <div
+                                    className=' my-2 ms-3 w-100 rounded-full flex flex-row justify-evenly cursor-pointer'
+                                    
+                                >
+                                    <Image
+                                        src={Images.avatar1}
+                                        width={35}
+                                        height={30}
+                                        alt=""
+                                        // onClick={toggleDropdown}
+                                    />
+
+                                </div>
 
                                 {alluser_accounts &&
                                     <div className='z-10 mt-10 top-2 py-3 absolute bg-white rounded-lg shadow dark:bg-gray-700 absolute divide-gray-100 shadow dark:bg-gray-700 border home_dropdown_menu rounded-md'>
@@ -809,9 +821,10 @@ const Left_Dashboard = () => {
                             </div>
                             <div className=' text-center my-10'>
 
-                                {cookie_user_brand && (
+                                {/* {cookie_user_brand && (
                                     <h4 className='font-bold my-5 capitalize'>{cookie_user_brand?.name || cookie_user_brand?.brand?.name}</h4>
-                                )}
+                                )} */}
+                                <h4 className='font-bold my-5 capitalize'>Brand One</h4>
                                 <div className='w-100 rounded-full bg-slate-800 text-white py-1 cursor-pointer'
                                     onClick={() => setIsModalOpen_edit_prof(true)}
                                 >
@@ -959,13 +972,13 @@ const Left_Dashboard = () => {
                                     onClick={handleInvoice}
                                 >
 
-                                    <svg 
-                                    className={activePage === 'invoice' ? 'active-svg' : ''}
-                                    xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                    <svg
+                                        className={activePage === 'invoice' ? 'active-svg' : ''}
+                                        xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
-                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" 
-                                        // fill="#000000" 
-                                        stroke="none">
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                            // fill="#000000" 
+                                            stroke="none">
                                             <path d="M2577 4556 c-477 -151 -770 -239 -772 -232 -2 6 -8 34 -15 61 -33 144 -141 285 -266 346 -64 32 -75 34 -169 34 -89 0 -106 -3 -150 -26 -78 -42 -151 -121 -195 -214 -51 -107 -58 -143 -66 -328 l-7 -157 -145 -47 c-82 -26 -156 -56 -172 -70 -43 -36 -65 -102 -52 -155 6 -24 241 -771 521 -1661 382 -1213 515 -1625 533 -1644 28 -31 77 -53 117 -53 31 0 327 91 1176 360 275 87 644 204 820 259 783 245 754 234 799 294 13 17 20 43 20 74 0 63 -1015 3292 -1050 3339 -28 38 -80 64 -126 63 -18 0 -379 -110 -801 -243z m-1189 -28 c57 -14 126 -79 141 -134 12 -44 14 -532 2 -819 -6 -169 -8 -184 -34 -237 -93 -189 -311 -235 -452 -94 -35 34 -60 72 -76 111 -22 58 -23 72 -27 371 l-3 312 32 11 c49 17 78 13 104 -14 l25 -24 0 -278 c0 -269 1 -280 23 -323 25 -50 77 -90 116 -90 41 0 86 34 110 84 22 44 23 58 28 493 6 416 5 450 -11 466 -13 13 -22 15 -37 7 -18 -10 -19 -26 -19 -445 l0 -434 -22 -25 c-34 -37 -85 -39 -118 -4 -20 21 -20 33 -20 473 0 452 0 452 23 495 26 50 56 75 113 95 49 18 46 17 102 3z m806 -602 c26 -11 38 -25 55 -68 21 -53 24 -55 74 -67 29 -6 69 -24 90 -38 46 -32 87 -98 87 -140 0 -40 -39 -76 -82 -75 -32 1 -45 12 -89 73 -23 33 -84 32 -111 -1 -27 -34 -21 -87 14 -113 25 -19 31 -19 82 -7 154 37 293 -59 304 -210 5 -70 -10 -120 -50 -166 l-31 -35 17 -42 c22 -58 20 -96 -6 -124 -23 -24 -66 -30 -98 -13 -10 5 -26 31 -36 57 -20 55 -38 73 -71 73 -32 0 -81 26 -121 64 -79 73 -84 159 -12 185 42 14 76 0 101 -43 28 -47 67 -63 108 -42 51 27 56 94 9 129 -26 19 -32 20 -93 8 -89 -18 -148 -3 -211 52 -57 50 -83 105 -84 175 0 58 18 109 55 158 24 31 24 33 9 70 -33 80 -13 138 54 153 1 1 18 -5 36 -13z m1375 -1082 c27 -34 27 -67 -1 -98 -20 -22 -159 -67 -953 -307 -511 -154 -945 -281 -964 -282 -25 -1 -39 6 -57 27 -52 60 -24 105 89 141 353 113 1800 543 1829 544 28 1 41 -5 57 -25z m166 -519 c17 -16 25 -35 25 -58 0 -37 -19 -59 -64 -77 -77 -29 -1858 -560 -1878 -560 -67 1 -97 95 -45 138 9 7 330 108 714 224 384 115 806 243 938 283 132 40 250 74 263 74 13 1 34 -10 47 -24z m175 -525 c29 -29 30 -83 2 -112 -10 -10 -399 -132 -967 -303 -850 -255 -953 -284 -978 -274 -51 21 -65 89 -24 126 15 14 288 101 862 273 462 139 881 265 930 281 109 34 148 36 175 9z" />
                                             <path d="M591 1795 l-1 -1341 23 -44 c14 -30 36 -53 62 -67 40 -22 44 -23 448 -23 l409 0 -36 42 c-20 22 -42 59 -51 82 -8 23 -199 628 -425 1346 -225 718 -414 1314 -419 1325 -6 13 -10 -472 -10 -1320z" />
                                             <path d="M3320 731 c-201 -64 -573 -182 -827 -261 l-461 -145 769 -3 c853 -2 813 -5 865 64 l29 37 3 214 c2 117 -1 213 -5 212 -4 -1 -172 -54 -373 -118z" />

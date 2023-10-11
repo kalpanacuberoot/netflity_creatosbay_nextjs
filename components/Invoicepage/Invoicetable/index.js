@@ -69,7 +69,7 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
@@ -116,7 +116,7 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
@@ -159,7 +159,7 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June
@@ -202,7 +202,7 @@ const Invoice_Table = () => {
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <h4> Jhon Smith</h4>
-                                <div className="font_size_14">smith@gmail.com</div>
+                                {/* <div className="font_size_14">smith@gmail.com</div> */}
                             </th>
                             {/* <td className="px-6 py-4">
                                 June

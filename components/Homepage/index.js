@@ -40,9 +40,9 @@ const Homepage = () => {
 
     const cookieValue = Cookies.get('user_data');
 
-    if (!cookieValue) {
-      router.push('/login');
-    }
+    // if (!cookieValue) {
+    //   router.push('/login');
+    // }
 
 
     const allCampaignData = async () => { 
@@ -131,7 +131,7 @@ const Homepage = () => {
 
     }
 
-    allCampaignData();
+    // allCampaignData();
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
@@ -218,7 +218,7 @@ const Homepage = () => {
                 style={{ backgroundColor: Colors.white_clr }}
               >
 
-                {itemsToShow?.length > 0 ? itemsToShow?.map((item, index) => (
+                {/* {itemsToShow?.length > 0 ? itemsToShow?.map((item, index) => (
                   <>
                     <Home_Card1 items={item} key={index} />
 
@@ -259,7 +259,11 @@ const Homepage = () => {
                       Next
                     </button>
                   </div>
-                }
+                } */}
+                <Home_Card2/>
+                <Home_Card2/>
+                <Home_Card2/>
+                <Home_Card2/>
               </div>
             </div>
 

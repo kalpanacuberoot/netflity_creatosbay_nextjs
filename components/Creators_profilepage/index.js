@@ -73,7 +73,7 @@ const Creators_profilepage = () => {
 
     window.addEventListener('resize', checkIsMobile);
 
-    handleSubmit();
+    // handleSubmit();
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
@@ -127,7 +127,7 @@ const Creators_profilepage = () => {
 
   return (
     <>
-      {loading ? ( // Show loader if loading is true
+      {/* {loading ? ( // Show loader if loading is true
         <div className="w-full h-full flex items-center justify-center">
           <Image
             width={100}
@@ -136,7 +136,7 @@ const Creators_profilepage = () => {
             src={Images.Loader}
           />
         </div>
-      ) : (
+      ) : ( */}
         <>
           <Creators_popup isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
@@ -169,12 +169,12 @@ const Creators_profilepage = () => {
                           width={50}
                           height={100}
                           className=" object-cover rounded-full "
-                          src={creator_details ? creator_details?.profile_pic : ""}
+                          src={creator_details ? creator_details?.profile_pic : Images.avatar1}
                           alt="Creator_name"
                         />
                       </div>
                       <div className="flex flex-col  ">
-                        <h3 className="capitalize">{creator_details ? creator_details?.user?.name : ""}</h3>
+                        <h3 className="capitalize">{creator_details ? creator_details?.user?.name : "Creator One"}</h3>
                         <p className="text-xs text-gray-500">I like Yor confidence</p>
                       </div>
                     </div>
@@ -206,7 +206,7 @@ const Creators_profilepage = () => {
                       <h3>About Me</h3>
                     </div>
                     <h4 className=" pt-5 mb-5 normal-case">
-                      {creator_details ? creator_details?.bio : ""}
+                      {creator_details ? creator_details?.bio : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
                     </h4>
 
                   </div>
@@ -214,33 +214,35 @@ const Creators_profilepage = () => {
                   <div className="grid grid-cols-3 mt-8 ">
                     <div>
                       <h4 className="text-gray-400">Height</h4>
-                      <h3>{heightInFeetAndInches}</h3>
+                      {/* <h3>{heightInFeetAndInches}</h3> */}
+                      <h3>5'' 5'</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400">Weight</h4>
-                      <h3>{creator_details ? creator_details?.weight : ""}</h3>
+                      <h3>{creator_details ? creator_details?.weight : "55"}</h3>
                     </div>
 
                     <div >
                       <h4 className="text-gray-400">Languages</h4>
-                      {creator_details?.languages.map((item) =>
+                      {/* {creator_details?.languages.map((item) =>
                         <h3 key={item?.id} className="capitalize">{item?.name}</h3>
-                      )}
+                      )} */}
+                      <h3 className="capitalize">Hindi</h3>
                     </div>
 
                   </div>
                   <div className="grid grid-cols-3 mt-8 ">
                     <div>
                       <h4 className="text-gray-400">Skin Color</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.skintype?.name : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.skintype?.name : "fair"}</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400">Eye Color</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.eyetype?.name : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.eyetype?.name : "blue"}</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400">Hairs Color</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.hairtype?.name : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.hairtype?.name : "black"}</h3>
                     </div>
                   </div>
                   <div className="grid grid-cols-3 mt-8 ">
@@ -254,7 +256,7 @@ const Creators_profilepage = () => {
                     </div>
                     <div>
                       <h4 className="text-gray-400">Location</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.city : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.city : "Faridabad"}</h3>
                     </div>
 
                   </div>
@@ -273,7 +275,7 @@ const Creators_profilepage = () => {
                         <h3 key={item?.id} className="capitalize my-1">{item?.name}</h3>
                       )
                         :
-                        <h3 className="capitalize">None</h3>
+                        <h3 className="capitalize">Instagram</h3>
                       }
                     </div>
 
@@ -281,11 +283,11 @@ const Creators_profilepage = () => {
                   <div className="grid grid-cols-3 mt-8 ">
                     <div>
                       <h4 className="text-gray-400">State</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.state?.name : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.state?.name : "Male"}</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400">Age</h4>
-                      <h3 className="capitalize">{creator_details ? creator_details?.age : ""}</h3>
+                      <h3 className="capitalize">{creator_details ? creator_details?.age : "22"}</h3>
                     </div>
                     <div>
                       <h4 className="text-gray-400 capitalize">Categories</h4>
@@ -319,7 +321,8 @@ const Creators_profilepage = () => {
                         color: Colors.white_clr,
                       }}
                       // onClick={() => setIsModalOpen(true) && window.location.reload()}
-                      onClick={handleReload}
+                      // onClick={handleReload}
+                      onClick={() => setIsModalOpen(true)}
                     >
 
                       Send Campaign
@@ -392,7 +395,7 @@ const Creators_profilepage = () => {
             </div>
           </div >
         </>
-      )}
+      {/* )} */}
     </>
   );
 };

@@ -19,12 +19,97 @@ import Ref_Image_content from './Ref_Imagepop/Ref_Image_content';
 import Date_range_picker from '../Invoicepage/daterangepicker';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'tailwindcss/tailwind.css';
+import dayjs, { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { StaticDateRangePicker } from '@mui/x-date-pickers-pro/StaticDateRangePicker';
+import { PickersShortcutsItem } from '@mui/x-date-pickers/PickersShortcuts';
+import { DateRange } from '@mui/x-date-pickers-pro';
+import TextField from '@mui/material/TextField';
+
 
 
 const Campaign_infopage = () => {
 
   const router = useRouter();
+
+
+  const shortcutsItems = [
+    // {
+    //   label: 'This Week',
+    //   getValue: () => {
+    //     const startOfCurrentWeek = today.startOf('week');
+    //     const endOfCurrentWeek = today.endOf('week');
+    //     return [startOfCurrentWeek, endOfCurrentWeek];
+    //   },
+    // },
+    {
+      label: 'Current Month',
+      getValue: () => {
+        const startOfCurrentMonth = today.startOf('month');
+        const endOfCurrentMonth = today.endOf('month');
+        return [startOfCurrentMonth, endOfCurrentMonth];
+      },
+    },
+    {
+      label: 'Next Month',
+      getValue: () => {
+        const startOfNextMonth = today.endOf('month').add(1, 'day');
+        const endOfNextMonth = startOfNextMonth.endOf('month');
+        return [startOfNextMonth, endOfNextMonth];
+      },
+    },
+    { label: 'Reset', getValue: () => [null, null] },
+  ];
+
+  const today = dayjs();
+  const initialDateRange = shortcutsItems[0].getValue(); // Set initial date range
+
+  const handleDateChange = (dateRange) => {
+    const [start, end] = dateRange;
+    console.log("handleDateChange", start, end);
+    const minimumDate = start.add(15, 'day');
+    // const starting_data = start[0]?.$D-start[0]?.$M-start[0]?.$y
+    console.log("starting_data", start.format('YYYY-MM-DD'));
+    setManualStartDate(start.format('YYYY-MM-DD'))
+    setManualEndDate(end.format('YYYY-MM-DD'))
+    if (end.isBefore(minimumDate)) {
+      alert('Please select a date range with a minimum of 15 days between the start and end dates.');
+    } else {
+      setSelectedRange(dateRange);
+    }
+  };
+
+  const [selectedRange, setSelectedRange] = useState(initialDateRange);
+  const [dateInput, setDateInput] = useState('');
+  const [manualStartDate, setManualStartDate] = useState('');
+  const [manualEndDate, setManualEndDate] = useState('');
+  const [calendarVisible, setCalendarVisible] = useState(false);
+
+
+
+
+  // const handleDateChange = (dateRange) => {
+  //   setSelectedRange(dateRange);
+  // };
+
+  const handleDateInputChange = (event) => {
+    setDateInput(event.target.value);
+  };
+
+  console.log("selectedRangeselectedRange", selectedRange);
+
+  const handleApplyDateInput = () => {
+    setManualStartDate(selectedRange[0])
+    setManualEndDate(selectedRange[1])
+    // const parsedDate = dayjs(dateInput, 'YYYY-MM-DD');
+    // if (parsedDate.isValid()) {
+    //   const newDateRange = [parsedDate, parsedDate];
+    //   setSelectedRange(newDateRange);
+    // } else {
+    //   alert('Invalid date format. Please use YYYY-MM-DD.');
+    // }
+  };
 
   const currentDate = new Date();
 
@@ -74,38 +159,38 @@ const Campaign_infopage = () => {
     };
   }, [router.query]);
 
-  const handleGrammarCheck = async () => {
-    try {
-      const response = await fetch('https://api.grammarly.com/v1/check', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer 212|uidNhXXZLJ56a0K4HF1kuKUa1AbSu3G8p3cvapNl', // Replace with your Grammarly API key
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "text":campaign_desc,
-          "language": 'en-US',
-        }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      console.log("handlegrammarcheckresponse",response);
-      const data = await response.json();
+  // const handleGrammarCheck = async () => {
+  //   try {
+  //     const response = await fetch('https://api.grammarly.com/v1/check', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Authorization': 'Bearer 212|uidNhXXZLJ56a0K4HF1kuKUa1AbSu3G8p3cvapNl', // Replace with your Grammarly API key
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         "text":campaign_desc,
+  //         "language": 'en-US',
+  //       }),
+  //     });
 
-      console.log("handlegrammarcheck",data);
-  
-      // Extract suggestions from the API response
-      const grammarSuggestions = data.suggestions || [];
-  
-      // Update the state with suggestions
-      setSuggestions(grammarSuggestions);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-  
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     console.log("handlegrammarcheckresponse",response);
+  //     const data = await response.json();
+
+  //     console.log("handlegrammarcheck",data);
+
+  //     // Extract suggestions from the API response
+  //     const grammarSuggestions = data.suggestions || [];
+
+  //     // Update the state with suggestions
+  //     setSuggestions(grammarSuggestions);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+
 
   console.log("suggestionssuggestions", suggestions);
 
@@ -251,6 +336,59 @@ const Campaign_infopage = () => {
     // setIsMobile(window.innerWidth <= 800);
   };
 
+
+
+  const minSelectableDate = today.add(15, 'day');
+
+  // const initialDateRange = [minSelectableDate, today];
+
+  // const shortcutsItems = [
+  //   {
+  //     label: 'This Week',
+  //     getValue: () => {
+  //       const today = dayjs();
+  //       return [today.startOf('week'), today.endOf('week')];
+  //     },
+  //   },
+  //   {
+  //     label: 'Last Week',
+  //     getValue: () => {
+  //       const today = dayjs();
+  //       const prevWeek = today.subtract(7, 'day');
+  //       return [prevWeek.startOf('week'), prevWeek.endOf('week')];
+  //     },
+  //   },
+  //   {
+  //     label: 'Last 7 Days',
+  //     getValue: () => {
+  //       const today = dayjs();
+  //       return [today.subtract(7, 'day'), today];
+  //     },
+  //   },
+  //   {
+  //     label: 'Current Month',
+  //     getValue: () => {
+  //       const today = dayjs();
+  //       return [today.startOf('month'), today.endOf('month')];
+  //     },
+  //   },
+  //   {
+  //     label: 'Next Month',
+  //     getValue: () => {
+  //       const today = dayjs();
+  //       const startOfNextMonth = today.endOf('month').add(1, 'day');
+  //       return [startOfNextMonth, startOfNextMonth.endOf('month')];
+  //     },
+  //   },
+  //   { label: 'Reset', getValue: () => [null, null] },
+  // ];
+
+
+
+  // const initialDateRange = shortcutsItems[0].getValue();
+
+  console.log("selecteddatse", selectedDate);
+
   return (
     <>
       {loading ? ( // Show loader if loading is true
@@ -324,7 +462,7 @@ const Campaign_infopage = () => {
                         onChange={(e) => setCampaign_desc(e.target.value)}
                         spellCheck="true"
                       ></textarea>
-                      <button onClick={handleGrammarCheck}>Check Grammar</button>
+                      {/* <button onClick={handleGrammarCheck}>Check Grammar</button>
                       <div>
                         <h2>Suggestions:</h2>
                         <ul>
@@ -332,7 +470,7 @@ const Campaign_infopage = () => {
                             <li key={index}>{suggestion.text}</li>
                           ))}
                         </ul>
-                      </div>
+                      </div> */}
 
                     </div>
 
@@ -393,7 +531,7 @@ const Campaign_infopage = () => {
                       <h3 className="mb-2">Timelines</h3>
                       <h6>Set Creating Date</h6>
 
-                      <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
+                      {/* <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
                         <div className='relative w-full'>
                           <DatePicker
                             selected={startDate}
@@ -436,6 +574,76 @@ const Campaign_infopage = () => {
                             />
                           </div>
                         </div>
+                      </div> */}
+                      <div className="flex flex-row my-5 border rounded-md justify-between items-center px-5">
+                        {/* <div className="relative w-full">
+                          <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            selectsStart
+                            startDate={selectedDate}
+                            endDate={selectedDate}
+                            placeholderText="Start/End Date"
+                            className="w-full text-center p-2 rounded"
+                            minDate={currentDate}
+                            isClearable={true}
+                          />
+                          <div className="absolute top-2.5 left-0 text-gray-400 ps-2">
+                            <img src={Images.calendar_icon} alt="" width={20} />
+                          </div>
+                        </div> */}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <div className='w-full'>
+                            <div className='w-full flex'>
+                              <TextField
+                                // label="Start Date"
+                                type="date"
+                                value={manualStartDate}
+                                onChange={(e) => setManualStartDate(e.target.value)}
+                                className='w-full'
+                                onClick={() => setCalendarVisible(true)}
+                              />
+                              <TextField
+                                // label="End Date"
+                                type="date"
+                                value={manualEndDate}
+                                onChange={(e) => setManualEndDate(e.target.value)}
+                                className='w-full'
+                                onClick={() => setCalendarVisible(true)}
+                              />
+                              {/* <button
+                                className='flex border rounded-full bg-green-100 my-3 text-sm px-2 py-1'
+                                variant="contained"
+                                onClick={handleApplyDateInput}
+                              >
+                                Apply Date
+                              </button> */}
+                            </div>
+                            <div className='w-full flex items-center justify-between'>
+                              <div>
+                                {shortcutsItems.map((shortcut, index) => (
+                                  <button
+                                    key={index}
+                                    onClick={() => handleDateChange(shortcut.getValue())}
+                                    variant="contained"
+                                    className='flex border rounded-full bg-blue-100 my-3 text-sm px-2 py-1'
+                                  >
+                                    {shortcut?.label}
+                                  </button>
+                                ))}
+                              </div>
+                              {calendarVisible && (
+                                <StaticDateRangePicker
+                                  calendars={2}
+                                  value={selectedRange}
+                                  minDate={today}
+                                  shortcuts={shortcutsItems}
+                                  onChange={handleDateChange}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        </LocalizationProvider>
                       </div>
                       <div className=''>
 

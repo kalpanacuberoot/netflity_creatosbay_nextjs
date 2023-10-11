@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { toast } from 'react-toastify';
+import { url } from "@/generalfunctions";
 
 const Forgotpage = () => {
 
@@ -19,7 +20,7 @@ const Forgotpage = () => {
 
     }
     try {
-      const response = await fetch('https://backend.creatorsbay.app/api/forgotpassword', {
+      const response = await fetch(`${url}/forgotpassword`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

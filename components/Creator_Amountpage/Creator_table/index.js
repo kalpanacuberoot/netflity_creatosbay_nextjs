@@ -81,7 +81,7 @@ const Creator_table = ({ creatorData }) => {
     };
 
     useEffect(() => {
-        handleSubmit();
+        // handleSubmit();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -119,7 +119,55 @@ const Creator_table = ({ creatorData }) => {
 
     return (
         <>
-            {loading ? (
+
+            <>
+
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <h4 className="capitalize">
+                             {/* {creator_name?.user?.name} */}
+                             Creator One
+                             </h4>
+
+                    </th>
+
+                    <td className="px-6 py-4">
+                        {/* {creatorData?.image_count} */}
+                    1
+                    </td>
+
+                    <td className="px-6 py-4">
+                        {/* {creatorData?.video_count} */}
+                        0
+                    </td>
+                    <td className="px-6 py-4">
+                        {/* {result} */}
+                        500
+
+                    </td>
+                    <td className="px-6 py-4 ">
+                        <Image
+                            src={Images.download_icon}
+                            width={40}
+                            height={40}
+                            alt=""
+                            className="mx-auto cursor-pointer"
+                        // onClick={handleDownload}
+                        />
+
+                        {/* <div ref={pdfRef} className="hidden" id="invoice">
+                        <PDFContent />
+                        <Creator_invoice_pdf_page />
+                        hello
+                    </div> */}
+
+                    </td>
+
+
+                </tr>
+            </>
+
+            {/* {loading ? (
                 <div className="w-full h-full flex items-center justify-center">
                     <Image
                         width={100}
@@ -155,21 +203,16 @@ const Creator_table = ({ creatorData }) => {
                                 height={40}
                                 alt=""
                                 className="mx-auto cursor-pointer"
-                            // onClick={handleDownload}
                             />
 
-                            {/* <div ref={pdfRef} className="hidden" id="invoice">
-                        <PDFContent />
-                        <Creator_invoice_pdf_page />
-                        hello
-                    </div> */}
+ 
 
                         </td>
 
 
                     </tr>
                 </>
-            )}
+            )} */}
         </>
     )
 }

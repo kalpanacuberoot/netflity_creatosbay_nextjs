@@ -87,7 +87,8 @@ const Logout_content = () => {
                             <Buttons
                                 buttoncss="font_size_24 leading-6 py-3 button_clr my-3"
                                 label={"Yes, Log Me Out"}
-                                onClick={onLogout}
+                                // onClick={onLogout}
+                                onClick={() => router.push('/')}
                             />
                         </div>
                     </div>
