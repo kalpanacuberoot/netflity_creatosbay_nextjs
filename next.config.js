@@ -11,7 +11,6 @@ const nextConfig = {
   env: {
 
   },
-  distDir: 'next/build',
 
 }
 
