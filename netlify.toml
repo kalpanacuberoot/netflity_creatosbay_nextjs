@@ -1,5 +1,5 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  functions = { external_node_modules = ["module-one", "module-two"] }
+ directory = "my-functions"
 
