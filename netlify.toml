@@ -1,0 +1,2 @@
+command = "npm run build"
+publish = ".next" # Specify the build output folder
