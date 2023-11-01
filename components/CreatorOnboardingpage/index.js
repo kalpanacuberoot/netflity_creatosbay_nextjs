@@ -78,78 +78,11 @@ const CreatorOnboardingpage = () => {
     // const [links, setLinks] = useState(Array(linkCount).fill(''));
     // const [links, setLinks] = useState(['', '', '', '', '', '', '', '', '']);
     const [linkCounter, setLinkCounter] = useState(5);
-    const [showPortfolios, setShowPortfolios] = useState(true);
+    const [showPortfolios, setShowPortfolios] = useState(false);
     const [allLinksData, setAllLinksData] = useState([linkone, linktwo, linkthree, linkfour, linkfive, linksix, linkseven, linkeight, linknine]);
     // const [links, setLinks] = useState(['', '', '', '', '', '', '', '', '']);
     const [links, setLinks] = useState(Array(9).fill(''));
 
-    const handleLinkChange = (index, newValue) => {
-        const updatedLinks = [...links];
-        updatedLinks[index] = newValue;
-        setLinks(updatedLinks);
-    };
-
-
-    console.log("allLinksData", allLinksData);
-
-    const isSubmitDisabled = links.filter(link => link).length < 6;
-    const isHttpValid = links.every(link => link.startsWith('http://') || link.startsWith('https://'));
-    console.log("isHttpValid", isHttpValid, isSubmitDisabled);
-    const handleSubmitLinks = () => {
-        console.log('All Link Values:', links);
-        if (isHttpValid && !isSubmitDisabled) {
-            toast.success("Creator Portfolios is Created Successfully", {
-                position: 'top-center',
-                autoClose: 15000,
-            });
-            router.push('/');
-
-        } else {
-            toast.error("Please fill out all 6 mandatory fields. and show all the valid urls", {
-                position: 'top-center',
-                autoClose: 5000,
-            });
-
-            // router.push('/');
-        }
-
-    };
-
-    // const handleAddLink = () => {
-    //     setCurrentLinkIndex(currentLinkIndex + 1);
-    //     setLinks([...links, '']);
-    // };
-
-    // const handleLinkChange = (index, newValue) => {
-    //     const updatedLinks = [...links];
-    //     updatedLinks[index] = newValue;
-    //     setLinks(updatedLinks);
-    // };
-
-    // const handleAddLink = () => {
-    //     setLinkCount(linkCount + 1);
-    //     setLinks([...links, '']);
-    // };
-
-    // const handleLinkChange = (index, newValue) => {
-    //     const updatedLinks = [...links];
-    //     updatedLinks[index] = newValue;
-    //     setLinks(updatedLinks);
-    // };
-
-    const handleAddLink = () => {
-        if (linkCounter < 8) {
-            setLinkCounter(linkCounter + 1);
-        }
-    };
-
-    // const handleLinkChange = (index, newValue) => {
-    //     const updatedLinks = [...links];
-    //     updatedLinks[index] = newValue;
-    //     setLinks(updatedLinks);
-    // };
-
-    // Define a function to update the selectedDataArray state
     const handleSelectedDataChange = (newSelectedDataArray) => {
         setSelectedDataArray(newSelectedDataArray);
     };
@@ -182,55 +115,62 @@ const CreatorOnboardingpage = () => {
     console.log("selectedLanguageIds", selectedLanguageIds, selectedlanguageItems);
 
     const getAllStates = async () => {
+        const userData = Cookies.get('creator_user_data');
+        if (userData) {
+            const cookieValue = JSON.parse(userData);
+            // const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+            // console.log('categories cookieValue------------1', cookieValue?.token);
 
-        const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
-        console.log('categories cookieValue------------1', cookieValue?.token);
+            try {
+                const requestOptions = {
 
-        try {
-            const requestOptions = {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${cookieValue?.token}` // Include the token if provided
+                    },
+                }
 
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookieValue?.token}` // Include the token if provided
-                },
+
+                const response = await fetch(`${url}/states?per_page=40&sort=name&order=ASC`, requestOptions);
+                console.log('states------', response)
+
+                if (response.status === 401) {
+                    toast.error("Session Expired: Please login again to continue.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/')
+
+                } else if (response.status === 429) {
+                    toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/')
+
+                    // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
+                } else if (response.status === 500) {
+                    toast.error("Server Error: Please wait while we fix this problem for you.", {
+                        position: 'top-center',
+                        autoClose: 5000,
+                    });
+                    router.push('/')
+
+                } else if (!response.ok) {
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
+
+                // return await response.json();
+                const responseData = await response.json();
+                console.log('states response:', responseData?.data?.data);
+                setStatesData(responseData?.data?.data);
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
             }
-
-
-            const response = await fetch(`${url}/states?per_page=40&sort=name&order=ASC`, requestOptions);
-            console.log('states------', response)
-
-            if (response.status === 401) {
-                toast.error("Session Expired: Please login again to continue.", {
-                    position: 'top-center',
-                    autoClose: 5000,
-                });
-
-            } else if (response.status === 429) {
-                toast.error("Too many requests: Please wait for a few minutes to try and login again.", {
-                    position: 'top-center',
-                    autoClose: 5000,
-                });
-                router.push('/')
-
-                // showToastMessage("Too many requests: Please wait for a few minutes to try and login again.");
-            } else if (response.status === 500) {
-                toast.error("Server Error: Please wait while we fix this problem for you.", {
-                    position: 'top-center',
-                    autoClose: 5000,
-                });
-
-            } else if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-
-            // return await response.json();
-            const responseData = await response.json();
-            console.log('states response:', responseData?.data?.data);
-            setStatesData(responseData?.data?.data);
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
+        } else {
+            // Handle the case where the cookie is not found or doesn't contain valid JSON
         }
 
     };
@@ -566,11 +506,6 @@ const CreatorOnboardingpage = () => {
             router.push('/');
         }
 
-        // const creatorId = Cookies.get('creator_profile_id')
-        // if(!creatorId){
-        //     setShowPortfolios(false)
-        // }
-
         getAllStates();
         getAllSkinTypes();
         getAllBodyTypes();
@@ -874,48 +809,59 @@ const CreatorOnboardingpage = () => {
 
     console.log("Video Links:", videoLinks, postLinks);
     console.log("Post Links:", postLinks);
-    const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
+    // const cookieValue = JSON.parse(Cookies.get('creator_user_data'));
+    const userData = Cookies.get('creator_user_data');
+    if (userData) {
+        const cookieValue = JSON.parse(userData);
+        const authToken = `Bearer ${cookieValue.token}`;
+        const creatorId = Cookies.get('creator_profile_id');
 
-    const authToken = `Bearer ${cookieValue.token}`;
+        const apiUrl = `${url}/creatorportfolios`;
 
-    const apiUrl = `${url}/creatorportfolios`;
+        async function postData(link) {
+            const data = {
+                creator_id: creatorId,
+                platform_id: 1,
+                link,
+                type: "video",
+                order: 0,
+            };
 
-    async function postData(link) {
-        const data = {
-            creator_id: creatorId,
-            platform_id: 1,
-            link,
-            type: "video",
-            order: 0,
-        };
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": authToken,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
 
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": authToken,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log(`Successfully added link: ${link}`, data?.data);
-        } else {
-            console.error(`Failed to add link: ${link}`);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(`Successfully added link: ${link}`, data?.data);
+            } else {
+                console.error(`Failed to add link: ${link}`);
+            }
         }
+
+        async function addVideoLinks() {
+            for (const link of videoLinks) {
+                await postData(link);
+            }
+        }
+
+        addVideoLinks();
+    } else {
+        // Handle the case where the cookie is not found or doesn't contain valid JSON
     }
 
-    async function addVideoLinks() {
-        for (const link of videoLinks) {
-            await postData(link);
-        }
-    }
-
-    addVideoLinks();
-
-    async function postImageData(link) {
+    if (userData) {
+      const cookieValue = JSON.parse(userData);
+      const authToken = `Bearer ${cookieValue.token}`;
+      const creatorId = Cookies.get('creator_profile_id');
+      const apiUrl = `${url}/creatorportfolios`;
+      async function postImageData(link) {
         const data = {
             creator_id: creatorId,
             platform_id: 1,
@@ -949,6 +895,42 @@ const CreatorOnboardingpage = () => {
     }
 
     addPostLinks();
+    } else {
+      // Handle the case where the cookie is not found or doesn't contain valid JSON
+    }
+    
+    const handleLinkChange = (index, newValue) => {
+        const updatedLinks = [...links];
+        updatedLinks[index] = newValue;
+        setLinks(updatedLinks);
+    };
+
+
+    console.log("allLinksData", allLinksData);
+
+    const isSubmitDisabled = links.filter(link => link).length < 6;
+    const isHttpValid = links.every(link => link.startsWith('http://') || link.startsWith('https://'));
+    console.log("isHttpValid", isHttpValid, isSubmitDisabled);
+    const handleSubmitLinks = () => {
+        console.log('All Link Values:', links);
+        if (isHttpValid && !isSubmitDisabled) {
+            toast.error("Please fill out all 6 mandatory fields. and show all the valid urls", {
+                position: 'top-center',
+                autoClose: 5000,
+            });
+
+        } else {
+            
+            toast.success("Creator Portfolios is Created Successfully", {
+                position: 'top-center',
+                autoClose: 15000,
+            });
+            router.push('/');
+
+            // router.push('/');
+        }
+
+    };
 
     return (
         <>
@@ -1593,7 +1575,8 @@ const CreatorOnboardingpage = () => {
                                 </div>
 
                                 <button
-                                    className="text-sm bg-blue-800 text-white px-3 py-1 rounded-lg mt-10"
+                                    // className="text-sm bg-purple-800 text-white px-3 py-1 rounded-lg mt-10"
+                                    className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
                                     onClick={handleSubmitLinks}
                                 >
                                     Submit All Links
