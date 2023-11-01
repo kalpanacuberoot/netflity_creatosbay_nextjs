@@ -1,6 +1,6 @@
 import CreatorOnboardingpage from "@/components/CreatorOnboardingpage"
 
-const Login = () => {
+const Creator_onboarding = () => {
     return (
         <>
             <CreatorOnboardingpage />
@@ -8,4 +8,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Creator_onboarding

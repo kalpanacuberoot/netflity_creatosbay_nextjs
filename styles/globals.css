@@ -83,3 +83,21 @@ select:focus ~ label {
   left: 0px;
 }
 
+/* BackgroundVideo.module.css */
+
+.background-video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.background-video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+

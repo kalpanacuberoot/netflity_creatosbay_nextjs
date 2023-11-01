@@ -10,16 +10,34 @@ export const isEmpty = (value) => {
     return false
   }
 }
-// Assuming you have axios imported or fetch available in your project
 
-// Wrapper function for API calls
+export const url = 'https://backend.creatorsbay.app/api'; 
 
-// export const url = 'https://backend.creatorsbay.app/api'
-// api.js (Utility file)
+export const apiCall = async (url, method, data = null, headers = {}) => {
+  try {
+    const options = {
+      method,
+      headers: {
+        ...headers, 
+        'Accept': 'application/json', 
+      },
+    };
 
-export const url = 'https://backend.creatorsbay.app/api'; // Replace with your API endpoint
+    if (method.toLowerCase() === 'post') {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(data);
+    }
+    const response = await fetch(url, options); 
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw new Error(`API call error: ${error.message}`);
+  }
+}
 
-// Wrapper function for making GET requests
 export async function getApiData(endpoint) {
   try {
     const response = await fetch(`${apiUrl}/${endpoint}`);
