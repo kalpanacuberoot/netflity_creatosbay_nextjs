@@ -44,14 +44,14 @@ const Loginpage = () => {
                     position: 'top-center',
                     autoClose: 5000,
                 });
-                //     router.push('/creator_form');
+                router.push('/creator_form');
                 // if (postResponse.user.type === 'creator') {
                 //     Cookies.set('creator_user_data', JSON.stringify(postResponse));
                 //     toast.success(postResponse?.message, {
                 //         position: 'top-center',
                 //         autoClose: 5000,
                 //     });
-                //     router.push('/creator_form');
+                //     
                 // }
 
             } else {
@@ -62,7 +62,11 @@ const Loginpage = () => {
             }
 
         } catch (error) {
-            toast.error('please register yourself or login again after sometime', {
+            // toast.error('please register yourself or login again after sometime', {
+            //     position: 'top-center',
+            //     autoClose: 5000,
+            // });
+            toast.error('Invalid credentials', {
                 position: 'top-center',
                 autoClose: 5000,
             });
