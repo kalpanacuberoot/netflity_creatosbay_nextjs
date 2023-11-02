@@ -39,15 +39,20 @@ const Loginpage = () => {
 
             if (postResponse?.message) {
                 console.log('POST response register-------------:', postResponse.user.type);
-
-                if (postResponse.user.type === 'creator') {
-                    Cookies.set('creator_user_data', JSON.stringify(postResponse));
-                    toast.success(postResponse?.message, {
-                        position: 'top-center',
-                        autoClose: 5000,
-                    });
-                    router.push('/creator_form');
-                }
+                Cookies.set('creator_user_data', JSON.stringify(postResponse));
+                toast.success(postResponse?.message, {
+                    position: 'top-center',
+                    autoClose: 5000,
+                });
+                //     router.push('/creator_form');
+                // if (postResponse.user.type === 'creator') {
+                //     Cookies.set('creator_user_data', JSON.stringify(postResponse));
+                //     toast.success(postResponse?.message, {
+                //         position: 'top-center',
+                //         autoClose: 5000,
+                //     });
+                //     router.push('/creator_form');
+                // }
 
             } else {
                 toast.error("Have you register yourself with emailId", {
@@ -140,7 +145,7 @@ const Loginpage = () => {
                                         className="form-checkbox h-5 w-5 "
                                         style={{ backgroundColor: Colors.logo_clr }}
                                     />
-                                    <label htmlFor="myCheckbox" className=" ml-2 text-black" style={{transform:'none'}}>
+                                    <label htmlFor="myCheckbox" className=" ml-2 text-black" style={{ transform: 'none' }}>
                                         Remember Me
                                     </label>
                                 </div>
