@@ -21,9 +21,9 @@ const CreatorOnboardingpage = () => {
     const [city, setCity] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
-    const [heightFeet, setHeightFeet] = useState('');
-    const [heightInches, setHeightInches] = useState('');
-    const [heightCm, setHeightCm] = useState('');
+    const [heightFeet, setHeightFeet] = useState(0);
+    const [heightInches, setHeightInches] = useState(0);
+    const [heightCm, setHeightCm] = useState(0);
     const [weight, setWeight] = useState('');
     const [bio, setBio] = useState('');
     const [pets, setPets] = useState('');
@@ -609,21 +609,29 @@ const CreatorOnboardingpage = () => {
         const feetToCm = parseFloat(heightFeet) * 30.48;
         console.log("feetToCm value", feetToCm);
         const inchesToCm = parseFloat(heightInches) * 2.54;
+
+        console.log("inchesToCm",inchesToCm);
         const totalHeightCm = feetToCm + inchesToCm;
+        console.log("totalHeightCm",totalHeightCm);
         setHeightCm(totalHeightCm.toFixed(2)); // You can adjust the number of decimal places as needed
+
     };
 
     const handleHeightFeetChange = (e) => {
         setHeightFeet(e.target.value);
-        convertToCm();
+        // convertToCm();
     };
 
     const handleHeightInchesChange = (e) => {
         setHeightInches(e.target.value);
-        convertToCm();
+        // convertToCm();
     };
 
-    console.log("heightCm", heightCm);
+    useEffect(() => {
+        convertToCm();
+      }, [heightFeet, heightInches, heightCm]);
+
+    console.log("heightCm heightCm", heightCm);
     console.log("allApiResponseallApiResponse", allApiResponse);
     const numericBodyId = parseInt(bodyType, 10);
     console.log("numericBodyId", numericBodyId);
@@ -857,48 +865,48 @@ const CreatorOnboardingpage = () => {
     }
 
     if (userData) {
-      const cookieValue = JSON.parse(userData);
-      const authToken = `Bearer ${cookieValue.token}`;
-      const creatorId = Cookies.get('creator_profile_id');
-      const apiUrl = `${url}/creatorportfolios`;
-      async function postImageData(link) {
-        const data = {
-            creator_id: creatorId,
-            platform_id: 1,
-            link,
-            type: "post",
-            order: 1,
-        };
+        const cookieValue = JSON.parse(userData);
+        const authToken = `Bearer ${cookieValue.token}`;
+        const creatorId = Cookies.get('creator_profile_id');
+        const apiUrl = `${url}/creatorportfolios`;
+        async function postImageData(link) {
+            const data = {
+                creator_id: creatorId,
+                platform_id: 1,
+                link,
+                type: "post",
+                order: 1,
+            };
 
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": authToken,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": authToken,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log(`Successfully added link: ${link}`, data?.data);
-        } else {
-            console.error(`Failed to add link: ${link}`);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(`Successfully added link: ${link}`, data?.data);
+            } else {
+                console.error(`Failed to add link: ${link}`);
+            }
         }
-    }
 
-    async function addPostLinks() {
-        for (const link of postLinks) {
-            await postImageData(link);
+        async function addPostLinks() {
+            for (const link of postLinks) {
+                await postImageData(link);
+            }
         }
-    }
 
-    addPostLinks();
+        addPostLinks();
     } else {
-      // Handle the case where the cookie is not found or doesn't contain valid JSON
+        // Handle the case where the cookie is not found or doesn't contain valid JSON
     }
-    
+
     const handleLinkChange = (index, newValue) => {
         const updatedLinks = [...links];
         updatedLinks[index] = newValue;
@@ -920,7 +928,7 @@ const CreatorOnboardingpage = () => {
             });
 
         } else {
-            
+
             toast.success("Creator Portfolios is Created Successfully", {
                 position: 'top-center',
                 autoClose: 15000,
@@ -947,10 +955,28 @@ const CreatorOnboardingpage = () => {
                         </div>
 
                     </div>
-                    <div id="creatorForm">
+                    <div id="creatorForm" className="mt-10">
                         {!showPortfolios &&
                             <>
                                 <div className="flex justify-between">
+                                    <div className="edit_button_clr px-5 py-5 cursor-pointer flex items-center rounded-md"
+                                        style={{
+                                            height: 'fit-content',
+                                            //  borderRadius: '50%'
+                                        }}
+                                        onClick={() => router.push('/all_list')}
+                                    >
+                                        <svg
+                                            className="me-5"
+                                            xmlns="http://www.w3.org/2000/svg" version="1.0" width="10.000000pt" height="10.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                                                <path d="M2058 4727 c-31 -13 -74 -38 -95 -55 -77 -62 -1882 -1878 -1907 -1920 -38 -61 -60 -154 -52 -225 14 -132 -40 -73 1014 -1129 795 -796 975 -971 1020 -994 78 -39 202 -46 285 -14 89 34 153 90 191 169 28 60 31 75 31 161 0 165 16 144 -562 729 -274 278 -534 536 -579 575 -45 40 -118 91 -167 116 l-86 45 1837 5 1837 5 57 23 c81 33 160 108 200 190 30 60 33 75 33 152 -1 70 -5 95 -27 142 -35 76 -99 143 -173 181 l-60 32 -1855 5 -1855 5 95 50 95 49 576 576 c665 664 634 624 634 795 0 89 -3 106 -28 156 -15 31 -50 78 -77 103 -72 68 -126 89 -235 93 -77 3 -98 0 -147 -20z" />
+                                            </g>
+                                        </svg>
+                                        <div>Back</div>
+
+                                    </div>
                                     <div className=" w-full"
                                         style={{ textAlign: '-webkit-center' }}
                                     >
@@ -1147,7 +1173,6 @@ const CreatorOnboardingpage = () => {
                                                         required
                                                         value={heightFeet}
                                                         onChange={handleHeightFeetChange}
-                                                        // onChange={(e) => setHeightFeet(e.target.value)}
                                                         className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                                     />
 
@@ -1168,7 +1193,6 @@ const CreatorOnboardingpage = () => {
                                                         placeholder=" "
                                                         required
                                                         value={heightInches}
-                                                        // onChange={(e) => setHeightInches(e.target.value)}
                                                         onChange={handleHeightInchesChange}
                                                         className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                                     />
@@ -1177,7 +1201,7 @@ const CreatorOnboardingpage = () => {
                                                 </div>
                                                 &apos;
                                             </div>
-                                            <div className="flex items-center">
+                                            {/* <div className="flex items-center">
                                                 <button
                                                     onClick={convertToCm}
                                                     type="submit"
@@ -1187,7 +1211,8 @@ const CreatorOnboardingpage = () => {
                                                         <div> {heightCm} cm</div>
                                                     </div>
                                                 )}
-                                            </div>
+                                                
+                                            </div> */}
                                         </div>
 
                                         <div className="flex">

@@ -356,12 +356,12 @@ const AllListpage = () => {
                         </div>
                     </div>
 
-                    <div className="mt-10 rounded-lg shadow-md border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-                        {/* <h4 className="mb-6 text-xl font-semibold text-black dark:text-white text-center underline ">
+                    {/* <div className="mt-10 rounded-lg shadow-md border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+                        <h4 className="mb-6 text-xl font-semibold text-black dark:text-white text-center underline ">
                             Brands List
-                        </h4> */}
+                        </h4>
 
-                        {/* <div className="flex flex-col">
+                        <div className="flex flex-col">
                             <div className="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
                                 <div className="p-2.5 xl:p-5">
                                     <h5 className="text-sm font-medium uppercase xsm:text-base">
@@ -473,8 +473,8 @@ const AllListpage = () => {
                                     </button>
                                 </div>
                             )}
-                        </div> */}
-                    </div>
+                        </div>
+                    </div> */}
                 </div>
             </div>
         </>

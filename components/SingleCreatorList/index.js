@@ -9,6 +9,7 @@ import Colors from "@/styles/Colors";
 import { useRouter } from "next/router";
 import { useMyContext } from "../AppContext";
 import { url } from "@/generalfunation";
+import Buttons from "../Button";
 
 
 const SingleCreatorListpage = () => {
@@ -345,6 +346,23 @@ const SingleCreatorListpage = () => {
                     <div className="mt-10">
                         <>
                             <div className="flex justify-between">
+                                <div className="edit_button_clr px-5 py-5 cursor-pointer flex items-center rounded-md"
+                                    style={{ height: 'fit-content',
+                                    //  borderRadius: '50%'
+                                     }}
+                                     onClick={() => router.push('/all_list')}
+                                >
+                                    <svg 
+                                    className="me-5"
+                                    xmlns="http://www.w3.org/2000/svg" version="1.0" width="10.000000pt" height="10.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                                            <path d="M2058 4727 c-31 -13 -74 -38 -95 -55 -77 -62 -1882 -1878 -1907 -1920 -38 -61 -60 -154 -52 -225 14 -132 -40 -73 1014 -1129 795 -796 975 -971 1020 -994 78 -39 202 -46 285 -14 89 34 153 90 191 169 28 60 31 75 31 161 0 165 16 144 -562 729 -274 278 -534 536 -579 575 -45 40 -118 91 -167 116 l-86 45 1837 5 1837 5 57 23 c81 33 160 108 200 190 30 60 33 75 33 152 -1 70 -5 95 -27 142 -35 76 -99 143 -173 181 l-60 32 -1855 5 -1855 5 95 50 95 49 576 576 c665 664 634 624 634 795 0 89 -3 106 -28 156 -15 31 -50 78 -77 103 -72 68 -126 89 -235 93 -77 3 -98 0 -147 -20z" />
+                                        </g>
+                                    </svg>
+                                    <div>Back</div>
+                                    
+                                </div>
                                 <div className=" w-full"
                                     style={{ textAlign: '-webkit-center' }}
                                 >
@@ -359,7 +377,7 @@ const SingleCreatorListpage = () => {
                                             style={{ borderColor: Colors.logo_clr }}
                                             className="w-auto py-5"
                                         > */}
-                                            {/* <div className="image-container"
+                                        {/* <div className="image-container"
                                                 style={{
                                                     width: '100%',
                                                     height: '100%',
@@ -385,12 +403,12 @@ const SingleCreatorListpage = () => {
                                                 />
 
                                             </div> */}
-                                            <div class="image-container" style={{width: '100%',height: '100%',borderRadius: '50%'}}>
-                                                <img 
+                                        <div class="image-container" style={{ width: '100%', height: '100%', borderRadius: '50%' }}>
+                                            <img
                                                 // src="https://creatorsbay-media-bucket.s3.ap-south-1.amazonaws.com/uploads/file_654234a9c99155.69770794.jpg" alt=""
-                                                 src={data?.profile_pic}
-                                                 style={{width: '100%',height: '100%',borderRadius: '50%'}} />
-                                            </div>
+                                                src={data?.profile_pic}
+                                                style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+                                        </div>
 
                                         {/* </label> */}
                                     </div>
