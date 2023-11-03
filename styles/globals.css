@@ -56,6 +56,18 @@ p {
   transform-origin: 0%;
 }
 
+.pink_clr{
+  background-color: #FF56A2;
+  color: #fff;
+  border: 5px solid #FF56A2;
+}
+
+.pink_clr:hover{
+  background-color: #fff;
+  color: #FF56A2;
+  border: 3px solid #FF56A2;
+}
+
 input:focus ~ label,
 input:not(:placeholder-shown) ~ label,
 textarea:focus ~ label,

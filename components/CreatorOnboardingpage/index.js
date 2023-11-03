@@ -942,7 +942,7 @@ const CreatorOnboardingpage = () => {
                     >
                         <div className="flex flex-row justify-between items-center  w-full">
                             <div className="text-2xl font-bold ps-5" style={{ color: Colors.white_clr }}>
-                                Edit Profile
+                                Creators Form
                             </div>
                         </div>
 

@@ -44,7 +44,8 @@ const Loginpage = () => {
                     position: 'top-center',
                     autoClose: 5000,
                 });
-                router.push('/creator_form');
+                // router.push('/creator_form');
+                router.push('/all_list');
                 // if (postResponse.user.type === 'creator') {
                 //     Cookies.set('creator_user_data', JSON.stringify(postResponse));
                 //     toast.success(postResponse?.message, {
