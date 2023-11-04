@@ -933,7 +933,7 @@ const CreatorOnboardingpage = () => {
                 position: 'top-center',
                 autoClose: 15000,
             });
-            router.push('/');
+            router.push('/all_list');
 
             // router.push('/');
         }
