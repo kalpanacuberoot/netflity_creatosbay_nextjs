@@ -685,9 +685,6 @@ const CreatorOnboardingpage = () => {
             }
         };
 
-        // if (name && email.match(emailRegex)) {
-        //     sendRegisterRequest();
-        // }
         sendRegisterRequest();
         return () => {
             shouldCallApi = false;
