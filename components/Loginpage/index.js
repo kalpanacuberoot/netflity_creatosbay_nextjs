@@ -39,7 +39,7 @@ const Loginpage = () => {
 
             if (postResponse?.message) {
                 console.log('POST response register-------------:', postResponse?.user?.type);
-                // Cookies.set('creator_user_data', JSON.stringify(postResponse));
+                Cookies.set('creator_lists', JSON.stringify(postResponse));
                 toast.success(postResponse?.message, {
                     position: 'top-center',
                     autoClose: 5000,

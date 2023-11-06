@@ -28,7 +28,7 @@ const AllListpage = () => {
 
     const fetchTotalCreatorCount = async () => {
         try {
-            const userData = Cookies.get('creator_user_data');
+            const userData = Cookies.get('creator_lists');
             const cookieValue = JSON.parse(userData)
             const apiUrl = `${url}/creators?order=desc`;
             const requestOptions = {
@@ -64,7 +64,7 @@ const AllListpage = () => {
         console.log("currentPage", page);
         try {
 
-            const userData = Cookies.get('creator_user_data');
+            const userData = Cookies.get('creator_lists');
             const cookieValue = JSON.parse(userData)
             const apiUrl = `${url}/creators?current_page=${page}&order=desc`;
             const requestOptions = {
@@ -91,7 +91,7 @@ const AllListpage = () => {
 
     const fetchTotalBrandCount = async () => {
         try {
-            const userData = Cookies.get('creator_user_data');
+            const userData = Cookies.get('creator_lists');
             const cookieValue = JSON.parse(userData)
             const apiUrl = `${url}/brands?order=desc`;
             const requestOptions = {
@@ -125,7 +125,7 @@ const AllListpage = () => {
         console.log("currentPage", page);
         try {
 
-            const userData = Cookies.get('creator_user_data');
+            const userData = Cookies.get('creator_lists');
             const cookieValue = JSON.parse(userData)
             const apiUrl = `${url}/brands?current_page=${page}&order=desc`;
             const requestOptions = {
