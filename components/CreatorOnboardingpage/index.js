@@ -819,11 +819,6 @@ const CreatorOnboardingpage = () => {
                     });
 
                     setShowPortfolios(true)
-
-                    // const creatorForm = document.getElementById('creatorForm');
-                    // if (creatorForm) {
-                    //     creatorForm.reset();
-                    // }
                     Cookies.set('creator_profile_id', JSON.stringify(data?.data?.id));
                 } else {
                     throw new Error('API Request Failed');
