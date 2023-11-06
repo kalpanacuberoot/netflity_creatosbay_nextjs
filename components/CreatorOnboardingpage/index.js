@@ -499,22 +499,17 @@ const CreatorOnboardingpage = () => {
 
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const cookieValue = Cookies.get('creator_user_data');
-        if (!cookieValue) {
-            router.push('/');
-        }
+    //     getAllStates();
+    //     getAllSkinTypes();
+    //     getAllBodyTypes();
+    //     getAllHairTypes();
+    //     getAllEyeTypes();
+    //     getAllPlatformTypes();
+    //     getAllCategories();
 
-        getAllStates();
-        getAllSkinTypes();
-        getAllBodyTypes();
-        getAllHairTypes();
-        getAllEyeTypes();
-        getAllPlatformTypes();
-        getAllCategories();
-
-    }, []);
+    // }, []);
 
     console.log("categoriesDataskinType", pets);
 
@@ -610,9 +605,9 @@ const CreatorOnboardingpage = () => {
         console.log("feetToCm value", feetToCm);
         const inchesToCm = parseFloat(heightInches) * 2.54;
 
-        console.log("inchesToCm",inchesToCm);
+        console.log("inchesToCm", inchesToCm);
         const totalHeightCm = feetToCm + inchesToCm;
-        console.log("totalHeightCm",totalHeightCm);
+        console.log("totalHeightCm", totalHeightCm);
         setHeightCm(totalHeightCm.toFixed(2)); // You can adjust the number of decimal places as needed
 
     };
@@ -629,29 +624,157 @@ const CreatorOnboardingpage = () => {
 
     useEffect(() => {
         convertToCm();
-      }, [heightFeet, heightInches, heightCm]);
+    }, [heightFeet, heightInches, heightCm]);
+
+    useEffect(() => {
+        // Define the API request function
+        let shouldCallApi = false;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        console.log("emailRegex",email.match(emailRegex));
+        const sendRegisterRequest = async () => {
+            if (name && email.match(emailRegex)) { 
+                shouldCallApi = true;
+                try {
+                    const response = await fetch(`${url}/register`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "name": name,
+                            "email": email,
+                            "password": email,
+                            "type": "creator"
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('register API response:', result);
+                        Cookies.set('creator_user_data', JSON.stringify(result));
+                        const userId = result?.user?.id;
+                        await getAllStates();
+                        await getAllSkinTypes();
+                        await getAllBodyTypes();
+                        await getAllHairTypes();
+                        await getAllEyeTypes();
+                        await getAllPlatformTypes();
+                        await getAllCategories();
+
+                        return userId;
+                    } else {
+                        console.error('API Error:', response.statusText);
+                        toast.error('Please enter the new EmailId', {
+                            position: 'top-center',
+                            autoClose: 3000,
+                        });
+                        setEmail('');
+                        shouldCallApi = false;
+                        return null;
+                    }
+                } catch (error) {
+                    console.error('API Request Error:', error);
+                    toast.error('Please enter the new EmailId', {
+                        position: 'top-center',
+                        autoClose: 3000,
+                    });
+                    // setEmail('');
+                    shouldCallApi = false;
+                    return null;
+                }
+            }
+        };
+
+        // if (name && email.match(emailRegex)) {
+        //     sendRegisterRequest();
+        // }
+        sendRegisterRequest();
+        return () => {
+            shouldCallApi = false;
+        };
+    }, [name, email]);
 
     console.log("heightCm heightCm", heightCm);
     console.log("allApiResponseallApiResponse", allApiResponse);
     const numericBodyId = parseInt(bodyType, 10);
     console.log("numericBodyId", numericBodyId);
 
+    const handleRegisterSubmit = async () => {
+        const options = {
+            "name": name,
+            "email": email,
+            "password": email,
+            "type": "creator"
+        }
+        try {
+            const response = await fetch(`${url}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify(options),
+            });
+
+            console.log('register response------', response)
+
+            if (response.status === true) {
+                const result = await response.json();
+                Cookies.set('creator_user_data', JSON.stringify(result));
+                toast.success('Registration Successfully', {
+                    position: 'top-center',
+                    autoClose: 3000,
+                });
+                console.log('register result response------------', result);
+                Cookies.set('creator_user_data', JSON.stringify(result));
+                const userId = result?.user?.id;
+                await getAllStates();
+                await getAllSkinTypes();
+                await getAllBodyTypes();
+                await getAllHairTypes();
+                await getAllEyeTypes();
+                await getAllPlatformTypes();
+                await getAllCategories();
+
+                return userId;
+            } else {
+                console.error('Error:', response?.statusText);
+                toast.error('Please enter the new EmailId', {
+                    position: 'top-center',
+                    autoClose: 3000,
+                });
+                return null;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('Please enter the new EmailId', {
+                position: 'top-center',
+                autoClose: 3000,
+            });
+            return null;
+        }
+    };
+
+
     const onHandleSubmit = async (event) => {
 
         event.preventDefault();
 
         try {
+            // const userId = await handleRegisterSubmit();
             const uploadedImageData = await handleSubmit();
 
             console.log("uploadedImageData", uploadedImageData);
+            // console.log("user register", userId);
 
             if (uploadedImageData !== null) {
 
                 const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
-                console.log('categories cookieValue------------2', cookieValue?.token);
+                // console.log('categories cookieValue------------2', cookieValue?.token);
 
                 const requestData = {
                     "user_id": cookieValue?.user?.id,
+                    // "user_id":userId,
                     "state_id": parseInt(selectedStateOption?.value, 10),
                     "city": 'luvk',
                     "gender": gender,

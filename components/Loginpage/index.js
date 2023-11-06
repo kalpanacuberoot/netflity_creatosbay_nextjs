@@ -38,23 +38,14 @@ const Loginpage = () => {
             console.log('POST response register-------------:', postResponse);
 
             if (postResponse?.message) {
-                console.log('POST response register-------------:', postResponse.user.type);
-                Cookies.set('creator_user_data', JSON.stringify(postResponse));
+                console.log('POST response register-------------:', postResponse?.user?.type);
+                // Cookies.set('creator_user_data', JSON.stringify(postResponse));
                 toast.success(postResponse?.message, {
                     position: 'top-center',
                     autoClose: 5000,
                 });
-                // router.push('/creator_form');
                 router.push('/all_list');
-                // if (postResponse.user.type === 'creator') {
-                //     Cookies.set('creator_user_data', JSON.stringify(postResponse));
-                //     toast.success(postResponse?.message, {
-                //         position: 'top-center',
-                //         autoClose: 5000,
-                //     });
-                //     
-                // }
-
+                
             } else {
                 toast.error("Have you register yourself with emailId", {
                     position: 'top-center',
