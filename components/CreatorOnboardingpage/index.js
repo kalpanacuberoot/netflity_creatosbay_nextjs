@@ -671,6 +671,7 @@ const CreatorOnboardingpage = () => {
                         setEmail('');
                         shouldCallApi = false;
                         return null;
+                        
                     }
                 } catch (error) {
                     console.error('API Request Error:', error);
