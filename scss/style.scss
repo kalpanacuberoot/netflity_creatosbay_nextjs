@@ -41,6 +41,7 @@
 
 .bg-color {
   background: #FFF8E7;
+  // background: #fff;
 }
 
 .bg-color h2 {
@@ -288,4 +289,50 @@ footer {
   background: var(--clr-secondary);
   color: var(--clr-white);
   padding: 2rem;
+}
+.container {
+  width: 100%;
+  max-width: 768px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 2rem 1.5rem;
+  /* background-color: #D8DBCE; */
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .cta-form {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+      margin-right: 2rem;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      width: 100%;
+      max-width: 25ch;
+      margin: 0 auto;
+      text-align: center;
+
+      @media (min-width: 768px) {
+        text-align: left;
+        margin: 0;
+      }
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 24ch;
+    }
+  }
 }

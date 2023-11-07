@@ -1,318 +1,825 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zonz</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Glide Slider stylesheet -->
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
-    <!-- our stylesheet -->
-    <link rel="stylesheet" href="scss/style.scss">
-  </head>
-  <body>
-    <!-- header start -->
-    <header id="site-header">
-      <div class="columns">
-        <a href="#hero" class="logo-link">
-          <!-- <img src="images/logo.png" class="logo-img" alt="logo" height="100"> -->
-          <p class="logo-title">ZonZ</p>
-        </a>
-        <!-- navigation start -->
-        <nav id="main-nav">
-          <ul>
-            <li><a href="#listings"><i class="fa-solid fa-user"></i>Listings</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#get-in-touch">Contact Us</a></li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zonz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+  <!-- <link rel="stylesheet" href="scss/style.scss"> -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- header start -->
+  <header id="site-header">
+    <div class="columns">
+      <a href="#hero" class="logo-link">
+        <!-- <img src="images/logo.png" class="logo-img" alt="logo" height="100"> -->
+        <!-- <img src="public/images/logo.png" class="logo-img" alt="logo" height="100"> -->
+        <img src="public/images/zonc_logo.png" class="logo-img" alt="logo" height="100">
+        <!-- <p class="logo-title">ZonZ</p> -->
+      </a>
+      <!-- navigation start -->
+      <nav id="main-nav">
+        <ul>
+          <li><a href="#example1"><i class="fa-solid fa-user"></i>Home</a></li>
+          <li><a href="#how-it-works">Why ZON Z</a></li>
+          <li><a href="#why-about-us">About Us</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li>
+            <a href="#contact-us">
+              <button>
+                Contact Us
+              </button>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- navigation end -->
+      <button id="nav-toggle" role="button">
+        <img src="images/demo/menu.svg" class="menu-icon menu-icon-hamburger" width="32" height="32"
+          alt="menu-icon-hamburger">
+        <img src="images/demo/xmark.svg" class="menu-icon menu-icon-xmark" width="32" height="32" alt="menu-icon-xmark">
+      </button>
+    </div>
+  </header>
+  <!-- header start -->
+  <!-- main start -->
+  <main>
+    <!-- section hero start -->
+    <!-- <section id="hero">
+      <div class="columns one-two-thirds">
+        <div class="section-content">
+          <h1>Your dream<br />vacation home</h1>
+          <p>In a world where attention spans are shrinking and competition is fierce, your content needs to rise above
+            the noise. This is where we come in.</p>
+          <a href="#get-in-touch" class="btn-primary">
+            <i class="fa-solid fa-list"></i>Get In Touch</a>
+        </div>
+        <div class="section-image">
+          <img src="public/images/demo2/1.webp" alt="hero-image" />
+        </div>
+      </div>
+    </section> -->
+    <section id="example1">
+      <div class="hero-text">
+        <div class="subsection1_heading">Collaborate, Co-own, Collect! </div>
+        <div class="section1_heading">Invest, Co own, Endorse</div>
+      </div>
+    </section>
+    <!-- section hero end -->
+
+
+
+
+    <!-- section why choose us start -->
+    <!-- <section id="why-about-us" style="padding: 0;margin: 0;max-width: 100rem;background-color: #FAFAFA;">
+      <div class="columns equal-widths" style="padding-right: 0;max-width: fit-content;">
+        <div class="section-content" style="width: 100%;max-width: 30rem;margin-left: 10rem;margin-right: 2rem;">
+          <h6 class="about-heading">About Us</h6>
+          <h2 class="about_subheading">Welcome to ZON Z.</h2>
+          <h6>Where we believe in the potential of co ownership to shape a brighter future</h6><br />
+          <p class="speciality" style="color: #5C5C5C;">where we believe in the potential of co-ownership to shape a
+            brighter future. We
+            understand the
+            difficulties there are in purchasing and maintaining prime real estate. Which is why, our mission is to
+            connect
+            individuals and businesses, facilitating seamless co-ownership arrangements that lead to shared prosperity.
+            Through our platform, we encourage collaboration, reduce risk, and maximize returns for our members. We're
+            committed to transparency, trust, and integrity in every facet of our operations.</p>
+
+        </div>
+        <div class="section-image " style="padding-right: 0;">
+          <img src="public/images/about_img.png" loading="lazy" alt="why choose us">
+        </div>
+      </div>
+    </section> -->
+    <div class="about_container">
+      <div class="about_column about_column-left">
+          <h6 class="about-heading">About Us</h6>
+          <h2 class="about_subheading">Welcome to ZON Z.</h2>
+          <h6>Where we believe in the potential of co ownership to shape a brighter future</h6><br />
+          <p class="speciality">Where we believe in the potential of co-ownership to shape a brighter future. We
+              understand the difficulties there are in purchasing and maintaining prime real estate. Which is why, our
+              mission is to connect individuals and businesses, facilitating seamless co-ownership arrangements that
+              lead to shared prosperity. Through our platform, we encourage collaboration, reduce risk, and maximize
+              returns for our members. We're committed to transparency, trust, and integrity in every facet of our
+              operations.</p>
+      </div>
+      <div class="about_column about_column-right about_section-image">
+          <img src="public/images/about_img.png" loading="lazy" alt="why choose us">
+      </div>
+  </div>
+    <!-- section why choose us end -->
+
+    <!-- section property listing -->
+    <section id="listings" class="bg-color">
+      <div class="columns equal-widths">
+        <!-- <h2>Most popular dream vacation properties</h2> -->
+        <h2 class="" style="text-align: left;margin-left: 1rem;">Featured Properties</h2>
+      </div>
+      <div class="columns equal-widths">
+        <div class="property-block">
+          <!-- <img src="public/images/demo2/es0220a.webp" loading="lazy" alt="digital content" class="property-img"> -->
+          <img src="public/images/feature_one.png" loading="lazy" alt="digital content" class="property-img">
+          <div class="property-content">
+            <!-- <p class="property-location">Forest Retreat</p> -->
+            <h3 class="property-title">
+              Forest Retreat
+            </h3>
+            <p class="feature-location">
+              Are you looking to find your dream home or invest in a lucrative property.
+            </p>
+            <p class="property-price" style="display: flex;align-items: center;justify-content: end;">
+              Book Now
+              <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
+                style="width: 20px;margin-left: 10px">
+            </p>
+            <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+          </div>
+        </div>
+
+        <div class="property-block">
+          <!-- <img src="public/images/demo2/es0347a_campos_finca.webp" loading="lazy" alt="digital content"
+            class="property-img"> -->
+          <img src="public/images/feature_two.png" loading="lazy" alt="digital content" class="property-img">
+          <div class="property-content">
+            <h3 class="property-title">
+              Forest Retreat
+            </h3>
+            <p class="feature-location">
+              Are you looking to find your dream home or invest in a lucrative property.
+            </p>
+            <p class="property-price" style="display: flex;align-items: center;justify-content: end;">
+              Book Now
+              <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
+                style="width: 20px;margin-left: 10px">
+            </p>
+            <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+            <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+            <p class="property-price">Rs. 21 Crs.</p> -->
+            <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+          </div>
+        </div>
+        <div class="property-block">
+          <!-- <img src="public/images/demo2/1.webp" loading="lazy" alt="digital content" class="property-img"> -->
+          <img src="public/images/feature_three.png" loading="lazy" alt="digital content" class="property-img">
+          <div class="property-content">
+            <h3 class="property-title">
+              Forest Retreat
+            </h3>
+            <p class="feature-location">
+              Are you looking to find your dream home or invest in a lucrative property.
+            </p>
+            <p class="property-price" style="display: flex;align-items: center;justify-content: end;">
+              Book Now
+              <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
+                style="width: 20px;margin-left: 10px;">
+            </p>
+            <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+            <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+            <p class="property-price">Rs. 21 Crs.</p> -->
+            <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+          </div>
+        </div>
+        <div class="property-block">
+          <!-- <img src="public/images/demo2/at0358a_3-bd-chaletwohnung-mit-talblick.webp" loading="lazy"
+            alt="digital content" class="property-img"> -->
+          <img src="public/images/feature_four.png" loading="lazy" alt="digital content" class="property-img">
+          <div class="property-content">
+            <h3 class="property-title">
+              Forest Retreat
+            </h3>
+            <p class="feature-location">
+              Are you looking to find your dream home or invest in a lucrative property.
+            </p>
+            <p class="property-price" style="display: flex;align-items: center;justify-content: end;">
+              Book Now
+              <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
+                style="width: 20px;margin-left: 10px">
+            </p>
+            <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+            <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+            <p class="property-price">Rs. 21 Crs.</p> -->
+            <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- section property listing end -->
+
+
+    <!-- section how it works start -->
+    <!-- <section id="process" style="padding: 0;margin: 0;max-width: 100rem;background-color: #FAFAFA;">
+      <div class="columns equal-widths" style="padding-left: 0;max-width: fit-content;">
+        <div class="section-image" style="padding: 0;">
+          <img src="public/images/process.png" loading="lazy" alt="want to join us">
+        </div>
+        <div class="section-content"
+          style="width: 100%;max-width: 50rem;margin-left: 5rem;margin-right: 10rem;padding-top: 5rem;padding-bottom: 5rem;">
+          <h6 class="about-heading">Process</h6>
+          <h2>The Clever Route to Your Own
+            Vacation Property</h2>
+          <h6>Where we believe in the potential of co ownership to shape a brighter future</h6><br />
+          <p class="speciality" style="color: #5C5C5C;">
+            Imagine owning a piece of prime real
+            estate for just a fraction of the cost, with the freedom to use it whenever you wish throughout the year.
+          </p>
+          <ul class="">
+            <li class="bold-list-item">Invest in Unbeatable Locations</li>
+            <p class="" style="color: #5C5C5C;">
+              Experience worry-free stays as we handle all aspects of property management,
+              upkeep, and maintenance, so you can unwind and make the most of your investment.
+            </p>
           </ul>
-        </nav>
-        <!-- navigation end -->
-        <button id="nav-toggle" role="button">
-          <img src="images/demo/menu.svg" class="menu-icon menu-icon-hamburger" width="32" height="32" alt="menu-icon-hamburger">
-          <img src="images/demo/xmark.svg" class="menu-icon menu-icon-xmark" width="32" height="32" alt="menu-icon-xmark">
-        </button>
-      </div> 
-    </header>
-    <!-- header start -->
-    <!-- main start -->
-    <main>
-      <!-- section hero start -->
-      <section id="hero">
-        <div class="columns one-two-thirds">
-          <div class="section-content">
-            <h1>Your dream<br/>vacation home</h1>
-            <p>In a world where attention spans are shrinking and competition is fierce, your content needs to rise above the noise. This is where we come in.</p>
-            <a href="#get-in-touch" class="btn-primary">
-              <i class="fa-solid fa-list"></i>Get In Touch</a>
-          </div>
-          <div class="section-image">
-            <img src="public/images/demo2/1.webp" alt="hero-image" />
-          </div>
+          <ul class="">
+            <li class="bold-list-item">Investment Holidays with Growth Potential</li>
+            <p class="" style="color: #5C5C5C;">
+              Experience worry-free stays as we handle all aspects of property management,
+              upkeep, and maintenance, so you can unwind and make the most of your investment.
+            </p>
+          </ul>
+          <ul class="">
+            <li class="bold-list-item">Relax, We've Got You Covere</li>
+            <p class="" style="color: #5C5C5C;">
+              Experience worry-free stays as we handle all aspects of property management,
+              upkeep, and maintenance, so you can unwind and make the most of your investment.
+            </p>
+          </ul>
+          <h2>How does Zonz works?</h2>
+          <p>Join our zoom call to understand how it works.</p>
+          <a href="#get-in-touch" class="btn-primary">Get In Touch</a>
         </div>
-      </section>
-      <!-- section hero end -->
 
-      <!-- section what we do start -->
-      <section id="what-we-do" class="bg-color">
-        <div class="columns">
-          <h2>Why ZonZ Co-ownership?</h2>
+      </div>
+    </section> -->
+    <div class="process_container">
+      <div class="process_column process_column-left process_section-image">
+          <img src="public/images/process.png" loading="lazy" alt="want to join us">
+      </div>
+      <div class="process_column process_column-right">
+          <h6 class="about-heading">Process</h6>
+          <h2>The Clever Route to Your Own Vacation Property</h2>
+          <p class="speciality">Imagine owning a piece of prime real estate for just a fraction of the cost, with the freedom to use it whenever you wish throughout the year.</p>
+          <ul>
+              <li class="bold-list-item">Invest in Unbeatable Locations</li>
+              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
+          </ul>
+          <ul>
+              <li class="bold-list-item">Investment Holidays with Growth Potential</li>
+              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
+          </ul>
+          <ul>
+              <li class="bold-list-item">Relax, We've Got You Covered</li>
+              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
+          </ul>
+      </div>
+  </div>
+    <!-- section how-it-works end -->
+
+    <!-- section what we do start -->
+    <section id="what-we-do" class="bg-color">
+      <div class="columns equal-widths">
+        <h2 style="margin-left: 1rem;">Loved by businesses, and individuals across the globe.</h2>
+      </div>
+      <div class="columns equal-widths">
+        <div class="service-block">
+          <img src="public/images/5_star.png" loading="lazy" alt="digital content" class="service-img">
+          <!-- <h3 class="service-title">Smartest way to own holiday property</h3> -->
+          <p class="service-content">
+            Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. Consulted
+            admitting oh mr up as described.
+          </p>
+          <div class="flex items-center space-x-4">
+            <img class="w-10 h-10 rounded-full" src="public/images/Image (1).png" alt="">
+            <div class="font-medium dark:text-white">
+              <div class="text-sm" style="font-weight: bold;">Jane Cooper</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Los Angeles, CA</div>
+            </div>
+          </div>
+
         </div>
-        <div class="columns equal-widths">
-          <div class="service-block">
-            <img src="public/images/demo2/006-idea.png" loading="lazy" alt="digital content" class="service-img">
-            <h3 class="service-title">Smartest way to own holiday property</h3>
-            <p class="service-content">Crisp, engaging copy optimized for online platforms</p>
+        <div class="service-block">
+          <img src="public/images/5_star.png" loading="lazy" alt="brand stories" class="service-img">
+          <!-- <h3 class="service-title">Real estate is the best destinations</h3> -->
+          <p class="service-content">The and collecting motionless difficulty son. His hearing staying ten colonel met.
+            Sex drew six easy four dear cold</p>
+          <div class="flex items-center space-x-4">
+            <img class="w-10 h-10 rounded-full" src="public/images/Image (2).png" alt="">
+            <div class="font-medium dark:text-white">
+              <div class="text-sm" style="font-weight: bold;">Robert Fox</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">New York City, NY</div>
+            </div>
           </div>
-          <div class="service-block">
-            <img src="public/images/demo2/007-sunset.png" loading="lazy" alt="brand stories" class="service-img">
-            <h3 class="service-title">Real estate is the best destinations</h3>
-            <p class="service-content">Compelling brand narratives that your customer will relate to</p>
-          </div>
-          <div class="service-block">
-            <img src="public/images/demo2/009-holidays.png" loading="lazy" alt="academic writing" class="service-img">
-            <h3 class="service-title">Holiday with potential for appreciation</h3>
-            <p class="service-content">Research-intensive content that focuses on niche themes</p>
-          </div>
-          <div class="service-block">
-            <img src="public/images/demo2/003-hassle-free.png" loading="lazy" alt="editing and proofreading" class="service-img">
-            <h3 class="service-title">Hassle-free experience for your convenience</h3>
-            <p class="service-content">Checks for language, grammar and flow to boost readability</p>
-          </div> 
         </div>
-      </section>
-      <!-- section what we do end -->
+
+        <div class="service-block">
+          <img src="public/images/5_star.png" loading="lazy" alt="academic writing" class="service-img">
+          <!-- <h3 class="service-title">Holiday with potential for appreciation</h3> -->
+          <p class="service-content">Sociable on as carriage my position weddings raillery consider. Peculiar trifling
+            absolute and wandered vicinity property yet.</p>
+          <div class="flex items-center space-x-4">
+            <img class="w-10 h-10 rounded-full" src="public/images/Image (3).png" alt="">
+            <div class="font-medium dark:text-white">
+              <div class="text-sm" style="font-weight: bold;">Jane Cooper</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Los Angeles, CA</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-block">
+          <img src="public/images/5_star.png" loading="lazy" alt="editing and proofreading" class="service-img">
+          <!-- <h3 class="service-title">Hassle-free experience for your convenience</h3> -->
+          <p class="service-content">Moderate children at of outweigh it. Unsatiable it considered invitation he
+            travelling insensible. Consulted admitting oh mr up as described.</p>
+          <div class="flex items-center space-x-4">
+            <img class="w-10 h-10 rounded-full" src="public/images/Image (1).png" alt="">
+            <div class="font-medium dark:text-white">
+              <div class="text-sm" style="font-weight: bold;">Jese Leos</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- section what we do end -->
 
 
-      <!-- section why choose us start -->
-      <section id="why-choose-us">
-        <div class="columns equal-widths">
-          <div class="section-content">
-            <h2>Experience luxury<br/>Natural landscapes<br/>Forget about stress</h2>
-            <p class="speciality">When you partner with Zonz, you gain access to a team of communication and content experts who bring a wealth of knowledge and experience to the table. Our secret sauce lies in our unwavering commitment to quality, creativity, and collaboration.</p>
-            <p class="speciality">We take the time to understand your requirements and your unique objectives, to ensure that every property you own is tailored specifically to your needs. Our approach is rooted in data-driven insights and cutting-edge strategies.</p>
-          </div>
-          <div class="section-image">
-            <img src="public/images/demo2/shutterstock_1572778642_new.webp" loading="lazy" alt="why choose us">
-          </div>
-        </div>
-      </section>
-      <!-- section why choose us end -->
 
-      <!-- section property listing -->
-      <section id="listings" class="bg-color">
-        <div class="columns">
-          <h2>Most popular dream vacation properties</h2>
+    <section id="faqs" class="bg-color" style="text-align: center;background-color:  #FAFAFA;">
+      <div class="accordion_container">
+        <h1 class="font-bold underline">Frequently asked questions</h1>
+        <p class="speciality_accordion">Everything you need to know about Zon Z. Can’t find the answer you’re
+          looking for? Feel free to
+          <span style="color: #0A7CFF;">contact us</span></p>
+        <!-- Replace this part with a loop in your backend or static HTML generation -->
+        <div class="accordion-item">
+          <div class="accordion-button">
+            <span class="accordion-title">What is co-ownership, and how does it work with ZON Z?</span>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            Our platform aims to connect brands with talented micro-influencers and user-generated content (UGC)
+            creators for authentic and cost-effective content collaborations.
+          </div>
         </div>
-        <div class="columns equal-widths">
-          <div class="property-block">
-            <img src="public/images/demo2/es0220a.webp" loading="lazy" alt="digital content" class="property-img">
-            <div class="property-content">
-              <p class="property-location">Muro | Mallorca | Spain</p>
-              <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
-              <p class="property-price">Rs. 21 Crs.</p>
+        <div class="accordion-item">
+          <div class="accordion-button">
+            <span class="accordion-title">What is co-ownership, and how does it work with ZON Z?</span>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            Our platform aims to connect brands with talented micro-influencers and user-generated content (UGC)
+            creators for authentic and cost-effective content collaborations.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-button">
+            <span class="accordion-title">What is co-ownership, and how does it work with ZON Z?</span>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            Our platform aims to connect brands with talented micro-influencers and user-generated content (UGC)
+            creators for authentic and cost-effective content collaborations.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-button">
+            <span class="accordion-title">What is co-ownership, and how does it work with ZON Z?</span>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            Our platform aims to connect brands with talented micro-influencers and user-generated content (UGC)
+            creators for authentic and cost-effective content collaborations.
+          </div>
+        </div>
+        <!-- Repeat similar structure for other FAQ items -->
+      </div>
+    </section>
+
+
+        <!-- section property listing -->
+        <div style="color: black;margin-bottom: 15rem;">
+        <section id="blog" class="bg-color" style="">
+          <div class="columns equal-widths">
+            <!-- <h2>Most popular dream vacation properties</h2> -->
+            <h2 class="" style="text-align: left;margin-left: 1rem;">Blogs</h2>
+          </div>
+          <div class="columns equal-widths">
+            <div class="property-block">
+              <!-- <img src="public/images/demo2/es0220a.webp" loading="lazy" alt="digital content" class="property-img"> -->
+              <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
+              <div class="property-content">
+                <!-- <p class="property-location">Forest Retreat</p> -->
+                <h3 class="property-title">
+                  Rover raised $65 million
+                </h3>
+                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                  Finding temporary housing for your dog
+                  should be as easy as renting an Airbnb.
+                  That’s the idea behind Rover ...
+                </p>
+                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                  Read More
+                </p>
+                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+              </div>
+            </div>
+    
+            <div class="property-block">
+              <!-- <img src="public/images/demo2/es0347a_campos_finca.webp" loading="lazy" alt="digital content"
+          class="property-img"> -->
+              <img src="public/images/blog_2.png" loading="lazy" alt="digital content" class="property-img">
+              <div class="property-content">
+                <h3 class="property-title">
+                  MateLabs machine learning
+                </h3>
+                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                  If you’ve ever wanted to train a machine
+                  learning model and integrate it with
+                  IFTTT, you now can with ...
+                </p>
+                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                  Read More
+                </p>
+                <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+          <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+          <p class="property-price">Rs. 21 Crs.</p> -->
+                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+              </div>
+            </div>
+            <div class="property-block">
+              <!-- <img src="public/images/demo2/1.webp" loading="lazy" alt="digital content" class="property-img"> -->
+              <img src="public/images/blog_3.png" loading="lazy" alt="digital content" class="property-img">
+              <div class="property-content">
+                <h3 class="property-title">
+                  US venture investment ticks
+                </h3>
+                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                  Venture investment in U.S. startups
+                  rose sequentially in the second quarter
+                  of 2017, boosted by large, ate-stage
+                  financings
+                </p>
+                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                  Read More
+                </p>
+                <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+          <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+          <p class="property-price">Rs. 21 Crs.</p> -->
+                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+              </div>
+            </div>
+            <div class="property-block" id="blog_bg" >
+              <div class="property-content" style="transform: none;">
+                <h1 class="property-title">
+                  Flexible work hours
+                </h1>
+                <p class="feature-location" style="color: #fff;margin-top: 1rem;">
+                  Rather than worrying about
+                  switching offices every couple
+                  years, you stay in the same place.
+                </p>
+                <p class="property-price" style="display: flex;align-items: center;">
+                  Read More
+                </p>
+                <!-- <div class="blog-text">
+                  <div class="blog_heading">
+                    Flexible work
+                    hours</div>
+                  <div class="subblog_heading">
+                    Rather than worrying about
+                    switching offices every couple
+                    years, you stay in the same place.</div>
+    
+                </div> -->
+              </div>
+              <!-- <img src="public/images/demo2/at0358a_3-bd-chaletwohnung-mit-talblick.webp" loading="lazy"
+          alt="digital content" class="property-img"> -->
+              <!-- <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
+              <div class="property-content">
+                <h3 class="property-title">
+                  Rover raised $65 million
+                </h3>
+                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                  Are you looking to find your dream home or invest in a lucrative property.
+                </p>
+                <p class="property-price" style="display: flex;align-items: center;justify-content: end;">
+                  Book Now
+                  <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
+                    style="width: 20px;margin-left: 10px">
+                </p> -->
+              <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+          <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
+          <p class="property-price">Rs. 21 Crs.</p> -->
               <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
             </div>
           </div>
+          </div>
+        </section>
+      </div>
+        <!-- section property listing end -->
+    <!-- section testimonials -->
+    <!-- <section id="testimonials" class="bg-color">
+      <div class="columns">
+        <h2>What our customers have to say</h2>
+      </div>
 
-          <div class="property-block">
-            <img src="public/images/demo2/es0347a_campos_finca.webp" loading="lazy" alt="digital content" class="property-img">
-            <div class="property-content">
-              <p class="property-location">Muro | Mallorca | Spain</p>
-              <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
-              <p class="property-price">Rs. 21 Crs.</p>
-              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-            </div>
+      <div class="columns">
+        <div class="testimonials glide">
+          <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--prev btn-prev" data-glide-dir="<">
+              <img src="public/images/demo2/003-back.png" alt="left arrow">
+            </button>
+            <button class="glide__arrow glide__arrow--next btn-next" data-glide-dir=">">
+              <img src="public/images/demo2/004-next.png" alt="right arrow">
+            </button>
           </div>
-          <div class="property-block">
-            <img src="public/images/demo2/1.webp" loading="lazy" alt="digital content" class="property-img">
-            <div class="property-content">
-              <p class="property-location">Muro | Mallorca | Spain</p>
-              <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
-              <p class="property-price">Rs. 21 Crs.</p>
-              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-            </div>
+          <div data-glide-el="track" class="glide__track">
+            <ul class="glide__slides">
+              <li class="glide__slide testimonial-block">
+                <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
+                <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca
+                  our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.
+                </div>
+                <div class="testimonial-author">Julian S.</div>
+                <div class="testimonial-author-designation">Mallorca</div>
+              </li>
+
+              <li class="glide__slide testimonial-block">
+                <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
+                <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca
+                  our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.
+                </div>
+                <div class="testimonial-author">Julian S.</div>
+                <div class="testimonial-author-designation">Mallorca</div>
+              </li>
+              <li class="glide__slide testimonial-block">
+                <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
+                <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca
+                  our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.
+                </div>
+                <div class="testimonial-author">Julian S.</div>
+                <div class="testimonial-author-designation">Mallorca</div>
+              </li>
+              <li class="glide__slide testimonial-block">
+                <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
+                <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca
+                  our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.
+                </div>
+                <div class="testimonial-author">Julian S.</div>
+                <div class="testimonial-author-designation">Mallorca</div>
+              </li>
+              <li class="glide__slide testimonial-block">
+                <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
+                <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca
+                  our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.
+                </div>
+                <div class="testimonial-author">Julian S.</div>
+                <div class="testimonial-author-designation">Mallorca</div>
+              </li>
+            </ul>
           </div>
-          <div class="property-block">
-            <img src="public/images/demo2/at0358a_3-bd-chaletwohnung-mit-talblick.webp" loading="lazy" alt="digital content" class="property-img">
-            <div class="property-content">
-              <p class="property-location">Muro | Mallorca | Spain</p>
-              <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
-              <p class="property-price">Rs. 21 Crs.</p>
-              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+        </div>
+      </div>
+    </section> -->
+    <!-- section testimonials end -->
+
+    <!-- section get in touch start -->
+    <!-- <section id="get-in-touch">
+      <div class="columns one-two-thirds">
+        <div class="section-image">
+          <img src="public/images/demo2/untitled-design.webp" loading="lazy" alt="get in touch">
+          <nav class="contact-links">
+            <ul>
+              <li>Phone: <a href="tel:+919999999999">+91 9999999999</a></li>
+              <li>Email:
+                <a href="mailto:abc@example.com">abc@example.com</a>
+              </li>
+            </ul>
+          </nav>
+          <nav class="social-icons">
+            <ul>
+              <li>
+                <a href="#">
+                  <img src="images/demo/linkedin.png" loading="lazy" height="32" alt="linkedin-icon">
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/demo/facebook.png" loading="lazy" height="32" alt="facebook-icon">
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/demo/instagram.png" loading="lazy" height="32" alt="instagram-icon">
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="section-content">
+          <h2>Have we piqued your interest?</h2>
+          <form action="php/contact.php" method="post" class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required="" autocomplete="name" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="company-name">Company Name</label>
+              <input type="text" name="company-name" id="company-name" required="" autocomplete="company-name"
+                placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required="" autocomplete="email" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" name="phone" id="phone" required="" autocomplete="mobile" placeholder="">
+            </div>
+            
+            <div class="honeypot">
+              <label for="spam">Leave this field empty:</label>
+              <input type="text" name="spam" id="spam" tabindex="-1">
+              <label for="username">Username:</label>
+              <input type="text" name="username" id="username" tabindex="-1">
+              <label for="website">Website:</label>
+              <input type="text" name="website" id="website" tabindex="-1">
+            </div>
+            <div class="form-group grid-span-col-2">
+              <label for="message">Message</label>
+              <textarea rows="3" name="message" id="message" required=""></textarea>
+            </div>
+            <div class="grid-span-col-2 small">
+              Zonz is committed to protecting and respecting your privacy. We will only use the information provided to
+              administer your account and provide services you request from us.
+            </div>
+            <button type="submit" name="submit" class="btn-primary m-0">Submit</button>
+          </form>
+        </div>
+      </div>
+      </div>
+      </div>
+    </section> -->
+    <!-- section get in touch end -->
+
+  </main>
+  <!-- main end -->
+  <!-- footer start -->
+  <!-- <footer> -->
+  <!-- <div class="columns">
+      <div class="footer-content">
+        <div class="copyright-info">Zonz © 2023 All Right Reserved.</div>
+      </div>
+    </div>
+    <div class="hide">
+      <a href="sitemap.xml">Sitemap</a>
+    </div> -->
+
+  <div class="footer-dark" style="">
+
+    <section style="max-width: 70rem;background-color: #FAFAFA;margin-inline: auto;transform: translate(-1%, -50%);" id="contact-us">
+      <div class="columns equal-widths" style="">
+        <div class="section-image" style="">
+          <!-- <img src="public/images/process.png" loading="lazy" alt="want to join us"> -->
+          <h2 style="color: black;">Have questions?</h2>
+          <p class="" style="color: #351D75;font-weight: 600;">Ready to take the next step?</p>
+          <p style="color: #979797;">Reach out to our dedicated team. We're here to provide the information and
+            assistance
+            you need to embark on your co-ownership journey with Zon Z.</p>
+        </div>
+        <div class="section-content forms_fields" style="">
+          <div class="container">
+            <form action="" class="form">
+
+              <input type="text" placeholder="First Name" class="form__input" id="name" />
+
+              <input type="text" placeholder="Last Name" class="form__input" id="name" />
+
+              <input type="email" placeholder="Email" class="form__input" id="email" />
+
+              <input type="text" placeholder="Phone " class="form__input" id="phone" />
+              <input type="text" placeholder="Address " class="form__input" id="phone" />
+            </form>
+            <div style="display: flex; justify-content: center;align-items: start;">
+              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="margin-right: 1rem;">
+              <div class="form_terms" style="color: #979797;">Reach out to our dedicated team. We're here to provide the
+                information and
+                assistance
+                you need to embark on your co-ownership journey with Zon Z.</div>
             </div>
           </div>
         </div>
-      </section>
-      <!-- section property listing end -->
+      </div>
+    </section>
 
 
-      <!-- section how it works start -->
-      <section id="how-it-works">
-        <div class="columns equal-widths">
-          <div class="section-content">
-            <h2>How does Zonz works?</h2>
-            <p>Join our zoom call to understand how it works.</p>
-            <a href="#get-in-touch" class="btn-primary">Get In Touch</a>
+    <footer>
+      <div class="container">
+        <div class="row">
+
+          <div class="" style="display: flex;flex-direction: column;align-items: center; margin-bottom: 2rem;">
+            <img src="public/images/logo_footer.png" loading="lazy" height="40" alt="linkedin-icon">
+            <p style="text-align: center;font-size: medium;" class="copyright">We share thoughts on design, tools, and
+              productivity. If you don't want to
+              miss them, subscribe to our newsletter on Substack.</p>
           </div>
-          <div class="section-image">
-            <img src="public/images/demo2/screenshot-2023-06-02-at-10-12-35.webp" loading="lazy" alt="want to join us">
+          <div style="width: 100%;text-align: -webkit-center;">
+            <button class="follow_substack">
+              <img src="public/images/substack.svg.png" loading="lazy" height="20" alt="linkedin-icon"
+                style="margin-right: 1rem;">
+              Follow on Substack
+            </button>
           </div>
-        </div>
-      </section>
-      <!-- section how-it-works end -->
 
-      <!-- section testimonials -->
-      <section id="testimonials" class="bg-color">
-        <div class="columns">
-          <h2>What our customers have to say</h2>
-        </div>
-
-        <div class="columns">
-          <div class="testimonials glide">
-            <div class="glide__arrows" data-glide-el="controls">
-              <button class="glide__arrow glide__arrow--prev btn-prev" data-glide-dir="<">
-                <img src="public/images/demo2/003-back.png" alt="left arrow">
-              </button>
-              <button class="glide__arrow glide__arrow--next btn-next" data-glide-dir=">">
-                <img src="public/images/demo2/004-next.png" alt="right arrow">
-              </button>
-            </div>
-            <div data-glide-el="track" class="glide__track">
-              <ul class="glide__slides">
-                <li class="glide__slide testimonial-block">
-                  <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
-                  <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.</div>
-                  <div class="testimonial-author">Julian S.</div>
-                  <div class="testimonial-author-designation">Mallorca</div>
-                </li>
-
-                <li class="glide__slide testimonial-block">
-                  <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
-                  <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.</div>
-                  <div class="testimonial-author">Julian S.</div>
-                  <div class="testimonial-author-designation">Mallorca</div>
-                </li>
-                <li class="glide__slide testimonial-block">
-                  <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
-                  <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.</div>
-                  <div class="testimonial-author">Julian S.</div>
-                  <div class="testimonial-author-designation">Mallorca</div>
-                </li>
-                <li class="glide__slide testimonial-block">
-                  <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
-                  <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.</div>
-                  <div class="testimonial-author">Julian S.</div>
-                  <div class="testimonial-author-designation">Mallorca</div>
-                </li>
-                <li class="glide__slide testimonial-block">
-                  <div class="testimonial-title">Worry-free holidays with ZonZ service</div>
-                  <div class="testimonial-quote">We are happy to have been able to call a beautiful property on Mallorca our own through MYNE for almost a year now. The on-site service allows us to fully enjoy our holiday.</div>
-                  <div class="testimonial-author">Julian S.</div>
-                  <div class="testimonial-author-designation">Mallorca</div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- section testimonials end -->
-
-      <!-- section get in touch start -->
-      <section id="get-in-touch">
-        <div class="columns one-two-thirds">
-          <div class="section-image">
-            <img src="public/images/demo2/untitled-design.webp" loading="lazy" alt="get in touch">
-            <nav class="contact-links">
-              <ul>
-                <li>Phone: <a href="tel:+919999999999">+91 9999999999</a></li>
-                <li>Email: 
-                  <a href="mailto:abc@example.com">abc@example.com</a>
-                </li>
-              </ul>
-            </nav>
+          <div class="col item social">
+            <!-- <a href="#"><i class="icon ion-social-facebook"></i></a>
+              <a href="#"><i class="icon ion-social-twitter"></i></a>
+              <a href="#"><i class="icon ion-social-snapchat"></i></a>
+              <a href="#"><i class="icon ion-social-instagram"></i></a> -->
+            <!-- <a href="#"><img class="icon ion-social-facebook" ></i></a> -->
             <nav class="social-icons">
               <ul>
                 <li>
                   <a href="#">
-                    <img src="images/demo/linkedin.png" loading="lazy" height="32" alt="linkedin-icon">
+                    <img src="public/images/Link.png" loading="lazy" height="32" alt="linkedin-icon">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="images/demo/facebook.png" loading="lazy" height="32" alt="facebook-icon">
+                    <img src="public/images/instagram.png" loading="lazy" height="32" alt="facebook-icon">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="images/demo/instagram.png" loading="lazy" height="32" alt="instagram-icon">
+                    <img src="public/images/linkedin.png" loading="lazy" height="32" alt="instagram-icon">
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="public/images/facebook.png" loading="lazy" height="32" alt="instagram-icon">
                   </a>
                 </li>
               </ul>
             </nav>
           </div>
-          <div class="section-content">
-            <h2>Have we piqued your interest?</h2>
-            <form action="php/contact.php" method="post" class="contact-form" id="contact-form">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" required="" autocomplete="name" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="company-name">Company Name</label>
-                <input type="text" name="company-name" id="company-name" required="" autocomplete="company-name" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required="" autocomplete="email" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone" id="phone" required="" autocomplete="mobile" placeholder="">
-              </div>
-              <!-- Honeypot fields -->
-              <div class="honeypot">
-                <label for="spam">Leave this field empty:</label>
-                <input type="text" name="spam" id="spam" tabindex="-1">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" tabindex="-1">
-                <label for="website">Website:</label>
-                <input type="text" name="website" id="website" tabindex="-1">
-              </div>
-              <div class="form-group grid-span-col-2">
-                <label for="message">Message</label>
-                <textarea rows="3" name="message" id="message" required=""></textarea>
-              </div>
-              <div class="grid-span-col-2 small">
-                Zonz is committed to protecting and respecting your privacy. We will only use the information provided to administer your account and provide services you request from us.
-              </div>
-              <button type="submit" name="submit" class="btn-primary m-0">Submit</button>
-            </form>
-          </div>
-        </div>
-        </div>
-        </div>
-      </section>
-      <!-- section get in touch end -->
+          <div class="container">
+            <ul class="foote_bottom_ul_amrc">
+              <li><a href="http://webenlance.com">Home</a></li>
+              <li><a href="http://webenlance.com">Pricing</a></li>
+              <li><a href="http://webenlance.com">FAQ</a></li>
+              <li><a href="http://webenlance.com">Changelog</a></li>
+              <li><a href="http://webenlance.com">License</a></li>
+              <li><a href="http://webenlance.com">Privacy Policy</a></li>
+              <li><a href="http://webenlance.com">Contact</a></li>
+            </ul>
+            <!--foote_bottom_ul_amrc ends here-->
 
-    </main>
-    <!-- main end -->
-    <!-- footer start -->
-    <footer>
-      <div class="columns">
-        <div class="footer-content">
-          <div class="copyright-info">Zonz © 2023 All Right Reserved.</div>
+
+            <!-- <ul class="social_footer_ul">
+                <li><a href="http://webenlance.com"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="http://webenlance.com"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>
+              </ul> -->
+            <!--social_footer_ul ends here-->
+          </div>
+
         </div>
-      </div>
-      <div class="hide">
-        <a href="sitemap.xml">Sitemap</a>
+        <p class="copyright">© 2020 – 2022 Anron. Built with <span class="text-center"
+            style="color: white !important;font-weight: bold;"> Zon Z.</span> All rights reserved.</p>
       </div>
     </footer>
-    <!-- footer end -->
+  </div>
+  <!-- </footer> -->
+  <!-- footer end -->
 
-    <!-- For Toast Notifications -->
-    <div class="notification" id="notification"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+  <!-- For Toast Notifications -->
+  <div class="notification" id="notification"></div>
+  <script type="module" src="/main.js"></script>
+  <script>
+    // JavaScript to handle the accordion functionality goes here
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    accordionItems.forEach((item) => {
+      const button = item.querySelector('.accordion-button');
+      const content = item.querySelector('.accordion-content');
+
+      button.addEventListener('click', () => {
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+
 </html>
