@@ -27,7 +27,9 @@ const SingleCreatorListpage = () => {
     console.log("single page single data", data);
 
     useEffect(() => {
-        if (data === null || undefined) {
+
+        const userData = Cookies.get('creator_lists')
+        if (data === null || undefined || userData === null || undefined) {
             router.push('/all_list')
         }
 
@@ -39,7 +41,7 @@ const SingleCreatorListpage = () => {
     }, [])
 
     const getAllStates = async () => {
-        const userData = Cookies.get('creator_user_data');
+        const userData = Cookies.get('creator_lists');
         if (userData) {
             const cookieValue = JSON.parse(userData);
 
@@ -80,7 +82,7 @@ const SingleCreatorListpage = () => {
                     router.push('/')
 
                 } else if (!response.ok) {
-                    throw new Error(`Request failed with status: ${response.status}`);
+                    throw new Error(`Request failed with status: ${response?.status}`);
                 }
 
                 // return await response.json();
@@ -99,7 +101,7 @@ const SingleCreatorListpage = () => {
 
     const getAllBodyTypes = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+        const cookieValue = JSON.parse(Cookies.get('creator_lists'))
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -157,7 +159,7 @@ const SingleCreatorListpage = () => {
 
     const getAllHairTypes = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+        const cookieValue = JSON.parse(Cookies.get('creator_lists'))
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -216,7 +218,7 @@ const SingleCreatorListpage = () => {
 
     const getAllSkinTypes = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+        const cookieValue = JSON.parse(Cookies.get('creator_lists'))
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -273,7 +275,7 @@ const SingleCreatorListpage = () => {
 
     const getAllEyeTypes = async () => {
 
-        const cookieValue = JSON.parse(Cookies.get('creator_user_data'))
+        const cookieValue = JSON.parse(Cookies.get('creator_lists'))
         console.log('categories cookieValue------------1', cookieValue?.token);
 
         try {
@@ -545,7 +547,7 @@ const SingleCreatorListpage = () => {
                                                 type="text"
                                                 name="state"
                                                 placeholder=" "
-                                                value={data?.kids === 0 ? "Yes" : "No"}
+                                                value={data?.kids === 1 ? "Yes" : "No"}
                                                 className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                             />
                                             <span className="text-sm text-red-600 hidden" id="error">Email address is required</span>
@@ -556,7 +558,7 @@ const SingleCreatorListpage = () => {
                                                 type="text"
                                                 name="state"
                                                 placeholder=" "
-                                                value={data?.pets === 0 ? "Yes" : "No"}
+                                                value={data?.pets === 1 ? "Yes" : "No"}
                                                 className=" pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                                             />
                                             <span className="text-sm text-red-600 hidden" id="error">Email address is required</span>
