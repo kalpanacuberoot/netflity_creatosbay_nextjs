@@ -3,12 +3,12 @@
 /**
  * Function: domReady
  */
-const domReady = function() {
+const domReady = function () {
   /* Hamburger Menu */
   const nav_main = document.getElementById('main-nav')
   const nav_toggle = document.getElementById('nav-toggle')
 
-  nav_toggle.addEventListener('click', function(){
+  nav_toggle.addEventListener('click', function () {
     if (nav_main.classList.contains('toggle-show')) {
       nav_main.classList.remove('toggle-show')
     } else {
@@ -69,4 +69,41 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
 } else {
   document.addEventListener("DOMContentLoaded", domReady);
 }
+
+
+
+const navToggle = document.getElementById("nav-toggle");
+const mainNav = document.getElementById("main-nav");
+const navLinks = mainNav.getElementsByTagName('a');
+let isOpen = false;
+
+navToggle.addEventListener("click", () => {
+  // isOpen = !isOpen;
+  if (isOpen) {
+    mainNav.style.display = "none";
+    mainNav.classList.remove("opened");
+    mainNav.classList.add("closed");
+    isOpen = false;
+  } else {
+    mainNav.style.display = "block";
+    mainNav.classList.remove("closed");
+    mainNav.classList.add("opened");
+    isOpen = true;
+  }
+});
+
+navToggle.addEventListener("click", () => {
+  mainNav.classList.toggle("closed");
+});
+
+for (let i = 0; i < navLinks.length; i++) {
+  navLinks[i].addEventListener('click', () => {
+    mainNav.style.display = "none";
+    // mainNav.classList.remove("opened");
+    mainNav.classList.add("closed");
+    isOpen = false;
+  });
+}
+
+
 

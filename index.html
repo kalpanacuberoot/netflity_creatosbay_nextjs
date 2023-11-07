@@ -15,17 +15,14 @@
 
 <body>
   <!-- header start -->
-  <header id="site-header">
+  <!-- <header id="site-header">
     <div class="columns">
       <a href="#hero" class="logo-link">
-        <!-- <img src="images/logo.png" class="logo-img" alt="logo" height="100"> -->
-        <!-- <img src="public/images/logo.png" class="logo-img" alt="logo" height="100"> -->
         <img src="public/images/zonc_logo.png" class="logo-img" alt="logo" height="100">
-        <!-- <p class="logo-title">ZonZ</p> -->
       </a>
-      <!-- navigation start -->
-      <nav id="main-nav">
-        <ul>
+
+      <nav id="main-nav" class="closed">
+        <ul style="text-align: center;">
           <li><a href="#example1"><i class="fa-solid fa-user"></i>Home</a></li>
           <li><a href="#how-it-works">Why ZON Z</a></li>
           <li><a href="#why-about-us">About Us</a></li>
@@ -41,12 +38,60 @@
           </li>
         </ul>
       </nav>
-      <!-- navigation end -->
+
+      <nav id="main-nav" class="opened">
+        <ul style="text-align: center;">
+          <li><a href="#example1"><i class="fa-solid fa-user"></i>Home</a></li>
+          <li><a href="#how-it-works">Why ZON Z</a></li>
+          <li><a href="#why-about-us">About Us</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li>
+            <a href="#contact-us">
+              <button>
+                Contact Us
+              </button>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
       <button id="nav-toggle" role="button">
-        <img src="images/demo/menu.svg" class="menu-icon menu-icon-hamburger" width="32" height="32"
-          alt="menu-icon-hamburger">
-        <img src="images/demo/xmark.svg" class="menu-icon menu-icon-xmark" width="32" height="32" alt="menu-icon-xmark">
+        <img src="public/images/hamburger_menu.png" class="menu-icon menu-icon-hamburger" width="32" height="32"
+        alt="menu-icon-hamburger">
+      <img src="public/images/hamburger_menu.png" class="menu-icon menu-icon-xmark" width="32" height="32" alt="menu-icon-xmark">
       </button>
+    </div>
+  </header> -->
+  <header id="site-header">
+    <div class="columns" style="display: flex; justify-content: space-between;">
+      <a href="#hero" class="logo-link" style="">
+        <img src="public/images/zonc_logo.png" class="logo-img" alt="logo" height="100">
+      </a>
+
+      <!-- Hamburger button -->
+      <label for="nav-toggle" id="nav-toggle-label" style="text-align: end;margin-left: auto;"></label>
+      <input type="checkbox" id="nav-toggle">
+
+      <!-- Navigation menu -->
+      <nav id="main-nav" style="margin: 0;">
+        <ul>
+          <li><a href="#example1">Home</a></li>
+          <li><a href="#how-it-works">Why ZON Z</a></li>
+          <li><a href="#why-about-us">About Us</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li>
+            <a href="#contact-us">
+              <button>
+                Contact Us
+              </button>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
   <!-- header start -->
@@ -102,20 +147,20 @@
     </section> -->
     <div class="about_container">
       <div class="about_column about_column-left">
-          <h6 class="about-heading">About Us</h6>
-          <h2 class="about_subheading">Welcome to ZON Z.</h2>
-          <h6>Where we believe in the potential of co ownership to shape a brighter future</h6><br />
-          <p class="speciality">Where we believe in the potential of co-ownership to shape a brighter future. We
-              understand the difficulties there are in purchasing and maintaining prime real estate. Which is why, our
-              mission is to connect individuals and businesses, facilitating seamless co-ownership arrangements that
-              lead to shared prosperity. Through our platform, we encourage collaboration, reduce risk, and maximize
-              returns for our members. We're committed to transparency, trust, and integrity in every facet of our
-              operations.</p>
+        <h6 class="about-heading">About Us</h6>
+        <h2 class="about_subheading">Welcome to ZON Z.</h2>
+        <h6>Where we believe in the potential of co ownership to shape a brighter future</h6><br />
+        <p class="speciality">Where we believe in the potential of co-ownership to shape a brighter future. We
+          understand the difficulties there are in purchasing and maintaining prime real estate. Which is why, our
+          mission is to connect individuals and businesses, facilitating seamless co-ownership arrangements that
+          lead to shared prosperity. Through our platform, we encourage collaboration, reduce risk, and maximize
+          returns for our members. We're committed to transparency, trust, and integrity in every facet of our
+          operations.</p>
       </div>
       <div class="about_column about_column-right about_section-image">
-          <img src="public/images/about_img.png" loading="lazy" alt="why choose us">
+        <img src="public/images/about_img.png" loading="lazy" alt="why choose us">
       </div>
-  </div>
+    </div>
     <!-- section why choose us end -->
 
     <!-- section property listing -->
@@ -261,26 +306,30 @@
     </section> -->
     <div class="process_container">
       <div class="process_column process_column-left process_section-image">
-          <img src="public/images/process.png" loading="lazy" alt="want to join us">
+        <img src="public/images/process.png" loading="lazy" alt="want to join us">
       </div>
       <div class="process_column process_column-right">
-          <h6 class="about-heading">Process</h6>
-          <h2>The Clever Route to Your Own Vacation Property</h2>
-          <p class="speciality">Imagine owning a piece of prime real estate for just a fraction of the cost, with the freedom to use it whenever you wish throughout the year.</p>
-          <ul>
-              <li class="bold-list-item">Invest in Unbeatable Locations</li>
-              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
-          </ul>
-          <ul>
-              <li class="bold-list-item">Investment Holidays with Growth Potential</li>
-              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
-          </ul>
-          <ul>
-              <li class="bold-list-item">Relax, We've Got You Covered</li>
-              <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and maintenance, so you can unwind and make the most of your investment.</p>
-          </ul>
+        <h6 class="about-heading">Process</h6>
+        <h2>The Clever Route to Your Own Vacation Property</h2>
+        <p class="speciality">Imagine owning a piece of prime real estate for just a fraction of the cost, with the
+          freedom to use it whenever you wish throughout the year.</p>
+        <ul>
+          <li class="bold-list-item">Invest in Unbeatable Locations</li>
+          <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and
+            maintenance, so you can unwind and make the most of your investment.</p>
+        </ul>
+        <ul>
+          <li class="bold-list-item">Investment Holidays with Growth Potential</li>
+          <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and
+            maintenance, so you can unwind and make the most of your investment.</p>
+        </ul>
+        <ul>
+          <li class="bold-list-item">Relax, We've Got You Covered</li>
+          <p class="speciality">Experience worry-free stays as we handle all aspects of property management, upkeep, and
+            maintenance, so you can unwind and make the most of your investment.</p>
+        </ul>
       </div>
-  </div>
+    </div>
     <!-- section how-it-works end -->
 
     <!-- section what we do start -->
@@ -356,7 +405,8 @@
         <h1 class="font-bold underline">Frequently asked questions</h1>
         <p class="speciality_accordion">Everything you need to know about Zon Z. Can’t find the answer you’re
           looking for? Feel free to
-          <span style="color: #0A7CFF;">contact us</span></p>
+          <span style="color: #0A7CFF;">contact us</span>
+        </p>
         <!-- Replace this part with a loop in your backend or static HTML generation -->
         <div class="accordion-item">
           <div class="accordion-button">
@@ -403,92 +453,92 @@
     </section>
 
 
-        <!-- section property listing -->
-        <div style="color: black;margin-bottom: 15rem;">
-        <section id="blog" class="bg-color" style="">
-          <div class="columns equal-widths">
-            <!-- <h2>Most popular dream vacation properties</h2> -->
-            <h2 class="" style="text-align: left;margin-left: 1rem;">Blogs</h2>
+    <!-- section property listing -->
+    <div style="color: black;margin-bottom: 15rem;">
+      <section id="blog" class="bg-color" style="">
+        <div class="columns equal-widths">
+          <!-- <h2>Most popular dream vacation properties</h2> -->
+          <h2 class="" style="text-align: left;margin-left: 1rem;">Blogs</h2>
+        </div>
+        <div class="columns equal-widths">
+          <div class="property-block">
+            <!-- <img src="public/images/demo2/es0220a.webp" loading="lazy" alt="digital content" class="property-img"> -->
+            <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
+            <div class="property-content">
+              <!-- <p class="property-location">Forest Retreat</p> -->
+              <h3 class="property-title">
+                Rover raised $65 million
+              </h3>
+              <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                Finding temporary housing for your dog
+                should be as easy as renting an Airbnb.
+                That’s the idea behind Rover ...
+              </p>
+              <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                Read More
+              </p>
+              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
+            </div>
           </div>
-          <div class="columns equal-widths">
-            <div class="property-block">
-              <!-- <img src="public/images/demo2/es0220a.webp" loading="lazy" alt="digital content" class="property-img"> -->
-              <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
-              <div class="property-content">
-                <!-- <p class="property-location">Forest Retreat</p> -->
-                <h3 class="property-title">
-                  Rover raised $65 million
-                </h3>
-                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
-                  Finding temporary housing for your dog
-                  should be as easy as renting an Airbnb.
-                  That’s the idea behind Rover ...
-                </p>
-                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
-                  Read More
-                </p>
-                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-              </div>
-            </div>
-    
-            <div class="property-block">
-              <!-- <img src="public/images/demo2/es0347a_campos_finca.webp" loading="lazy" alt="digital content"
+
+          <div class="property-block">
+            <!-- <img src="public/images/demo2/es0347a_campos_finca.webp" loading="lazy" alt="digital content"
           class="property-img"> -->
-              <img src="public/images/blog_2.png" loading="lazy" alt="digital content" class="property-img">
-              <div class="property-content">
-                <h3 class="property-title">
-                  MateLabs machine learning
-                </h3>
-                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
-                  If you’ve ever wanted to train a machine
-                  learning model and integrate it with
-                  IFTTT, you now can with ...
-                </p>
-                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
-                  Read More
-                </p>
-                <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+            <img src="public/images/blog_2.png" loading="lazy" alt="digital content" class="property-img">
+            <div class="property-content">
+              <h3 class="property-title">
+                MateLabs machine learning
+              </h3>
+              <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                If you’ve ever wanted to train a machine
+                learning model and integrate it with
+                IFTTT, you now can with ...
+              </p>
+              <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                Read More
+              </p>
+              <!-- <p class="property-location">Muro | Mallorca | Spain</p>
           <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
           <p class="property-price">Rs. 21 Crs.</p> -->
-                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-              </div>
+              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
             </div>
-            <div class="property-block">
-              <!-- <img src="public/images/demo2/1.webp" loading="lazy" alt="digital content" class="property-img"> -->
-              <img src="public/images/blog_3.png" loading="lazy" alt="digital content" class="property-img">
-              <div class="property-content">
-                <h3 class="property-title">
-                  US venture investment ticks
-                </h3>
-                <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
-                  Venture investment in U.S. startups
-                  rose sequentially in the second quarter
-                  of 2017, boosted by large, ate-stage
-                  financings
-                </p>
-                <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
-                  Read More
-                </p>
-                <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+          </div>
+          <div class="property-block">
+            <!-- <img src="public/images/demo2/1.webp" loading="lazy" alt="digital content" class="property-img"> -->
+            <img src="public/images/blog_3.png" loading="lazy" alt="digital content" class="property-img">
+            <div class="property-content">
+              <h3 class="property-title">
+                US venture investment ticks
+              </h3>
+              <p class="feature-location" style="color: #67748E;margin-top: 1rem;">
+                Venture investment in U.S. startups
+                rose sequentially in the second quarter
+                of 2017, boosted by large, ate-stage
+                financings
+              </p>
+              <p class="property-price" style="display: flex;align-items: center;color:#17C1E8;">
+                Read More
+              </p>
+              <!-- <p class="property-location">Muro | Mallorca | Spain</p>
           <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
           <p class="property-price">Rs. 21 Crs.</p> -->
-                <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-              </div>
+              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
             </div>
-            <div class="property-block" id="blog_bg" >
-              <div class="property-content" style="transform: none;">
-                <h1 class="property-title">
-                  Flexible work hours
-                </h1>
-                <p class="feature-location" style="color: #fff;margin-top: 1rem;">
-                  Rather than worrying about
-                  switching offices every couple
-                  years, you stay in the same place.
-                </p>
-                <p class="property-price" style="display: flex;align-items: center;">
-                  Read More
-                </p>
-                <!-- <div class="blog-text">
+          </div>
+          <div class="property-block" id="blog_bg">
+            <div class="property-content" style="transform: none;">
+              <h1 class="property-title">
+                Flexible work hours
+              </h1>
+              <p class="feature-location" style="color: #fff;margin-top: 1rem;">
+                Rather than worrying about
+                switching offices every couple
+                years, you stay in the same place.
+              </p>
+              <p class="property-price" style="display: flex;align-items: center;">
+                Read More
+              </p>
+              <!-- <div class="blog-text">
                   <div class="blog_heading">
                     Flexible work
                     hours</div>
@@ -498,10 +548,10 @@
                     years, you stay in the same place.</div>
     
                 </div> -->
-              </div>
-              <!-- <img src="public/images/demo2/at0358a_3-bd-chaletwohnung-mit-talblick.webp" loading="lazy"
+            </div>
+            <!-- <img src="public/images/demo2/at0358a_3-bd-chaletwohnung-mit-talblick.webp" loading="lazy"
           alt="digital content" class="property-img"> -->
-              <!-- <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
+            <!-- <img src="public/images/blog_1.png" loading="lazy" alt="digital content" class="property-img">
               <div class="property-content">
                 <h3 class="property-title">
                   Rover raised $65 million
@@ -514,16 +564,16 @@
                   <img src="public/images/leftarrow.svg.png" loading="lazy" alt="digital content" class=""
                     style="width: 20px;margin-left: 10px">
                 </p> -->
-              <!-- <p class="property-location">Muro | Mallorca | Spain</p>
+            <!-- <p class="property-location">Muro | Mallorca | Spain</p>
           <h3 class="property-title">Beautiful Apartment with pool and beach</h3>
           <p class="property-price">Rs. 21 Crs.</p> -->
-              <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
-            </div>
+            <!-- <p class="property-description">Exclusive new build apartment with private garden and pool within walking distance to the beach</p> -->
           </div>
-          </div>
-        </section>
-      </div>
-        <!-- section property listing end -->
+        </div>
+    </div>
+    </section>
+    </div>
+    <!-- section property listing end -->
     <!-- section testimonials -->
     <!-- <section id="testimonials" class="bg-color">
       <div class="columns">
@@ -684,11 +734,11 @@
 
   <div class="footer-dark" style="">
 
-    <section style="max-width: 70rem;background-color: #FAFAFA;margin-inline: auto;transform: translate(-1%, -50%);" id="contact-us">
-      <div class="columns equal-widths" style="">
-        <div class="section-image" style="">
+    <section style="" id="contact-us" class="form_container">
+      <div class="columns equal-widths" style="align-items: start;">
+        <div class="form_leftside" style="">
           <!-- <img src="public/images/process.png" loading="lazy" alt="want to join us"> -->
-          <h2 style="color: black;">Have questions?</h2>
+          <h2 style="color: black;" class="form_title">Have questions?</h2>
           <p class="" style="color: #351D75;font-weight: 600;">Ready to take the next step?</p>
           <p style="color: #979797;">Reach out to our dedicated team. We're here to provide the information and
             assistance
@@ -714,6 +764,7 @@
                 assistance
                 you need to embark on your co-ownership journey with Zon Z.</div>
             </div>
+            <button class="submit_button">Submit</button>
           </div>
         </div>
       </div>
@@ -819,6 +870,42 @@
         }
       });
     });
+
+
+    const navToggle = document.getElementById("nav-toggle");
+    const mainNav = document.getElementById("main-nav");
+    const navLinks = mainNav.getElementsByTagName('a');
+    let isOpen = false;
+
+    navToggle.addEventListener("click", () => {
+      // isOpen = !isOpen;
+      if (isOpen) {
+        mainNav.style.display = "none";
+        mainNav.classList.remove("opened");
+        mainNav.classList.add("closed");
+        isOpen = false;
+      } else {
+        mainNav.style.display = "block";
+        mainNav.classList.remove("closed");
+        mainNav.classList.add("opened");
+        isOpen = true;
+      }
+    });
+
+    navToggle.addEventListener("click", () => {
+      mainNav.classList.toggle("closed");
+    });
+
+    for (let i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', () => {
+        mainNav.style.display = "none";
+        // mainNav.classList.remove("opened");
+        mainNav.classList.add("closed");
+        isOpen = false;
+      });
+    }
+
+
   </script>
 </body>
 
