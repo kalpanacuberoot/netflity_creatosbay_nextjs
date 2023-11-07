@@ -627,7 +627,6 @@ const CreatorOnboardingpage = () => {
     }, [heightFeet, heightInches, heightCm]);
 
     useEffect(() => {
-        // Define the API request function
         let shouldCallApi = false;
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         console.log("emailRegex",email.match(emailRegex));
